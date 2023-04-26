@@ -165,7 +165,7 @@ function toFixed(x)
 	return x;
 }
 
-//Beautify and number-formatting adapted from the Frozen Cookies add-on (http://cookieclicker.wikia.com/wiki/Frozen_Cookies_%28JavaScript_Add-on%29)
+//Beautify and number-formatting adapted from the Frozen Cookies add-on (http://kookieclicker.wikia.com/wiki/Frozen_Cookies_%28JavaScript_Add-on%29)
 function formatEveryThirdPower(notations)
 {
 	return function (val)
@@ -999,7 +999,7 @@ var Game={};
 			}
 		-the mod object may also contain any other data or functions you want, for instance to make them accessible to other mods
 		-your mod and its data can be accessed with Game.mods['mod id']
-		-hooks are functions the game calls automatically in certain circumstances, like when calculating cookies per click or when redrawing the screen
+		-hooks are functions the game calls automatically in certain circumstances, like when calculating kookies per click or when redrawing the screen
 		-to add a hook: Game.registerHook('hook id',yourFunctionHere) - note: you can also declare whole arrays of hooks, ie. Game.registerHook('hook id',[function1,function2,...])
 		-to remove a hook: Game.removeHook('hook id',theSameFunctionHere)
 		-some hooks are fed a parameter you can use in the function
@@ -1010,8 +1010,8 @@ var Game={};
 			'reincarnate' - called when the player has reincarnated after an ascension
 			'ticker' - called when determining news ticker text; should return an array of possible choices to add
 			'cps' - called when determining the CpS; parameter is the current CpS; should return the modified CpS
-			'cookiesPerClick' - called when determining the cookies per click; parameter is the current value; should return the modified value
-			'click' - called when the big cookie is clicked
+			'kookiesPerClick' - called when determining the kookies per click; parameter is the current value; should return the modified value
+			'click' - called when the big kookie is clicked
 			'create' - called after the game declares all buildings, buffs, upgrades and achievs; use this to declare your own - note that while the game distinguishes between vanilla and non-vanilla content, saving/loading functionality for custom content (including stuff like active buffs or permanent upgrade slotting) is not explicitly implemented and may be unpredictable and broken
 			'check' - called every few seconds when we check for upgrade/achiev unlock conditions; you can also use this for other checks that you don't need happening every logic frame
 		-function hooks are provided for convenience and more advanced mod functionality will probably involve manual code injection
@@ -1024,7 +1024,7 @@ var Game={};
 	Game.brokenMods=[];
 	Game.modSaveData={};
 	Game.modHooks={};
-	Game.modHooksNames=['logic','draw','reset','reincarnate','ticker','cps','cookiesPerClick','click','create','check'];
+	Game.modHooksNames=['logic','draw','reset','reincarnate','ticker','cps','kookiesPerClick','click','create','check'];
 	for (var i=0;i<Game.modHooksNames.length;i++){Game.modHooks[Game.modHooksNames[i]]=[];}
 	Game.registerMod=function(id,mod)
 	{
@@ -1176,7 +1176,7 @@ var Game={};
 			/*
 				what this example mod does:
 				-double your CpS
-				-display a little popup for half a second whenever you click the big cookie
+				-display a little popup for half a second whenever you click the big kookie
 				-add a little intro text above your bakery name, and generate that intro text at random if you don't already have one
 				-save and load your intro text
 			*/
@@ -1196,7 +1196,7 @@ var Game={};
 			},
 			addIntro:function(text){
 				//note: this is not a mod hook, just a function that's part of the mod
-				Game.playerIntro=text||choose(['oh snap, it\'s','watch out, it\'s','oh no! here comes','hide your cookies, for here comes','behold! it\'s']);
+				Game.playerIntro=text||choose(['oh snap, it\'s','watch out, it\'s','oh no! here comes','hide your kookies, for here comes','behold! it\'s']);
 				if (!l('bakerySubtitle')) l('bakeryName').insertAdjacentHTML('afterend','<div id="bakerySubtitle" class="title" style="text-align:center;position:absolute;left:0px;right:0px;bottom:32px;font-size:12px;pointer-events:none;text-shadow:0px 1px 1px #000,0px 0px 4px #f00;opacity:0.8;"></div>');
 				l('bakerySubtitle').textContent='~'+Game.playerIntro+'~';
 			},
@@ -1286,24 +1286,24 @@ Game.Launch=function()
 	(App?'<div class="listing" style="font-weight:bold;font-style:italic;opacity:0.5;">'+loc("Note: links will open in your web browser.")+'</div>':'')+
 	'<div class="listing">'+loc("Cookie Clicker is a javascript game by %1 and %2.",['<a href="//orteil.dashnet.org" target="_blank">Orteil</a>','<a href="//dashnet.org" target="_blank">Opti</a>'])+'</div>'+
 	(App?'<div class="listing">'+loc("Music by %1.",'<a href="https://twitter.com/C418" target="_blank">C418</a>')+'</div>':'')+
-	//'<div class="listing">We have an <a href="https://discordapp.com/invite/cookie" target="_blank">official Discord</a>, as well as a <a href="http://forum.dashnet.org" target="_blank">forum</a>; '+
+	//'<div class="listing">We have an <a href="https://discordapp.com/invite/kookie" target="_blank">official Discord</a>, as well as a <a href="http://forum.dashnet.org" target="_blank">forum</a>; '+
 	'<div class="listing">'+(EN?
-		'We have an <a href="https://discordapp.com/invite/cookie" target="_blank">official Discord</a>; if you\'re looking for help, you may also want to visit the <a href="https://www.reddit.com/r/CookieClicker" target="_blank">subreddit</a> or the <a href="https://cookieclicker.wikia.com/wiki/Cookie_Clicker_Wiki" target="_blank">wiki</a>.<br>News and teasers are usually posted on Orteil\'s <a href="https://orteil42.tumblr.com/" target="_blank">tumblr</a> and <a href="https://twitter.com/orteil42" target="_blank">twitter</a>.'
+		'We have an <a href="https://discordapp.com/invite/kookie" target="_blank">official Discord</a>; if you\'re looking for help, you may also want to visit the <a href="https://www.reddit.com/r/CookieClicker" target="_blank">subreddit</a> or the <a href="https://kookieclicker.wikia.com/wiki/Cookie_Clicker_Wiki" target="_blank">wiki</a>.<br>News and teasers are usually posted on Orteil\'s <a href="https://orteil42.tumblr.com/" target="_blank">tumblr</a> and <a href="https://twitter.com/orteil42" target="_blank">twitter</a>.'
 		:
 		loc("Useful links: %1, %2, %3, %4.",[
-		'<a href="https://discordapp.com/invite/cookie" target="_blank" class="highlightHover smallBlackButton">Discord</a>',
-		'<a href="https://cookieclicker.wikia.com/wiki/Cookie_Clicker_Wiki" target="_blank" class="highlightHover smallBlackButton">wiki</a>',
+		'<a href="https://discordapp.com/invite/kookie" target="_blank" class="highlightHover smallBlackButton">Discord</a>',
+		'<a href="https://kookieclicker.wikia.com/wiki/Cookie_Clicker_Wiki" target="_blank" class="highlightHover smallBlackButton">wiki</a>',
 		'<a href="https://orteil42.tumblr.com/" target="_blank" class="highlightHover smallBlackButton">tumblr</a>',
 		'<a href="https://twitter.com/orteil42" target="_blank" class="highlightHover smallBlackButton">twitter</a>',
 		]))
 	+'</div>'+
 	(!App?'<div class="listing block" style="margin:8px 32px;font-size:11px;line-height:110%;color:rgba(200,200,255,1);background:rgba(128,128,255,0.15);" id="supportSection">'+loc(
 		"This version of Cookie Clicker is 100% free, forever. Want to support us so we can keep developing games? Here's some ways you can help:%1",
-		[(!App?'<br><br>&bull; '+(EN?'get ':'')+'<a href="https://store.steampowered.com/app/1454400/Cookie_Clicker/" target="_blank" class="highlightHover smallWhiteButton">Cookie Clicker on Steam</a>':'')+''+(EN?' (it\'s about 5 bucks)':'')+'<br><br>&bull; '+(EN?'support us on ':'')+'<a href="https://www.patreon.com/dashnet" target="_blank" class="highlightHover smallOrangeButton">Patreon</a>'+(EN?' (there\'s perks!)':'')+'<br><br>&bull; '+(EN?'check out our ':'')+'<a href="http://www.redbubble.com/people/dashnet" target="_blank" class="highlightHover smallWhiteButton">Shop</a>'+(EN?' with rad cookie shirts, hoodies and stickers':'')+((!App && EN)?'<br><br>&bull; disable your adblocker (if you want!)':'')]
+		[(!App?'<br><br>&bull; '+(EN?'get ':'')+'<a href="https://store.steampowered.com/app/1454400/Cookie_Clicker/" target="_blank" class="highlightHover smallWhiteButton">Cookie Clicker on Steam</a>':'')+''+(EN?' (it\'s about 5 bucks)':'')+'<br><br>&bull; '+(EN?'support us on ':'')+'<a href="https://www.patreon.com/dashnet" target="_blank" class="highlightHover smallOrangeButton">Patreon</a>'+(EN?' (there\'s perks!)':'')+'<br><br>&bull; '+(EN?'check out our ':'')+'<a href="http://www.redbubble.com/people/dashnet" target="_blank" class="highlightHover smallWhiteButton">Shop</a>'+(EN?' with rad kookie shirts, hoodies and stickers':'')+((!App && EN)?'<br><br>&bull; disable your adblocker (if you want!)':'')]
 	)+
 	'</div></div>':'')+
 	'<div class="listing warning">'+loc("Note: if you find a new bug after an update and you're using a 3rd-party add-on, make sure it's not just your add-on causing it!")+'</div>'+
-	(!App?('<div class="listing warning">'+loc("Warning: clearing your browser cache or cookies <small>(what else?)</small> will result in your save being wiped. Export your save and back it up first!")+'</div>'):'')+
+	(!App?('<div class="listing warning">'+loc("Warning: clearing your browser cache or kookies <small>(what else?)</small> will result in your save being wiped. Export your save and back it up first!")+'</div>'):'')+
 	
 	'</div><div class="subsection">'+
 	'<div class="title">'+loc("Version history")+'</div>';
@@ -1334,7 +1334,7 @@ Game.Launch=function()
 	'<div class="listing">&bull; added the jukebox</div>'+
 	'<div class="listing">&bull; the 3 secret heavenly upgrades now rely on how many times the relevant digit is present in total, rather than at the end</div>'+
 	'<div class="listing">&bull; backgrounds overhauled; extra options for the background selector</div>'+
-	'<div class="listing">&bull; extra options for the golden cookie sound selector</div>'+
+	'<div class="listing">&bull; extra options for the golden kookie sound selector</div>'+
 	'<div class="listing">&bull; the bank minigame now tells you the value you previously bought a stock at</div>'+
 	'<div class="listing">&bull; the bank minigame flow is a little more exciting</div>'+
 	(App?'<div class="listing">&bull; new option to disable your game activity showing up in Discord</div>':'')+
@@ -1378,7 +1378,7 @@ Game.Launch=function()
 	'</div><div class="subsection update small">'+
 	'<div class="title">08/08/2020 - checking account (beta)</div>'+
 	'<div class="listing">&bull; stock market layout has been revised</div>'+
-	'<div class="listing">&bull; selling stocks no longer increases cookies baked all time</div>'+
+	'<div class="listing">&bull; selling stocks no longer increases kookies baked all time</div>'+
 	'<div class="listing">&bull; stock prices are now defined by your highest raw CpS this ascension (which is now displayed in the stats screen)</div>'+
 	'<div class="listing">&bull; can no longer buy and sell a stock in the same tick</div>'+
 	'<div class="listing">&bull; warehouse space now gains +10 per associated building level (up from +5)</div>'+
@@ -1399,38 +1399,38 @@ Game.Launch=function()
 	'</div><div class="subsection update">'+
 	'<div class="title">28/09/2019 - going off-script</div>'+
 	'<div class="listing">&bull; added a new building</div>'+
-	'<div class="listing">&bull; added fortune cookies (a new heavenly upgrade)</div>'+
+	'<div class="listing">&bull; added fortune kookies (a new heavenly upgrade)</div>'+
 	'<div class="listing">&bull; more upgrades, achievements etc</div>'+
-	'<div class="listing">&bull; updated the Russian bread cookies icon to better reflect their cyrillic origins</div>'+
+	'<div class="listing">&bull; updated the Russian bread kookies icon to better reflect their cyrillic origins</div>'+
 	'<div class="listing">&bull; <i style="font-style:italic;">stealth update :</i> the sugar lump refill timeout (not sugar lump growth) now no longer ticks down while the game is closed (this fixes an exploit)</div>'+
-	'<div class="listing">&bull; also released the official Android version of Cookie Clicker, playable <a href="https://play.google.com/store/apps/details?id=org.dashnet.cookieclicker" target="_blank">here</a> (iOS version will come later)</div>'+
+	'<div class="listing">&bull; also released the official Android version of Cookie Clicker, playable <a href="https://play.google.com/store/apps/details?id=org.dashnet.kookieclicker" target="_blank">here</a> (iOS version will come later)</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">01/04/2019 - 2.019 (the "this year" update)</div>'+
 	'<div class="listing">&bull; game has been renamed to "Cookie Clicker" to avoid confusion</div>'+
-	'<div class="listing">&bull; can now click the big cookie to generate cookies for free</div>'+
+	'<div class="listing">&bull; can now click the big kookie to generate kookies for free</div>'+
 	'<div class="listing">&bull; removed fall damage</div>'+
 	//'<div class="listing">&bull; fixed various typos : player\'s name is now correctly spelled as "[bakeryName]"</div>'+
 	'<div class="listing">&bull; removed all references to computer-animated movie <i style="font-style:italic;">Hoodwinked!</i> (2005)</div>'+
-	'<div class="listing">&bull; went back in time and invented cookies and computer mice, ensuring Cookie Clicker would one day come to exist</div>'+
+	'<div class="listing">&bull; went back in time and invented kookies and computer mice, ensuring Cookie Clicker would one day come to exist</div>'+
 	'<div class="listing">&bull; game now fully compliant with Geneva Conventions</div>'+
 	'<div class="listing">&bull; dropped support for TI-84 version</div>'+
-	'<div class="listing">&bull; released a low-res retro version of the game, playable here : <a href="//orteil.dashnet.org/experiments/cookie/" target="_blank">orteil.dashnet.org/experiments/cookie</a></div>'+
+	'<div class="listing">&bull; released a low-res retro version of the game, playable here : <a href="//orteil.dashnet.org/experiments/kookie/" target="_blank">orteil.dashnet.org/experiments/kookie</a></div>'+
 	'<div class="listing">&bull; updated version number</div>'+
 	
 	'</div><div class="subsection update small">'+
-	'<div class="title">05/03/2019 - cookies for days</div>'+
-	'<div class="listing">&bull; added over 20 new cookies, all previously suggested by our supporters on <a href="https://www.patreon.com/dashnet" target="_blank">Patreon</a></div>'+
+	'<div class="title">05/03/2019 - kookies for days</div>'+
+	'<div class="listing">&bull; added over 20 new kookies, all previously suggested by our supporters on <a href="https://www.patreon.com/dashnet" target="_blank">Patreon</a></div>'+
 	'<div class="listing">&bull; added 2 heavenly upgrades</div>'+
-	'<div class="listing">&bull; the Golden goose egg now counts as a golden cookie upgrade for Residual luck purposes</div>'+
-	'<div class="listing">&bull; golden sugar lumps now either double your cookies, or give you 24 hours of your CpS, whichever is lowest (previously was doubling cookies with no cap)</div>'+
+	'<div class="listing">&bull; the Golden goose egg now counts as a golden kookie upgrade for Residual luck purposes</div>'+
+	'<div class="listing">&bull; golden sugar lumps now either double your kookies, or give you 24 hours of your CpS, whichever is lowest (previously was doubling kookies with no cap)</div>'+
 	'<div class="listing">&bull; the amount of heralds is now saved with your game, and is used to compute offline CpS the next time the game is loaded; previously, on page load, the offline calculation assumed heralds to be 0</div>'+
-	'<div class="listing">&bull; added a system to counteract the game freezing up (and not baking cookies) after being inactive for a long while on slower computers; instead, this will now trigger sleep mode, during which you still produce cookies as if the game was closed; to enable this feature, use the "Sleep mode timeout" option in the settings</div>'+
+	'<div class="listing">&bull; added a system to counteract the game freezing up (and not baking kookies) after being inactive for a long while on slower computers; instead, this will now trigger sleep mode, during which you still produce kookies as if the game was closed; to enable this feature, use the "Sleep mode timeout" option in the settings</div>'+
 	'<div class="listing">&bull; vaulting upgrades is now done with shift-click, as ctrl-click was posing issues for Mac browsers</div>'+
 	'<div class="listing">&bull; made tooltips for building CpS boosts from synergies hopefully clearer</div>'+
 	'<div class="listing">&bull; fixed an exploit with gambler\'s fever dream working across exports and ascensions</div>'+
 	'<div class="listing">&bull; can now hide tooltips in the garden by keeping the shift key pressed to make it easier to see where you\'re planting</div>'+
-	'<div class="listing">&bull; fixed a bug with golden cookies/reindeer not disappearing properly in some circumstances</div>'+
+	'<div class="listing">&bull; fixed a bug with golden kookies/reindeer not disappearing properly in some circumstances</div>'+
 	'<div class="listing">&bull; the Dragon\'s Curve aura should now properly make sugar lumps twice as weird</div>'+
 	'<div class="listing">&bull; the ctrl key should less often register incorrectly as pressed</div>'+
 	'<div class="listing">&bull; added a new ad slot in the top-right, as while our playerbase is strong and supportive as ever, our ad revenue sometimes fluctuates badly; we may remove the ad again should our income stabilize</div>'+
@@ -1443,8 +1443,8 @@ Game.Launch=function()
 	'<div class="listing">&bull; launched our <a href="https://www.patreon.com/dashnet" class="orangeLink" target="_blank">Patreon</a> <span style="font-size:80%;">(the link is orange so you\'ll notice it!)</span></div>'+
 	'<div class="listing">&bull; added a bunch of new heavenly upgrades, one of which ties into our Patreon but benefits everyone (this is still experimental!)</div>'+
 	'<div class="listing">&bull; when hovering over grandmas, you can now see their names and ages</div>'+
-	'<div class="listing">&bull; "make X cookies just from Y" requirements are now higher</div>'+
-	'<div class="listing">&bull; tweaked the prices of some heavenly upgrades to better fit the current cookie economy (it turns out billions of heavenly chips is now very achievable)</div>'+
+	'<div class="listing">&bull; "make X kookies just from Y" requirements are now higher</div>'+
+	'<div class="listing">&bull; tweaked the prices of some heavenly upgrades to better fit the current kookie economy (it turns out billions of heavenly chips is now very achievable)</div>'+
 	'<div class="listing">&bull; building tooltips now display what % of CpS they contribute through synergy upgrades</div>'+
 	'<div class="listing">&bull; queenbeets now give up to 4% of bank, down from 6%</div>'+
 	'<div class="listing">&bull; among other things, season switches now display how many seasonal upgrades you\'re missing, and permanent upgrade slots now display the name of the slotted upgrade</div>'+
@@ -1469,7 +1469,7 @@ Game.Launch=function()
 	'<div class="listing">&bull; added a heavenly upgrade that lets you see upgrade tiers (feature was previously removed due to being confusing)</div>'+
 	'<div class="listing">&bull; added a new wrinkler-related heavenly upgrade</div>'+
 	'<div class="listing">&bull; added a new upgrade tier</div>'+
-	'<div class="listing">&bull; added a couple new cookies and achievements</div>'+
+	'<div class="listing">&bull; added a couple new kookies and achievements</div>'+
 	'<div class="listing">&bull; new "extra buttons" setting; turning it on adds buttons that let you minimize buildings</div>'+
 	'<div class="listing">&bull; new "lump confirmation" setting; turning it on will show a confirmation prompt when you spend sugar lumps</div>'+
 	'<div class="listing">&bull; buildings now sell back for 25% of their current price (down from 50%); Earth Shatterer modified accordingly, now gives back 50% (down from 85%)</div>'+
@@ -1500,12 +1500,12 @@ Game.Launch=function()
 	'<div class="title">18/04/2018 - your garden-variety update</div>'+
 	'<div class="listing">&bull; added the garden, a minigame unlocked by having at least level 1 farms</div>'+
 	'<div class="listing">&bull; added a little arrow and a blinky label to signal the game has updated since you last played it (hi!)</div>'+
-	'<div class="listing">&bull; new cookies, milk flavors and achievements</div>'+
-	'<div class="listing">&bull; sugar lumps are now unlocked whenever you\'ve baked at least a billion cookies, instead of on your first ascension</div>'+
+	'<div class="listing">&bull; new kookies, milk flavors and achievements</div>'+
+	'<div class="listing">&bull; sugar lumps are now unlocked whenever you\'ve baked at least a billion kookies, instead of on your first ascension</div>'+
 	'<div class="listing">&bull; sugar lump type now saves correctly</div>'+
 	'<div class="listing">&bull; minigame sugar lump refills can now only be done every 15 minutes (timer shared across all minigames)</div>'+
 	'<div class="listing">&bull; CpS achievements now have steeper requirements</div>'+
-	'<div class="listing">&bull; golden cookies now last 5% shorter for every other golden cookie on the screen</div>'+
+	'<div class="listing">&bull; golden kookies now last 5% shorter for every other golden kookie on the screen</div>'+
 	'<div class="listing">&bull; the game now remembers which minigames are closed or open</div>'+
 	'<div class="listing">&bull; added a popup that shows when a season starts (so people won\'t be so confused about "the game looking weird today")</div>'+
 	'<div class="listing">&bull; permanent upgrade slots now show a tooltip for the selected upgrade</div>'+
@@ -1513,18 +1513,18 @@ Game.Launch=function()
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">24/02/2018 - sugar coating</div>'+
-	'<div class="listing">&bull; added link to <a href="https://discordapp.com/invite/cookie" target="_blank">official Discord server</a></div>'+
+	'<div class="listing">&bull; added link to <a href="https://discordapp.com/invite/kookie" target="_blank">official Discord server</a></div>'+
 	'<div class="listing">&bull; felt weird about pushing an update without content so :</div>'+
-	'<div class="listing">&bull; added a handful of new cookies</div>'+
+	'<div class="listing">&bull; added a handful of new kookies</div>'+
 	'<div class="listing">&bull; added 3 new heavenly upgrades</div>'+
 	'<div class="listing">&bull; short numbers should now be displayed up to novemnonagintillions</div>'+
-	'<div class="listing">&bull; cookie chains no longer spawn from the Force the Hand of Fate spell</div>'+
+	'<div class="listing">&bull; kookie chains no longer spawn from the Force the Hand of Fate spell</div>'+
 	'<div class="listing">&bull; bigger, better Cookie Clicker content coming later this year</div>'+
 	
 	'</div><div class="subsection update">'+
 	'<div class="title">08/08/2017 - 4 more years</div>'+
 	'<div class="listing">&bull; new building : Chancemakers</div>'+
-	'<div class="listing">&bull; new milk, new kittens, new dragon aura, new cookie, new upgrade tier</div>'+
+	'<div class="listing">&bull; new milk, new kittens, new dragon aura, new kookie, new upgrade tier</div>'+
 	'<div class="listing">&bull; buffs no longer affect offline CpS</div>'+
 	'<div class="listing">&bull; Godzamok\'s hunger was made less potent (this is a nerf, very sorry)</div>'+
 	'<div class="listing">&bull; grimoire spell costs and maximum magic work differently</div>'+
@@ -1547,29 +1547,29 @@ Game.Launch=function()
 	'<div class="listing">&bull; some old bugs were phased out and replaced by new ones</div>'+
 	
 	'</div><div class="subsection update small">'+
-	'<div class="title">24/07/2016 - golden cookies overhaul</div>'+
-	'<div class="listing">&bull; golden cookies and reindeer now follow a new system involving explicitly defined buffs</div>'+
-	'<div class="listing">&bull; a bunch of new golden cookie effects have been added</div>'+
+	'<div class="title">24/07/2016 - golden kookies overhaul</div>'+
+	'<div class="listing">&bull; golden kookies and reindeer now follow a new system involving explicitly defined buffs</div>'+
+	'<div class="listing">&bull; a bunch of new golden kookie effects have been added</div>'+
 	'<div class="listing">&bull; CpS gains from eggs are now multiplicative</div>'+
 	'<div class="listing">&bull; shiny wrinklers are now saved</div>'+
 	'<div class="listing">&bull; reindeer have been rebalanced ever so slightly</div>'+
-	'<div class="listing">&bull; added a new cookie upgrade near the root of the heavenly upgrade tree; this is intended to boost early ascensions and speed up the game as a whole</div>'+
-	'<div class="listing">&bull; due to EU legislation, implemented a warning message regarding browser cookies; do understand that the irony is not lost on us</div>'+
+	'<div class="listing">&bull; added a new kookie upgrade near the root of the heavenly upgrade tree; this is intended to boost early ascensions and speed up the game as a whole</div>'+
+	'<div class="listing">&bull; due to EU legislation, implemented a warning message regarding browser kookies; do understand that the irony is not lost on us</div>'+
 	
 	'</div><div class="subsection update">'+
 	'<div class="title">08/02/2016 - legacy</div>'+
 	'<div class="listing"><b>Everything that was implemented during the almost 2-year-long beta has been added to the live game. To recap :</b></div>'+
 	'<div class="listing">&bull; 3 new buildings : banks, temples, and wizard towers; these have been added in-between existing buildings and as such, may disrupt some building-related achievements</div>'+
 	'<div class="listing">&bull; the ascension system has been redone from scratch, with a new heavenly upgrade tree</div>'+
-	'<div class="listing">&bull; mysterious new features such as angel-powered offline progression, challenge runs, and a cookie dragon</div>'+
+	'<div class="listing">&bull; mysterious new features such as angel-powered offline progression, challenge runs, and a kookie dragon</div>'+
 	'<div class="listing">&bull; sounds have been added (can be disabled in the options)</div>'+
 	'<div class="listing">&bull; heaps of rebalancing and bug fixes</div>'+
 	'<div class="listing">&bull; a couple more upgrades and achievements, probably</div>'+
-	'<div class="listing">&bull; fresh new options to further customize your cookie-clicking experience</div>'+
+	'<div class="listing">&bull; fresh new options to further customize your kookie-clicking experience</div>'+
 	'<div class="listing">&bull; quality-of-life improvements : better bulk-buy, better switches etc</div>'+
 	'<div class="listing">&bull; added some <a href="http://en.wikipedia.org/wiki/'+choose(['Krzysztof_Arciszewski','Eustachy_Sanguszko','Maurycy_Hauke','Karol_Turno','Tadeusz_Kutrzeba','Kazimierz_Fabrycy','Florian_Siwicki'])+'" target="_blank">general polish</a></div>'+/* i liked this dumb pun too much to let it go unnoticed */
 	'<div class="listing">&bull; tons of other little things we can\'t even remember right now</div>'+
-	'<div class="listing">Miss the old version? Your old save was automatically exported <a href="//orteil.dashnet.org/cookieclicker/v10466/" target="_blank">here</a>!</div>'+
+	'<div class="listing">Miss the old version? Your old save was automatically exported <a href="//orteil.dashnet.org/kookieclicker/v10466/" target="_blank">here</a>!</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">05/02/2016 - legacy beta, more fixes</div>'+
@@ -1584,7 +1584,7 @@ Game.Launch=function()
 		'<div style="opacity:0.8;margin-left:12px;">'+
 		'-a few more achievements<br>'+
 		'-new option for neat, but slow CSS effects (disabled by default)<br>'+
-		'-new option for a less grating cookie sound (enabled by default)<br>'+
+		'-new option for a less grating kookie sound (enabled by default)<br>'+
 		'-new option to bring back the boxes around icons in the stats screen<br>'+
 		'-new buttons for saving and loading your game to a text file<br>'+
 		'</div>'+
@@ -1595,9 +1595,9 @@ Game.Launch=function()
 		'-dragonflight should be somewhat less ridiculously overpowered<br>'+
 		'-please let me know if the rebalancing was too heavy or not heavy enough<br>'+
 		'-santa and easter upgrades now depend on Santa level and amount of eggs owned, respectively, instead of costing several minutes worth of CpS<br>'+
-		'-cookie upgrades now stack multiplicatively rather than additively<br>'+
-		'-golden switch now gives +50% CpS, and residual luck is +10% CpS per golden cookie upgrade (up from +25% and +1%, respectively)<br>'+
-		'-lucky cookies and cookie chain payouts have been modified a bit, possibly for the better, who knows!<br>'+
+		'-kookie upgrades now stack multiplicatively rather than additively<br>'+
+		'-golden switch now gives +50% CpS, and residual luck is +10% CpS per golden kookie upgrade (up from +25% and +1%, respectively)<br>'+
+		'-lucky kookies and kookie chain payouts have been modified a bit, possibly for the better, who knows!<br>'+
 		'-wrinklers had previously been reduced to a maximum of 8 (10 with a heavenly upgrade), but are now back to 10 (12 with the upgrade)<br>'+
 		/*'-all animations are now handled by requestAnimationFrame(), which should hopefully help make the game less resource-intensive<br>'+*/
 		'-an ascension now only counts for achievement purposes if you earned at least 1 prestige level from it<br>'+
@@ -1612,7 +1612,7 @@ Game.Launch=function()
 		'-upgrades in the store should no longer randomly go unsorted<br>'+
 		'-window can be resized to any size again<br>'+
 		'-the "Stats" and "Options" buttons have been swapped again<br>'+
-		'-the golden cookie sound should be somewhat clearer<br>'+
+		'-the golden kookie sound should be somewhat clearer<br>'+
 		'-the ascend screen should be less CPU-hungry<br>'+
 		'</div>'+
 	'</div>'+
@@ -1625,7 +1625,7 @@ Game.Launch=function()
 	'<div class="listing">&bull; heaps of new upgrades and achievements</div>'+
 	'<div class="listing">&bull; fixed a whole bunch of bugs</div>'+
 	'<div class="listing">&bull; did a lot of rebalancing</div>'+
-	'<div class="listing">&bull; reworked heavenly chips and heavenly cookies (still experimenting, will probably rebalance things further)</div>'+
+	'<div class="listing">&bull; reworked heavenly chips and heavenly kookies (still experimenting, will probably rebalance things further)</div>'+
 	'<div class="listing">&bull; you may now unlock a dragon friend</div>'+
 	'<div class="listing">&bull; switches and season triggers now have their own store section</div>'+
 	'<div class="listing">&bull; ctrl-s and ctrl-o now save the game and open the import menu, respectively</div>'+
@@ -1637,7 +1637,7 @@ Game.Launch=function()
 	'<div class="title">25/08/2014 - legacy beta, part I</div>'+
 	'<div class="listing">&bull; 3 new buildings</div>'+
 	'<div class="listing">&bull; price and CpS curves revamped</div>'+
-	'<div class="listing">&bull; CpS calculations revamped; cookie upgrades now stack multiplicatively</div>'+
+	'<div class="listing">&bull; CpS calculations revamped; kookie upgrades now stack multiplicatively</div>'+
 	'<div class="listing">&bull; prestige system redone from scratch, with a whole new upgrade tree</div>'+
 	'<div class="listing">&bull; added some <a href="http://en.wikipedia.org/wiki/'+choose(['Krzysztof_Arciszewski','Eustachy_Sanguszko','Maurycy_Hauke','Karol_Turno','Tadeusz_Kutrzeba','Kazimierz_Fabrycy','Florian_Siwicki'])+'" target="_blank">general polish</a></div>'+
 	'<div class="listing">&bull; tons of other miscellaneous fixes and additions</div>'+
@@ -1650,7 +1650,7 @@ Game.Launch=function()
 	'<div class="listing">&bull; prompts now have keyboard shortcuts like system prompts would</div>'+
 	'<div class="listing">&bull; naming your bakery? you betcha</div>'+
 	'<div class="listing">&bull; "Fast notes" option to make all notifications close faster; new button to close all notifications</div>'+
-	'<div class="listing">&bull; the dungeons beta is now available on <a href="//orteil.dashnet.org/cookieclicker/betadungeons" target="_blank">/betadungeons</a></div>'+
+	'<div class="listing">&bull; the dungeons beta is now available on <a href="//orteil.dashnet.org/kookieclicker/betadungeons" target="_blank">/betadungeons</a></div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">09/04/2014 - nightmare in heaven</div>'+
@@ -1666,12 +1666,12 @@ Game.Launch=function()
 	'<div class="listing">&bull; implemented a simplified version of the <a href="https://github.com/Icehawk78/FrozenCookies" target="_blank">Frozen Cookies</a> add-on\'s short number formatting</div>'+
 	'<div class="listing">&bull; you can now buy 10 and sell all of a building at a time</div>'+
 	'<div class="listing">&bull; tons of optimizations and subtler changes</div>'+
-	'<div class="listing">&bull; you can now <a href="//orteil.dashnet.org/cookies2cash/" target="_blank">convert your cookies to cash</a>!</div>'+
+	'<div class="listing">&bull; you can now <a href="//orteil.dashnet.org/kookies2cash/" target="_blank">convert your kookies to cash</a>!</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">05/04/2014 - pity the fool</div>'+
 	'<div class="listing">&bull; wrinklers should now be saved so you don\'t have to pop them every time you refresh the game</div>'+
-	'<div class="listing">&bull; you now properly win 1 cookie upon reaching 10 billion cookies and making it on the local news</div>'+
+	'<div class="listing">&bull; you now properly win 1 kookie upon reaching 10 billion kookies and making it on the local news</div>'+
 	'<div class="listing">&bull; miscellaneous fixes and tiny additions</div>'+
 	'<div class="listing">&bull; added a few very rudimentary mod hooks</div>'+
 	'<div class="listing">&bull; the game should work again in Opera</div>'+
@@ -1687,15 +1687,15 @@ Game.Launch=function()
 	'<div class="title">14/02/2014 - lovely rainbowcalypse</div>'+
 	'<div class="listing">&bull; new building (it\'s been a while). More to come!</div>'+
 	'<div class="listing">&bull; you can now trigger seasonal events to your heart\'s content (upgrade unlocks at 5000 heavenly chips)</div>'+
-	'<div class="listing">&bull; new ultra-expensive batch of seasonal cookie upgrades you\'ll love to hate</div>'+
-	'<div class="listing">&bull; new timer bars for golden cookie buffs</div>'+
+	'<div class="listing">&bull; new ultra-expensive batch of seasonal kookie upgrades you\'ll love to hate</div>'+
+	'<div class="listing">&bull; new timer bars for golden kookie buffs</div>'+
 	'<div class="listing">&bull; buildings are now hidden when you start out and appear as they become available</div>'+
-	'<div class="listing">&bull; technical stuff : the game is now saved through localstorage instead of browser cookies, therefore ruining a perfectly good pun</div>'+
+	'<div class="listing">&bull; technical stuff : the game is now saved through localstorage instead of browser kookies, therefore ruining a perfectly good pun</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">22/12/2013 - merry fixmas</div>'+
 	'<div class="listing">&bull; some issues with the christmas upgrades have been fixed</div>'+
-	'<div class="listing">&bull; reindeer cookie drops are now more common</div>'+
+	'<div class="listing">&bull; reindeer kookie drops are now more common</div>'+
 	'<div class="listing">&bull; reindeers are now reindeer</div>'+
 	
 	'</div><div class="subsection update">'+
@@ -1704,20 +1704,20 @@ Game.Launch=function()
 	'<div class="listing">&bull; reindeer are running amok (catch them if you can!)</div>'+
 	'<div class="listing">&bull; added a new option to warn you when you close the window, so you don\'t lose your un-popped wrinklers</div>'+
 	'<div class="listing">&bull; also added a separate option for displaying cursors</div>'+
-	'<div class="listing">&bull; all the Halloween features are still there (and having the Spooky cookies achievements makes the Halloween cookies drop much more often)</div>'+
+	'<div class="listing">&bull; all the Halloween features are still there (and having the Spooky kookies achievements makes the Halloween kookies drop much more often)</div>'+
 	'<div class="listing">&bull; oh yeah, we now have <a href="http://www.redbubble.com/people/dashnet" target="_blank">Cookie Clicker shirts, stickers and hoodies</a>! (they\'re really rad)</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">29/10/2013 - spooky update</div>'+
-	'<div class="listing">&bull; the Grandmapocalypse now spawns wrinklers, hideous elderly creatures that damage your CpS when they reach your big cookie. Thankfully, you can click on them to make them explode (you\'ll even gain back the cookies they\'ve swallowed - with interest!).</div>'+
-	'<div class="listing">&bull; wrath cookie now 27% spookier</div>'+
+	'<div class="listing">&bull; the Grandmapocalypse now spawns wrinklers, hideous elderly creatures that damage your CpS when they reach your big kookie. Thankfully, you can click on them to make them explode (you\'ll even gain back the kookies they\'ve swallowed - with interest!).</div>'+
+	'<div class="listing">&bull; wrath kookie now 27% spookier</div>'+
 	'<div class="listing">&bull; some other stuff</div>'+
 	'<div class="listing">&bull; you should totally go check out <a href="http://candybox2.net/" target="_blank">Candy Box 2</a>, the sequel to the game that inspired Cookie Clicker</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">15/10/2013 - it\'s a secret</div>'+
-	'<div class="listing">&bull; added a new heavenly upgrade that gives you 5% of your heavenly chips power for 11 cookies (if you purchased the Heavenly key, you might need to buy it again, sorry)</div>'+
-	'<div class="listing">&bull; golden cookie chains should now work properly</div>'+
+	'<div class="listing">&bull; added a new heavenly upgrade that gives you 5% of your heavenly chips power for 11 kookies (if you purchased the Heavenly key, you might need to buy it again, sorry)</div>'+
+	'<div class="listing">&bull; golden kookie chains should now work properly</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">15/10/2013 - player-friendly</div>'+
@@ -1728,17 +1728,17 @@ Game.Launch=function()
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">15/10/2013 - a couple fixes</div>'+
-	'<div class="listing">&bull; golden cookies should no longer spawn embarrassingly often</div>'+
+	'<div class="listing">&bull; golden kookies should no longer spawn embarrassingly often</div>'+
 	'<div class="listing">&bull; cursors now stop moving if Fancy Graphics is turned off</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">14/10/2013 - going for the gold</div>'+
-	'<div class="listing">&bull; golden cookie chains work a bit differently</div>'+
-	'<div class="listing">&bull; golden cookie spawns are more random</div>'+
-	'<div class="listing">&bull; CpS achievements are no longer affected by golden cookie frenzies</div>'+
-	'<div class="listing">&bull; revised cookie-baking achievement requirements</div>'+
+	'<div class="listing">&bull; golden kookie chains work a bit differently</div>'+
+	'<div class="listing">&bull; golden kookie spawns are more random</div>'+
+	'<div class="listing">&bull; CpS achievements are no longer affected by golden kookie frenzies</div>'+
+	'<div class="listing">&bull; revised kookie-baking achievement requirements</div>'+
 	'<div class="listing">&bull; heavenly chips now require upgrades to function at full capacity</div>'+
-	'<div class="listing">&bull; added 4 more cookie upgrades, unlocked after reaching certain amounts of Heavenly Chips</div>'+
+	'<div class="listing">&bull; added 4 more kookie upgrades, unlocked after reaching certain amounts of Heavenly Chips</div>'+
 	'<div class="listing">&bull; speed baking achievements now require you to have no heavenly upgrades; as such, they have been reset for everyone (along with the Hardcore achievement) to better match their initially intended difficulty</div>'+
 	'<div class="listing">&bull; made good progress on the mobile port</div>'+
 	
@@ -1747,41 +1747,41 @@ Game.Launch=function()
 	'<div class="listing">&bull; some visual effects have been completely rewritten and should now run more smoothly (and be less CPU-intensive)</div>'+
 	'<div class="listing">&bull; new upgrade tier</div>'+
 	'<div class="listing">&bull; new milk tier</div>'+
-	'<div class="listing">&bull; cookie chains have different capping mechanics</div>'+
+	'<div class="listing">&bull; kookie chains have different capping mechanics</div>'+
 	'<div class="listing">&bull; antimatter condensers are back to their previous price</div>'+
 	'<div class="listing">&bull; heavenly chips now give +2% CpS again (they will be extensively reworked in the future)</div>'+
 	'<div class="listing">&bull; farms have been buffed a bit (to popular demand)</div>'+
-	'<div class="listing">&bull; dungeons still need a bit more work and will be released soon - we want them to be just right! (you can test an unfinished version in <a href="//orteil.dashnet.org/cookieclicker/betadungeons/" target="_blank">the beta</a>)</div>'+
+	'<div class="listing">&bull; dungeons still need a bit more work and will be released soon - we want them to be just right! (you can test an unfinished version in <a href="//orteil.dashnet.org/kookieclicker/betadungeons/" target="_blank">the beta</a>)</div>'+
 	
 	'</div><div class="subsection update">'+
 	'<div class="title">28/09/2013 - dungeon beta</div>'+
-	'<div class="listing">&bull; from now on, big updates will come through a beta stage first (you can <a href="//orteil.dashnet.org/cookieclicker/betadungeons/" target="_blank">try it here</a>)</div>'+
+	'<div class="listing">&bull; from now on, big updates will come through a beta stage first (you can <a href="//orteil.dashnet.org/kookieclicker/betadungeons/" target="_blank">try it here</a>)</div>'+
 	'<div class="listing">&bull; first dungeons! (you need 50 factories to unlock them!)</div>'+
-	'<div class="listing">&bull; cookie chains can be longer</div>'+
+	'<div class="listing">&bull; kookie chains can be longer</div>'+
 	'<div class="listing">&bull; antimatter condensers are a bit more expensive</div>'+
-	'<div class="listing">&bull; heavenly chips now only give +1% cps each (to account for all the cookies made from condensers)</div>'+
+	'<div class="listing">&bull; heavenly chips now only give +1% cps each (to account for all the kookies made from condensers)</div>'+
 	'<div class="listing">&bull; added flavor text on all upgrades</div>'+
 	
 	'</div><div class="subsection update small">'+
-	'<div class="title">15/09/2013 - anticookies</div>'+
-	'<div class="listing">&bull; ran out of regular matter to make your cookies? Try our new antimatter condensers!</div>'+
+	'<div class="title">15/09/2013 - antikookies</div>'+
+	'<div class="listing">&bull; ran out of regular matter to make your kookies? Try our new antimatter condensers!</div>'+
 	'<div class="listing">&bull; renamed Hard-reset to "Wipe save" to avoid confusion</div>'+
-	'<div class="listing">&bull; reset achievements are now regular achievements and require cookies baked all time, not cookies in bank</div>'+
+	'<div class="listing">&bull; reset achievements are now regular achievements and require kookies baked all time, not kookies in bank</div>'+
 	'<div class="listing">&bull; heavenly chips have been nerfed a bit (and are now awarded following a geometric progression : 1 trillion for the first, 2 for the second, etc); the prestige system will be extensively reworked in a future update (after dungeons)</div>'+
-	'<div class="listing">&bull; golden cookie clicks are no longer reset by soft-resets</div>'+
+	'<div class="listing">&bull; golden kookie clicks are no longer reset by soft-resets</div>'+
 	'<div class="listing">&bull; you can now see how long you\'ve been playing in the stats</div>'+
 	
 	'</div><div class="subsection update small">'+
-	'<div class="title">08/09/2013 - everlasting cookies</div>'+
-	'<div class="listing">&bull; added a prestige system - resetting gives you permanent CpS boosts (the more cookies made before resetting, the bigger the boost!)</div>'+
+	'<div class="title">08/09/2013 - everlasting kookies</div>'+
+	'<div class="listing">&bull; added a prestige system - resetting gives you permanent CpS boosts (the more kookies made before resetting, the bigger the boost!)</div>'+
 	'<div class="listing">&bull; save format has been slightly modified to take less space</div>'+
-	'<div class="listing">&bull; Leprechaun has been bumped to 777 golden cookies clicked and is now shadow; Fortune is the new 77 golden cookies achievement</div>'+
+	'<div class="listing">&bull; Leprechaun has been bumped to 777 golden kookies clicked and is now shadow; Fortune is the new 77 golden kookies achievement</div>'+
 	'<div class="listing">&bull; clicking frenzy is now x777</div>'+
 	
 	'</div><div class="subsection update small">'+
-	'<div class="title">04/09/2013 - smarter cookie</div>'+
-	'<div class="listing">&bull; golden cookies only have 20% chance of giving the same outcome twice in a row now</div>'+
-	'<div class="listing">&bull; added a golden cookie upgrade</div>'+
+	'<div class="title">04/09/2013 - smarter kookie</div>'+
+	'<div class="listing">&bull; golden kookies only have 20% chance of giving the same outcome twice in a row now</div>'+
+	'<div class="listing">&bull; added a golden kookie upgrade</div>'+
 	'<div class="listing">&bull; added an upgrade that makes pledges last twice as long (requires having pledged 10 times)</div>'+
 	'<div class="listing">&bull; Quintillion fingers is now twice as efficient</div>'+
 	'<div class="listing">&bull; Uncanny clicker was really too unpredictable; it is now a regular achievement and no longer requires a world record, just *pretty fast* clicking</div>'+
@@ -1794,8 +1794,8 @@ Game.Launch=function()
 	'<div class="listing">&bull; added an option for faster, cheaper graphics</div>'+
 	'<div class="listing">&bull; base64 encoding has been redone; this might make saving possible again on some older browsers</div>'+
 	'<div class="listing">&bull; shadow achievements now have their own section</div>'+
-	'<div class="listing">&bull; raspberry juice is now named raspberry milk, despite raspberry juice being delicious and going unquestionably well with cookies</div>'+
-	'<div class="listing">&bull; HOTFIX : cursors now click; fancy graphics button renamed; cookies amount now more visible against cursors</div>'+
+	'<div class="listing">&bull; raspberry juice is now named raspberry milk, despite raspberry juice being delicious and going unquestionably well with kookies</div>'+
+	'<div class="listing">&bull; HOTFIX : cursors now click; fancy graphics button renamed; kookies amount now more visible against cursors</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">01/09/2013 - sorting things out</div>'+
@@ -1809,7 +1809,7 @@ Game.Launch=function()
 	'<div class="listing">&bull; added a way to permanently stop the grandmapocalypse</div>'+
 	'<div class="listing">&bull; Elder Pledge price is now capped</div>'+
 	'<div class="listing">&bull; One Mind and other grandma research upgrades are now a little more powerful, if not 100% accurate</div>'+
-	'<div class="listing">&bull; "golden" cookie now appears again during grandmapocalypse; Elder Pledge-related achievements are now unlockable</div>'+
+	'<div class="listing">&bull; "golden" kookie now appears again during grandmapocalypse; Elder Pledge-related achievements are now unlockable</div>'+
 	
 	'</div><div class="subsection update">'+
 	'<div class="title">31/08/2013 - too many grandmas</div>'+
@@ -1820,7 +1820,7 @@ Game.Launch=function()
 	'</div><div class="subsection update small">'+
 	'<div class="title">28/08/2013 - over-achiever</div>'+
 	'<div class="listing">&bull; added a few more achievements</div>'+
-	'<div class="listing">&bull; reworked the "Bake X cookies" achievements so they take longer to achieve</div>'+
+	'<div class="listing">&bull; reworked the "Bake X kookies" achievements so they take longer to achieve</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">27/08/2013 - a bad idea</div>'+
@@ -1834,7 +1834,7 @@ Game.Launch=function()
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">26/08/2013 - new upgrade tier</div>'+
-	'<div class="listing">&bull; added some more upgrades (including a couple golden cookie-related ones)</div>'+
+	'<div class="listing">&bull; added some more upgrades (including a couple golden kookie-related ones)</div>'+
 	'<div class="listing">&bull; added clicking stats</div>'+
 	
 	'</div><div class="subsection update small">'+
@@ -1846,10 +1846,10 @@ Game.Launch=function()
 	'</div><div class="subsection update small">'+
 	'<div class="title">25/08/2013 - tweaks</div>'+
 	'<div class="listing">&bull; rebalanced progression curve (mid- and end-game objects cost more and give more)</div>'+
-	'<div class="listing">&bull; added some more cookie upgrades</div>'+
+	'<div class="listing">&bull; added some more kookie upgrades</div>'+
 	'<div class="listing">&bull; added CpS for cursors</div>'+
 	'<div class="listing">&bull; added sell button</div>'+
-	'<div class="listing">&bull; made golden cookie more useful</div>'+
+	'<div class="listing">&bull; made golden kookie more useful</div>'+
 	
 	'</div><div class="subsection update small">'+
 	'<div class="title">24/08/2013 - hotfixes</div>'+
@@ -1865,7 +1865,7 @@ Game.Launch=function()
 	
 	'</div><div class="subsection update">'+
 	'<div class="title">08/08/2013 - game launch</div>'+
-	'<div class="listing">&bull; made <a href="https://orteil.dashnet.org/experiments/cookie/" target="_blank">the game</a> in a couple hours, for laughs</div>'+
+	'<div class="listing">&bull; made <a href="https://orteil.dashnet.org/experiments/kookie/" target="_blank">the game</a> in a couple hours, for laughs</div>'+
 	'<div class="listing">&bull; kinda starting to regret it</div>'+
 	'<div class="listing">&bull; ah well</div>'+
 	'</div>'+
@@ -1888,7 +1888,7 @@ Game.Launch=function()
 		l('offGameMessage').innerHTML=
 		'<div class="title">Oops. Wrong address!</div>'+
 		'<div>It looks like you\'re accessing Cookie Clicker from another URL than the official one.<br>'+
-		'You can <a href="//orteil.dashnet.org/cookieclicker/" target="_blank">play Cookie Clicker over here</a>!<br>'+
+		'You can <a href="//orteil.dashnet.org/kookieclicker/" target="_blank">play Cookie Clicker over here</a>!<br>'+
 		'<small>(If for any reason, you are unable to access the game on the official URL, we are currently working on a second domain.)</small></div>';
 	}
 	Game.timedout=false;
@@ -1896,7 +1896,7 @@ Game.Launch=function()
 	{
 		Game.WriteSave();
 		Game.killShimmers();
-		l('offGameMessage').innerHTML='<div class="title">'+(Game.Has('Twin Gates of Transcendence')?loc("Cookie Clicker is in sleep mode and generating offline cookies."):loc("Cookie Clicker is in sleep mode."))+'</div>'+loc("%1 to resume from your save file.",'<a '+Game.clickStr+'="Game.Resume();">'+loc("Click here")+'</a>')+'<br><div style="font-style:italic;font-size:65%;line-height:110%;opacity:0.75;">'+loc("(this happens when too many frames are skipped at once,<br>usually when the game has been running in the background for a while)<br>(you can turn this feature off in the settings menu)")+'</div>';
+		l('offGameMessage').innerHTML='<div class="title">'+(Game.Has('Twin Gates of Transcendence')?loc("Cookie Clicker is in sleep mode and generating offline kookies."):loc("Cookie Clicker is in sleep mode."))+'</div>'+loc("%1 to resume from your save file.",'<a '+Game.clickStr+'="Game.Resume();">'+loc("Click here")+'</a>')+'<br><div style="font-style:italic;font-size:65%;line-height:110%;opacity:0.75;">'+loc("(this happens when too many frames are skipped at once,<br>usually when the game has been running in the background for a while)<br>(you can turn this feature off in the settings menu)")+'</div>';
 		l('offGameMessageWrap').style.display='table';
 		Game.timedout=true;
 		console.log('[=== Game timed out and has been put in sleep mode. Data was saved. ===]');
@@ -1977,29 +1977,29 @@ Game.Launch=function()
 			return result;
 		}
 		
-		Game.cookiesEarned=0;//all cookies earned during gameplay
-		Game.cookies=0;//cookies
-		Game.cookiesd=0;//cookies display
-		Game.cookiesPs=1;//cookies per second (to recalculate with every new purchase)
-		Game.cookiesPsRaw=0;//raw cookies per second
-		Game.cookiesPsRawHighest=0;//highest raw cookies per second this ascension
-		Game.cookiesReset=0;//cookies lost to resetting (used to determine prestige and heavenly chips)
-		Game.cookieClicks=0;//+1 for each click on the cookie
-		Game.goldenClicks=0;//+1 for each golden cookie clicked (all time)
-		Game.goldenClicksLocal=0;//+1 for each golden cookie clicked (this game only)
-		Game.missedGoldenClicks=0;//+1 for each golden cookie missed
-		Game.handmadeCookies=0;//all the cookies made from clicking the cookie
+		Game.kookiesEarned=0;//all kookies earned during gameplay
+		Game.kookies=0;//kookies
+		Game.kookiesd=0;//kookies display
+		Game.kookiesPs=1;//kookies per second (to recalculate with every new purchase)
+		Game.kookiesPsRaw=0;//raw kookies per second
+		Game.kookiesPsRawHighest=0;//highest raw kookies per second this ascension
+		Game.kookiesReset=0;//kookies lost to resetting (used to determine prestige and heavenly chips)
+		Game.kookieClicks=0;//+1 for each click on the kookie
+		Game.goldenClicks=0;//+1 for each golden kookie clicked (all time)
+		Game.goldenClicksLocal=0;//+1 for each golden kookie clicked (this game only)
+		Game.missedGoldenClicks=0;//+1 for each golden kookie missed
+		Game.handmadeCookies=0;//all the kookies made from clicking the kookie
 		Game.milkProgress=0;//you gain a little bit for each achievement. Each increment of 1 is a different milk displayed.
 		Game.milkH=Game.milkProgress/2;//milk height, between 0 and 1 (although should never go above 0.5)
 		Game.milkHd=0;//milk height display
 		Game.milkType=0;//custom milk
 		Game.bgType=0;//custom background
-		Game.chimeType=0;//golden cookie chime
-		Game.prestige=0;//prestige level (recalculated depending on Game.cookiesReset)
+		Game.chimeType=0;//golden kookie chime
+		Game.prestige=0;//prestige level (recalculated depending on Game.kookiesReset)
 		Game.heavenlyChips=0;//heavenly chips the player currently has
 		Game.heavenlyChipsDisplayed=0;//ticks up or down to match Game.heavenlyChips
-		Game.heavenlyChipsSpent=0;//heavenly chips spent on cookies, upgrades and such
-		Game.heavenlyCookies=0;//how many cookies have we baked from chips (unused)
+		Game.heavenlyChipsSpent=0;//heavenly chips spent on kookies, upgrades and such
+		Game.heavenlyCookies=0;//how many kookies have we baked from chips (unused)
 		Game.permanentUpgrades=[-1,-1,-1,-1,-1];
 		Game.ascensionMode=0;//type of challenge run if any
 		Game.resets=0;//reset counter
@@ -2027,7 +2027,7 @@ Game.Launch=function()
 		Game.pledgeT=0;
 		Game.researchT=0;
 		Game.nextResearch=0;
-		Game.cookiesSucked=0;//cookies sucked by wrinklers
+		Game.kookiesSucked=0;//kookies sucked by wrinklers
 		Game.cpsSucked=0;//percent of CpS being sucked by wrinklers
 		Game.wrinklersPopped=0;
 		Game.santaLevel=0;
@@ -2103,13 +2103,13 @@ Game.Launch=function()
 		
 		Game.startDate=parseInt(Date.now());//when we started playing
 		Game.fullDate=parseInt(Date.now());//when we started playing (carries over with resets)
-		Game.lastDate=parseInt(Date.now());//when we last saved the game (used to compute "cookies made since we closed the game" etc)
+		Game.lastDate=parseInt(Date.now());//when we last saved the game (used to compute "kookies made since we closed the game" etc)
 		
 		Game.prefs=[];
 		Game.DefaultPrefs=function()
 		{
-			Game.prefs.particles=1;//particle effects : falling cookies etc
-			Game.prefs.numbers=1;//numbers that pop up when clicking the cookie
+			Game.prefs.particles=1;//particle effects : falling kookies etc
+			Game.prefs.numbers=1;//numbers that pop up when clicking the kookie
 			Game.prefs.autosave=1;//save the game every minute or so
 			Game.prefs.autoupdate=1;//send an AJAX request to the server every 30 minutes (note : ignored)
 			Game.prefs.milk=1;//display milk
@@ -2121,10 +2121,10 @@ Game.Launch=function()
 			Game.prefs.format=0;//shorten numbers
 			Game.prefs.notifs=0;//notifications fade faster
 			Game.prefs.animate=1;//animate buildings
-			Game.prefs.wobbly=1;//wobbly cookie
-			Game.prefs.monospace=0;//alt monospace font for cookies
+			Game.prefs.wobbly=1;//wobbly kookie
+			Game.prefs.monospace=0;//alt monospace font for kookies
 			Game.prefs.filters=1;//CSS filter effects (might be heavy on some browsers)
-			Game.prefs.cookiesound=1;//use new cookie click sound
+			Game.prefs.kookiesound=1;//use new kookie click sound
 			Game.prefs.crates=0;//show crates around icons in stats
 			Game.prefs.altDraw=0;//use requestAnimationFrame to update drawing instead of fixed 30 fps setTimeout
 			Game.prefs.showBackupWarning=1;//if true, show a "Have you backed up your save?" message on save load; set to false when save is exported
@@ -2524,7 +2524,7 @@ Game.Launch=function()
 				if (!App && Game.heralds==0) str+=loc("There are no heralds at the moment. Please consider <b style=\"color:#bc3aff;\">donating to our Patreon</b>!");
 				else
 				{
-					str+='<b style="color:#bc3aff;text-shadow:0px 1px 0px #6d0096;">'+loc("%1 herald",Game.heralds)+'</b> '+loc("selflessly inspiring a boost in production for everyone, resulting in %1.",'<br><b style="color:#cdaa89;text-shadow:0px 1px 0px #7c4532,0px 0px 6px #7c4532;"><div style="width:16px;height:16px;display:inline-block;vertical-align:middle;background:url(img/money.png);"></div>'+loc("+%1% cookies per second",Game.heralds)+'</b>');
+					str+='<b style="color:#bc3aff;text-shadow:0px 1px 0px #6d0096;">'+loc("%1 herald",Game.heralds)+'</b> '+loc("selflessly inspiring a boost in production for everyone, resulting in %1.",'<br><b style="color:#cdaa89;text-shadow:0px 1px 0px #7c4532,0px 0px 6px #7c4532;"><div style="width:16px;height:16px;display:inline-block;vertical-align:middle;background:url(img/money.png);"></div>'+loc("+%1% kookies per second",Game.heralds)+'</b>');
 					str+='<div class="line"></div>';
 					if (Game.ascensionMode==1) str+=loc("You are in a <b>Born again</b> run, and are not currently benefiting from heralds.");
 					else if (Game.Has('Heralds')) str+=loc("You own the <b>Heralds</b> upgrade, and therefore benefit from the production boost.");
@@ -2556,7 +2556,7 @@ Game.Launch=function()
 		
 		
 		Game.useLocalStorage=1;
-		//window.localStorage.clear();//won't switch back to cookie-based if there is localStorage info
+		//window.localStorage.clear();//won't switch back to kookie-based if there is localStorage info
 		
 		/*=====================================================================================
 		SAVE
@@ -2643,7 +2643,7 @@ Game.Launch=function()
 			(Game.prefs.wobbly?'1':'0')+
 			(Game.prefs.monospace?'1':'0')+
 			(Game.prefs.filters?'1':'0')+
-			(Game.prefs.cookiesound?'1':'0')+
+			(Game.prefs.kookiesound?'1':'0')+
 			(Game.prefs.crates?'1':'0')+
 			(Game.prefs.showBackupWarning?'1':'0')+
 			(Game.prefs.extraButtons?'1':'0')+
@@ -2661,23 +2661,23 @@ Game.Launch=function()
 			str+=str2+'|';
 			if (type==3) str+='\n\nMisc game data';
 			str+=
-			(type==3?'\n	cookies : ':'')+parseFloat(Game.cookies).toString()+';'+
-			(type==3?'\n	total cookies earned : ':'')+parseFloat(Game.cookiesEarned).toString()+';'+
-			(type==3?'\n	cookie clicks : ':'')+parseInt(Math.floor(Game.cookieClicks))+';'+
-			(type==3?'\n	golden cookie clicks : ':'')+parseInt(Math.floor(Game.goldenClicks))+';'+
-			(type==3?'\n	cookies made by clicking : ':'')+parseFloat(Game.handmadeCookies).toString()+';'+
-			(type==3?'\n	golden cookies missed : ':'')+parseInt(Math.floor(Game.missedGoldenClicks))+';'+
+			(type==3?'\n	kookies : ':'')+parseFloat(Game.kookies).toString()+';'+
+			(type==3?'\n	total kookies earned : ':'')+parseFloat(Game.kookiesEarned).toString()+';'+
+			(type==3?'\n	kookie clicks : ':'')+parseInt(Math.floor(Game.kookieClicks))+';'+
+			(type==3?'\n	golden kookie clicks : ':'')+parseInt(Math.floor(Game.goldenClicks))+';'+
+			(type==3?'\n	kookies made by clicking : ':'')+parseFloat(Game.handmadeCookies).toString()+';'+
+			(type==3?'\n	golden kookies missed : ':'')+parseInt(Math.floor(Game.missedGoldenClicks))+';'+
 			(type==3?'\n	background type : ':'')+parseInt(Math.floor(Game.bgType))+';'+
 			(type==3?'\n	milk type : ':'')+parseInt(Math.floor(Game.milkType))+';'+
-			(type==3?'\n	cookies from past runs : ':'')+parseFloat(Game.cookiesReset).toString()+';'+
+			(type==3?'\n	kookies from past runs : ':'')+parseFloat(Game.kookiesReset).toString()+';'+
 			(type==3?'\n	elder wrath : ':'')+parseInt(Math.floor(Game.elderWrath))+';'+
 			(type==3?'\n	pledges : ':'')+parseInt(Math.floor(Game.pledges))+';'+
 			(type==3?'\n	pledge time left : ':'')+parseInt(Math.floor(Game.pledgeT))+';'+
 			(type==3?'\n	currently researching : ':'')+parseInt(Math.floor(Game.nextResearch))+';'+
 			(type==3?'\n	research time left : ':'')+parseInt(Math.floor(Game.researchT))+';'+
 			(type==3?'\n	ascensions : ':'')+parseInt(Math.floor(Game.resets))+';'+
-			(type==3?'\n	golden cookie clicks (this run) : ':'')+parseInt(Math.floor(Game.goldenClicksLocal))+';'+
-			(type==3?'\n	cookies sucked by wrinklers : ':'')+parseFloat(Game.cookiesSucked).toString()+';'+
+			(type==3?'\n	golden kookie clicks (this run) : ':'')+parseInt(Math.floor(Game.goldenClicksLocal))+';'+
+			(type==3?'\n	kookies sucked by wrinklers : ':'')+parseFloat(Game.kookiesSucked).toString()+';'+
 			(type==3?'\n	wrinkles popped : ':'')+parseInt(Math.floor(Game.wrinklersPopped))+';'+
 			(type==3?'\n	santa level : ':'')+parseInt(Math.floor(Game.santaLevel))+';'+
 			(type==3?'\n	reindeer clicked : ':'')+parseInt(Math.floor(Game.reindeerClicked))+';'+
@@ -2686,12 +2686,12 @@ Game.Launch=function()
 			(type==3?'\n	current season : ':'')+(Game.season?Game.season:'')+';';
 			var wrinklers=Game.SaveWrinklers();
 			str+=
-			(type==3?'\n	amount of cookies contained in wrinklers : ':'')+parseFloat(Math.floor(wrinklers.amount))+';'+
+			(type==3?'\n	amount of kookies contained in wrinklers : ':'')+parseFloat(Math.floor(wrinklers.amount))+';'+
 			(type==3?'\n	number of wrinklers : ':'')+parseInt(Math.floor(wrinklers.number))+';'+
 			(type==3?'\n	prestige level : ':'')+parseFloat(Game.prestige).toString()+';'+
 			(type==3?'\n	heavenly chips : ':'')+parseFloat(Game.heavenlyChips).toString()+';'+
 			(type==3?'\n	heavenly chips spent : ':'')+parseFloat(Game.heavenlyChipsSpent).toString()+';'+
-			(type==3?'\n	heavenly cookies : ':'')+parseFloat(Game.heavenlyCookies).toString()+';'+
+			(type==3?'\n	heavenly kookies : ':'')+parseFloat(Game.heavenlyCookies).toString()+';'+
 			(type==3?'\n	ascension mode : ':'')+parseInt(Math.floor(Game.ascensionMode))+';'+
 			(type==3?'\n	permanent upgrades : ':'')+parseInt(Math.floor(Game.permanentUpgrades[0]))+';'+parseInt(Math.floor(Game.permanentUpgrades[1]))+';'+parseInt(Math.floor(Game.permanentUpgrades[2]))+';'+parseInt(Math.floor(Game.permanentUpgrades[3]))+';'+parseInt(Math.floor(Game.permanentUpgrades[4]))+';'+
 			(type==3?'\n	dragon level : ':'')+parseInt(Math.floor(Game.dragonLevel))+';'+
@@ -2700,7 +2700,7 @@ Game.Launch=function()
 			(type==3?'\n	chime type : ':'')+parseInt(Math.floor(Game.chimeType))+';'+
 			(type==3?'\n	volume : ':'')+parseInt(Math.floor(Game.volume))+';'+
 			(type==3?'\n	number of shiny wrinklers : ':'')+parseInt(Math.floor(wrinklers.shinies))+';'+
-			(type==3?'\n	amount of cookies contained in shiny wrinklers : ':'')+parseFloat(Math.floor(wrinklers.amountShinies))+';'+
+			(type==3?'\n	amount of kookies contained in shiny wrinklers : ':'')+parseFloat(Math.floor(wrinklers.amountShinies))+';'+
 			(type==3?'\n	current amount of sugar lumps : ':'')+parseFloat(Math.floor(Game.lumps))+';'+
 			(type==3?'\n	total amount of sugar lumps made : ':'')+parseFloat(Math.floor(Game.lumpsTotal))+';'+
 			(type==3?'\n	time when current sugar lump started : ':'')+parseFloat(Math.floor(Game.lumpT))+';'+
@@ -2708,14 +2708,14 @@ Game.Launch=function()
 			(type==3?'\n	sugar lump type : ':'')+parseInt(Math.floor(Game.lumpCurrentType))+';'+
 			(type==3?'\n	vault : ':'')+Game.vault.join(',')+';'+
 			(type==3?'\n	heralds : ':'')+parseInt(Game.heralds)+';'+
-			(type==3?'\n	golden cookie fortune : ':'')+parseInt(Game.fortuneGC)+';'+
+			(type==3?'\n	golden kookie fortune : ':'')+parseInt(Game.fortuneGC)+';'+
 			(type==3?'\n	CpS fortune : ':'')+parseInt(Game.fortuneCPS)+';'+
-			(type==3?'\n	highest raw CpS : ':'')+parseFloat(Game.cookiesPsRawHighest)+';'+
+			(type==3?'\n	highest raw CpS : ':'')+parseFloat(Game.kookiesPsRawHighest)+';'+
 			(type==3?'\n	music volume : ':'')+parseInt(Math.floor(Game.volumeMusic))+';'+
 			
-			'|';//cookies and lots of other stuff
+			'|';//kookies and lots of other stuff
 			
-			if (type==3) str+='\n\nBuildings : amount, bought, cookies produced, level, minigame data';
+			if (type==3) str+='\n\nBuildings : amount, bought, kookies produced, level, minigame data';
 			for (var i in Game.Objects)//buildings
 			{
 				var me=Game.Objects[i];
@@ -2792,7 +2792,7 @@ Game.Launch=function()
 			{
 				if (Game.useLocalStorage)
 				{
-					//so we used to save the game using browser cookies, which was just really neat considering the game's name
+					//so we used to save the game using browser kookies, which was just really neat considering the game's name
 					//we're using localstorage now, which is more efficient but not as cool
 					//a moment of silence for our fallen puns
 					str=utf8_to_b64(str)+'!END!';
@@ -2818,16 +2818,16 @@ Game.Launch=function()
 				else//legacy system
 				{
 					//that's right
-					//we're using cookies
+					//we're using kookies
 					//yeah I went there
 					var now=new Date();//we storin dis for 5 years, people
-					now.setFullYear(now.getFullYear()+5);//mmh stale cookies
+					now.setFullYear(now.getFullYear()+5);//mmh stale kookies
 					str=utf8_to_b64(str)+'!END!';
 					Game.saveData=escape(str);
 					str=Game.SaveTo+'='+escape(str)+'; expires='+now.toUTCString()+';';
-					document.cookie=str;//aaand save
+					document.kookie=str;//aaand save
 					if (App) App.save(str);
-					if (document.cookie.indexOf(Game.SaveTo)<0)
+					if (document.kookie.indexOf(Game.SaveTo)<0)
 					{
 						Game.Notify(loc("Error while saving"),loc("Export your save instead!"),'',0,1);
 					}
@@ -2863,12 +2863,12 @@ Game.Launch=function()
 				if (Game.useLocalStorage)
 				{
 					var local=localStorageGet(Game.SaveTo);
-					if (!local)//no localstorage save found? let's get the cookie one last time
+					if (!local)//no localstorage save found? let's get the kookie one last time
 					{
-						if (document.cookie.indexOf(Game.SaveTo)>=0)
+						if (document.kookie.indexOf(Game.SaveTo)>=0)
 						{
-							str=unescape(document.cookie.split(Game.SaveTo+'=')[1]);
-							document.cookie=Game.SaveTo+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+							str=unescape(document.kookie.split(Game.SaveTo+'=')[1]);
+							document.kookie=Game.SaveTo+'=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 						}
 						else return false;
 					}
@@ -2879,7 +2879,7 @@ Game.Launch=function()
 				}
 				else//legacy system
 				{
-					if (document.cookie.indexOf(Game.SaveTo)>=0) str=unescape(document.cookie.split(Game.SaveTo+'=')[1]);//get cookie here
+					if (document.kookie.indexOf(Game.SaveTo)>=0) str=unescape(document.kookie.split(Game.SaveTo+'=')[1]);//get kookie here
 					else return false;
 				}
 			}
@@ -2943,7 +2943,7 @@ Game.Launch=function()
 						Game.prefs.wobbly=spl[11]?parseInt(spl[11]):0;
 						Game.prefs.monospace=spl[12]?parseInt(spl[12]):0;
 						Game.prefs.filters=spl[13]?parseInt(spl[13]):1;if (Game.prefs.filters) Game.removeClass('noFilters'); else if (!Game.prefs.filters) Game.addClass('noFilters');
-						Game.prefs.cookiesound=spl[14]?parseInt(spl[14]):1;
+						Game.prefs.kookiesound=spl[14]?parseInt(spl[14]):1;
 						Game.prefs.crates=spl[15]?parseInt(spl[15]):0;
 						Game.prefs.showBackupWarning=spl[16]?parseInt(spl[16]):1;
 						Game.prefs.extraButtons=spl[17]?parseInt(spl[17]):1;if (!Game.prefs.extraButtons) Game.removeClass('extraButtons'); else if (Game.prefs.extraButtons) Game.addClass('extraButtons');
@@ -2957,16 +2957,16 @@ Game.Launch=function()
 						Game.prefs.screenreader=spl[25]?parseInt(spl[25]):0;
 						Game.prefs.discordPresence=spl[26]?parseInt(spl[26]):1;
 						BeautifyAll();
-						spl=str[4].split(';');//cookies and lots of other stuff
-						Game.cookies=parseFloat(spl[0]);
-						Game.cookiesEarned=parseFloat(spl[1]);
-						Game.cookieClicks=spl[2]?parseInt(spl[2]):0;
+						spl=str[4].split(';');//kookies and lots of other stuff
+						Game.kookies=parseFloat(spl[0]);
+						Game.kookiesEarned=parseFloat(spl[1]);
+						Game.kookieClicks=spl[2]?parseInt(spl[2]):0;
 						Game.goldenClicks=spl[3]?parseInt(spl[3]):0;
 						Game.handmadeCookies=spl[4]?parseFloat(spl[4]):0;
 						Game.missedGoldenClicks=spl[5]?parseInt(spl[5]):0;
 						Game.bgType=spl[6]?parseInt(spl[6]):0;
 						Game.milkType=spl[7]?parseInt(spl[7]):0;
-						Game.cookiesReset=spl[8]?parseFloat(spl[8]):0;
+						Game.kookiesReset=spl[8]?parseFloat(spl[8]):0;
 						Game.elderWrath=spl[9]?parseInt(spl[9]):0;
 						Game.pledges=spl[10]?parseInt(spl[10]):0;
 						Game.pledgeT=spl[11]?parseInt(spl[11]):0;
@@ -2974,7 +2974,7 @@ Game.Launch=function()
 						Game.researchT=spl[13]?parseInt(spl[13]):0;
 						Game.resets=spl[14]?parseInt(spl[14]):0;
 						Game.goldenClicksLocal=spl[15]?parseInt(spl[15]):0;
-						Game.cookiesSucked=spl[16]?parseFloat(spl[16]):0;
+						Game.kookiesSucked=spl[16]?parseFloat(spl[16]):0;
 						Game.wrinklersPopped=spl[17]?parseInt(spl[17]):0;
 						Game.santaLevel=spl[18]?parseInt(spl[18]):0;
 						Game.reindeerClicked=spl[19]?parseInt(spl[19]):0;
@@ -2988,7 +2988,7 @@ Game.Launch=function()
 						Game.heavenlyCookies=spl[28]?parseFloat(spl[28]):0;
 						Game.ascensionMode=spl[29]?parseInt(spl[29]):0;
 						Game.permanentUpgrades[0]=spl[30]?parseInt(spl[30]):-1;Game.permanentUpgrades[1]=spl[31]?parseInt(spl[31]):-1;Game.permanentUpgrades[2]=spl[32]?parseInt(spl[32]):-1;Game.permanentUpgrades[3]=spl[33]?parseInt(spl[33]):-1;Game.permanentUpgrades[4]=spl[34]?parseInt(spl[34]):-1;
-						//if (version<1.05) {Game.heavenlyChipsEarned=Game.HowMuchPrestige(Game.cookiesReset);Game.heavenlyChips=Game.heavenlyChipsEarned;}
+						//if (version<1.05) {Game.heavenlyChipsEarned=Game.HowMuchPrestige(Game.kookiesReset);Game.heavenlyChips=Game.heavenlyChipsEarned;}
 						Game.dragonLevel=spl[35]?parseInt(spl[35]):0;
 						if (version<2.0041 && Game.dragonLevel==Game.dragonLevels.length-2) {Game.dragonLevel=Game.dragonLevels.length-1;}
 						Game.dragonAura=spl[36]?parseInt(spl[36]):0;
@@ -3009,7 +3009,7 @@ Game.Launch=function()
 						Game.heralds=spl[48]?parseFloat(spl[48]):Game.heralds;
 						Game.fortuneGC=spl[49]?parseInt(spl[49]):0;
 						Game.fortuneCPS=spl[50]?parseInt(spl[50]):0;
-						Game.cookiesPsRawHighest=spl[51]?parseFloat(spl[51]):0;
+						Game.kookiesPsRawHighest=spl[51]?parseFloat(spl[51]):0;
 						Game.volumeMusic=spl[52]?parseInt(spl[52]):50;
 						
 						spl=str[5].split(';');//buildings
@@ -3215,7 +3215,7 @@ Game.Launch=function()
 						Game.computeSeasonPrices();
 						
 						//recompute prestige
-						Game.prestige=Math.floor(Game.HowMuchPrestige(Game.cookiesReset));
+						Game.prestige=Math.floor(Game.HowMuchPrestige(Game.kookiesReset));
 						//if ((Game.heavenlyChips+Game.heavenlyChipsSpent)<Game.prestige)
 						//{Game.heavenlyChips=Game.prestige;Game.heavenlyChipsSpent=0;}//chips owned and spent don't add up to total prestige? set chips owned to prestige
 						
@@ -3274,7 +3274,7 @@ Game.Launch=function()
 						if (Math.random()<1/10000) Game.TOYS=1;//teehee!
 						if (Math.random()<1/10000) Game.WINKLERS=1;//squeak
 						
-						//compute cookies earned while the game was closed
+						//compute kookies earned while the game was closed
 						if (Game.mobile || Game.Has('Perfect idling') || Game.Has('Twin Gates of Transcendence'))
 						{
 							if (Game.Has('Perfect idling'))
@@ -3311,11 +3311,11 @@ Game.Launch=function()
 							
 							var timeOfflineOptimal=Math.min(timeOffline,maxTime);
 							var timeOfflineReduced=Math.max(0,timeOffline-timeOfflineOptimal);
-							var amount=(timeOfflineOptimal+timeOfflineReduced*0.1)*Game.cookiesPs*(percent/100);
+							var amount=(timeOfflineOptimal+timeOfflineReduced*0.1)*Game.kookiesPs*(percent/100);
 							
 							if (amount>0)
 							{
-								Game.Notify(loc("Welcome back!"),loc("You earned <b>%1</b> while you were away.",loc("%1 cookie",LBeautify(amount)))+(EN?('<br>('+Game.sayTime(timeOfflineOptimal*Game.fps,-1)+' at '+Math.floor(percent)+'% CpS'+(timeOfflineReduced?', plus '+Game.sayTime(timeOfflineReduced*Game.fps,-1)+' at '+(Math.floor(percent*10)/100)+'%':'')+'.)'):''),[Math.floor(Math.random()*16),11]);
+								Game.Notify(loc("Welcome back!"),loc("You earned <b>%1</b> while you were away.",loc("%1 kookie",LBeautify(amount)))+(EN?('<br>('+Game.sayTime(timeOfflineOptimal*Game.fps,-1)+' at '+Math.floor(percent)+'% CpS'+(timeOfflineReduced?', plus '+Game.sayTime(timeOfflineReduced*Game.fps,-1)+' at '+(Math.floor(percent*10)/100)+'%':'')+'.)'):''),[Math.floor(Math.random()*16),11]);
 								Game.Earn(amount);
 							}
 						}
@@ -3363,7 +3363,7 @@ Game.Launch=function()
 					
 					Game.killShimmers();
 					
-					if (Game.T>Game.fps*5 && Game.ReincarnateTimer==0)//fade out of black and pop the cookie
+					if (Game.T>Game.fps*5 && Game.ReincarnateTimer==0)//fade out of black and pop the kookie
 					{
 						Game.ReincarnateTimer=1;
 						Game.addClass('reincarnating');
@@ -3383,10 +3383,10 @@ Game.Launch=function()
 					
 					if (Game.season!='' && Game.season==Game.baseSeason)
 					{
-						if (Game.season=='valentines') Game.Notify(loc("Valentine's Day!"),loc("It's <b>Valentine's season</b>!<br>Love's in the air and cookies are just that much sweeter!"),[20,3],60*3);
+						if (Game.season=='valentines') Game.Notify(loc("Valentine's Day!"),loc("It's <b>Valentine's season</b>!<br>Love's in the air and kookies are just that much sweeter!"),[20,3],60*3);
 						else if (Game.season=='fools') Game.Notify(loc("Business Day!"),loc("It's <b>Business season</b>!<br>Don't panic! Things are gonna be looking a little more corporate for a few days."),[17,6],60*3);
 						else if (Game.season=='halloween') Game.Notify(loc("Halloween!"),loc("It's <b>Halloween season</b>!<br>Everything is just a little bit spookier!"),[13,8],60*3);
-						else if (Game.season=='christmas') Game.Notify(loc("Christmas time!"),loc("It's <b>Christmas season</b>!<br>Bring good cheer to all and you just may get cookies in your stockings!"),[12,10],60*3);
+						else if (Game.season=='christmas') Game.Notify(loc("Christmas time!"),loc("It's <b>Christmas season</b>!<br>Bring good cheer to all and you just may get kookies in your stockings!"),[12,10],60*3);
 						else if (Game.season=='easter') Game.Notify(loc("Easter!"),loc("It's <b>Easter season</b>!<br>Keep an eye out and you just might click a rabbit or two!"),[0,12],60*3);
 					}
 					
@@ -3412,43 +3412,43 @@ Game.Launch=function()
 			
 			if (hard) {Game.loadedFromVersion=Game.version;}
 			
-			var cookiesForfeited=Game.cookiesEarned;
+			var kookiesForfeited=Game.kookiesEarned;
 			if (!hard)
 			{
-				if (cookiesForfeited>=1000000) Game.Win('Sacrifice');
-				if (cookiesForfeited>=1000000000) Game.Win('Oblivion');
-				if (cookiesForfeited>=1000000000000) Game.Win('From scratch');
-				if (cookiesForfeited>=1000000000000000) Game.Win('Nihilism');
-				if (cookiesForfeited>=1000000000000000000) Game.Win('Dematerialize');
-				if (cookiesForfeited>=1000000000000000000000) Game.Win('Nil zero zilch');
-				if (cookiesForfeited>=1000000000000000000000000) Game.Win('Transcendence');
-				if (cookiesForfeited>=1000000000000000000000000000) Game.Win('Obliterate');
-				if (cookiesForfeited>=1000000000000000000000000000000) Game.Win('Negative void');
-				if (cookiesForfeited>=1000000000000000000000000000000000) Game.Win('To crumbs, you say?');
-				if (cookiesForfeited>=1000000000000000000000000000000000000) Game.Win('You get nothing');
-				if (cookiesForfeited>=1000000000000000000000000000000000000000) Game.Win('Humble rebeginnings');
-				if (cookiesForfeited>=1000000000000000000000000000000000000000000) Game.Win('The end of the world');
-				if (cookiesForfeited>=1000000000000000000000000000000000000000000000) Game.Win('Oh, you\'re back');
-				if (cookiesForfeited>=1000000000000000000000000000000000000000000000000) Game.Win('Lazarus');
-				if (cookiesForfeited>=1000000000000000000000000000000000000000000000000000) Game.Win('Smurf account');
-				if (cookiesForfeited>=1000000000000000000000000000000000000000000000000000000) Game.Win('If at first you don\'t succeed');
+				if (kookiesForfeited>=1000000) Game.Win('Sacrifice');
+				if (kookiesForfeited>=1000000000) Game.Win('Oblivion');
+				if (kookiesForfeited>=1000000000000) Game.Win('From scratch');
+				if (kookiesForfeited>=1000000000000000) Game.Win('Nihilism');
+				if (kookiesForfeited>=1000000000000000000) Game.Win('Dematerialize');
+				if (kookiesForfeited>=1000000000000000000000) Game.Win('Nil zero zilch');
+				if (kookiesForfeited>=1000000000000000000000000) Game.Win('Transcendence');
+				if (kookiesForfeited>=1000000000000000000000000000) Game.Win('Obliterate');
+				if (kookiesForfeited>=1000000000000000000000000000000) Game.Win('Negative void');
+				if (kookiesForfeited>=1000000000000000000000000000000000) Game.Win('To crumbs, you say?');
+				if (kookiesForfeited>=1000000000000000000000000000000000000) Game.Win('You get nothing');
+				if (kookiesForfeited>=1000000000000000000000000000000000000000) Game.Win('Humble rebeginnings');
+				if (kookiesForfeited>=1000000000000000000000000000000000000000000) Game.Win('The end of the world');
+				if (kookiesForfeited>=1000000000000000000000000000000000000000000000) Game.Win('Oh, you\'re back');
+				if (kookiesForfeited>=1000000000000000000000000000000000000000000000000) Game.Win('Lazarus');
+				if (kookiesForfeited>=1000000000000000000000000000000000000000000000000000) Game.Win('Smurf account');
+				if (kookiesForfeited>=1000000000000000000000000000000000000000000000000000000) Game.Win('If at first you don\'t succeed');
 				
-				if (Math.round(Game.cookies)==1000000000000) Game.Win('When the cookies ascend just right');
+				if (Math.round(Game.kookies)==1000000000000) Game.Win('When the kookies ascend just right');
 			}
 			
 			Game.killBuffs();
 			
 			Game.seed=Game.makeSeed();
 			
-			Game.cookiesReset+=Game.cookiesEarned;
-			Game.cookies=0;
-			Game.cookiesEarned=0;
-			Game.cookieClicks=0;
+			Game.kookiesReset+=Game.kookiesEarned;
+			Game.kookies=0;
+			Game.kookiesEarned=0;
+			Game.kookieClicks=0;
 			Game.goldenClicksLocal=0;
 			//Game.goldenClicks=0;
 			//Game.missedGoldenClicks=0;
 			Game.handmadeCookies=0;
-			Game.cookiesPsRawHighest=0;
+			Game.kookiesPsRawHighest=0;
 			if (hard)
 			{
 				Game.bgType=0;
@@ -3472,7 +3472,7 @@ Game.Launch=function()
 			Game.startDate=parseInt(Date.now());
 			Game.lastDate=parseInt(Date.now());
 			
-			Game.cookiesSucked=0;
+			Game.kookiesSucked=0;
 			Game.wrinklersPopped=0;
 			Game.ResetWrinklers();
 			
@@ -3519,8 +3519,8 @@ Game.Launch=function()
 			Game.BuildingsOwned=0;
 			Game.UpgradesOwned=0;
 			
-			Game.cookiesPsByType={};
-			Game.cookiesMultByType={};
+			Game.kookiesPsByType={};
+			Game.kookiesMultByType={};
 			
 			if (!hard)
 			{
@@ -3577,13 +3577,13 @@ Game.Launch=function()
 			if (hard)
 			{
 				Game.clicksThisSession=0;
-				if (Game.T>Game.fps*5 && Game.ReincarnateTimer==0)//fade out of black and pop the cookie
+				if (Game.T>Game.fps*5 && Game.ReincarnateTimer==0)//fade out of black and pop the kookie
 				{
 					Game.ReincarnateTimer=1;
 					Game.addClass('reincarnating');
 					Game.BigCookieSize=0;
 				}
-				Game.Notify(loc("Game reset"),EN?"So long, cookies.":loc("Good bye, cookies."),[21,6],6);
+				Game.Notify(loc("Game reset"),EN?"So long, kookies.":loc("Good bye, kookies."),[21,6],6);
 			}
 			else Game.clicksThisSession=Math.max(Game.clicksThisSession,1);
 			
@@ -3622,7 +3622,7 @@ Game.Launch=function()
 				Game.fullDate=parseInt(Date.now());
 				Game.bakeryName=Game.GetBakeryName();
 				Game.bakeryNameRefresh();
-				Game.cookiesReset=0;
+				Game.kookiesReset=0;
 				Game.prestige=0;
 				Game.heavenlyChips=0;
 				Game.heavenlyChipsSpent=0;
@@ -3763,7 +3763,7 @@ Game.Launch=function()
 				
 				if (me.pool=='prestige') tags.push(loc("[Tag]Heavenly",0,'Heavenly'),'#efa438');
 				else if (me.pool=='tech') tags.push(loc("[Tag]Tech",0,'Tech'),'#36a4ff');
-				else if (me.pool=='cookie') tags.push(loc("[Tag]Cookie",0,'Cookie'),0);
+				else if (me.pool=='kookie') tags.push(loc("[Tag]Cookie",0,'Cookie'),0);
 				else if (me.pool=='debug') tags.push(loc("[Tag]Debug",0,'Debug'),'#00c462');
 				else if (me.pool=='toggle') tags.push(loc("[Tag]Switch",0,'Switch'),0);
 				else tags.push(loc("[Tag]Upgrade",0,'Upgrade'),0);
@@ -3802,7 +3802,7 @@ Game.Launch=function()
 						(context=='store'?(canBuy?'':' disabled'):'')+
 					'">'+Beautify(Math.round(cost))+'</span>'+((me.pool!='prestige' && me.priceLumps==0)?Game.costDetails(cost):'')+'</div>';
 					
-					ariaText+=(me.bought?'Bought for':canBuy?'Can buy for':'Cannot afford the')+' '+Beautify(Math.round(cost))+' '+((me.priceLumps>0)?'sugar lumps':(me.pool=='prestige')?'heavenly chips':'cookies')+'. ';
+					ariaText+=(me.bought?'Bought for':canBuy?'Can buy for':'Cannot afford the')+' '+Beautify(Math.round(cost))+' '+((me.priceLumps>0)?'sugar lumps':(me.pool=='prestige')?'heavenly chips':'kookies')+'. ';
 				}
 			}
 			else if (me.type=='achievement')
@@ -3894,10 +3894,10 @@ Game.Launch=function()
 			if (!Game.Has('Genius accounting')) return '';
 			if (!cost) return '';
 			var priceInfo='';
-			var cps=Game.cookiesPs*(1-Game.cpsSucked);
-			if (cost>Game.cookies) priceInfo+=loc("in %1",Game.sayTime(((cost-Game.cookies)/cps+1)*Game.fps))+'<br>';
+			var cps=Game.kookiesPs*(1-Game.cpsSucked);
+			if (cost>Game.kookies) priceInfo+=loc("in %1",Game.sayTime(((cost-Game.kookies)/cps+1)*Game.fps))+'<br>';
 			priceInfo+=loc("%1 worth",Game.sayTime((cost/cps+1)*Game.fps))+'<br>';
-			priceInfo+=loc("%1% of bank",Beautify((cost/Game.cookies)*100,1))+'<br>';
+			priceInfo+=loc("%1% of bank",Beautify((cost/Game.kookies)*100,1))+'<br>';
 			return '<div style="font-size:80%;opacity:0.7;line-height:90%;" class="costDetails">'+priceInfo+'</div>';
 		}
 		
@@ -3907,20 +3907,20 @@ Game.Launch=function()
 		=======================================================================================*/
 		
 		Game.HCfactor=3;
-		Game.HowMuchPrestige=function(cookies)//how much prestige [cookies] should land you
+		Game.HowMuchPrestige=function(kookies)//how much prestige [kookies] should land you
 		{
-			return Math.pow(cookies/1000000000000,1/Game.HCfactor);
+			return Math.pow(kookies/1000000000000,1/Game.HCfactor);
 		}
-		Game.HowManyCookiesReset=function(chips)//how many cookies [chips] are worth
+		Game.HowManyCookiesReset=function(chips)//how many kookies [chips] are worth
 		{
-			//this must be the inverse of the above function (ie. if cookies=chips^2, chips=cookies^(1/2) )
+			//this must be the inverse of the above function (ie. if kookies=chips^2, chips=kookies^(1/2) )
 			return Math.pow(chips,Game.HCfactor)*1000000000000;
 		}
 		Game.gainedPrestige=0;
-		Game.EarnHeavenlyChips=function(cookiesForfeited,silent)
+		Game.EarnHeavenlyChips=function(kookiesForfeited,silent)
 		{
 			//recalculate prestige and chips owned
-			var prestige=Math.floor(Game.HowMuchPrestige(Game.cookiesReset+cookiesForfeited));
+			var prestige=Math.floor(Game.HowMuchPrestige(Game.kookiesReset+kookiesForfeited));
 			prestige=Math.max(0,prestige);
 			if (prestige!=Game.prestige)//did we change prestige levels?
 			{
@@ -3928,7 +3928,7 @@ Game.Launch=function()
 				Game.gainedPrestige=prestigeDifference;
 				Game.heavenlyChips+=prestigeDifference;
 				Game.prestige=prestige;
-				if (!silent && prestigeDifference>0) Game.Notify(loc("You forfeit your %1.",loc("%1 cookie",LBeautify(cookiesForfeited))),loc("You gain <b>%1</b>!",loc("%1 prestige level",LBeautify(prestigeDifference))),[19,7]);
+				if (!silent && prestigeDifference>0) Game.Notify(loc("You forfeit your %1.",loc("%1 kookie",LBeautify(kookiesForfeited))),loc("You gain <b>%1</b>!",loc("%1 prestige level",LBeautify(prestigeDifference))),[19,7]);
 			}
 		}
 		
@@ -3936,7 +3936,7 @@ Game.Launch=function()
 		{
 			var heavenlyMult=0;
 			if (Game.Has('Heavenly chip secret')) heavenlyMult+=0.05;
-			if (Game.Has('Heavenly cookie stand')) heavenlyMult+=0.20;
+			if (Game.Has('Heavenly kookie stand')) heavenlyMult+=0.20;
 			if (Game.Has('Heavenly bakery')) heavenlyMult+=0.25;
 			if (Game.Has('Heavenly confectionery')) heavenlyMult+=0.25;
 			if (Game.Has('Heavenly key')) heavenlyMult+=0.25;
@@ -3958,7 +3958,7 @@ Game.Launch=function()
 		Game.ascensionModes={
 		0:{name:'None',dname:loc("None [ascension type]"),desc:loc("No special modifiers."),icon:[10,0]},
 		1:{name:'Born again',dname:loc("Born again [ascension type]"),desc:loc("This run will behave as if you'd just started the game from scratch. Prestige levels and heavenly upgrades will have no effect, as will sugar lumps and building levels. Perma-upgrades and minigames will be unavailable.<div class=\"line\"></div>Some achievements are only available in this mode."),icon:[2,7]}/*,
-		2:{name:'Trigger finger',dname:loc("Trigger finger [ascension type]"),desc:loc("In this run, scrolling your mouse wheel on the cookie counts as clicking it. Some upgrades introduce new clicking behaviors.<br>No clicking achievements may be obtained in this mode.<div class=\"line\"></div>Reaching 1 quadrillion cookies in this mode unlocks a special heavenly upgrade."),icon:[12,0]}*/
+		2:{name:'Trigger finger',dname:loc("Trigger finger [ascension type]"),desc:loc("In this run, scrolling your mouse wheel on the kookie counts as clicking it. Some upgrades introduce new clicking behaviors.<br>No clicking achievements may be obtained in this mode.<div class=\"line\"></div>Reaching 1 quadrillion kookies in this mode unlocks a special heavenly upgrade."),icon:[12,0]}*/
 		};
 		
 		Game.ascendMeterPercent=0;
@@ -4005,7 +4005,7 @@ Game.Launch=function()
 			
 			'<div id="ascendInfo"><div class="ascendData smallFramed" style="margin-top:22px;width:75%;font-size:11px;">'+loc("You are ascending.<br>Drag the screen around<br>or use arrow keys!<br>When you're ready,<br>click Reincarnate.")+'</div></div>';
 		
-		Game.attachTooltip(l('ascendData1'),function(){return '<div style="min-width:300px;text-align:center;font-size:11px;padding:8px;" id="tooltipAscendData1">(<b>'+Beautify(Game.heavenlyChips)+'</b>)<div class="line"></div>'+loc("Each prestige level grants you a permanent <b>+%1% CpS</b>.<br>The more levels you have, the more cookies they require.",1)+'</div>';},'bottom-right');
+		Game.attachTooltip(l('ascendData1'),function(){return '<div style="min-width:300px;text-align:center;font-size:11px;padding:8px;" id="tooltipAscendData1">(<b>'+Beautify(Game.heavenlyChips)+'</b>)<div class="line"></div>'+loc("Each prestige level grants you a permanent <b>+%1% CpS</b>.<br>The more levels you have, the more kookies they require.",1)+'</div>';},'bottom-right');
 		Game.attachTooltip(l('ascendData2'),function(){return '<div style="min-width:300px;text-align:center;font-size:11px;padding:8px;" id="tooltipAscendData2">(<b>'+loc("%1 heavenly chip",LBeautify(Game.heavenlyChips))+'</b>)<div class="line"></div>'+loc("Heavenly chips are used to buy heavenly upgrades.<br>You gain <b>1 chip</b> every time you gain a prestige level.")+'</div>';},'bottom-right');
 		
 		Game.UpdateAscensionModePrompt();
@@ -4022,7 +4022,7 @@ Game.Launch=function()
 		Game.OnAscend=0;
 		Game.AscendTimer=0;//how far we are into the ascend animation
 		Game.AscendDuration=Game.fps*5;//how long the ascend animation is
-		Game.AscendBreakpoint=Game.AscendDuration*0.5;//at which point the cookie explodes during the ascend animation
+		Game.AscendBreakpoint=Game.AscendDuration*0.5;//at which point the kookie explodes during the ascend animation
 		Game.UpdateAscendIntro=function()
 		{
 			if (Game.AscendTimer==1) PlaySound('snd/charging.mp3');
@@ -4033,7 +4033,7 @@ Game.Launch=function()
 				PlayCue('ascend');
 				PlayMusicSound('snd/cymbalRev.mp3');
 				if (!App || Game.volumeMusic==0) PlaySound('snd/choir.mp3');
-				Game.EarnHeavenlyChips(Game.cookiesEarned);
+				Game.EarnHeavenlyChips(Game.kookiesEarned);
 				Game.AscendTimer=0;
 				Game.OnAscend=1;Game.removeClass('ascendIntro');
 				Game.addClass('ascending');
@@ -4067,7 +4067,7 @@ Game.Launch=function()
 				Game.Reset();
 				if (Game.HasAchiev('Rebirth'))
 				{
-					Game.Notify('Reincarnated',loc("Hello, cookies!"),[10,0],4);
+					Game.Notify('Reincarnated',loc("Hello, kookies!"),[10,0],4);
 				}
 				if (Game.resets>=1000) Game.Win('Endless cycle');
 				if (Game.resets>=100) Game.Win('Reincarnation');
@@ -4093,10 +4093,10 @@ Game.Launch=function()
 		}
 		Game.Ascend=function(bypass)
 		{
-			if (!bypass) Game.Prompt('<id Ascend><h3>'+loc("Ascend")+'</h3><div class="block">'+tinyIcon([19,7])+'<div class="line"></div>'+loc("Do you REALLY want to ascend?<div class=\"line\"></div>You will lose your progress and start over from scratch.<div class=\"line\"></div>All your cookies will be converted into prestige and heavenly chips.")+'<div class="line"></div>'+(Game.canLumps()?loc("You will keep your achievements, building levels and sugar lumps."):loc("You will keep your achievements."))+'<div class="optionBox"><a class="option smallFancyButton" style="margin:16px;padding:8px 16px;animation:rainbowCycle 5s infinite ease-in-out,pucker 0.2s ease-out;box-shadow:0px 0px 0px 1px #000,0px 0px 1px 2px currentcolor;background:linear-gradient(to bottom,transparent 0%,currentColor 500%);width:auto;text-align:center;" '+Game.clickStr+'="PlaySound(\'snd/tick.mp3\');Game.ClosePrompt();Game.Ascend(1);" id="promptOption0">'+loc("Ascend")+'</a></div></div>',[[loc("Yes"),'Game.ClosePrompt();Game.Ascend(1);','float:left;display:none;'],[loc("Cancel"),0,'float:right']]);
+			if (!bypass) Game.Prompt('<id Ascend><h3>'+loc("Ascend")+'</h3><div class="block">'+tinyIcon([19,7])+'<div class="line"></div>'+loc("Do you REALLY want to ascend?<div class=\"line\"></div>You will lose your progress and start over from scratch.<div class=\"line\"></div>All your kookies will be converted into prestige and heavenly chips.")+'<div class="line"></div>'+(Game.canLumps()?loc("You will keep your achievements, building levels and sugar lumps."):loc("You will keep your achievements."))+'<div class="optionBox"><a class="option smallFancyButton" style="margin:16px;padding:8px 16px;animation:rainbowCycle 5s infinite ease-in-out,pucker 0.2s ease-out;box-shadow:0px 0px 0px 1px #000,0px 0px 1px 2px currentcolor;background:linear-gradient(to bottom,transparent 0%,currentColor 500%);width:auto;text-align:center;" '+Game.clickStr+'="PlaySound(\'snd/tick.mp3\');Game.ClosePrompt();Game.Ascend(1);" id="promptOption0">'+loc("Ascend")+'</a></div></div>',[[loc("Yes"),'Game.ClosePrompt();Game.Ascend(1);','float:left;display:none;'],[loc("Cancel"),0,'float:right']]);
 			else
 			{
-				Game.Notify(loc("Ascending"),loc("So long, cookies."),[20,7],4);
+				Game.Notify(loc("Ascending"),loc("So long, kookies."),[20,7],4);
 				Game.OnAscend=0;Game.removeClass('ascending');
 				Game.addClass('ascendIntro');
 				//trigger the ascend animation
@@ -4425,7 +4425,7 @@ Game.Launch=function()
 			{
 				if (Game.lumpCurrentType!=0) str+='<div class="line"></div>';
 				if (Game.lumpCurrentType==1) str+=loc("This sugar lump grew to be <b>bifurcated</b>; harvesting it has a 50% chance of yielding two lumps.");
-				else if (Game.lumpCurrentType==2) str+=loc("This sugar lump grew to be <b>golden</b>; harvesting it will yield 2 to 7 lumps, your current cookies will be doubled (capped to a gain of 24 hours of your CpS), and you will find 10% more golden cookies for the next 24 hours.");
+				else if (Game.lumpCurrentType==2) str+=loc("This sugar lump grew to be <b>golden</b>; harvesting it will yield 2 to 7 lumps, your current kookies will be doubled (capped to a gain of 24 hours of your CpS), and you will find 10% more golden kookies for the next 24 hours.");
 				else if (Game.lumpCurrentType==3) str+=loc("This sugar lump was affected by the elders and grew to be <b>meaty</b>; harvesting it will yield between 0 and 2 lumps.");
 				else if (Game.lumpCurrentType==4) str+=loc("This sugar lump is <b>caramelized</b>, its stickiness binding it to unexpected things; harvesting it will yield between 1 and 3 lumps and will refill your sugar lump cooldowns.");
 			}
@@ -4520,8 +4520,8 @@ Game.Launch=function()
 			{
 				total*=choose([2,3,4,5,6,7]);
 				Game.gainBuff('sugar blessing',24*60*60,1);
-				Game.Earn(Math.min(Game.cookiesPs*60*60*24,Game.cookies));
-				Game.Notify(loc("Sugar blessing activated!"),loc("Your cookies have been doubled.<br>+10% golden cookies for the next 24 hours."),[29,16]);
+				Game.Earn(Math.min(Game.kookiesPs*60*60*24,Game.kookies));
+				Game.Notify(loc("Sugar blessing activated!"),loc("Your kookies have been doubled.<br>+10% golden kookies for the next 24 hours."),[29,16]);
 			}
 			else if (Game.lumpCurrentType==3) total*=choose([0,0,1,2,2]);
 			else if (Game.lumpCurrentType==4)
@@ -4567,7 +4567,7 @@ Game.Launch=function()
 		
 		Game.canLumps=function()//grammatically pleasing function name
 		{
-			if (Game.lumpsTotal>-1 || (Game.ascensionMode!=1 && (Game.cookiesEarned+Game.cookiesReset)>=1000000000)) return true;
+			if (Game.lumpsTotal>-1 || (Game.ascensionMode!=1 && (Game.kookiesEarned+Game.kookiesReset)>=1000000000)) return true;
 			return false;
 		}
 		
@@ -4630,7 +4630,7 @@ Game.Launch=function()
 				Game.lumps=0;
 				Game.computeLumpType();
 				
-				Game.Notify(loc("Sugar lumps!"),loc("Because you've baked a <b>billion cookies</b> in total, you are now attracting <b>sugar lumps</b>. They coalesce quietly near the top of your screen, under the Stats button.<br>You will be able to harvest them when they're ripe, after which you may spend them on all sorts of things!"),[23,14]);
+				Game.Notify(loc("Sugar lumps!"),loc("Because you've baked a <b>billion kookies</b> in total, you are now attracting <b>sugar lumps</b>. They coalesce quietly near the top of your screen, under the Stats button.<br>You will be able to harvest them when they're ripe, after which you may spend them on all sorts of things!"),[23,14]);
 			}
 			var age=Date.now()-Game.lumpT;
 			if (age>Game.lumpOverripeAge)
@@ -4681,19 +4681,19 @@ Game.Launch=function()
 		=======================================================================================*/
 		Game.Earn=function(howmuch)
 		{
-			Game.cookies+=howmuch;
-			Game.cookiesEarned+=howmuch;
+			Game.kookies+=howmuch;
+			Game.kookiesEarned+=howmuch;
 		}
 		Game.Spend=function(howmuch)
 		{
-			Game.cookies-=howmuch;
+			Game.kookies-=howmuch;
 		}
 		Game.Dissolve=function(howmuch)
 		{
-			Game.cookies-=howmuch;
-			Game.cookiesEarned-=howmuch;
-			Game.cookies=Math.max(0,Game.cookies);
-			Game.cookiesEarned=Math.max(0,Game.cookiesEarned);
+			Game.kookies-=howmuch;
+			Game.kookiesEarned-=howmuch;
+			Game.kookies=Math.max(0,Game.kookies);
+			Game.kookiesEarned=Math.max(0,Game.kookiesEarned);
 		}
 		Game.mouseCps=function()
 		{
@@ -4715,22 +4715,22 @@ Game.Launch=function()
 			for (var i in Game.Objects) {num+=Game.Objects[i].amount;}
 			num-=Game.Objects['Cursor'].amount;
 			add=add*num;
-			if (Game.Has('Plastic mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Iron mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Titanium mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Adamantium mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Unobtainium mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Eludium mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Wishalloy mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Fantasteel mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Nevercrack mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Armythril mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Technobsidian mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Plasmarble mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Miraculite mouse')) add+=Game.cookiesPs*0.01;
-			if (Game.Has('Aetherice mouse')) add+=Game.cookiesPs*0.01;
+			if (Game.Has('Plastic mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Iron mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Titanium mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Adamantium mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Unobtainium mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Eludium mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Wishalloy mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Fantasteel mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Nevercrack mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Armythril mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Technobsidian mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Plasmarble mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Miraculite mouse')) add+=Game.kookiesPs*0.01;
+			if (Game.Has('Aetherice mouse')) add+=Game.kookiesPs*0.01;
 			
-			if (Game.Has('Fortune #104')) add+=Game.cookiesPs*0.01;
+			if (Game.Has('Fortune #104')) add+=Game.kookiesPs*0.01;
 			var mult=1;
 			
 			
@@ -4764,7 +4764,7 @@ Game.Launch=function()
 			
 			var out=mult*Game.ComputeCps(1,Game.Has('Reinforced index finger')+Game.Has('Carpal tunnel prevention cream')+Game.Has('Ambidextrous'),add);
 			
-			out=Game.runModHookOnValue('cookiesPerClick',out);
+			out=Game.runModHookOnValue('kookiesPerClick',out);
 			
 			if (Game.hasBuff('Cursed finger')) out=Game.buffs['Cursed finger'].power;
 			return out;
@@ -4780,13 +4780,13 @@ Game.Launch=function()
 		Game.BigCookieSize=0;
 		Game.BigCookieSizeD=0;
 		Game.BigCookieSizeT=1;
-		Game.cookieClickSound=Math.floor(Math.random()*7)+1;
+		Game.kookieClickSound=Math.floor(Math.random()*7)+1;
 		Game.playCookieClickSound=function()
 		{
-			if (Game.prefs.cookiesound) PlaySound('snd/clickb'+(Game.cookieClickSound)+'.mp3',0.5);
-			else PlaySound('snd/click'+(Game.cookieClickSound)+'.mp3',0.5);
-			Game.cookieClickSound+=Math.floor(Math.random()*4)+1;
-			if (Game.cookieClickSound>7) Game.cookieClickSound-=7;
+			if (Game.prefs.kookiesound) PlaySound('snd/clickb'+(Game.kookieClickSound)+'.mp3',0.5);
+			else PlaySound('snd/click'+(Game.kookieClickSound)+'.mp3',0.5);
+			Game.kookieClickSound+=Math.floor(Math.random()*4)+1;
+			if (Game.kookieClickSound>7) Game.kookieClickSound-=7;
 		}
 		Game.ClickCookie=function(e,amount)
 		{
@@ -4814,7 +4814,7 @@ Game.Launch=function()
 				Game.runModHook('click');
 				
 				Game.playCookieClickSound();
-				Game.cookieClicks++;
+				Game.kookieClicks++;
 				
 				if (Game.clicksThisSession==0) PlayCue('preplay');
 				Game.clicksThisSession++;
@@ -4863,7 +4863,7 @@ Game.Launch=function()
 		if (Game.prefs.screenreader)
 		{
 			bigCookie.ariaLabelledby='bigCookieLabel';
-			bigCookie.insertAdjacentHTML('beforeend','<label id="bigCookieLabel" style="font-size:100px !important;" class="srOnly">'+loc("Big clickable cookie")+'</label>');
+			bigCookie.insertAdjacentHTML('beforeend','<label id="bigCookieLabel" style="font-size:100px !important;" class="srOnly">'+loc("Big clickable kookie")+'</label>');
 			bigCookie.tabIndex=1;
 		}
 		Game.Click=0;
@@ -4875,7 +4875,7 @@ Game.Launch=function()
 		if (!Game.touchEvents)
 		{
 			AddEvent(bigCookie,'click',Game.ClickCookie);
-			AddEvent(bigCookie,'mousedown',function(event){Game.BigCookieState=1;if (Game.prefs.cookiesound) {Game.playCookieClickSound();}if (event) event.preventDefault();});
+			AddEvent(bigCookie,'mousedown',function(event){Game.BigCookieState=1;if (Game.prefs.kookiesound) {Game.playCookieClickSound();}if (event) event.preventDefault();});
 			AddEvent(bigCookie,'mouseup',function(event){Game.BigCookieState=2;if (event) event.preventDefault();});
 			AddEvent(bigCookie,'mouseout',function(event){Game.BigCookieState=0;});
 			AddEvent(bigCookie,'mouseover',function(event){Game.BigCookieState=2;});
@@ -4950,15 +4950,15 @@ Game.Launch=function()
 		
 		Game.heavenlyPower=1;//how many CpS percents a single heavenly chip gives
 		Game.recalculateGains=1;
-		Game.cookiesPsByType={};
-		Game.cookiesMultByType={};
+		Game.kookiesPsByType={};
+		Game.kookiesMultByType={};
 		//display bars with http://codepen.io/anon/pen/waGyEJ
 		Game.effs={};
 		Game.eff=function(name,def){if (typeof Game.effs[name]==='undefined') return (typeof def==='undefined'?1:def); else return Game.effs[name];};
 		
 		Game.CalculateGains=function()
 		{
-			Game.cookiesPs=0;
+			Game.kookiesPs=0;
 			var mult=1;
 			//add up effect bonuses from building minigames
 			var effs={};
@@ -4982,9 +4982,9 @@ Game.Launch=function()
 			
 			if (Game.Has('Heralds') && Game.ascensionMode!=1) mult*=(1+0.01*Game.heralds);
 			
-			for (var i in Game.cookieUpgrades)
+			for (var i in Game.kookieUpgrades)
 			{
-				var me=Game.cookieUpgrades[i];
+				var me=Game.kookieUpgrades[i];
 				if (Game.Has(me.name))
 				{
 					mult*=(1+(typeof(me.power)==='function'?me.power(me):me.power)*0.01);
@@ -5042,7 +5042,7 @@ Game.Launch=function()
 			
 			Game.milkProgress=Game.AchievementsOwned/25;
 			var milkMult=1;
-			if (Game.Has('Santa\'s milk and cookies')) milkMult*=1.05;
+			if (Game.Has('Santa\'s milk and kookies')) milkMult*=1.05;
 			//if (Game.hasAura('Breath of Milk')) milkMult*=1.05;
 			milkMult*=1+Game.auraMult('Breath of Milk')*0.05;
 			if (Game.hasGod)
@@ -5073,7 +5073,7 @@ Game.Launch=function()
 			if (Game.Has('Kitten angels')) catMult*=(1+Game.milkProgress*0.1*milkMult);
 			if (Game.Has('Fortune #103')) catMult*=(1+Game.milkProgress*0.05*milkMult);
 			
-			Game.cookiesMultByType['kittens']=catMult;
+			Game.kookiesMultByType['kittens']=catMult;
 			
 			for (var i in Game.Objects)
 			{
@@ -5082,13 +5082,13 @@ Game.Launch=function()
 				if (Game.ascensionMode!=1) me.storedCps*=(1+me.level*0.01)*buildMult;
 				if (me.id==1 && Game.Has('Milkhelp&reg; lactose intolerance relief tablets')) me.storedCps*=1+0.05*Game.milkProgress*milkMult;//this used to be "me.storedCps*=1+0.1*Math.pow(catMult-1,0.5)" which was. hmm
 				me.storedTotalCps=me.amount*me.storedCps;
-				Game.cookiesPs+=me.storedTotalCps;
-				Game.cookiesPsByType[me.name]=me.storedTotalCps;
+				Game.kookiesPs+=me.storedTotalCps;
+				Game.kookiesPsByType[me.name]=me.storedTotalCps;
 			}
 			//cps from buildings only
-			Game.buildingCps=Game.cookiesPs;
+			Game.buildingCps=Game.kookiesPs;
 			
-			if (Game.Has('"egg"')) {Game.cookiesPs+=9;Game.cookiesPsByType['"egg"']=9;}//"egg"
+			if (Game.Has('"egg"')) {Game.kookiesPs+=9;Game.kookiesPsByType['"egg"']=9;}//"egg"
 			
 			mult*=catMult;
 			
@@ -5113,7 +5113,7 @@ Game.Launch=function()
 				eggMult*=1+(1-Math.pow(1-day/100,3))*0.1;
 			}
 			
-			Game.cookiesMultByType['eggs']=eggMult;
+			Game.kookiesMultByType['eggs']=eggMult;
 			mult*=eggMult;
 			
 			if (Game.Has('Sugar baking')) mult*=(1+Math.min(100,Game.lumps)*0.01);
@@ -5121,13 +5121,13 @@ Game.Launch=function()
 			//if (Game.hasAura('Radiant Appetite')) mult*=2;
 			mult*=1+Game.auraMult('Radiant Appetite');
 			
-			var rawCookiesPs=Game.cookiesPs*mult;
+			var rawCookiesPs=Game.kookiesPs*mult;
 			for (var i in Game.CpsAchievements)
 			{
 				if (rawCookiesPs>=Game.CpsAchievements[i].threshold) Game.Win(Game.CpsAchievements[i].name);
 			}
-			Game.cookiesPsRaw=rawCookiesPs;
-			Game.cookiesPsRawHighest=Math.max(Game.cookiesPsRawHighest,rawCookiesPs);
+			Game.kookiesPsRaw=rawCookiesPs;
+			Game.kookiesPsRawHighest=Math.max(Game.kookiesPsRawHighest,rawCookiesPs);
 			
 			var n=Game.shimmerTypes['golden'].n;
 			var auraMult=Game.auraMult('Dragon\'s Fortune');
@@ -5171,11 +5171,11 @@ Game.Launch=function()
 			if (Game.Has('Occult obstruction')) mult*=0;
 			
 			
-			Game.cookiesPs=Game.runModHookOnValue('cps',Game.cookiesPs);
+			Game.kookiesPs=Game.runModHookOnValue('cps',Game.kookiesPs);
 			
 			
-			//cps without golden cookie effects
-			Game.unbuffedCps=Game.cookiesPs*mult;
+			//cps without golden kookie effects
+			Game.unbuffedCps=Game.kookiesPs*mult;
 			
 			for (var i in Game.buffs)
 			{
@@ -5183,9 +5183,9 @@ Game.Launch=function()
 			}
 			
 			Game.globalCpsMult=mult;
-			Game.cookiesPs*=Game.globalCpsMult;
+			Game.kookiesPs*=Game.globalCpsMult;
 			
-			//if (Game.hasBuff('Cursed finger')) Game.cookiesPs=0;
+			//if (Game.hasBuff('Cursed finger')) Game.kookiesPs=0;
 			
 			Game.computedMouseCps=Game.mouseCps();
 			
@@ -5276,13 +5276,13 @@ Game.Launch=function()
 				Game.shimmers[i].update();
 			}
 			
-			//cookie storm!
+			//kookie storm!
 			if (Game.hasBuff('Cookie storm') && Math.random()<0.5)
 			{
-				var newShimmer=new Game.shimmer('golden',{type:'cookie storm drop'},1);
+				var newShimmer=new Game.shimmer('golden',{type:'kookie storm drop'},1);
 				newShimmer.dur=Math.ceil(Math.random()*4+1);
 				newShimmer.life=Math.ceil(Game.fps*newShimmer.dur);
-				//newShimmer.force='cookie storm drop';
+				//newShimmer.force='kookie storm drop';
 				newShimmer.sizeMult=Math.random()*0.75+0.25;
 			}
 			
@@ -5338,7 +5338,7 @@ Game.Launch=function()
 				},
 				initFunc:function(me)
 				{
-					if (!this.spawned && me.force!='cookie storm drop' && Game.chimeType!=0 && Game.ascensionMode!=1) Game.playGoldenCookieChime();
+					if (!this.spawned && me.force!='kookie storm drop' && Game.chimeType!=0 && Game.ascensionMode!=1) Game.playGoldenCookieChime();
 					
 					//set image
 					var bgPic='img/goldCookie.png';
@@ -5384,10 +5384,10 @@ Game.Launch=function()
 					me.l.style.backgroundPosition=(-picX*96)+'px '+(-picY*96)+'px';
 					me.l.style.opacity='0';
 					me.l.style.display='block';
-					me.l.setAttribute('alt',loc(me.wrath?"Wrath cookie":"Golden cookie"));
+					me.l.setAttribute('alt',loc(me.wrath?"Wrath kookie":"Golden kookie"));
 					
-					me.life=1;//the cookie's current progression through its lifespan (in frames)
-					me.dur=13;//duration; the cookie's lifespan in seconds before it despawns
+					me.life=1;//the kookie's current progression through its lifespan (in frames)
+					me.dur=13;//duration; the kookie's lifespan in seconds before it despawns
 					
 					var dur=13;
 					if (Game.Has('Lucky day')) dur*=2;
@@ -5398,7 +5398,7 @@ Game.Launch=function()
 					if (Game.Has('Lucky payout')) dur*=1.01;
 					if (!me.wrath) dur*=Game.eff('goldenCookieDur');
 					else dur*=Game.eff('wrathCookieDur');
-					dur*=Math.pow(0.95,Game.shimmerTypes['golden'].n-1);//5% shorter for every other golden cookie on the screen
+					dur*=Math.pow(0.95,Game.shimmerTypes['golden'].n-1);//5% shorter for every other golden kookie on the screen
 					if (this.chain>0) dur=Math.max(2,10/this.chain);//this is hilarious
 					me.dur=dur;
 					me.life=Math.ceil(Game.fps*me.dur);
@@ -5408,7 +5408,7 @@ Game.Launch=function()
 				{
 					var curve=1-Math.pow((me.life/(Game.fps*me.dur))*2-1,4);
 					me.l.style.opacity=curve;
-					//this line makes each golden cookie pulse in a unique way
+					//this line makes each golden kookie pulse in a unique way
 					if (Game.prefs.fancy) me.l.style.transform='rotate('+(Math.sin(me.id*0.69)*24+Math.sin(Game.T*(0.35+Math.sin(me.id*0.97)*0.15)+me.id/*+Math.sin(Game.T*0.07)*2+2*/)*(3+Math.sin(me.id*0.36)*2))+'deg) scale('+(me.sizeMult*(1+Math.sin(me.id*0.53)*0.2)*curve*(1+(0.06+Math.sin(me.id*0.41)*0.05)*(Math.sin(Game.T*(0.25+Math.sin(me.id*0.73)*0.15)+me.id))))+')';
 					me.life--;
 					if (me.life<=0) {this.missFunc(me);me.die();}
@@ -5421,8 +5421,8 @@ Game.Launch=function()
 						Game.goldenClicks++;
 						Game.goldenClicksLocal++;
 						
-						if (Game.goldenClicks>=1) Game.Win('Golden cookie');
-						if (Game.goldenClicks>=7) Game.Win('Lucky cookie');
+						if (Game.goldenClicks>=1) Game.Win('Golden kookie');
+						if (Game.goldenClicks>=7) Game.Win('Lucky kookie');
 						if (Game.goldenClicks>=27) Game.Win('A stroke of luck');
 						if (Game.goldenClicks>=77) Game.Win('Fortune');
 						if (Game.goldenClicks>=777) Game.Win('Leprechaun');
@@ -5444,11 +5444,11 @@ Game.Launch=function()
 					
 					//select an effect
 					var list=[];
-					if (me.wrath>0) list.push('clot','multiply cookies','ruin cookies');
-					else list.push('frenzy','multiply cookies');
-					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
-					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
-					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
+					if (me.wrath>0) list.push('clot','multiply kookies','ruin kookies');
+					else list.push('frenzy','multiply kookies');
+					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin kookies','clot','ruin kookies');
+					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain kookie','kookie storm');
+					else if (Math.random()<0.03 && Game.kookiesEarned>=100000) list.push('chain kookie','kookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
 					if (Math.random()<0.1 && (Math.random()<0.05 || !Game.hasBuff('Dragonflight'))) list.push('click frenzy');
 					if (me.wrath && Math.random()<0.1) list.push('cursed finger');
@@ -5469,9 +5469,9 @@ Game.Launch=function()
 					if (Math.random()<0.0001) list.push('blab');
 					var choice=choose(list);
 					
-					if (this.chain>0) choice='chain cookie';
+					if (this.chain>0) choice='chain kookie';
 					if (me.force!='') {this.chain=0;choice=me.force;me.force='';}
-					if (choice!='chain cookie') this.chain=0;
+					if (choice!='chain kookie') this.chain=0;
 					
 					this.last=choice;
 					
@@ -5552,18 +5552,18 @@ Game.Launch=function()
 					{
 						buff=Game.gainBuff('everything must go',Math.ceil(8*effectDurMod),5);
 					}
-					else if (choice=='multiply cookies')
+					else if (choice=='multiply kookies')
 					{
-						var moni=mult*Math.min(Game.cookies*0.15,Game.cookiesPs*60*15)+13;//add 15% to cookies owned (+13), or 15 minutes of cookie production - whichever is lowest
+						var moni=mult*Math.min(Game.kookies*0.15,Game.kookiesPs*60*15)+13;//add 15% to kookies owned (+13), or 15 minutes of kookie production - whichever is lowest
 						Game.Earn(moni);
-						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
+						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 kookie",LBeautify(moni)))+'</small>';
 					}
-					else if (choice=='ruin cookies')
+					else if (choice=='ruin kookies')
 					{
-						var moni=Math.min(Game.cookies*0.05,Game.cookiesPs*60*10)+13;//lose 5% of cookies owned (-13), or 10 minutes of cookie production - whichever is lowest
-						moni=Math.min(Game.cookies,moni);
+						var moni=Math.min(Game.kookies*0.05,Game.kookiesPs*60*10)+13;//lose 5% of kookies owned (-13), or 10 minutes of kookie production - whichever is lowest
+						moni=Math.min(Game.kookies,moni);
 						Game.Spend(moni);
-						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
+						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 kookie",LBeautify(moni)))+'</small>';
 					}
 					else if (choice=='blood frenzy')
 					{
@@ -5575,7 +5575,7 @@ Game.Launch=function()
 					}
 					else if (choice=='cursed finger')
 					{
-						buff=Game.gainBuff('cursed finger',Math.ceil(10*effectDurMod),Game.cookiesPs*Math.ceil(10*effectDurMod));
+						buff=Game.gainBuff('cursed finger',Math.ceil(10*effectDurMod),Game.kookiesPs*Math.ceil(10*effectDurMod));
 					}
 					else if (choice=='click frenzy')
 					{
@@ -5586,15 +5586,15 @@ Game.Launch=function()
 						buff=Game.gainBuff('dragonflight',Math.ceil(10*effectDurMod),1111);
 						if (Math.random()<0.8) Game.killBuff('Click frenzy');
 					}
-					else if (choice=='chain cookie')
+					else if (choice=='chain kookie')
 					{
 						//fix by Icehawk78
 						if (this.chain==0) this.totalFromChain=0;
 						this.chain++;
 						var digit=me.wrath?6:7;
-						if (this.chain==1) this.chain+=Math.max(0,Math.ceil(Math.log(Game.cookies)/Math.LN10)-10);
+						if (this.chain==1) this.chain+=Math.max(0,Math.ceil(Math.log(Game.kookies)/Math.LN10)-10);
 						
-						var maxPayout=Math.min(Game.cookiesPs*60*60*6,Game.cookies*0.5)*mult;
+						var maxPayout=Math.min(Game.kookiesPs*60*60*6,Game.kookies*0.5)*mult;
 						var moni=Math.max(digit,Math.min(Math.floor(1/9*Math.pow(10,this.chain)*digit*mult),maxPayout));
 						var nextMoni=Math.max(digit,Math.min(Math.floor(1/9*Math.pow(10,this.chain+1)*digit*mult),maxPayout));
 						this.totalFromChain+=moni;
@@ -5603,23 +5603,23 @@ Game.Launch=function()
 						if (Math.random()<0.01 || nextMoni>=maxPayout)
 						{
 							this.chain=0;
-							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'<br>'+loc("Cookie chain over. You made %1.",loc("%1 cookie",LBeautify(this.totalFromChain)))+'</small>';
+							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 kookie",LBeautify(moni)))+'<br>'+loc("Cookie chain over. You made %1.",loc("%1 kookie",LBeautify(this.totalFromChain)))+'</small>';
 						}
 						else
 						{
-							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
+							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 kookie",LBeautify(moni)))+'</small>';
 						}
 						Game.Earn(moni);
 					}
-					else if (choice=='cookie storm')
+					else if (choice=='kookie storm')
 					{
-						buff=Game.gainBuff('cookie storm',Math.ceil(7*effectDurMod),7);
+						buff=Game.gainBuff('kookie storm',Math.ceil(7*effectDurMod),7);
 					}
-					else if (choice=='cookie storm drop')
+					else if (choice=='kookie storm drop')
 					{
-						var moni=Math.max(mult*(Game.cookiesPs*60*Math.floor(Math.random()*7+1)),Math.floor(Math.random()*7+1));//either 1-7 cookies or 1-7 minutes of cookie production, whichever is highest
+						var moni=Math.max(mult*(Game.kookiesPs*60*Math.floor(Math.random()*7+1)),Math.floor(Math.random()*7+1));//either 1-7 kookies or 1-7 minutes of kookie production, whichever is highest
 						Game.Earn(moni);
-						popup='<div style="font-size:75%;">'+loc("+%1!",loc('%1 cookie',LBeautify(moni)))+'</div>';
+						popup='<div style="font-size:75%;">'+loc("+%1!",loc('%1 kookie',LBeautify(moni)))+'</div>';
 					}
 					else if (choice=='blab')//sorry (it's really rare)
 					{
@@ -5627,17 +5627,17 @@ Game.Launch=function()
 						'Cookie crumbliness x3 for 60 seconds!',
 						'Chocolatiness x7 for 77 seconds!',
 						'Dough elasticity halved for 66 seconds!',
-						'Golden cookie shininess doubled for 3 seconds!',
+						'Golden kookie shininess doubled for 3 seconds!',
 						'World economy halved for 30 seconds!',
 						'Grandma kisses 23% stingier for 45 seconds!',
 						'Thanks for clicking!',
 						'Fooled you! This one was just a test.',
-						'Golden cookies clicked +1!',
+						'Golden kookies clicked +1!',
 						'Your click has been registered. Thank you for your cooperation.',
 						'Thanks! That hit the spot!',
 						'Thank you. A team has been dispatched.',
 						'They know.',
-						'Oops. This was just a chocolate cookie with shiny aluminium foil.',
+						'Oops. This was just a chocolate kookie with shiny aluminium foil.',
 						'Eschaton immanentized!',
 						'Oh, that tickled!',
 						'Again.',
@@ -5657,10 +5657,10 @@ Game.Launch=function()
 						'Did you just click that?',
 						'Huh? Oh, there was nothing there.',
 						'You saw nothing.',
-						'It seems you hallucinated that golden cookie.',
-						'This golden cookie was a complete fabrication.',
-						'In theory there\'s no wrong way to click a golden cookie, but you just did that, somehow.',
-						'All cookies multiplied by 999!<br>All cookies divided by 999!',
+						'It seems you hallucinated that golden kookie.',
+						'This golden kookie was a complete fabrication.',
+						'In theory there\'s no wrong way to click a golden kookie, but you just did that, somehow.',
+						'All kookies multiplied by 999!<br>All kookies divided by 999!',
 						'Why?'
 						])):choose(loc("Cookie blab"));
 						popup=str;
@@ -5673,9 +5673,9 @@ Game.Launch=function()
 					
 					//sparkle and kill the shimmer
 					Game.SparkleAt(me.x+48,me.y+48);
-					if (choice=='cookie storm drop')
+					if (choice=='kookie storm drop')
 					{
-						if (Game.prefs.cookiesound) PlaySound('snd/clickb'+Math.floor(Math.random()*7+1)+'.mp3',0.75);
+						if (Game.prefs.kookiesound) PlaySound('snd/clickb'+Math.floor(Math.random()*7+1)+'.mp3',0.75);
 						else PlaySound('snd/click'+Math.floor(Math.random()*7+1)+'.mp3',0.75);
 					}
 					else PlaySound('snd/shimmerClick.mp3');
@@ -5685,7 +5685,7 @@ Game.Launch=function()
 				{
 					if (this.chain>0 && this.totalFromChain>0)
 					{
-						Game.Popup(loc("Cookie chain broken.<br><small>You made %1.</small>",loc("%1 cookie",LBeautify(this.totalFromChain))),me.x+me.l.offsetWidth/2,me.y);
+						Game.Popup(loc("Cookie chain broken.<br><small>You made %1.</small>",loc("%1 kookie",LBeautify(this.totalFromChain))),me.x+me.l.offsetWidth/2,me.y);
 						this.chain=0;this.totalFromChain=0;
 					}
 					if (me.spawnLead) Game.missedGoldenClicks++;
@@ -5780,7 +5780,7 @@ Game.Launch=function()
 					me.l.setAttribute('alt',loc("Reindeer"));
 					
 					me.life=1;//the reindeer's current progression through its lifespan (in frames)
-					me.dur=4;//duration; the cookie's lifespan in seconds before it despawns
+					me.dur=4;//duration; the kookie's lifespan in seconds before it despawns
 					
 					var dur=4;
 					if (Game.Has('Weighted sleighs')) dur*=2;
@@ -5805,16 +5805,16 @@ Game.Launch=function()
 						Game.reindeerClicked++;
 					}
 					
-					var val=Game.cookiesPs*60;
+					var val=Game.kookiesPs*60;
 					if (Game.hasBuff('Elder frenzy')) val*=0.5;//very sorry
 					if (Game.hasBuff('Frenzy')) val*=0.75;//I sincerely apologize
-					var moni=Math.max(25,val);//1 minute of cookie production, or 25 cookies - whichever is highest
+					var moni=Math.max(25,val);//1 minute of kookie production, or 25 kookies - whichever is highest
 					if (Game.Has('Ho ho ho-flavored frosting')) moni*=2;
 					moni*=Game.eff('reindeerGain');
 					Game.Earn(moni);
 					if (Game.hasBuff('Elder frenzy')) Game.Win('Eldeer');
 					
-					var cookie='';
+					var kookie='';
 					var failRate=0.8;
 					if (Game.HasAchiev('Let it snow')) failRate=0.6;
 					failRate*=1/Game.dropRateMult();
@@ -5826,20 +5826,20 @@ Game.Launch=function()
 						else if (godLvl==2) failRate*=0.95;
 						else if (godLvl==3) failRate*=0.97;
 					}
-					if (Math.random()>failRate)//christmas cookie drops
+					if (Math.random()>failRate)//christmas kookie drops
 					{
-						cookie=choose(['Christmas tree biscuits','Snowflake biscuits','Snowman biscuits','Holly biscuits','Candy cane biscuits','Bell biscuits','Present biscuits']);
-						if (!Game.HasUnlocked(cookie) && !Game.Has(cookie))
+						kookie=choose(['Christmas tree biscuits','Snowflake biscuits','Snowman biscuits','Holly biscuits','Candy cane biscuits','Bell biscuits','Present biscuits']);
+						if (!Game.HasUnlocked(kookie) && !Game.Has(kookie))
 						{
-							Game.Unlock(cookie);
+							Game.Unlock(kookie);
 						}
-						else cookie='';
+						else kookie='';
 					}
 					
 					var popup='';
 					
-					Game.Notify(loc("You found %1!",choose(loc("Reindeer names"))),loc("The reindeer gives you %1.",loc("%1 cookie",LBeautify(moni)))+(cookie==''?'':'<br>'+loc("You are also rewarded with %1!",Game.Upgrades[cookie].dname)),[12,9],6);
-					popup='<div style="font-size:80%;">'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</div>';
+					Game.Notify(loc("You found %1!",choose(loc("Reindeer names"))),loc("The reindeer gives you %1.",loc("%1 kookie",LBeautify(moni)))+(kookie==''?'':'<br>'+loc("You are also rewarded with %1!",Game.Upgrades[kookie].dname)),[12,9],6);
+					popup='<div style="font-size:80%;">'+loc("+%1!",loc("%1 kookie",LBeautify(moni)))+'</div>';
 					
 					if (popup!='') Game.Popup(popup,Game.mouseX,Game.mouseY);
 					
@@ -5890,14 +5890,14 @@ Game.Launch=function()
 		
 		Game.goldenCookieChoices=[
 			"Frenzy","frenzy",
-			"Lucky","multiply cookies",
-			"Ruin","ruin cookies",
+			"Lucky","multiply kookies",
+			"Ruin","ruin kookies",
 			"Elder frenzy","blood frenzy",
 			"Clot","clot",
 			"Click frenzy","click frenzy",
 			"Cursed finger","cursed finger",
-			"Cookie chain","chain cookie",
-			"Cookie storm","cookie storm",
+			"Cookie chain","chain kookie",
+			"Cookie storm","kookie storm",
 			"Building special","building special",
 			"Dragon Harvest","dragon harvest",
 			"Dragonflight","dragonflight",
@@ -5929,7 +5929,7 @@ Game.Launch=function()
 		/*=====================================================================================
 		PARTICLES
 		=======================================================================================*/
-		//generic particles (falling cookies etc)
+		//generic particles (falling kookies etc)
 		//only displayed on left section
 		Game.particles=[];
 		Game.particlesN=50;
@@ -5996,13 +5996,13 @@ Game.Launch=function()
 					if (Game.season=='fools') pic='smallDollars.png';
 					else
 					{
-						var cookies=[[10,0]];
+						var kookies=[[10,0]];
 						for (var i in Game.Upgrades)
 						{
-							var cookie=Game.Upgrades[i];
-							if (cookie.bought>0 && cookie.pool=='cookie') cookies.push(cookie.icon);
+							var kookie=Game.Upgrades[i];
+							if (kookie.bought>0 && kookie.pool=='kookie') kookies.push(kookie.icon);
 						}
-						me.picPos=choose(cookies);
+						me.picPos=choose(kookies);
 						if (Game.bakeryName.toLowerCase()=='ortiel' || Math.random()<1/10000) me.picPos=[17,5];
 						pic='icons.png';
 					}
@@ -6552,13 +6552,13 @@ Game.Launch=function()
 		
 		Game.tinyCookie=function()
 		{
-			if (!Game.HasAchiev('Tiny cookie'))
+			if (!Game.HasAchiev('Tiny kookie'))
 			{
 				return '<div class="tinyCookie" '+Game.clickStr+'="Game.ClickTinyCookie();"></div>';
 			}
 			return '';
 		}
-		Game.ClickTinyCookie=function(){if (!Game.HasAchiev('Tiny cookie')){PlaySound('snd/tick.mp3');Game.Win('Tiny cookie');}}
+		Game.ClickTinyCookie=function(){if (!Game.HasAchiev('Tiny kookie')){PlaySound('snd/tick.mp3');Game.Win('Tiny kookie');}}
 		
 		Game.setVolume=function(what)
 		{
@@ -6652,14 +6652,14 @@ Game.Launch=function()
 							(App?Game.WritePrefButton('fullscreen','fullscreenButton',loc("Fullscreen")+ON,loc("Fullscreen")+OFF,'Game.ToggleFullscreen();')+'<br>':'')+
 							Game.WritePrefButton('fancy','fancyButton',loc("Fancy graphics")+ON,loc("Fancy graphics")+OFF,'Game.ToggleFancy();')+'<label>('+loc("visual improvements; disabling may improve performance")+')</label><br>'+
 							Game.WritePrefButton('filters','filtersButton',loc("CSS filters")+ON,loc("CSS filters")+OFF,'Game.ToggleFilters();')+'<label>('+(EN?'cutting-edge visual improvements; disabling may improve performance':loc("visual improvements; disabling may improve performance"))+')</label><br>'+
-							Game.WritePrefButton('particles','particlesButton',loc("Particles")+ON,loc("Particles")+OFF)+(EN?'<label>(cookies falling down, etc; disabling may improve performance)</label>':'')+'<br>'+
-							Game.WritePrefButton('numbers','numbersButton',loc("Numbers")+ON,loc("Numbers")+OFF)+'<label>('+loc("numbers that pop up when clicking the cookie")+')</label><br>'+
+							Game.WritePrefButton('particles','particlesButton',loc("Particles")+ON,loc("Particles")+OFF)+(EN?'<label>(kookies falling down, etc; disabling may improve performance)</label>':'')+'<br>'+
+							Game.WritePrefButton('numbers','numbersButton',loc("Numbers")+ON,loc("Numbers")+OFF)+'<label>('+loc("numbers that pop up when clicking the kookie")+')</label><br>'+
 							Game.WritePrefButton('milk','milkButton',loc("Milk [setting]")+ON,loc("Milk [setting]")+OFF)+(EN?'<label>(only appears with enough achievements)</label>':'')+'<br>'+
 							Game.WritePrefButton('cursors','cursorsButton',loc("Cursors [setting]")+ON,loc("Cursors [setting]")+OFF)+'<label>('+loc("visual display of your cursors")+')</label><br>'+
-							Game.WritePrefButton('wobbly','wobblyButton',loc("Wobbly cookie")+ON,loc("Wobbly cookie")+OFF)+(EN?'<label>(your cookie will react when you click it)</label>':'')+'<br>'+
-							Game.WritePrefButton('cookiesound','cookiesoundButton',loc("Alt cookie sound")+ON,loc("Alt cookie sound")+OFF)+(EN?'<label>(how your cookie sounds when you click on it)</label>':'')+'<br>'+
+							Game.WritePrefButton('wobbly','wobblyButton',loc("Wobbly kookie")+ON,loc("Wobbly kookie")+OFF)+(EN?'<label>(your kookie will react when you click it)</label>':'')+'<br>'+
+							Game.WritePrefButton('kookiesound','kookiesoundButton',loc("Alt kookie sound")+ON,loc("Alt kookie sound")+OFF)+(EN?'<label>(how your kookie sounds when you click on it)</label>':'')+'<br>'+
 							Game.WritePrefButton('crates','cratesButton',loc("Icon crates")+ON,loc("Icon crates")+OFF)+'<label>('+loc("display boxes around upgrades and achievements in Stats")+')</label><br>'+
-							Game.WritePrefButton('monospace','monospaceButton',loc("Alt font")+ON,loc("Alt font")+OFF)+'<label>('+loc("your cookies are displayed using a monospace font")+')</label><br>'+
+							Game.WritePrefButton('monospace','monospaceButton',loc("Alt font")+ON,loc("Alt font")+OFF)+'<label>('+loc("your kookies are displayed using a monospace font")+')</label><br>'+
 							Game.WritePrefButton('format','formatButton',loc("Short numbers")+OFF,loc("Short numbers")+ON,'BeautifyAll();Game.RefreshStore();Game.upgradesToRebuild=1;',1)+(EN?'<label>(shorten big numbers)</label>':'')+'<br>'+
 							Game.WritePrefButton('notifs','notifsButton',loc("Fast notes")+ON,loc("Fast notes")+OFF)+'<label>('+loc("notifications disappear much faster")+')</label><br>'+
 							//Game.WritePrefButton('autoupdate','autoupdateButton','Offline mode OFF','Offline mode ON',0,1)+'<label>(disables update notifications)</label><br>'+
@@ -6704,7 +6704,7 @@ Game.Launch=function()
 				var buildingsOwned=0;
 				buildingsOwned=Game.BuildingsOwned;
 				var upgrades='';
-				var cookieUpgrades='';
+				var kookieUpgrades='';
 				var hiddenUpgrades='';
 				var prestigeUpgrades='';
 				var upgradesTotal=0;
@@ -6735,10 +6735,10 @@ Game.Launch=function()
 						else if (me.pool=='prestige') prestigeUpgradesOwned++;
 					}
 					
-					if (me.pool=='' || me.pool=='cookie' || me.pool=='tech') upgradesTotal++;
+					if (me.pool=='' || me.pool=='kookie' || me.pool=='tech') upgradesTotal++;
 					if (me.pool=='debug') hiddenUpgrades+=str2;
 					else if (me.pool=='prestige') {prestigeUpgrades+=str2;prestigeUpgradesTotal++;}
-					else if (me.pool=='cookie') cookieUpgrades+=str2;
+					else if (me.pool=='kookie') kookieUpgrades+=str2;
 					else if (me.pool!='toggle' && me.pool!='unused') upgrades+=str2;
 				}
 				var achievements=[];
@@ -6869,24 +6869,24 @@ Game.Launch=function()
 				'<div class="subsection">'+
 				'<div class="title">'+loc("General")+'</div>'+
 				'<div id="statsGeneral">'+
-					'<div class="listing"><b>'+loc("Cookies in bank:")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.cookies)+'</div></div>'+
-					'<div class="listing"><b>'+loc("Cookies baked (this ascension):")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.cookiesEarned)+'</div></div>'+
-					'<div class="listing"><b>'+loc("Cookies baked (all time):")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.cookiesEarned+Game.cookiesReset)+'</div></div>'+
-					(Game.cookiesReset>0?'<div class="listing"><b>'+loc("Cookies forfeited by ascending:")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.cookiesReset)+'</div></div>':'')+
+					'<div class="listing"><b>'+loc("Cookies in bank:")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.kookies)+'</div></div>'+
+					'<div class="listing"><b>'+loc("Cookies baked (this ascension):")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.kookiesEarned)+'</div></div>'+
+					'<div class="listing"><b>'+loc("Cookies baked (all time):")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.kookiesEarned+Game.kookiesReset)+'</div></div>'+
+					(Game.kookiesReset>0?'<div class="listing"><b>'+loc("Cookies forfeited by ascending:")+'</b> <div class="price plain">'+Game.tinyCookie()+Beautify(Game.kookiesReset)+'</div></div>':'')+
 					(Game.resets?('<div class="listing"><b>'+loc("Legacy started:")+'</b> '+(fullDate==''?loc("just now"):loc("%1 ago",fullDate))+', '+loc("with %1 ascension",LBeautify(Game.resets))+'</div>'):'')+
 					'<div class="listing"><b>'+loc("Run started:")+'</b> '+(startDate==''?loc("just now"):loc("%1 ago",startDate))+'</div>'+
 					'<div class="listing"><b>'+loc("Buildings owned:")+'</b> '+Beautify(buildingsOwned)+'</div>'+
-					'<div class="listing"><b>'+loc("Cookies per second:")+'</b> '+Beautify(Game.cookiesPs,1)+' <small>'+
+					'<div class="listing"><b>'+loc("Cookies per second:")+'</b> '+Beautify(Game.kookiesPs,1)+' <small>'+
 						'('+loc("multiplier:")+' '+Beautify(Math.round(Game.globalCpsMult*100),1)+'%)'+
 						(Game.cpsSucked>0?' <span class="warning">('+loc("withered:")+' '+Beautify(Math.round(Game.cpsSucked*100),1)+'%)</span>':'')+
 						'</small></div>'+
-					'<div class="listing"><b>'+loc("Raw cookies per second:")+'</b> '+Beautify(Game.cookiesPsRaw,1)+' <small>'+
-						'('+loc("highest this ascension:")+' '+Beautify(Game.cookiesPsRawHighest,1)+')'+
+					'<div class="listing"><b>'+loc("Raw kookies per second:")+'</b> '+Beautify(Game.kookiesPsRaw,1)+' <small>'+
+						'('+loc("highest this ascension:")+' '+Beautify(Game.kookiesPsRawHighest,1)+')'+
 						'</small></div>'+
 					'<div class="listing"><b>'+loc("Cookies per click:")+'</b> '+Beautify(Game.computedMouseCps,1)+'</div>'+
-					'<div class="listing"><b>'+loc("Cookie clicks:")+'</b> '+Beautify(Game.cookieClicks)+'</div>'+
-					'<div class="listing"><b>'+loc("Hand-made cookies:")+'</b> '+Beautify(Game.handmadeCookies)+'</div>'+
-					'<div class="listing"><b>'+loc("Golden cookie clicks:")+'</b> '+Beautify(Game.goldenClicksLocal)+' <small>('+loc("all time:")+' '+Beautify(Game.goldenClicks)+')</small></div>'+//' <span class="hidden">(<b>Missed golden cookies :</b> '+Beautify(Game.missedGoldenClicks)+')</span></div>'+
+					'<div class="listing"><b>'+loc("Cookie clicks:")+'</b> '+Beautify(Game.kookieClicks)+'</div>'+
+					'<div class="listing"><b>'+loc("Hand-made kookies:")+'</b> '+Beautify(Game.handmadeCookies)+'</div>'+
+					'<div class="listing"><b>'+loc("Golden kookie clicks:")+'</b> '+Beautify(Game.goldenClicksLocal)+' <small>('+loc("all time:")+' '+Beautify(Game.goldenClicks)+')</small></div>'+//' <span class="hidden">(<b>Missed golden kookies :</b> '+Beautify(Game.missedGoldenClicks)+')</span></div>'+
 					(dropMult!=1?'<div class="listing"><b>'+loc("Random drop multiplier:")+'</b> <small>x</small>'+Beautify(dropMult,2)+'</div>':'')+
 				'</div>'+
 				'<br><div class="listing"><b>'+loc("Running version:")+'</b> '+Game.version+'</div>'+
@@ -6900,7 +6900,7 @@ Game.Launch=function()
 						(seasonStr!=''?' <small>('+loc("%1 remaining",seasonStr)+')</small>':'')+
 					'</div>':'')+
 					(EN && Game.season=='fools'?
-						'<div class="listing"><b>Money made from selling cookies :</b> '+Beautify(Game.cookiesEarned*0.08,2)+' cookie dollars</div>'+
+						'<div class="listing"><b>Money made from selling kookies :</b> '+Beautify(Game.kookiesEarned*0.08,2)+' kookie dollars</div>'+
 						(Game.Objects['Portal'].highest>0?'<div class="listing"><b>TV show seasons produced :</b> '+Beautify(Math.floor((timeInSeconds/60/60)*(Game.Objects['Portal'].highest*0.13)+1))+'</div>':'')
 					:'')+
 					(researchStr!=''?'<div class="listing"><b>'+loc("Research:")+'</b> '+loc("%1 remaining",researchStr)+'</div>':'')+
@@ -6908,7 +6908,7 @@ Game.Launch=function()
 					(pledgeStr!=''?'<div class="listing"><b>'+loc("Pledge:")+'</b> '+loc("%1 remaining",pledgeStr)+'</div>':'')+
 					(Game.wrinklersPopped>0?'<div class="listing"><b>'+loc("Wrinklers popped:")+'</b> '+Beautify(Game.wrinklersPopped)+'</div>':'')+
 					((Game.canLumps() && Game.lumpsTotal>-1)?'<div class="listing"><b>'+loc("Sugar lumps harvested:")+'</b> <div class="price lump plain">'+Beautify(Game.lumpsTotal)+'</div></div>':'')+
-					//(Game.cookiesSucked>0?'<div class="listing warning"><b>Withered :</b> '+Beautify(Game.cookiesSucked)+' cookies</div>':'')+
+					//(Game.kookiesSucked>0?'<div class="listing warning"><b>Withered :</b> '+Beautify(Game.kookiesSucked)+' kookies</div>':'')+
 					(Game.reindeerClicked>0?'<div class="listing"><b>'+loc("Reindeer found:")+'</b> '+Beautify(Game.reindeerClicked)+'</div>':'')+
 					(santaStr!=''?'<div class="listing"><b>'+loc("Santa stages unlocked:")+'</b></div><div>'+santaStr+'</div>':'')+
 					(dragonStr!=''?'<div class="listing"><b>'+loc("Dragon training:")+'</b></div><div>'+dragonStr+'</div>':'')+
@@ -6934,14 +6934,14 @@ Game.Launch=function()
 					'<div class="listing crateBox">'+hiddenUpgrades+'</div>'):'')+
 					'<div class="listing"><b>'+loc("Upgrades unlocked:")+'</b> '+upgradesOwned+'/'+upgradesTotal+' ('+Math.floor((upgradesOwned/upgradesTotal)*100)+'%)</div>'+
 					'<div class="listing crateBox">'+upgrades+'</div>'+
-					(cookieUpgrades!=''?('<div class="listing"><b>'+loc("Cookies")+'</b></div>'+
-					'<div class="listing crateBox">'+cookieUpgrades+'</div>'):'')+
+					(kookieUpgrades!=''?('<div class="listing"><b>'+loc("Cookies")+'</b></div>'+
+					'<div class="listing crateBox">'+kookieUpgrades+'</div>'):'')+
 				'</div>'+
 				'</div><div class="subsection">'+
 				'<div class="title">'+loc("Achievements")+'</div>'+
 				'<div id="statsAchievs">'+
 					'<div class="listing"><b>'+loc("Achievements unlocked:")+'</b> '+achievementsOwned+'/'+achievementsTotal+' ('+Math.floor((achievementsOwned/achievementsTotal)*100)+'%)'+(achievementsOwnedOther>0?('<span style="font-weight:bold;font-size:10px;color:#70a;"> (+'+achievementsOwnedOther+')</span>'):'')+'</div>'+
-					(Game.cookiesMultByType['kittens']>1?('<div class="listing"><b>'+loc("Kitten multiplier:")+'</b> '+Beautify((Game.cookiesMultByType['kittens'])*100)+'%</div>'):'')+
+					(Game.kookiesMultByType['kittens']>1?('<div class="listing"><b>'+loc("Kitten multiplier:")+'</b> '+Beautify((Game.kookiesMultByType['kittens'])*100)+'%</div>'):'')+
 					'<div class="listing"><b>'+loc("Milk")+':</b> '+milkName+'</div>'+
 					(milkStr!=''?'<div class="listing"><b>'+loc("Milk flavors unlocked:")+'</b></div><div>'+milkStr+'</div>':'')+
 					'<div class="listing"><small style="opacity:0.75;">('+loc("Milk is gained with each achievement. It can unlock unique upgrades over time.")+')</small></div>'+
@@ -7002,19 +7002,19 @@ Game.Launch=function()
 			
 			var NEWS=loc("News :").replace(' ','&nbsp;')+' ';
 			
-			var loreProgress=Math.round(Math.log(Game.cookiesEarned/10)*Math.LOG10E+1|0);
+			var loreProgress=Math.round(Math.log(Game.kookiesEarned/10)*Math.LOG10E+1|0);
 			
 			if (Game.TickerN%2==0 || loreProgress>14)
 			{
 				var animals=['newts','penguins','scorpions','axolotls','puffins','porpoises','blowfish','horses','crayfish','slugs','humpback whales','nurse sharks','giant squids','polar bears','fruit bats','frogs','sea squirts','velvet worms','mole rats','paramecia','nematodes','tardigrades','giraffes','monkfish','wolfmen','goblins','hippies'];
 				
-				if (Math.random()<0.75 || Game.cookiesEarned<10000)
+				if (Math.random()<0.75 || Game.kookiesEarned<10000)
 				{
 					if (Game.Objects['Grandma'].amount>0) list.push('<q>'+choose(loc("Ticker (grandma)"))+'</q><sig>'+Game.Objects['Grandma'].single+'</sig>');
 					
 					if (!Game.prefs.notScary && Game.Objects['Grandma'].amount>=50) list.push('<q>'+choose(loc("Ticker (threatening grandma)"))+'</q><sig>'+Game.Objects['Grandma'].single+'</sig>');
 					
-					if (EN && Game.HasAchiev('Just wrong') && Math.random()<0.05) list.push(NEWS+'cookie manufacturer downsizes, sells own grandmother!');
+					if (EN && Game.HasAchiev('Just wrong') && Math.random()<0.05) list.push(NEWS+'kookie manufacturer downsizes, sells own grandmother!');
 					if (!Game.prefs.notScary && Game.HasAchiev('Just wrong') && Math.random()<0.4) list.push('<q>'+choose(loc("Ticker (angry grandma)"))+'</q><sig>'+Game.Objects['Grandma'].single+'</sig>');
 					
 					if (!Game.prefs.notScary && Game.Objects['Grandma'].amount>=1 && Game.pledges>0 && Game.elderWrath==0) list.push('<q>'+choose(loc("Ticker (grandmas return)"))+'</q><sig>'+Game.Objects['Grandma'].single+'</sig>');
@@ -7026,7 +7026,7 @@ Game.Launch=function()
 							if (i!='Cursor' && i!='Grandma' && Game.Objects[i].amount>0) list.push(NEWS+choose(loc("Ticker ("+i+")")));
 						}
 						
-						if (Game.cookiesEarned>=1000)
+						if (Game.kookiesEarned>=1000)
 						{
 							if (Game.season=='halloween') list.push(NEWS+choose(loc("Ticker (Halloween)")));
 							if (Game.season=='christmas') list.push(NEWS+choose(loc("Ticker (Christmas)")));
@@ -7037,11 +7037,11 @@ Game.Launch=function()
 					else
 					{
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
-						'News : cookie farms suspected of employing undeclared elderly workforce!',
-						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
-						'News : genetically-modified chocolate controversy strikes cookie farmers!',
-						'News : free-range farm cookies popular with today\'s hip youth, says specialist.',
-						'News : farm cookies deemed unfit for vegans, says nutritionist.'
+						'News : kookie farms suspected of employing undeclared elderly workforce!',
+						'News : kookie farms release harmful chocolate in our rivers, says scientist!',
+						'News : genetically-modified chocolate controversy strikes kookie farmers!',
+						'News : free-range farm kookies popular with today\'s hip youth, says specialist.',
+						'News : farm kookies deemed unfit for vegans, says nutritionist.'
 						]));
 						
 						if (Game.Objects['Mine'].amount>0) list.push(choose([
@@ -7053,39 +7053,39 @@ Game.Launch=function()
 						]));
 						
 						if (Game.Objects['Factory'].amount>0) list.push(choose([
-						'News : cookie factories linked to global warming!',
-						'News : cookie factories involved in chocolate weather controversy!',
-						'News : cookie factories on strike, robotic minions employed to replace workforce!',
-						'News : cookie factories on strike - workers demand to stop being paid in cookies!',
-						'News : factory-made cookies linked to obesity, says study.'
+						'News : kookie factories linked to global warming!',
+						'News : kookie factories involved in chocolate weather controversy!',
+						'News : kookie factories on strike, robotic minions employed to replace workforce!',
+						'News : kookie factories on strike - workers demand to stop being paid in kookies!',
+						'News : factory-made kookies linked to obesity, says study.'
 						]));
 						
 						if (Game.Objects['Bank'].amount>0) list.push(choose([
-						'News : cookie loans on the rise as people can no longer afford them with regular money.',
-						'News : cookies slowly creeping up their way as a competitor to traditional currency!',
-						'News : most bakeries now fitted with ATMs to allow for easy cookie withdrawals and deposits.',
-						'News : cookie economy now strong enough to allow for massive vaults doubling as swimming pools!',
-						'News : "Tomorrow\'s wealthiest people will be calculated by their worth in cookies", predict economists.'
+						'News : kookie loans on the rise as people can no longer afford them with regular money.',
+						'News : kookies slowly creeping up their way as a competitor to traditional currency!',
+						'News : most bakeries now fitted with ATMs to allow for easy kookie withdrawals and deposits.',
+						'News : kookie economy now strong enough to allow for massive vaults doubling as swimming pools!',
+						'News : "Tomorrow\'s wealthiest people will be calculated by their worth in kookies", predict economists.'
 						]));
 						
 						if (Game.Objects['Temple'].amount>0) list.push(choose([
 						'News : explorers bring back ancient artifact from abandoned temple; archeologists marvel at the centuries-old '+choose(['magic','carved','engraved','sculpted','royal','imperial','mummified','ritual','golden','silver','stone','cursed','plastic','bone','blood','holy','sacred','sacrificial','electronic','singing','tapdancing'])+' '+choose(['spoon','fork','pizza','washing machine','calculator','hat','piano','napkin','skeleton','gown','dagger','sword','shield','skull','emerald','bathtub','mask','rollerskates','litterbox','bait box','cube','sphere','fungus'])+'!',
-						'News : recently-discovered chocolate temples now sparking new cookie-related cult; thousands pray to Baker in the sky!',
-						'News : just how extensive is the cookie pantheon? Theologians speculate about possible '+choose(['god','goddess'])+' of '+choose([choose(animals),choose(['kazoos','web design','web browsers','kittens','atheism','handbrakes','hats','aglets','elevator music','idle games','the letter "P"','memes','hamburgers','bad puns','kerning','stand-up comedy','failed burglary attempts','clickbait','one weird tricks'])])+'.',
-						'News : theists of the world discover new cookie religion - "Oh boy, guess we were wrong all along!"',
-						'News : cookie heaven allegedly "sports elevator instead of stairway"; cookie hell "paved with flagstone, as good intentions make for poor building material".'
+						'News : recently-discovered chocolate temples now sparking new kookie-related cult; thousands pray to Baker in the sky!',
+						'News : just how extensive is the kookie pantheon? Theologians speculate about possible '+choose(['god','goddess'])+' of '+choose([choose(animals),choose(['kazoos','web design','web browsers','kittens','atheism','handbrakes','hats','aglets','elevator music','idle games','the letter "P"','memes','hamburgers','bad puns','kerning','stand-up comedy','failed burglary attempts','clickbait','one weird tricks'])])+'.',
+						'News : theists of the world discover new kookie religion - "Oh boy, guess we were wrong all along!"',
+						'News : kookie heaven allegedly "sports elevator instead of stairway"; kookie hell "paved with flagstone, as good intentions make for poor building material".'
 						]));
 						
 						if (Game.Objects['Wizard tower'].amount>0) list.push(choose([
 						'News : all '+choose([choose(animals),choose(['public restrooms','clouds','politicians','moustaches','hats','shoes','pants','clowns','encyclopedias','websites','potted plants','lemons','household items','bodily fluids','cutlery','national landmarks','yogurt','rap music','underwear'])])+' turned into '+choose([choose(animals),choose(['public restrooms','clouds','politicians','moustaches','hats','shoes','pants','clowns','encyclopedias','websites','potted plants','lemons','household items','bodily fluids','cutlery','national landmarks','yogurt','rap music','underwear'])])+' in freak magic catastrophe!',
 						'News : heavy dissent rages between the schools of '+choose(['water','fire','earth','air','lightning','acid','song','battle','peace','pencil','internet','space','time','brain','nature','techno','plant','bug','ice','poison','crab','kitten','dolphin','bird','punch','fart'])+' magic and '+choose(['water','fire','earth','air','lightning','acid','song','battle','peace','pencil','internet','space','time','brain','nature','techno','plant','bug','ice','poison','crab','kitten','dolphin','bird','punch','fart'])+' magic!',
 						'News : get your new charms and curses at the yearly National Spellcrafting Fair! Exclusive prices on runes and spellbooks.',
-						'News : cookie wizards deny involvement in shockingly ugly newborn - infant is "honestly grody-looking, but natural", say doctors.',
+						'News : kookie wizards deny involvement in shockingly ugly newborn - infant is "honestly grody-looking, but natural", say doctors.',
 						'News : "Any sufficiently crude magic is indistinguishable from technology", claims renowned technowizard.'
 						]));
 						
 						if (Game.Objects['Shipment'].amount>0) list.push(choose([
-						'News : new chocolate planet found, becomes target of cookie-trading spaceships!',
+						'News : new chocolate planet found, becomes target of kookie-trading spaceships!',
 						'News : massive chocolate planet found with 99.8% certified pure dark chocolate core!',
 						'News : space tourism booming as distant planets attract more bored millionaires!',
 						'News : chocolate-based organisms found on distant planet!',
@@ -7093,42 +7093,42 @@ Game.Launch=function()
 						]));
 						
 						if (Game.Objects['Alchemy lab'].amount>0) list.push(choose([
-						'News : national gold reserves dwindle as more and more of the precious mineral is turned to cookies!',
+						'News : national gold reserves dwindle as more and more of the precious mineral is turned to kookies!',
 						'News : chocolate jewelry found fashionable, gold and diamonds "just a fad", says specialist.',
 						'News : silver found to also be transmutable into white chocolate!',
-						'News : defective alchemy lab shut down, found to convert cookies to useless gold.',
-						'News : alchemy-made cookies shunned by purists!'
+						'News : defective alchemy lab shut down, found to convert kookies to useless gold.',
+						'News : alchemy-made kookies shunned by purists!'
 						]));
 						
 						if (Game.Objects['Portal'].amount>0) list.push(choose([
 						'News : nation worried as more and more unsettling creatures emerge from dimensional portals!',
 						'News : dimensional portals involved in city-engulfing disaster!',
-						'News : tourism to cookieverse popular with bored teenagers! Casualty rate as high as 73%!',
-						'News : cookieverse portals suspected to cause fast aging and obsession with baking, says study.',
+						'News : tourism to kookieverse popular with bored teenagers! Casualty rate as high as 73%!',
+						'News : kookieverse portals suspected to cause fast aging and obsession with baking, says study.',
 						'News : "do not settle near portals," says specialist; "your children will become strange and corrupted inside."'
 						]));
 						
 						if (Game.Objects['Time machine'].amount>0) list.push(choose([
 						'News : time machines involved in history-rewriting scandal! Or are they?',
 						'News : time machines used in unlawful time tourism!',
-						'News : cookies brought back from the past "unfit for human consumption", says historian.',
+						'News : kookies brought back from the past "unfit for human consumption", says historian.',
 						'News : various historical figures inexplicably replaced with talking lumps of dough!',
 						'News : "I have seen the future," says time machine operator, "and I do not wish to go there again."'
 						]));
 						
 						if (Game.Objects['Antimatter condenser'].amount>0) list.push(choose([
 						'News : whole town seemingly swallowed by antimatter-induced black hole; more reliable sources affirm town "never really existed"!',
-						'News : "explain to me again why we need particle accelerators to bake cookies?" asks misguided local woman.',
+						'News : "explain to me again why we need particle accelerators to bake kookies?" asks misguided local woman.',
 						'News : first antimatter condenser successfully turned on, doesn\'t rip apart reality!',
-						'News : researchers conclude that what the cookie industry needs, first and foremost, is "more magnets".',
-						'News : "unravelling the fabric of reality just makes these cookies so much tastier", claims scientist.'
+						'News : researchers conclude that what the kookie industry needs, first and foremost, is "more magnets".',
+						'News : "unravelling the fabric of reality just makes these kookies so much tastier", claims scientist.'
 						]));
 						
 						if (Game.Objects['Prism'].amount>0) list.push(choose([
-						'News : new cookie-producing prisms linked to outbreak of rainbow-related viral videos.',
+						'News : new kookie-producing prisms linked to outbreak of rainbow-related viral videos.',
 						'News : scientists warn against systematically turning light into matter - "One day, we\'ll end up with all matter and no light!"',
-						'News : cookies now being baked at the literal speed of light thanks to new prismatic contraptions.',
-						'News : "Can\'t you sense the prism watching us?", rambles insane local man. "No idea what he\'s talking about", shrugs cookie magnate/government official.',
+						'News : kookies now being baked at the literal speed of light thanks to new prismatic contraptions.',
+						'News : "Can\'t you sense the prism watching us?", rambles insane local man. "No idea what he\'s talking about", shrugs kookie magnate/government official.',
 						'News : world citizens advised "not to worry" about frequent atmospheric flashes.',
 						]));
 						
@@ -7145,7 +7145,7 @@ Game.Launch=function()
 						'News : local man sails around the world to find himself - right where he left it.',
 						'News : local guru claims "there\'s a little bit of ourselves in everyone", under investigation for alleged cannibalism.',
 						'News : news writer finds herself daydreaming about new career. Or at least a raise.',
-						'News : polls find idea of cookies made of cookies "acceptable" - "at least we finally know what\'s in them", says interviewed citizen.',
+						'News : polls find idea of kookies made of kookies "acceptable" - "at least we finally know what\'s in them", says interviewed citizen.',
 						]));
 						
 						if (Game.Objects['Javascript console'].amount>0) list.push(choose([
@@ -7172,17 +7172,17 @@ Game.Launch=function()
 						'News : are you smarter than a cortex baker? New game show deemed "unfair" by contestants.'
 						]));
 						
-						if (Game.season=='halloween' && Game.cookiesEarned>=1000) list.push(choose([
-						'News : strange twisting creatures amass around cookie factories, nibble at assembly lines.',
-						'News : ominous wrinkly monsters take massive bites out of cookie production; "this can\'t be hygienic", worries worker.',
+						if (Game.season=='halloween' && Game.kookiesEarned>=1000) list.push(choose([
+						'News : strange twisting creatures amass around kookie factories, nibble at assembly lines.',
+						'News : ominous wrinkly monsters take massive bites out of kookie production; "this can\'t be hygienic", worries worker.',
 						'News : pagan rituals on the rise as children around the world dress up in strange costumes and blackmail homeowners for candy.',
 						'News : new-age terrorism strikes suburbs as houses find themselves covered in eggs and toilet paper.',
-						'News : children around the world "lost and confused" as any and all Halloween treats have been replaced by cookies.'
+						'News : children around the world "lost and confused" as any and all Halloween treats have been replaced by kookies.'
 						]));
 						
-						if (Game.season=='christmas' && Game.cookiesEarned>=1000) list.push(choose([
+						if (Game.season=='christmas' && Game.kookiesEarned>=1000) list.push(choose([
 						'News : bearded maniac spotted speeding on flying sleigh! Investigation pending.',
-						'News : Santa Claus announces new brand of breakfast treats to compete with cookie-flavored cereals! "They\'re ho-ho-horrible!" says Santa.',
+						'News : Santa Claus announces new brand of breakfast treats to compete with kookie-flavored cereals! "They\'re ho-ho-horrible!" says Santa.',
 						'News : "You mean he just gives stuff away for free?!", concerned moms ask. "Personally, I don\'t trust his beard."',
 						'News : obese jolly lunatic still on the loose, warn officials. "Keep your kids safe and board up your chimneys. We mean it."',
 						'News : children shocked as they discover Santa Claus isn\'t just their dad in a costume after all!<br>"I\'m reassessing my life right now", confides Laura, aged 6.',
@@ -7195,15 +7195,15 @@ Game.Launch=function()
 						'News : drama unfolds at North Pole as rumors crop up around Rudolph\'s red nose; "I may have an addiction or two", admits reindeer.'
 						]));
 						
-						if (Game.season=='valentines' && Game.cookiesEarned>=1000) list.push(choose([
+						if (Game.season=='valentines' && Game.kookiesEarned>=1000) list.push(choose([
 						'News : organ-shaped confectioneries being traded in schools all over the world; gruesome practice undergoing investigation.',
-						'News : heart-shaped candies overtaking sweets business, offering competition to cookie empire. "It\'s the economy, cupid!"',
+						'News : heart-shaped candies overtaking sweets business, offering competition to kookie empire. "It\'s the economy, cupid!"',
 						'News : love\'s in the air, according to weather specialists. Face masks now offered in every city to stunt airborne infection.',
-						'News : marrying a cookie - deranged practice, or glimpse of the future?',
-						'News : boyfriend dumped after offering his lover cookies for Valentine\'s Day, reports say. "They were off-brand", shrugs ex-girlfriend.'
+						'News : marrying a kookie - deranged practice, or glimpse of the future?',
+						'News : boyfriend dumped after offering his lover kookies for Valentine\'s Day, reports say. "They were off-brand", shrugs ex-girlfriend.'
 						]));
 						
-						if (Game.season=='easter' && Game.cookiesEarned>=1000) list.push(choose([
+						if (Game.season=='easter' && Game.kookiesEarned>=1000) list.push(choose([
 						'News : long-eared critters with fuzzy tails invade suburbs, spread terror and chocolate!',
 						'News : eggs have begun to materialize in the most unexpected places; "no place is safe", warn experts.',
 						'News : packs of rampaging rabbits cause billions in property damage; new strain of myxomatosis being developed.',
@@ -7214,7 +7214,7 @@ Game.Launch=function()
 				}
 				if (!EN)
 				{
-					if (Game.cookiesEarned>=10000)
+					if (Game.kookiesEarned>=10000)
 					{
 						list.push(NEWS+choose(loc("Ticker (misc)")));
 						list.push(NEWS+choose(loc("Ticker (misc)")));
@@ -7225,24 +7225,24 @@ Game.Launch=function()
 				{
 					if (Math.random()<0.05)
 					{
-						if (Game.HasAchiev('Base 10')) list.push('News : cookie manufacturer completely forgoes common sense, lets strange obsession with round numbers drive building decisions!');
-						if (Game.HasAchiev('From scratch')) list.push('News : follow the tear-jerking, riches-to-rags story about a local cookie manufacturer who decided to give it all up!');
-						if (Game.HasAchiev('A world filled with cookies')) list.push('News : known universe now jammed with cookies! No vacancies!');
-						if (Game.HasAchiev('Last Chance to See')) list.push('News : incredibly rare albino wrinkler on the brink of extinction poached by cookie-crazed pastry magnate!');
-						if (Game.Has('Serendipity')) list.push('News : local cookie manufacturer becomes luckiest being alive!');
+						if (Game.HasAchiev('Base 10')) list.push('News : kookie manufacturer completely forgoes common sense, lets strange obsession with round numbers drive building decisions!');
+						if (Game.HasAchiev('From scratch')) list.push('News : follow the tear-jerking, riches-to-rags story about a local kookie manufacturer who decided to give it all up!');
+						if (Game.HasAchiev('A world filled with kookies')) list.push('News : known universe now jammed with kookies! No vacancies!');
+						if (Game.HasAchiev('Last Chance to See')) list.push('News : incredibly rare albino wrinkler on the brink of extinction poached by kookie-crazed pastry magnate!');
+						if (Game.Has('Serendipity')) list.push('News : local kookie manufacturer becomes luckiest being alive!');
 						if (Game.Has('Season switcher')) list.push('News : seasons are all out of whack! "We need to get some whack back into them seasons", says local resident.');
 						
-						if (Game.Has('Kitten helpers')) list.push('News : faint meowing heard around local cookie facilities; suggests new ingredient being tested.');
-						if (Game.Has('Kitten workers')) list.push('News : crowds of meowing kittens with little hard hats reported near local cookie facilities.');
-						if (Game.Has('Kitten engineers')) list.push('News : surroundings of local cookie facilities now overrun with kittens in adorable little suits. Authorities advise to stay away from the premises.');
+						if (Game.Has('Kitten helpers')) list.push('News : faint meowing heard around local kookie facilities; suggests new ingredient being tested.');
+						if (Game.Has('Kitten workers')) list.push('News : crowds of meowing kittens with little hard hats reported near local kookie facilities.');
+						if (Game.Has('Kitten engineers')) list.push('News : surroundings of local kookie facilities now overrun with kittens in adorable little suits. Authorities advise to stay away from the premises.');
 						if (Game.Has('Kitten overseers')) list.push('News : locals report troupe of bossy kittens meowing adorable orders at passersby.');
 						if (Game.Has('Kitten managers')) list.push('News : local office cubicles invaded with armies of stern-looking kittens asking employees "what\'s happening, meow".');
 						if (Game.Has('Kitten accountants')) list.push('News : tiny felines show sudden and amazing proficiency with fuzzy mathematics and pawlinomials, baffling scientists and pet store owners.');
-						if (Game.Has('Kitten specialists')) list.push('News : new kitten college opening next week, offers courses on cookie-making and catnip studies.');
+						if (Game.Has('Kitten specialists')) list.push('News : new kitten college opening next week, offers courses on kookie-making and catnip studies.');
 						if (Game.Has('Kitten experts')) list.push('News : unemployment rates soaring as woefully adorable little cats nab jobs on all levels of expertise, says study.');
 						if (Game.Has('Kitten consultants')) list.push('News : "In the future, your job will most likely be done by a cat", predicts suspiciously furry futurologist.');
 						if (Game.Has('Kitten assistants to the regional manager')) list.push('News : strange kittens with peculiar opinions on martial arts spotted loitering on local beet farms!');
-						if (Game.Has('Kitten marketeers')) list.push('News : nonsensical kitten billboards crop up all over countryside, trying to sell people the cookies they already get for free!');
+						if (Game.Has('Kitten marketeers')) list.push('News : nonsensical kitten billboards crop up all over countryside, trying to sell people the kookies they already get for free!');
 						if (Game.Has('Kitten analysts')) list.push('News : are your spending habits sensible? For a hefty fee, these kitten analysts will tell you!');
 						if (Game.Has('Kitten executives')) list.push('News : kittens strutting around in hot little business suits shouting cut-throat orders at their assistants, possibly the cutest thing this reporter has ever seen!');
 						if (Game.Has('Kitten admins')) list.push('News : all systems nominal, claim kitten admins obviously in way over their heads.');
@@ -7274,103 +7274,103 @@ Game.Launch=function()
 						);
 					}
 					
-					if (Game.cookiesEarned>=10000) list.push(
+					if (Game.kookiesEarned>=10000) list.push(
 					'News : '+choose([
-						'cookies found to '+choose(['increase lifespan','sensibly increase intelligence','reverse aging','decrease hair loss','prevent arthritis','cure blindness'])+' in '+choose(animals)+'!',
-						'cookies found to make '+choose(animals)+' '+choose(['more docile','more handsome','nicer','less hungry','more pragmatic','tastier'])+'!',
-						'cookies tested on '+choose(animals)+', found to have no ill effects.',
-						'cookies unexpectedly popular among '+choose(animals)+'!',
-						'unsightly lumps found on '+choose(animals)+' near cookie facility; "they\'ve pretty much always looked like that", say biologists.',
-						'new species of '+choose(animals)+' discovered in distant country; "yup, tastes like cookies", says biologist.',
-						'cookies go well with '+choose([choose(['roasted','toasted','boiled','sauteed','minced'])+' '+choose(animals),choose(['sushi','soup','carpaccio','steak','nuggets'])+' made from '+choose(animals)])+', says controversial chef.',
-						'"do your cookies contain '+choose(animals)+'?", asks PSA warning against counterfeit cookies.',
-						'doctors recommend twice-daily consumption of fresh cookies.',
+						'kookies found to '+choose(['increase lifespan','sensibly increase intelligence','reverse aging','decrease hair loss','prevent arthritis','cure blindness'])+' in '+choose(animals)+'!',
+						'kookies found to make '+choose(animals)+' '+choose(['more docile','more handsome','nicer','less hungry','more pragmatic','tastier'])+'!',
+						'kookies tested on '+choose(animals)+', found to have no ill effects.',
+						'kookies unexpectedly popular among '+choose(animals)+'!',
+						'unsightly lumps found on '+choose(animals)+' near kookie facility; "they\'ve pretty much always looked like that", say biologists.',
+						'new species of '+choose(animals)+' discovered in distant country; "yup, tastes like kookies", says biologist.',
+						'kookies go well with '+choose([choose(['roasted','toasted','boiled','sauteed','minced'])+' '+choose(animals),choose(['sushi','soup','carpaccio','steak','nuggets'])+' made from '+choose(animals)])+', says controversial chef.',
+						'"do your kookies contain '+choose(animals)+'?", asks PSA warning against counterfeit kookies.',
+						'doctors recommend twice-daily consumption of fresh kookies.',
 						'doctors warn against chocolate chip-snorting teen fad.',
-						'doctors advise against new cookie-free fad diet.',
-						'doctors warn mothers about the dangers of "home-made cookies".'
+						'doctors advise against new kookie-free fad diet.',
+						'doctors warn mothers about the dangers of "home-made kookies".'
 						]),
 					'News : "'+choose([
-						'I\'m all about cookies',
-						'I just can\'t stop eating cookies. I think I seriously need help',
-						'I guess I have a cookie problem',
-						'I\'m not addicted to cookies. That\'s just speculation by fans with too much free time',
-						'my upcoming album contains 3 songs about cookies',
-						'I\'ve had dreams about cookies 3 nights in a row now. I\'m a bit worried honestly',
-						'accusations of cookie abuse are only vile slander',
-						'cookies really helped me when I was feeling low',
-						'cookies are the secret behind my perfect skin',
-						'cookies helped me stay sane while filming my upcoming movie',
-						'cookies helped me stay thin and healthy',
-						'I\'ll say one word, just one : cookies',
-						'alright, I\'ll say it - I\'ve never eaten a single cookie in my life'
+						'I\'m all about kookies',
+						'I just can\'t stop eating kookies. I think I seriously need help',
+						'I guess I have a kookie problem',
+						'I\'m not addicted to kookies. That\'s just speculation by fans with too much free time',
+						'my upcoming album contains 3 songs about kookies',
+						'I\'ve had dreams about kookies 3 nights in a row now. I\'m a bit worried honestly',
+						'accusations of kookie abuse are only vile slander',
+						'kookies really helped me when I was feeling low',
+						'kookies are the secret behind my perfect skin',
+						'kookies helped me stay sane while filming my upcoming movie',
+						'kookies helped me stay thin and healthy',
+						'I\'ll say one word, just one : kookies',
+						'alright, I\'ll say it - I\'ve never eaten a single kookie in my life'
 						])+'", reveals celebrity.',
 					choose([
-						'News : scientist predicts imminent cookie-related "end of the world"; becomes joke among peers.',
-						'News : man robs bank, buys cookies.',
-						'News : scientists establish that the deal with airline food is, in fact, a critical lack of cookies.',
-						'News : hundreds of tons of cookies dumped into starving country from airplanes; thousands dead, nation grateful.',
-						'News : new study suggests cookies neither speed up nor slow down aging, but instead "take you in a different direction".',
-						'News : overgrown cookies found in fishing nets, raise questions about hormone baking.',
-						'News : "all-you-can-eat" cookie restaurant opens in big city; waiters trampled in minutes.',
-						'News : man dies in cookie-eating contest; "a less-than-impressive performance", says judge.',
-						'News : what makes cookies taste so right? "Probably all the [*****] they put in them", says anonymous tipper.',
-						'News : man found allergic to cookies; "what a weirdo", says family.',
-						'News : foreign politician involved in cookie-smuggling scandal.',
-						'News : cookies now more popular than '+choose(['cough drops','broccoli','smoked herring','cheese','video games','stable jobs','relationships','time travel','cat videos','tango','fashion','television','nuclear warfare','whatever it is we ate before','politics','oxygen','lamps'])+', says study.',
-						'News : obesity epidemic strikes nation; experts blame '+choose(['twerking','that darn rap music','video-games','lack of cookies','mysterious ghostly entities','aliens','parents','schools','comic-books','cookie-snorting fad'])+'.',
-						'News : cookie shortage strikes town, people forced to eat cupcakes; "just not the same", concedes mayor.',
-						'News : "you gotta admit, all this cookie stuff is a bit ominous", says confused idiot.',
-						//'News : scientists advise getting used to cookies suffusing every aspect of life; "this is the new normal", expert says.',
-						//'News : doctors advise against wearing face masks when going outside. "You never know when you might need a cookie... a mask would just get in the way."',//these were written back when covid hadn't really done much damage yet but they just feel in poor taste now
+						'News : scientist predicts imminent kookie-related "end of the world"; becomes joke among peers.',
+						'News : man robs bank, buys kookies.',
+						'News : scientists establish that the deal with airline food is, in fact, a critical lack of kookies.',
+						'News : hundreds of tons of kookies dumped into starving country from airplanes; thousands dead, nation grateful.',
+						'News : new study suggests kookies neither speed up nor slow down aging, but instead "take you in a different direction".',
+						'News : overgrown kookies found in fishing nets, raise questions about hormone baking.',
+						'News : "all-you-can-eat" kookie restaurant opens in big city; waiters trampled in minutes.',
+						'News : man dies in kookie-eating contest; "a less-than-impressive performance", says judge.',
+						'News : what makes kookies taste so right? "Probably all the [*****] they put in them", says anonymous tipper.',
+						'News : man found allergic to kookies; "what a weirdo", says family.',
+						'News : foreign politician involved in kookie-smuggling scandal.',
+						'News : kookies now more popular than '+choose(['cough drops','broccoli','smoked herring','cheese','video games','stable jobs','relationships','time travel','cat videos','tango','fashion','television','nuclear warfare','whatever it is we ate before','politics','oxygen','lamps'])+', says study.',
+						'News : obesity epidemic strikes nation; experts blame '+choose(['twerking','that darn rap music','video-games','lack of kookies','mysterious ghostly entities','aliens','parents','schools','comic-books','kookie-snorting fad'])+'.',
+						'News : kookie shortage strikes town, people forced to eat cupcakes; "just not the same", concedes mayor.',
+						'News : "you gotta admit, all this kookie stuff is a bit ominous", says confused idiot.',
+						//'News : scientists advise getting used to kookies suffusing every aspect of life; "this is the new normal", expert says.',
+						//'News : doctors advise against wearing face masks when going outside. "You never know when you might need a kookie... a mask would just get in the way."',//these were written back when covid hadn't really done much damage yet but they just feel in poor taste now
 						'News : is there life on Mars? Various chocolate bar manufacturers currently under investigation for bacterial contaminants.',
-						'News : "so I guess that\'s a thing now", scientist comments on cookie particles now present in virtually all steel manufactured since cookie production ramped up worldwide.',
-						'News : trace amounts of cookie particles detected in most living creatures, some of which adapting them as part of new and exotic metabolic processes.',
+						'News : "so I guess that\'s a thing now", scientist comments on kookie particles now present in virtually all steel manufactured since kookie production ramped up worldwide.',
+						'News : trace amounts of kookie particles detected in most living creatures, some of which adapting them as part of new and exotic metabolic processes.',
 					]),
 					choose([
-						'News : movie cancelled from lack of actors; "everybody\'s at home eating cookies", laments director.',
-						'News : comedian forced to cancel cookie routine due to unrelated indigestion.',
-						'News : new cookie-based religion sweeps the nation.',
-						'News : fossil records show cookie-based organisms prevalent during Cambrian explosion, scientists say.',
-						'News : mysterious illegal cookies seized; "tastes terrible", says police.',
-						'News : man found dead after ingesting cookie; investigators favor "mafia snitch" hypothesis.',
-						'News : "the universe pretty much loops on itself," suggests researcher; "it\'s cookies all the way down."',
-						'News : minor cookie-related incident turns whole town to ashes; neighboring cities asked to chip in for reconstruction.',
-						'News : is our media controlled by the cookie industry? This could very well be the case, says crackpot conspiracy theorist.',
-						'News : '+choose(['cookie-flavored popcorn pretty damn popular; "we kinda expected that", say scientists.','cookie-flavored cereals break all known cereal-related records','cookies popular among all age groups, including fetuses, says study.','cookie-flavored popcorn sales exploded during screening of Grandmothers II : The Moistening.']),
-						'News : all-cookie restaurant opening downtown. Dishes such as braised cookies, cookie thermidor, and for dessert : crepes.',
+						'News : movie cancelled from lack of actors; "everybody\'s at home eating kookies", laments director.',
+						'News : comedian forced to cancel kookie routine due to unrelated indigestion.',
+						'News : new kookie-based religion sweeps the nation.',
+						'News : fossil records show kookie-based organisms prevalent during Cambrian explosion, scientists say.',
+						'News : mysterious illegal kookies seized; "tastes terrible", says police.',
+						'News : man found dead after ingesting kookie; investigators favor "mafia snitch" hypothesis.',
+						'News : "the universe pretty much loops on itself," suggests researcher; "it\'s kookies all the way down."',
+						'News : minor kookie-related incident turns whole town to ashes; neighboring cities asked to chip in for reconstruction.',
+						'News : is our media controlled by the kookie industry? This could very well be the case, says crackpot conspiracy theorist.',
+						'News : '+choose(['kookie-flavored popcorn pretty damn popular; "we kinda expected that", say scientists.','kookie-flavored cereals break all known cereal-related records','kookies popular among all age groups, including fetuses, says study.','kookie-flavored popcorn sales exploded during screening of Grandmothers II : The Moistening.']),
+						'News : all-kookie restaurant opening downtown. Dishes such as braised kookies, kookie thermidor, and for dessert : crepes.',
 						'News : "Ook", says interviewed orangutan.',
-						'News : cookies could be the key to '+choose(['eternal life','infinite riches','eternal youth','eternal beauty','curing baldness','world peace','solving world hunger','ending all wars world-wide','making contact with extraterrestrial life','mind-reading','better living','better eating','more interesting TV shows','faster-than-light travel','quantum baking','chocolaty goodness','gooder thoughtness'])+', say scientists.',
+						'News : kookies could be the key to '+choose(['eternal life','infinite riches','eternal youth','eternal beauty','curing baldness','world peace','solving world hunger','ending all wars world-wide','making contact with extraterrestrial life','mind-reading','better living','better eating','more interesting TV shows','faster-than-light travel','quantum baking','chocolaty goodness','gooder thoughtness'])+', say scientists.',
 						'News : flavor text '+choose(['not particularly flavorful','kind of unsavory','"rather bland"','pretty spicy lately'])+', study finds.',
 					]),
 					choose([
-						'News : what do golden cookies taste like? Study reveals a flavor "somewhere between spearmint and liquorice".',
-						'News : what do wrath cookies taste like? Study reveals a flavor "somewhere between blood sausage and seawater".',
-						'News : '+Game.bakeryName+'-brand cookies "'+choose(['much less soggy','much tastier','relatively less crappy','marginally less awful','less toxic','possibly more edible','more fashionable','slightly nicer','trendier','arguably healthier','objectively better choice','slightly less terrible','decidedly cookier','a tad cheaper'])+' than competitors", says consumer survey.',
+						'News : what do golden kookies taste like? Study reveals a flavor "somewhere between spearmint and liquorice".',
+						'News : what do wrath kookies taste like? Study reveals a flavor "somewhere between blood sausage and seawater".',
+						'News : '+Game.bakeryName+'-brand kookies "'+choose(['much less soggy','much tastier','relatively less crappy','marginally less awful','less toxic','possibly more edible','more fashionable','slightly nicer','trendier','arguably healthier','objectively better choice','slightly less terrible','decidedly kookier','a tad cheaper'])+' than competitors", says consumer survey.',
 						'News : "'+Game.bakeryName+'" set to be this year\'s most popular baby name.',
-						'News : new popularity survey says '+Game.bakeryName+'\'s the word when it comes to cookies.',
-						'News : major city being renamed '+Game.bakeryName+'ville after world-famous cookie manufacturer.',
-						'News : '+choose(['street','school','nursing home','stadium','new fast food chain','new planet','new disease','flesh-eating bacteria','deadly virus','new species of '+choose(animals),'new law','baby','programming language'])+' to be named after '+Game.bakeryName+', the world-famous cookie manufacturer.',
+						'News : new popularity survey says '+Game.bakeryName+'\'s the word when it comes to kookies.',
+						'News : major city being renamed '+Game.bakeryName+'ville after world-famous kookie manufacturer.',
+						'News : '+choose(['street','school','nursing home','stadium','new fast food chain','new planet','new disease','flesh-eating bacteria','deadly virus','new species of '+choose(animals),'new law','baby','programming language'])+' to be named after '+Game.bakeryName+', the world-famous kookie manufacturer.',
 						'News : don\'t miss tonight\'s biopic on '+Game.bakeryName+'\'s irresistible rise to success!',
 						'News : don\'t miss tonight\'s interview of '+Game.bakeryName+' by '+choose(['Bloprah','Blavid Bletterman','Blimmy Blimmel','Blellen Blegeneres','Blimmy Blallon','Blonan Blo\'Brien','Blay Bleno','Blon Blewart','Bleven Blolbert','Lord Toxikhron of dimension 7-B19',Game.bakeryName+'\'s own evil clone'])+'!',
 						'News : people all over the internet still scratching their heads over nonsensical reference : "Okay, but why an egg?"',
 						'News : viral video "Too Many Cookies" could be "a grim commentary on the impending crisis our world is about to face", says famous economist.',
 						'News : "memes from last year somehow still relevant", deplore experts.',
-						'News : cookie emoji most popular among teenagers, far ahead of "judgmental OK hand sign" and "shifty-looking dark moon", says study.',
+						'News : kookie emoji most popular among teenagers, far ahead of "judgmental OK hand sign" and "shifty-looking dark moon", says study.',
 					]),
 					choose([
 						'News : births of suspiciously bald babies on the rise; ancient alien cabal denies involvement.',
-						'News : "at this point, cookies permeate the economy", says economist. "If we start eating anything else, we\'re all dead."',
+						'News : "at this point, kookies permeate the economy", says economist. "If we start eating anything else, we\'re all dead."',
 						'News : pun in headline infuriates town, causes riot. 21 wounded, 5 dead; mayor still missing.',
 						'Nws : ky btwn W and R brokn, plas snd nw typwritr ASAP.',
 						'Neeeeews : "neeeew EEEEEE keeeeey working fineeeeeeeee", reeeports gleeeeeeeeful journalist.',
-						'News : cookies now illegal in some backwards country nobody cares about. Political tensions rising; war soon, hopefully.',
-						'News : irate radio host rambles about pixelated icons. "None of the cookies are aligned! Can\'t anyone else see it? I feel like I\'m taking crazy pills!"',
-						'News : nation cheers as legislators finally outlaw '+choose(['cookie criticism','playing other games than Cookie Clicker','pineapple on pizza','lack of cheerfulness','mosquitoes','broccoli','the human spleen','bad weather','clickbait','dabbing','the internet','memes','millennials'])+'!',
-						'News : '+choose(['local','area'])+' '+choose(['man','woman'])+' goes on journey of introspection, finds cookies : "I honestly don\'t know what I was expecting."',
-						'News : '+choose(['man','woman'])+' wakes up from coma, '+choose(['tries cookie for the first time, dies.','regrets it instantly.','wonders "why everything is cookies now".','babbles incoherently about some supposed "non-cookie food" we used to eat.','cites cookies as main motivator.','asks for cookies.']),
+						'News : kookies now illegal in some backwards country nobody cares about. Political tensions rising; war soon, hopefully.',
+						'News : irate radio host rambles about pixelated icons. "None of the kookies are aligned! Can\'t anyone else see it? I feel like I\'m taking crazy pills!"',
+						'News : nation cheers as legislators finally outlaw '+choose(['kookie criticism','playing other games than Cookie Clicker','pineapple on pizza','lack of cheerfulness','mosquitoes','broccoli','the human spleen','bad weather','clickbait','dabbing','the internet','memes','millennials'])+'!',
+						'News : '+choose(['local','area'])+' '+choose(['man','woman'])+' goes on journey of introspection, finds kookies : "I honestly don\'t know what I was expecting."',
+						'News : '+choose(['man','woman'])+' wakes up from coma, '+choose(['tries kookie for the first time, dies.','regrets it instantly.','wonders "why everything is kookies now".','babbles incoherently about some supposed "non-kookie food" we used to eat.','cites kookies as main motivator.','asks for kookies.']),
 						'News : pet '+choose(animals)+', dangerous fad or juicy new market?',
 						'News : person typing these wouldn\'t mind someone else breaking the news to THEM, for a change.',
-						'News : "average person bakes '+Beautify(Math.ceil(Game.cookiesEarned/7300000000))+' cookie'+(Math.ceil(Game.cookiesEarned/7300000000)==1?'':'s')+' a year" factoid actually just statistical error; '+Game.bakeryName+', who has produced '+Beautify(Game.cookiesEarned)+' cookies in their lifetime, is an outlier and should not have been counted.'
+						'News : "average person bakes '+Beautify(Math.ceil(Game.kookiesEarned/7300000000))+' kookie'+(Math.ceil(Game.kookiesEarned/7300000000)==1?'':'s')+' a year" factoid actually just statistical error; '+Game.bakeryName+', who has produced '+Beautify(Game.kookiesEarned)+' kookies in their lifetime, is an outlier and should not have been counted.'
 						])
 					);
 				}
@@ -7378,21 +7378,21 @@ Game.Launch=function()
 			
 			if (list.length==0)
 			{
-				if (loreProgress<=0) list.push(loc("You feel like making cookies. But nobody wants to eat your cookies."));
+				if (loreProgress<=0) list.push(loc("You feel like making kookies. But nobody wants to eat your kookies."));
 				else if (loreProgress<=1) list.push(loc("Your first batch goes to the trash. The neighborhood raccoon barely touches it."));
-				else if (loreProgress<=2) list.push(loc("Your family accepts to try some of your cookies."));
-				else if (loreProgress<=3) list.push(loc("Your cookies are popular in the neighborhood."),loc("People are starting to talk about your cookies."));
-				else if (loreProgress<=4) list.push(loc("Your cookies are talked about for miles around."),loc("Your cookies are renowned in the whole town!"));
-				else if (loreProgress<=5) list.push(loc("Your cookies bring all the boys to the yard."),loc("Your cookies now have their own website!"));
-				else if (loreProgress<=6) list.push(loc("Your cookies are worth a lot of money."),loc("Your cookies sell very well in distant countries."));
-				else if (loreProgress<=7) list.push(loc("People come from very far away to get a taste of your cookies."),loc("Kings and queens from all over the world are enjoying your cookies."));
-				else if (loreProgress<=8) list.push(loc("There are now museums dedicated to your cookies."),loc("A national day has been created in honor of your cookies."));
-				else if (loreProgress<=9) list.push(loc("Your cookies have been named a part of the world wonders."),loc("History books now include a whole chapter about your cookies."));
-				else if (loreProgress<=10) list.push(loc("Your cookies have been placed under government surveillance."),loc("The whole planet is enjoying your cookies!"));
-				else if (loreProgress<=11) list.push(loc("Strange creatures from neighboring planets wish to try your cookies."),loc("Elder gods from the whole cosmos have awoken to taste your cookies."));
-				else if (loreProgress<=12) list.push(loc("Beings from other dimensions lapse into existence just to get a taste of your cookies."),loc("Your cookies have achieved sentience."));
-				else if (loreProgress<=13) list.push(loc("The universe has now turned into cookie dough, to the molecular level."),loc("Your cookies are rewriting the fundamental laws of the universe."));
-				else if (loreProgress<=14) list.push(loc("A local news station runs a 10-minute segment about your cookies. Success!<br><small>(you win a cookie)</small>"),loc("it's time to stop playing"));
+				else if (loreProgress<=2) list.push(loc("Your family accepts to try some of your kookies."));
+				else if (loreProgress<=3) list.push(loc("Your kookies are popular in the neighborhood."),loc("People are starting to talk about your kookies."));
+				else if (loreProgress<=4) list.push(loc("Your kookies are talked about for miles around."),loc("Your kookies are renowned in the whole town!"));
+				else if (loreProgress<=5) list.push(loc("Your kookies bring all the boys to the yard."),loc("Your kookies now have their own website!"));
+				else if (loreProgress<=6) list.push(loc("Your kookies are worth a lot of money."),loc("Your kookies sell very well in distant countries."));
+				else if (loreProgress<=7) list.push(loc("People come from very far away to get a taste of your kookies."),loc("Kings and queens from all over the world are enjoying your kookies."));
+				else if (loreProgress<=8) list.push(loc("There are now museums dedicated to your kookies."),loc("A national day has been created in honor of your kookies."));
+				else if (loreProgress<=9) list.push(loc("Your kookies have been named a part of the world wonders."),loc("History books now include a whole chapter about your kookies."));
+				else if (loreProgress<=10) list.push(loc("Your kookies have been placed under government surveillance."),loc("The whole planet is enjoying your kookies!"));
+				else if (loreProgress<=11) list.push(loc("Strange creatures from neighboring planets wish to try your kookies."),loc("Elder gods from the whole cosmos have awoken to taste your kookies."));
+				else if (loreProgress<=12) list.push(loc("Beings from other dimensions lapse into existence just to get a taste of your kookies."),loc("Your kookies have achieved sentience."));
+				else if (loreProgress<=13) list.push(loc("The universe has now turned into kookie dough, to the molecular level."),loc("Your kookies are rewriting the fundamental laws of the universe."));
+				else if (loreProgress<=14) list.push(loc("A local news station runs a 10-minute segment about your kookies. Success!<br><small>(you win a kookie)</small>"),loc("it's time to stop playing"));
 			}
 			
 			//if (Game.elderWrath>0 && (Game.pledges==0 || Math.random()<0.2))
@@ -7401,10 +7401,10 @@ Game.Launch=function()
 				list=[];
 				if (Game.elderWrath==1) list.push(EN?choose([
 					'News : millions of old ladies reported missing!',
-					'News : processions of old ladies sighted around cookie facilities!',
+					'News : processions of old ladies sighted around kookie facilities!',
 					'News : families around the continent report agitated, transfixed grandmothers!',
 					'News : doctors swarmed by cases of old women with glassy eyes and a foamy mouth!',
-					'News : nurses report "strange scent of cookie dough" around female elderly patients!'
+					'News : nurses report "strange scent of kookie dough" around female elderly patients!'
 				]):(NEWS+choose(loc("Ticker (grandma invasion start)"))));
 				if (Game.elderWrath==2) list.push(EN?choose([
 					'News : town in disarray as strange old ladies break into homes to abduct infants and baking utensils!',
@@ -7414,7 +7414,7 @@ Game.Launch=function()
 					'News : old women freeze in place in streets, ooze warm sugary syrup!'
 				]):(NEWS+choose(loc("Ticker (grandma invasion rise)"))));
 				if (Game.elderWrath==3) list.push(EN?choose([
-					'News : large "flesh highways" scar continent, stretch between various cookie facilities!',
+					'News : large "flesh highways" scar continent, stretch between various kookie facilities!',
 					'News : wrinkled "flesh tendrils" visible from space!',
 					'News : remains of "old ladies" found frozen in the middle of growing fleshy structures!', 
 					'News : all hope lost as writhing mass of flesh and dough engulfs whole city!',
@@ -7426,13 +7426,13 @@ Game.Launch=function()
 			{
 				list=[];
 				
-				if (Game.cookiesEarned>=1000) list.push(choose([
+				if (Game.kookiesEarned>=1000) list.push(choose([
 					choose(['Your office chair is really comfortable.','Profit\'s in the air!','Business meetings are such a joy!','What a great view from your office!','Smell that? That\'s capitalism, baby!','You truly love answering emails.','Working hard, or hardly working?','Another day in paradise!','Expensive lunch time!','Another government bailout coming up! Splendid!','These profits are doing wonderful things for your skin.','You daydream for a moment about a world without taxes.','You\'ll worry about environmental damage when you\'re dead!','Yay, office supplies!','Sweet, those new staplers just came in!','Ohh, coffee break!']),
 					choose(['You\'ve spent the whole day','Another great day','First order of business today:','Why, you truly enjoy','What next? That\'s right,','You check what\'s next on the agenda. Oh boy,'])+' '+choose(['signing contracts','filling out forms','touching base with the team','examining exciting new prospects','playing with your desk toys','getting new nameplates done','attending seminars','videoconferencing','hiring dynamic young executives','meeting new investors','updating your rolodex','pumping up those numbers','punching in some numbers','getting investigated for workers\' rights violations','reorganizing documents','belittling underlings','reviewing employee performance','revising company policies','downsizing','pulling yourself up by your bootstraps','adjusting your tie','performing totally normal human activities','recentering yourself in the scream room','immanentizing the eschaton','shredding some sensitive documents','comparing business cards','pondering the meaning of your existence','listening to the roaring emptiness inside your soul','playing minigolf in your office'])+'!',
-					'The word of the day is: '+choose(['viral','search engine optimization','blags and wobsites','social networks','webinette','staycation','user experience','crowdfunding','carbon neutral','big data','machine learning','disrupting','influencers','monoconsensual transactions','sustainable','freemium','incentives','grassroots','web 3.0'/*this was before this whole crypto mess i'm so sorry*/,'logistics','leveraging','branding','proactive','synergizing','market research','demographics','pie charts','blogular','blogulacious','blogastic','authenticity','plastics','electronic mail','cellular phones','rap music','bulbs','goblinization','straight-to-bakery','microbakeries','chocolativity','flavorfulness','tastyfication','sugar offsets','activated wheat','reification','immanentize the eschaton','cookies, I guess'])+'.'
+					'The word of the day is: '+choose(['viral','search engine optimization','blags and wobsites','social networks','webinette','staycation','user experience','crowdfunding','carbon neutral','big data','machine learning','disrupting','influencers','monoconsensual transactions','sustainable','freemium','incentives','grassroots','web 3.0'/*this was before this whole crypto mess i'm so sorry*/,'logistics','leveraging','branding','proactive','synergizing','market research','demographics','pie charts','blogular','blogulacious','blogastic','authenticity','plastics','electronic mail','cellular phones','rap music','bulbs','goblinization','straight-to-bakery','microbakeries','chocolativity','flavorfulness','tastyfication','sugar offsets','activated wheat','reification','immanentize the eschaton','kookies, I guess'])+'.'
 				]));
-				if (Game.cookiesEarned>=1000 && Math.random()<0.05) list.push(choose([
-					'If you could get some more cookies baked, that\'d be great.',
+				if (Game.kookiesEarned>=1000 && Math.random()<0.05) list.push(choose([
+					'If you could get some more kookies baked, that\'d be great.',
 					'So. About those TPS reports.',
 					'Hmm, you\'ve got some video tapes to return.',
 					'They\'ll pay. They\'ll all pay.',
@@ -7450,12 +7450,12 @@ Game.Launch=function()
 					]));
 					
 					if (Game.Objects['Grandma'].amount>0) list.push(choose([
-					'Your ovens are diligently baking more and more cookies.',
+					'Your ovens are diligently baking more and more kookies.',
 					'Your ovens burn a whole batch. Ah well! Still good.'
 					]));
 					
 					if (Game.Objects['Farm'].amount>0) list.push(choose([
-					'Scores of cookies come out of your kitchens.',
+					'Scores of kookies come out of your kitchens.',
 					'Today, new recruits are joining your kitchens!'
 					]));
 					
@@ -7472,7 +7472,7 @@ Game.Launch=function()
 					
 					if (Game.Objects['Shipment'].amount>0) list.push(choose([
 					'Your supermarkets are bustling with happy, hungry customers.',
-					'Your supermarkets are full of cookie merch!'
+					'Your supermarkets are full of kookie merch!'
 					]));
 					
 					if (Game.Objects['Alchemy lab'].amount>0) list.push(choose([
@@ -7482,12 +7482,12 @@ Game.Launch=function()
 					
 					if (Game.Objects['Portal'].amount>0) list.push(choose([
 					'You just released a new TV show episode!',
-					'Your cookie-themed TV show is being adapted into a new movie!'
+					'Your kookie-themed TV show is being adapted into a new movie!'
 					]));
 					
 					if (Game.Objects['Time machine'].amount>0) list.push(choose([
 					'Your theme parks are doing well - puddles of vomit and roller-coaster casualties are being swept under the rug!',
-					'Visitors are stuffing themselves with cookies before riding your roller-coasters. You might want to hire more clean-up crews.'
+					'Visitors are stuffing themselves with kookies before riding your roller-coasters. You might want to hire more clean-up crews.'
 					]));
 					
 					if (Game.Objects['Antimatter condenser'].amount>0) list.push(choose([
@@ -7498,49 +7498,49 @@ Game.Launch=function()
 					if (Game.Objects['Prism'].amount>0) list.push(choose([
 					'Your corporate nations just gained a new parliament!',
 					'You\'ve just annexed a new nation!',
-					'A new nation joins the grand cookie conglomerate!'
+					'A new nation joins the grand kookie conglomerate!'
 					]));
 					
 					if (Game.Objects['Chancemaker'].amount>0) list.push(choose([
-					'Your intergalactic federation of cookie-sponsored planets reports record-breaking profits!',
+					'Your intergalactic federation of kookie-sponsored planets reports record-breaking profits!',
 					'Billions of unwashed aliens are pleased to join your workforce as you annex their planet!',
-					'New toll opened on interstellar highway, funnelling more profits into the cookie economy!'
+					'New toll opened on interstellar highway, funnelling more profits into the kookie economy!'
 					]));
 					
 					if (Game.Objects['Fractal engine'].amount>0) list.push(choose([
-					'Your cookie-based political party is doing fantastic in the polls!',
-					'New pro-cookie law passes without a hitch thanks to your firm grasp of the political ecosystem!',
-					'Your appointed senators are overturning cookie bans left and right!'
+					'Your kookie-based political party is doing fantastic in the polls!',
+					'New pro-kookie law passes without a hitch thanks to your firm grasp of the political ecosystem!',
+					'Your appointed senators are overturning kookie bans left and right!'
 					]));
 					
 					if (Game.Objects['Javascript console'].amount>0) list.push(choose([
 					'Cookies are now one of the defining aspects of mankind! Congratulations!',
-					'Time travelers report that this era will later come to be known, thanks to you, as the cookie millennium!',
+					'Time travelers report that this era will later come to be known, thanks to you, as the kookie millennium!',
 					'Cookies now deeply rooted in human culture, likely puzzling future historians!'
 					]));
 					
 					if (Game.Objects['Idleverse'].amount>0) list.push(choose([
-					'Public aghast as all remaining aspects of their lives overtaken by universal cookie industry!',
+					'Public aghast as all remaining aspects of their lives overtaken by universal kookie industry!',
 					'Every single product currently sold in the observable universe can be traced back to your company! And that\'s a good thing.',
 					'Antitrust laws let out a helpless whimper before being engulfed by your sprawling empire!'
 					]));
 					
 					if (Game.Objects['Cortex baker'].amount>0) list.push(choose([
 					'Bold new law proposal would grant default ownership of every new idea by anyone anywhere to '+Game.bakeryName+'\'s bakery!',
-					'Bakery think tanks accidentally reinvent cookies for the 57th time this week!',
-					'Bakery think tanks invent entire new form of human communication to advertise and boost cookie sales!'
+					'Bakery think tanks accidentally reinvent kookies for the 57th time this week!',
+					'Bakery think tanks invent entire new form of human communication to advertise and boost kookie sales!'
 					]));
 				}
 				
 				if (loreProgress<=0) list.push('Such a grand day to begin a new business.');
 				else if (loreProgress<=1) list.push('You\'re baking up a storm!');
-				else if (loreProgress<=2) list.push('You are confident that one day, your cookie company will be the greatest on the market!');
+				else if (loreProgress<=2) list.push('You are confident that one day, your kookie company will be the greatest on the market!');
 				else if (loreProgress<=3) list.push('Business is picking up!');
 				else if (loreProgress<=4) list.push('You\'re making sales left and right!');
-				else if (loreProgress<=5) list.push('Everyone wants to buy your cookies!');
+				else if (loreProgress<=5) list.push('Everyone wants to buy your kookies!');
 				else if (loreProgress<=6) list.push('You are now spending most of your day signing contracts!');
 				else if (loreProgress<=7) list.push('You\'ve been elected "business tycoon of the year"!');
-				else if (loreProgress<=8) list.push('Your cookies are a worldwide sensation! Well done, old chap!');
+				else if (loreProgress<=8) list.push('Your kookies are a worldwide sensation! Well done, old chap!');
 				else if (loreProgress<=9) list.push('Your brand has made its way into popular culture. Children recite your slogans and adults reminisce them fondly!');
 				else if (loreProgress<=10) list.push('A business day like any other. It\'s good to be at the top!');
 				else if (loreProgress<=11) list.push('You look back on your career. It\'s been a fascinating journey, building your baking empire from the ground up.');
@@ -7554,7 +7554,7 @@ Game.Launch=function()
 			
 			Game.TickerEffect=0;
 			
-			if (!manual && Game.T>Game.fps*10 && Game.Has('Fortune cookies') && Math.random()<(Game.HasAchiev('O Fortuna')?0.04:0.02))
+			if (!manual && Game.T>Game.fps*10 && Game.Has('Fortune kookies') && Math.random()<(Game.HasAchiev('O Fortuna')?0.04:0.02))
 			{
 				var fortunes=[];
 				for (var i in Game.Tiers['fortune'].upgrades)
@@ -7572,7 +7572,7 @@ Game.Launch=function()
 					var me=choose(fortunes);
 					Game.TickerEffect={type:'fortune',sub:me};
 					
-					if (me=='fortuneGC') me=loc("Today is your lucky day!");/*<br>Click here for a golden cookie.';*/
+					if (me=='fortuneGC') me=loc("Today is your lucky day!");/*<br>Click here for a golden kookie.';*/
 					else if (me=='fortuneCPS') {Math.seedrandom(Game.seed+'-fortune');me=loc("Your lucky numbers are:")+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)/*+'<br>Click here to gain one hour of your CpS.'*/;Math.seedrandom();}
 					else
 					{
@@ -7582,7 +7582,7 @@ Game.Launch=function()
 							me=me.substring(0,me.length-4);
 						}
 						else if (me.buildingTie) me=me.dname+' : '+loc(choose(["Never forget your %1.","Pay close attention to the humble %1.","You've been neglecting your %1.","Remember to visit your %1 sometimes."]),me.buildingTie.single);
-						else me=me.dname+' : '+loc(choose(["You don't know what you have until you've lost it.","Remember to take breaks.","Hey, what's up. I'm a fortune cookie.","You think you have it bad? Look at me."]));
+						else me=me.dname+' : '+loc(choose(["You don't know what you have until you've lost it.","Remember to take breaks.","Hey, what's up. I'm a fortune kookie.","You think you have it bad? Look at me."]));
 					}
 					me='<span class="fortune"><div class="icon" style="vertical-align:middle;display:inline-block;background-position:'+(-29*48)+'px '+(-8*48)+'px;transform:scale(0.5);margin:-16px;position:relative;left:-4px;top:-2px;"></div>'+me+'</span>';
 					list=[me];
@@ -7627,7 +7627,7 @@ Game.Launch=function()
 				var effect=Game.TickerEffect.sub;
 				if (effect=='fortuneGC')
 				{
-					Game.Notify(loc("Fortune!"),loc("A golden cookie has appeared."),[10,32]);
+					Game.Notify(loc("Fortune!"),loc("A golden kookie has appeared."),[10,32]);
 					Game.fortuneGC=1;
 					var newShimmer=new Game.shimmer('golden',{noWrath:true});
 				}
@@ -7635,7 +7635,7 @@ Game.Launch=function()
 				{
 					Game.Notify(loc("Fortune!"),loc("You gain <b>one hour</b> of your CpS (capped at double your bank)."),[10,32]);
 					Game.fortuneCPS=1;
-					Game.Earn(Math.min(Game.cookiesPs*60*60,Game.cookies));
+					Game.Earn(Math.min(Game.kookiesPs*60*60,Game.kookies));
 				}
 				else
 				{
@@ -7826,7 +7826,7 @@ Game.Launch=function()
 				for (var i=0;i<amount;i++)
 				{
 					var price=this.getPrice();
-					if (Game.cookies>=price)
+					if (Game.kookies>=price)
 					{
 						bought++;
 						moni+=price;
@@ -7844,7 +7844,7 @@ Game.Launch=function()
 					}
 				}
 				if (success) {PlaySound('snd/buy'+choose([1,2,3,4])+'.mp3',0.75);this.refresh();}
-				//if (moni>0 && amount>1) Game.Notify(this.name,'Bought <b>'+bought+'</b> for '+Beautify(moni)+' cookies','',2);
+				//if (moni>0 && amount>1) Game.Notify(this.name,'Bought <b>'+bought+'</b> for '+Beautify(moni)+' kookies','',2);
 			}
 			this.sell=function(amount,bypass)
 			{
@@ -7862,8 +7862,8 @@ Game.Launch=function()
 					{
 						sold++;
 						moni+=price;
-						Game.cookies+=price;
-						Game.cookiesEarned=Math.max(Game.cookies,Game.cookiesEarned);//this is to avoid players getting the cheater achievement when selling buildings that have a higher price than they used to
+						Game.kookies+=price;
+						Game.kookiesEarned=Math.max(Game.kookies,Game.kookiesEarned);//this is to avoid players getting the cheater achievement when selling buildings that have a higher price than they used to
 						this.amount--;
 						price=this.getPrice();
 						this.price=price;
@@ -7902,12 +7902,12 @@ Game.Launch=function()
 						if (buffsN==0)
 						{
 							new Game.shimmer('golden');
-							Game.Notify(EN?'Dragon Orbs!':loc("Dragon Orbs"),loc("Wish granted. Golden cookie spawned."),[33,25]);
+							Game.Notify(EN?'Dragon Orbs!':loc("Dragon Orbs"),loc("Wish granted. Golden kookie spawned."),[33,25]);
 						}
 					}
 				}
 				if (success) {PlaySound('snd/sell'+choose([1,2,3,4])+'.mp3',0.75);this.refresh();}
-				//if (moni>0) Game.Notify(this.name,'Sold <b>'+sold+'</b> for '+Beautify(moni)+' cookies','',2);
+				//if (moni>0) Game.Notify(this.name,'Sold <b>'+sold+'</b> for '+Beautify(moni)+' kookies','',2);
 			}
 			this.sacrifice=function(amount)//sell without getting back any money
 			{
@@ -7924,8 +7924,8 @@ Game.Launch=function()
 					{
 						sold++;
 						//moni+=price;
-						//Game.cookies+=price;
-						//Game.cookiesEarned=Math.max(Game.cookies,Game.cookiesEarned);
+						//Game.kookies+=price;
+						//Game.kookiesEarned=Math.max(Game.kookies,Game.kookiesEarned);
 						this.amount--;
 						price=this.getPrice();
 						this.price=price;
@@ -7937,13 +7937,13 @@ Game.Launch=function()
 					}
 				}
 				if (success) {this.refresh();}
-				//if (moni>0) Game.Notify(this.name,'Sold <b>'+sold+'</b> for '+Beautify(moni)+' cookies','',2);
+				//if (moni>0) Game.Notify(this.name,'Sold <b>'+sold+'</b> for '+Beautify(moni)+' kookies','',2);
 			}
 			this.buyFree=function(amount)//unlike getFree, this still increases the price
 			{
 				for (var i=0;i<amount;i++)
 				{
-					if (Game.cookies>=price)
+					if (Game.kookies>=price)
 					{
 						this.amount++;
 						this.bought++;
@@ -7998,11 +7998,11 @@ Game.Launch=function()
 					desc='???';
 					icon=[0,7];
 				}
-				//if (l('rowInfo'+me.id) && Game.drawT%10==0) l('rowInfoContent'+me.id).innerHTML='&bull; '+me.amount+' '+(me.amount==1?me.single:me.plural)+'<br>&bull; producing '+Beautify(me.storedTotalCps,1)+' '+(me.storedTotalCps==1?'cookie':'cookies')+' per second<br>&bull; total : '+Beautify(me.totalCookies)+' '+(Math.floor(me.totalCookies)==1?'cookie':'cookies')+' '+me.actionName;
+				//if (l('rowInfo'+me.id) && Game.drawT%10==0) l('rowInfoContent'+me.id).innerHTML='&bull; '+me.amount+' '+(me.amount==1?me.single:me.plural)+'<br>&bull; producing '+Beautify(me.storedTotalCps,1)+' '+(me.storedTotalCps==1?'kookie':'kookies')+' per second<br>&bull; total : '+Beautify(me.totalCookies)+' '+(Math.floor(me.totalCookies)==1?'kookie':'kookies')+' '+me.actionName;
 				
 				var canBuy=false;
 				var price=me.bulkPrice;
-				if ((Game.buyMode==1 && Game.cookies>=price) || (Game.buyMode==-1 && me.amount>0)) canBuy=true;
+				if ((Game.buyMode==1 && Game.kookies>=price) || (Game.buyMode==-1 && me.amount>0)) canBuy=true;
 				
 				var synergiesStr='';
 				//note : might not be entirely accurate, math may need checking
@@ -8056,7 +8056,7 @@ Game.Launch=function()
 							if (synergiesStr!='') synergiesStr+=', ';
 							synergiesStr+='<span style="color:#fff;font-weight:bold;font-size:80%;background:#000;box-shadow:0px 0px 0px 1px rgba(255,255,255,0.2);border-radius:3px;padding:0px 2px;display:inline-block;">'+i+' +'+Beautify(synergiesWith[i]*100,1)+'%</span>';
 						}
-						synergiesStr=loc("...also boosting some other buildings:")+' '+synergiesStr+' - '+loc("all combined, these boosts account for <b>%1</b> per second (<b>%2%</b> of total CpS)",[loc("%1 cookie",LBeautify(synergyBoost,1)),Beautify((synergyBoost/Game.cookiesPs)*100,1)]);
+						synergiesStr=loc("...also boosting some other buildings:")+' '+synergiesStr+' - '+loc("all combined, these boosts account for <b>%1</b> per second (<b>%2%</b> of total CpS)",[loc("%1 kookie",LBeautify(synergyBoost,1)),Beautify((synergyBoost/Game.kookiesPs)*100,1)]);
 					}
 				}
 				
@@ -8065,11 +8065,11 @@ Game.Launch=function()
 					if (me.locked) ariaText='This building is not yet unlocked. ';
 					else ariaText=name+'. ';
 					if (!me.locked) ariaText+='You own '+me.amount+'. ';
-					ariaText+=(canBuy?'Can buy 1 for':'Cannot afford the')+' '+Beautify(Math.round(price))+' cookies. ';
+					ariaText+=(canBuy?'Can buy 1 for':'Cannot afford the')+' '+Beautify(Math.round(price))+' kookies. ';
 					if (!me.locked && me.totalCookies>0)
 					{
-						ariaText+='Each '+me.single+' produces '+Beautify((me.storedTotalCps/me.amount)*Game.globalCpsMult,1)+' cookies per second. ';
-						ariaText+=Beautify(me.totalCookies)+' cookies '+me.actionName+' so far. ';
+						ariaText+='Each '+me.single+' produces '+Beautify((me.storedTotalCps/me.amount)*Game.globalCpsMult,1)+' kookies per second. ';
+						ariaText+=Beautify(me.totalCookies)+' kookies '+me.actionName+' so far. ';
 					}
 					if (!me.locked) ariaText+=desc;
 					
@@ -8081,10 +8081,10 @@ Game.Launch=function()
 				'<div class="line"></div><div class="description"><q>'+desc+'</q></div>'+
 				(me.totalCookies>0?(
 					'<div class="line"></div>'+
-					(me.amount>0?'<div class="descriptionBlock">'+loc("each %1 produces <b>%2</b> per second",[me.single,loc("%1 cookie",LBeautify((me.storedTotalCps/me.amount)*Game.globalCpsMult,1))])+'</div>':'')+
-					'<div class="descriptionBlock">'+loc("%1 producing <b>%2</b> per second",[loc("%1 "+me.bsingle,LBeautify(me.amount)),loc("%1 cookie",LBeautify(me.storedTotalCps*Game.globalCpsMult,1))])+' ('+loc("<b>%1%</b> of total CpS",Beautify(Game.cookiesPs>0?((me.amount>0?((me.storedTotalCps*Game.globalCpsMult)/Game.cookiesPs):0)*100):0,1))+')</div>'+
+					(me.amount>0?'<div class="descriptionBlock">'+loc("each %1 produces <b>%2</b> per second",[me.single,loc("%1 kookie",LBeautify((me.storedTotalCps/me.amount)*Game.globalCpsMult,1))])+'</div>':'')+
+					'<div class="descriptionBlock">'+loc("%1 producing <b>%2</b> per second",[loc("%1 "+me.bsingle,LBeautify(me.amount)),loc("%1 kookie",LBeautify(me.storedTotalCps*Game.globalCpsMult,1))])+' ('+loc("<b>%1%</b> of total CpS",Beautify(Game.kookiesPs>0?((me.amount>0?((me.storedTotalCps*Game.globalCpsMult)/Game.kookiesPs):0)*100):0,1))+')</div>'+
 					(synergiesStr?('<div class="descriptionBlock">'+synergiesStr+'</div>'):'')+
-					(EN?'<div class="descriptionBlock"><b>'+Beautify(me.totalCookies)+'</b> '+(Math.floor(me.totalCookies)==1?'cookie':'cookies')+' '+me.actionName+' so far</div>':'<div class="descriptionBlock">'+loc("<b>%1</b> produced so far",loc("%1 cookie",LBeautify(me.totalCookies)))+'</div>')
+					(EN?'<div class="descriptionBlock"><b>'+Beautify(me.totalCookies)+'</b> '+(Math.floor(me.totalCookies)==1?'kookie':'kookies')+' '+me.actionName+' so far</div>':'<div class="descriptionBlock">'+loc("<b>%1</b> produced so far",loc("%1 kookie",LBeautify(me.totalCookies)))+'</div>')
 				):'')+
 				'</div>';
 			}
@@ -8125,8 +8125,8 @@ Game.Launch=function()
 				var me=this;
 				//var classes='product';
 				var price=me.bulkPrice;
-				/*if (Game.cookiesEarned>=me.basePrice || me.bought>0) {classes+=' unlocked';me.locked=0;} else {classes+=' locked';me.locked=1;}
-				if (Game.cookies>=price) classes+=' enabled'; else classes+=' disabled';
+				/*if (Game.kookiesEarned>=me.basePrice || me.bought>0) {classes+=' unlocked';me.locked=0;} else {classes+=' locked';me.locked=1;}
+				if (Game.kookies>=price) classes+=' enabled'; else classes+=' disabled';
 				if (me.l.className.indexOf('toggledOff')!=-1) classes+=' toggledOff';
 				*/
 				var icon=[0,me.icon];
@@ -8615,7 +8615,7 @@ Game.Launch=function()
 			/*
 			if (Game.Objects[what].amount>=250)
 			{
-				//this makes buildings give 1% more cookies for every building over 250.
+				//this makes buildings give 1% more kookies for every building over 250.
 				//this turns out to be rather stupidly overpowered.
 				var n=Game.Objects[what].amount-250;
 				return 1+Math.pow(1.01,n);
@@ -8667,7 +8667,7 @@ Game.Launch=function()
 		});
 		
 		Game.SpecialGrandmaUnlock=15;
-		new Game.Object('Grandma','grandma|grandmas|baked|Grandmas are [X] year older|Grandmas are [X] years older','A nice grandma to bake more cookies.',1,1,{pic:function(i){
+		new Game.Object('Grandma','grandma|grandmas|baked|Grandmas are [X] year older|Grandmas are [X] years older','A nice grandma to bake more kookies.',1,1,{pic:function(i){
 			var list=['grandma'];
 			if (Game.Has('Farmer grandmas')) list.push('farmerGrandma');
 			if (Game.Has('Worker grandmas')) list.push('workerGrandma');
@@ -8747,7 +8747,7 @@ Game.Launch=function()
 		};
 		
 		
-		new Game.Object('Farm','farm|farms|harvested|[X] more acre|[X] more acres','Grows cookie plants from cookie seeds.',3,2,{base:'farm',xV:8,yV:8,w:64,rows:2,x:0,y:16},500,function(me){
+		new Game.Object('Farm','farm|farms|harvested|[X] more acre|[X] more acres','Grows kookie plants from kookie seeds.',3,2,{base:'farm',xV:8,yV:8,w:64,rows:2,x:0,y:16},500,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8759,7 +8759,7 @@ Game.Launch=function()
 		Game.last.minigameUrl='minigameGarden.js';
 		Game.last.minigameName=loc("Garden");
 		
-		new Game.Object('Mine','mine|mines|mined|[X] mile deeper|[X] miles deeper','Mines out cookie dough and chocolate chips.',4,3,{base:'mine',xV:16,yV:16,w:64,rows:2,x:0,y:24},10000,function(me){
+		new Game.Object('Mine','mine|mines|mined|[X] mile deeper|[X] miles deeper','Mines out kookie dough and chocolate chips.',4,3,{base:'mine',xV:16,yV:16,w:64,rows:2,x:0,y:24},10000,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8769,7 +8769,7 @@ Game.Launch=function()
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
 		});
 		
-		new Game.Object('Factory','factory|factories|mass-produced|[X] additional patent|[X] additional patents','Produces large quantities of cookies.',5,4,{base:'factory',xV:8,yV:0,w:64,rows:1,x:0,y:-22},3000,function(me){
+		new Game.Object('Factory','factory|factories|mass-produced|[X] additional patent|[X] additional patents','Produces large quantities of kookies.',5,4,{base:'factory',xV:8,yV:0,w:64,rows:1,x:0,y:-22},3000,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8781,7 +8781,7 @@ Game.Launch=function()
 		//Game.last.minigameUrl='minigameDungeon.js';//not yet
 		Game.last.minigameName=loc("Dungeon");
 		
-		new Game.Object('Bank','bank|banks|banked|Interest rates [X]% better|Interest rates [X]% better','Generates cookies from interest.',6,15,{base:'bank',xV:8,yV:4,w:56,rows:1,x:0,y:13},0,function(me){
+		new Game.Object('Bank','bank|banks|banked|Interest rates [X]% better|Interest rates [X]% better','Generates kookies from interest.',6,15,{base:'bank',xV:8,yV:4,w:56,rows:1,x:0,y:13},0,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8805,7 +8805,7 @@ Game.Launch=function()
 		Game.last.minigameUrl='minigamePantheon.js';
 		Game.last.minigameName=loc("Pantheon");
 		
-		new Game.Object('Wizard tower','wizard tower|wizard towers|summoned|Incantations have [X] more syllable|Incantations have [X] more syllables','Summons cookies with magic spells.',8,17,{base:'wizardtower',xV:16,yV:16,w:48,rows:2,x:0,y:20},0,function(me){
+		new Game.Object('Wizard tower','wizard tower|wizard towers|summoned|Incantations have [X] more syllable|Incantations have [X] more syllables','Summons kookies with magic spells.',8,17,{base:'wizardtower',xV:16,yV:16,w:48,rows:2,x:0,y:20},0,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8818,7 +8818,7 @@ Game.Launch=function()
 		Game.last.minigameUrl='minigameGrimoire.js';
 		Game.last.minigameName=loc("Grimoire");
 		
-		new Game.Object('Shipment','shipment|shipments|shipped|[X] galaxy fully explored|[X] galaxies fully explored','Brings in fresh cookies from the cookie planet.',9,5,{base:'shipment',xV:16,yV:16,w:64,rows:1,x:0,y:0},40000,function(me){
+		new Game.Object('Shipment','shipment|shipments|shipped|[X] galaxy fully explored|[X] galaxies fully explored','Brings in fresh kookies from the kookie planet.',9,5,{base:'shipment',xV:16,yV:16,w:64,rows:1,x:0,y:0},40000,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8828,7 +8828,7 @@ Game.Launch=function()
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
 		});
 		
-		new Game.Object('Alchemy lab','alchemy lab|alchemy labs|transmuted|[X] primordial element mastered|[X] primordial elements mastered','Turns gold into cookies!',10,6,{base:'alchemylab',xV:16,yV:16,w:64,rows:2,x:0,y:16},200000,function(me){
+		new Game.Object('Alchemy lab','alchemy lab|alchemy labs|transmuted|[X] primordial element mastered|[X] primordial elements mastered','Turns gold into kookies!',10,6,{base:'alchemylab',xV:16,yV:16,w:64,rows:2,x:0,y:16},200000,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8849,7 +8849,7 @@ Game.Launch=function()
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
 		});
 		
-		new Game.Object('Time machine','time machine|time machines|recovered|[X] century secured|[X] centuries secured','Brings cookies from the past, before they were even eaten.',12,8,{base:'timemachine',xV:32,yV:32,w:64,rows:1,x:0,y:0},123456789,function(me){
+		new Game.Object('Time machine','time machine|time machines|recovered|[X] century secured|[X] centuries secured','Brings kookies from the past, before they were even eaten.',12,8,{base:'timemachine',xV:32,yV:32,w:64,rows:1,x:0,y:0},123456789,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8860,7 +8860,7 @@ Game.Launch=function()
 		});
 		Game.last.displayName='<span style="font-size:80%;letter-spacing:-1px;position:relative;bottom:3px;">Time machine</span>';//shrink
 		
-		new Game.Object('Antimatter condenser','antimatter condenser|antimatter condensers|condensed|[X] extra quark flavor|[X] extra quark flavors','Condenses the antimatter in the universe into cookies.',13,13,{base:'antimattercondenser',xV:0,yV:64,w:64,rows:1,x:0,y:0},3999999999,function(me){
+		new Game.Object('Antimatter condenser','antimatter condenser|antimatter condensers|condensed|[X] extra quark flavor|[X] extra quark flavors','Condenses the antimatter in the universe into kookies.',13,13,{base:'antimattercondenser',xV:0,yV:64,w:64,rows:1,x:0,y:0},3999999999,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8871,7 +8871,7 @@ Game.Launch=function()
 		});
 		Game.last.displayName='<span style="font-size:65%;letter-spacing:-1px;position:relative;bottom:4px;">Antim. condenser</span>';//shrink
 		
-		new Game.Object('Prism','prism|prisms|converted|[X] new color discovered|[X] new colors discovered','Converts light itself into cookies.',14,14,{base:'prism',xV:16,yV:4,w:64,rows:1,x:0,y:20},75000000000,function(me){
+		new Game.Object('Prism','prism|prisms|converted|[X] new color discovered|[X] new colors discovered','Converts light itself into kookies.',14,14,{base:'prism',xV:16,yV:4,w:64,rows:1,x:0,y:20},75000000000,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8881,7 +8881,7 @@ Game.Launch=function()
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
 		});
 		
-		new Game.Object('Chancemaker','chancemaker|chancemakers|spontaneously generated|Chancemakers are powered by [X]-leaf clovers|Chancemakers are powered by [X]-leaf clovers','Generates cookies out of thin air through sheer luck.',15,19,{base:'chancemaker',xV:8,yV:64,w:64,rows:1,x:0,y:0,rows:2},77777777777,function(me){
+		new Game.Object('Chancemaker','chancemaker|chancemakers|spontaneously generated|Chancemakers are powered by [X]-leaf clovers|Chancemakers are powered by [X]-leaf clovers','Generates kookies out of thin air through sheer luck.',15,19,{base:'chancemaker',xV:8,yV:64,w:64,rows:1,x:0,y:0,rows:2},77777777777,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8892,7 +8892,7 @@ Game.Launch=function()
 		});
 		Game.last.displayName='<span style="font-size:85%;letter-spacing:-1px;position:relative;bottom:2px;">Chancemaker</span>';//shrink
 		
-		new Game.Object('Fractal engine','fractal engine|fractal engines|made from cookies|[X] iteration deep|[X] iterations deep','Turns cookies into even more cookies.',16,20,{base:'fractalEngine',xV:8,yV:64,w:64,rows:1,x:0,y:0},12345678987654321,function(me){
+		new Game.Object('Fractal engine','fractal engine|fractal engines|made from kookies|[X] iteration deep|[X] iterations deep','Turns kookies into even more kookies.',16,20,{base:'fractalEngine',xV:8,yV:64,w:64,rows:1,x:0,y:0},12345678987654321,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8903,7 +8903,7 @@ Game.Launch=function()
 		});
 		Game.last.displayName='<span style="font-size:80%;letter-spacing:-1px;position:relative;bottom:4px;">Fractal engine</span>';//shrink
 		
-		new Game.Object('Javascript console','javascript console|javascript consoles|programmed|Equipped with [X] external library|Equipped with [X] external libraries','Creates cookies from the very code this game was written in.',17,32,{base:'javascriptconsole',xV:8,yV:64,w:14,rows:1,x:8,y:-32,frames:2},12345678987654321,function(me){
+		new Game.Object('Javascript console','javascript console|javascript consoles|programmed|Equipped with [X] external library|Equipped with [X] external libraries','Creates kookies from the very code this game was written in.',17,32,{base:'javascriptconsole',xV:8,yV:64,w:14,rows:1,x:8,y:-32,frames:2},12345678987654321,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8914,7 +8914,7 @@ Game.Launch=function()
 		});
 		Game.last.displayName='<span style="font-size:65%;letter-spacing:-1px;position:relative;bottom:4px;">Javascript console</span>';//shrink
 		
-		new Game.Object('Idleverse','idleverse|idleverses|hijacked|[X] manifold|[X] manifolds','There\'s been countless other idle universes running alongside our own. You\'ve finally found a way to hijack their production and convert whatever they\'ve been making into cookies!',18,33,{base:'idleverse',xV:8,yV:96,w:48,rows:2,x:0,y:0,frames:4},12345678987654321,function(me){
+		new Game.Object('Idleverse','idleverse|idleverses|hijacked|[X] manifold|[X] manifolds','There\'s been countless other idle universes running alongside our own. You\'ve finally found a way to hijack their production and convert whatever they\'ve been making into kookies!',18,33,{base:'idleverse',xV:8,yV:96,w:48,rows:2,x:0,y:0,frames:4},12345678987654321,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8924,7 +8924,7 @@ Game.Launch=function()
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
 		});
 		
-		new Game.Object('Cortex baker','cortex baker|cortex bakers|imagined|[X] extra IQ point|[X] extra IQ points','These artificial brains the size of planets are capable of simply dreaming up cookies into existence. Time and space are inconsequential. Reality is arbitrary.',19,34,{base:'cortex',xV:8,yV:96,w:48,rows:1,x:0,y:0,frames:4},12345678987654321,function(me){
+		new Game.Object('Cortex baker','cortex baker|cortex bakers|imagined|[X] extra IQ point|[X] extra IQ points','These artificial brains the size of planets are capable of simply dreaming up kookies into existence. Time and space are inconsequential. Reality is arbitrary.',19,34,{base:'cortex',xV:8,yV:96,w:48,rows:1,x:0,y:0,frames:4},12345678987654321,function(me){
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
@@ -8936,24 +8936,24 @@ Game.Launch=function()
 		
 		Game.foolObjects={
 			'Unknown':{name:'Investment',desc:'You\'re not sure what this does, you just know it means profit.',icon:0},
-			'Cursor':{name:'Rolling pin',desc:'Essential in flattening dough. The first step in cookie-making.',icon:0},
-			'Grandma':{name:'Oven',desc:'A crucial element of baking cookies.',icon:1},
-			'Farm':{name:'Kitchen',desc:'The more kitchens, the more cookies your employees can produce.',icon:2},
+			'Cursor':{name:'Rolling pin',desc:'Essential in flattening dough. The first step in kookie-making.',icon:0},
+			'Grandma':{name:'Oven',desc:'A crucial element of baking kookies.',icon:1},
+			'Farm':{name:'Kitchen',desc:'The more kitchens, the more kookies your employees can produce.',icon:2},
 			'Mine':{name:'Secret recipe',desc:'These give you the edge you need to outsell those pesky competitors.',icon:3},
 			'Factory':{name:'Factory',desc:'Mass production is the future of baking. Seize the day, and synergize!',icon:4},
 			'Bank':{name:'Investor',desc:'Business folks with a nose for profit, ready to finance your venture as long as there\'s money to be made.',icon:5},
 			'Temple':{name:'Like',desc:'Your social media page is going viral! Amassing likes is the key to a lasting online presence and juicy advertising deals.',icon:9},
 			'Wizard tower':{name:'Meme',desc:'Cookie memes are all the rage! With just the right amount of social media astroturfing, your brand image will be all over the cyberspace.',icon:6},
-			'Shipment':{name:'Supermarket',desc:'A gigantic cookie emporium - your very own retail chain.',icon:7},
+			'Shipment':{name:'Supermarket',desc:'A gigantic kookie emporium - your very own retail chain.',icon:7},
 			'Alchemy lab':{name:'Stock share',desc:'You\'re officially on the stock market, and everyone wants a piece!',icon:8},
-			'Portal':{name:'TV show',desc:'Your cookies have their own sitcom! Hilarious baking hijinks set to the cheesiest laughtrack.',icon:10},
+			'Portal':{name:'TV show',desc:'Your kookies have their own sitcom! Hilarious baking hijinks set to the cheesiest laughtrack.',icon:10},
 			'Time machine':{name:'Theme park',desc:'Cookie theme parks, full of mascots and roller-coasters. Build one, build a hundred!',icon:11},
 			'Antimatter condenser':{name:'Cookiecoin',desc:'A virtual currency, already replacing regular money in some small countries.',icon:12},
 			'Prism':{name:'Corporate country',desc:'You\'ve made it to the top, and you can now buy entire nations to further your corporate greed. Godspeed.',icon:13},
-			'Chancemaker':{name:'Privatized planet',desc:'Actually, you know what\'s cool? A whole planet dedicated to producing, advertising, selling, and consuming your cookies.',icon:15},
-			'Fractal engine':{name:'Senate seat',desc:'Only through political dominion can you truly alter this world to create a brighter, more cookie-friendly future.',icon:16},
-			'Javascript console':{name:'Doctrine',desc:'Taking many forms -religion, culture, philosophy- a doctrine may, when handled properly, cause a lasting impact on civilizations, reshaping minds and people and ensuring all future generations share a singular goal - the production, and acquisition, of more cookies.',icon:17},
-			'Idleverse':{name:'Lateral expansions',desc:'Sometimes the best way to keep going up is sideways. Diversify your ventures through non-cookie investments.',icon:18},
+			'Chancemaker':{name:'Privatized planet',desc:'Actually, you know what\'s cool? A whole planet dedicated to producing, advertising, selling, and consuming your kookies.',icon:15},
+			'Fractal engine':{name:'Senate seat',desc:'Only through political dominion can you truly alter this world to create a brighter, more kookie-friendly future.',icon:16},
+			'Javascript console':{name:'Doctrine',desc:'Taking many forms -religion, culture, philosophy- a doctrine may, when handled properly, cause a lasting impact on civilizations, reshaping minds and people and ensuring all future generations share a singular goal - the production, and acquisition, of more kookies.',icon:17},
+			'Idleverse':{name:'Lateral expansions',desc:'Sometimes the best way to keep going up is sideways. Diversify your ventures through non-kookie investments.',icon:18},
 			'Cortex baker':{name:'Think tank',desc:'There\'s only so many ways you can bring in more profit. Or is there? Hire the most brilliant experts in the known universe and let them scrape their brains for you!',icon:19},
 		};
 		
@@ -9035,7 +9035,7 @@ Game.Launch=function()
 			this.bought=0;
 			this.order=this.id;
 			if (order) this.order=order+this.id*0.001;
-			this.pool='';//can be '', cookie, toggle, debug, prestige, prestigeDecor, tech, or unused
+			this.pool='';//can be '', kookie, toggle, debug, prestige, prestigeDecor, tech, or unused
 			if (pool) this.pool=pool;
 			this.power=0;
 			if (power) this.power=power;
@@ -9074,7 +9074,7 @@ Game.Launch=function()
 				//if (Game.hasAura('Master of the Armory')) price*=0.98;
 				price*=1-Game.auraMult('Master of the Armory')*0.02;
 				price*=Game.eff('upgradeCost');
-				if (this.pool=='cookie' && Game.Has('Divine bakeries')) price/=5;
+				if (this.pool=='kookie' && Game.Has('Divine bakeries')) price/=5;
 			}
 			return Math.ceil(price);
 		}
@@ -9082,7 +9082,7 @@ Game.Launch=function()
 		Game.Upgrade.prototype.canBuy=function()
 		{
 			if (this.canBuyFunc) return this.canBuyFunc();
-			if (Game.cookies>=this.getPrice()) return true; else return false;
+			if (Game.kookies>=this.getPrice()) return true; else return false;
 		}
 		
 		Game.storeBuyAll=function()
@@ -9293,7 +9293,7 @@ Game.Launch=function()
 		
 		Game.CountsAsUpgradeOwned=function(pool)
 		{
-			if (pool=='' || pool=='cookie' || pool=='tech') return true; else return false;
+			if (pool=='' || pool=='kookie' || pool=='tech') return true; else return false;
 		}
 		
 		/*AddEvent(l('toggleBox'),'blur',function()//if we click outside of the selector, close it
@@ -9424,8 +9424,8 @@ Game.Launch=function()
 			if (vaultStr=='') l('vaultUpgrades').style.display='none'; else l('vaultUpgrades').style.display='block';
 		}
 		
-		Game.UnlockAt=[];//this contains an array of every upgrade with a cookie requirement in the form of {cookies:(amount of cookies earned required),name:(name of upgrade or achievement to unlock)} (and possibly require:(name of upgrade of achievement to own))
-		//note : the cookie will not be added to the list if it contains locked:1 (use for seasonal cookies and such)
+		Game.UnlockAt=[];//this contains an array of every upgrade with a kookie requirement in the form of {kookies:(amount of kookies earned required),name:(name of upgrade or achievement to unlock)} (and possibly require:(name of upgrade of achievement to own))
+		//note : the kookie will not be added to the list if it contains locked:1 (use for seasonal kookies and such)
 		
 		var strCookieProductionMultiplierPlus=loc("Cookie production multiplier <b>+%1%</b>.",'[x]');
 		var getStrCookieProductionMultiplierPlus=function(x)
@@ -9440,8 +9440,8 @@ Game.Launch=function()
 		{
 			var upgrade=new Game.Upgrade(obj.name,getStrCookieProductionMultiplierPlus(Beautify((typeof(obj.power)==='function'?obj.power(obj):obj.power),1))+(EN?'<q>'+obj.desc+'</q>':''),obj.price,obj.icon);
 			upgrade.power=obj.power;
-			upgrade.pool='cookie';
-			var toPush={cookies:obj.price/20,name:obj.name};
+			upgrade.pool='kookie';
+			var toPush={kookies:obj.price/20,name:obj.name};
 			if (obj.require) toPush.require=obj.require;
 			if (obj.season) toPush.season=obj.season;
 			if (!obj.locked) Game.UnlockAt.push(toPush);
@@ -9579,7 +9579,7 @@ Game.Launch=function()
 		new Game.Upgrade('Reinforced index finger',loc("The mouse and cursors are <b>twice</b> as efficient.")+'<q>prod prod</q>',100,[0,0]);Game.MakeTiered(Game.last,1,0);
 		new Game.Upgrade('Carpal tunnel prevention cream',loc("The mouse and cursors are <b>twice</b> as efficient.")+'<q>it... it hurts to click...</q>',500,[0,1]);Game.MakeTiered(Game.last,2,0);
 		new Game.Upgrade('Ambidextrous',loc("The mouse and cursors are <b>twice</b> as efficient.")+'<q>Look ma, both hands!</q>',10000,[0,2]);Game.MakeTiered(Game.last,3,0);
-		new Game.Upgrade('Thousand fingers',loc("The mouse and cursors gain <b>+%1</b> cookies for each non-cursor building owned.",0.1)+'<q>clickity</q>',100000,[0,13]);Game.MakeTiered(Game.last,4,0);
+		new Game.Upgrade('Thousand fingers',loc("The mouse and cursors gain <b>+%1</b> kookies for each non-cursor building owned.",0.1)+'<q>clickity</q>',100000,[0,13]);Game.MakeTiered(Game.last,4,0);
 		
 		new Game.Upgrade('Million fingers',getStrThousandFingersGain(5)+'<q>clickityclickity</q>',10000000,[0,14]);Game.MakeTiered(Game.last,5,0);
 		new Game.Upgrade('Billion fingers',getStrThousandFingersGain(10)+'<q>clickityclickityclickity</q>',100000000,[0,15]);Game.MakeTiered(Game.last,6,0);
@@ -9616,9 +9616,9 @@ Game.Launch=function()
 		Game.TieredUpgrade('True chocolate','<q>The purest form of cacao.</q>','Alchemy lab',3);
 		
 		order=800;
-		Game.TieredUpgrade('Ancient tablet','<q>A strange slab of peanut brittle, holding an ancient cookie recipe. Neat!</q>','Portal',1);
+		Game.TieredUpgrade('Ancient tablet','<q>A strange slab of peanut brittle, holding an ancient kookie recipe. Neat!</q>','Portal',1);
 		Game.TieredUpgrade('Insane oatling workers','<q>ARISE, MY MINIONS!</q>','Portal',2);
-		Game.TieredUpgrade('Soul bond','<q>So I just sign up and get more cookies? Sure, whatever!</q>','Portal',3);
+		Game.TieredUpgrade('Soul bond','<q>So I just sign up and get more kookies? Sure, whatever!</q>','Portal',3);
 		
 		order=900;
 		Game.TieredUpgrade('Flux capacitors','<q>Bake to the future.</q>','Time machine',1);
@@ -9630,42 +9630,42 @@ Game.Launch=function()
 		new Game.Upgrade('Kitten workers',strKittenDesc+'<q>meow meow meow meow</q>',9000000000,Game.GetIcon('Kitten',2));Game.last.kitten=1;Game.MakeTiered(Game.last,2,18);
 		
 		order=10000;
-		Game.NewUpgradeCookie({name:'Plain cookies',desc:'We all gotta start somewhere.',icon:[2,3],power:										1,	price:	999999});
-		Game.NewUpgradeCookie({name:'Sugar cookies',desc:'Tasty, if a little unimaginative.',icon:[7,3],power:									1,	price:	999999*5});
-		Game.NewUpgradeCookie({name:'Oatmeal raisin cookies',desc:'No raisin to hate these.',icon:[0,3],power:									1,	price:	9999999});
-		Game.NewUpgradeCookie({name:'Peanut butter cookies',desc:'Get yourself some jam cookies!',icon:[1,3],power:								2,	price:	9999999*5});
-		Game.NewUpgradeCookie({name:'Coconut cookies',desc:'Flaky, but not unreliable. Some people go crazy for these.',icon:[3,3],power:		2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Plain kookies',desc:'We all gotta start somewhere.',icon:[2,3],power:										1,	price:	999999});
+		Game.NewUpgradeCookie({name:'Sugar kookies',desc:'Tasty, if a little unimaginative.',icon:[7,3],power:									1,	price:	999999*5});
+		Game.NewUpgradeCookie({name:'Oatmeal raisin kookies',desc:'No raisin to hate these.',icon:[0,3],power:									1,	price:	9999999});
+		Game.NewUpgradeCookie({name:'Peanut butter kookies',desc:'Get yourself some jam kookies!',icon:[1,3],power:								2,	price:	9999999*5});
+		Game.NewUpgradeCookie({name:'Coconut kookies',desc:'Flaky, but not unreliable. Some people go crazy for these.',icon:[3,3],power:		2,	price:	99999999});
 		order=10001;
-		Game.NewUpgradeCookie({name:'White chocolate cookies',desc:'I know what you\'ll say. It\'s just cocoa butter! It\'s not real chocolate!<br>Oh please.',icon:[4,3],power:2,	price:	99999999*5});
+		Game.NewUpgradeCookie({name:'White chocolate kookies',desc:'I know what you\'ll say. It\'s just cocoa butter! It\'s not real chocolate!<br>Oh please.',icon:[4,3],power:2,	price:	99999999*5});
 		order=10000;
-		Game.NewUpgradeCookie({name:'Macadamia nut cookies',desc:'They\'re macadamn delicious!',icon:[5,3],power:								2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Macadamia nut kookies',desc:'They\'re macadamn delicious!',icon:[5,3],power:								2,	price:	99999999});
 		order=10002;
-		Game.NewUpgradeCookie({name:'Double-chip cookies',desc:'DOUBLE THE CHIPS<br>DOUBLE THE TASTY<br>(double the calories)',icon:[6,3],power:2,	price:	999999999*5});
-		Game.NewUpgradeCookie({name:'White chocolate macadamia nut cookies',desc:'Orteil\'s favorite.',icon:[8,3],power:						2,	price:	9999999999});
-		Game.NewUpgradeCookie({name:'All-chocolate cookies',desc:'CHOCOVERDOSE.',icon:[9,3],power:												2,	price:	9999999999*5});
+		Game.NewUpgradeCookie({name:'Double-chip kookies',desc:'DOUBLE THE CHIPS<br>DOUBLE THE TASTY<br>(double the calories)',icon:[6,3],power:2,	price:	999999999*5});
+		Game.NewUpgradeCookie({name:'White chocolate macadamia nut kookies',desc:'Orteil\'s favorite.',icon:[8,3],power:						2,	price:	9999999999});
+		Game.NewUpgradeCookie({name:'All-chocolate kookies',desc:'CHOCOVERDOSE.',icon:[9,3],power:												2,	price:	9999999999*5});
 		
 		order=100;
 		new Game.Upgrade('Quadrillion fingers',getStrThousandFingersGain(20)+'<q>clickityclickityclickityclickityclick</q>',10000000000,[0,17]);Game.MakeTiered(Game.last,8,0);
 		
 		order=200;Game.TieredUpgrade('Prune juice','<q>Gets me going.</q>','Grandma',4);
-		order=300;Game.TieredUpgrade('Genetically-modified cookies','<q>All-natural mutations.</q>','Farm',4);
-		order=500;Game.TieredUpgrade('Radium reactors','<q>Gives your cookies a healthy glow.</q>','Factory',4);
+		order=300;Game.TieredUpgrade('Genetically-modified kookies','<q>All-natural mutations.</q>','Farm',4);
+		order=500;Game.TieredUpgrade('Radium reactors','<q>Gives your kookies a healthy glow.</q>','Factory',4);
 		order=400;Game.TieredUpgrade('Ultimadrill','<q>Pierce the heavens, etc.</q>','Mine',4);
 		order=600;Game.TieredUpgrade('Warp drive','<q>To boldly bake.</q>','Shipment',4);
-		order=700;Game.TieredUpgrade('Ambrosia','<q>Adding this to the cookie mix is sure to make them even more addictive!<br>Perhaps dangerously so.<br>Let\'s hope you can keep selling these legally.</q>','Alchemy lab',4);
+		order=700;Game.TieredUpgrade('Ambrosia','<q>Adding this to the kookie mix is sure to make them even more addictive!<br>Perhaps dangerously so.<br>Let\'s hope you can keep selling these legally.</q>','Alchemy lab',4);
 		order=800;Game.TieredUpgrade('Sanity dance','<q>We can change if we want to.<br>We can leave our brains behind.</q>','Portal',4);
 		order=900;Game.TieredUpgrade('Causality enforcer','<q>What happened, happened.</q>','Time machine',4);
 		
 		order=5000;
-		new Game.Upgrade('Lucky day',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>Oh hey, a four-leaf penny!</q>',777777777,[27,6]);
-		new Game.Upgrade('Serendipity',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>What joy! Seven horseshoes!</q>',77777777777,[27,6]);
+		new Game.Upgrade('Lucky day',loc("Golden kookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>Oh hey, a four-leaf penny!</q>',777777777,[27,6]);
+		new Game.Upgrade('Serendipity',loc("Golden kookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>What joy! Seven horseshoes!</q>',77777777777,[27,6]);
 		
 		order=20000;
 		new Game.Upgrade('Kitten engineers',strKittenDesc+'<q>meow meow meow meow, sir</q>',90000000000000,Game.GetIcon('Kitten',3));Game.last.kitten=1;Game.MakeTiered(Game.last,3,18);
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Dark chocolate-coated cookies',desc:'These absorb light so well you almost need to squint to see them.',icon:[10,3],power:			5,	price:	99999999999});
-		Game.NewUpgradeCookie({name:'White chocolate-coated cookies',desc:'These dazzling cookies absolutely glisten with flavor.',icon:[11,3],power:					5,	price:	99999999999});
+		Game.NewUpgradeCookie({name:'Dark chocolate-coated kookies',desc:'These absorb light so well you almost need to squint to see them.',icon:[10,3],power:			5,	price:	99999999999});
+		Game.NewUpgradeCookie({name:'White chocolate-coated kookies',desc:'These dazzling kookies absolutely glisten with flavor.',icon:[11,3],power:					5,	price:	99999999999});
 		
 		Game.GrandmaSynergies=[];
 		Game.GrandmaSynergy=function(name,desc,building)
@@ -9682,13 +9682,13 @@ Game.Launch=function()
 		}
 		
 		order=250;
-		Game.GrandmaSynergy('Farmer grandmas','A nice farmer to grow more cookies.','Farm');
-		Game.GrandmaSynergy('Miner grandmas','A nice miner to dig more cookies.','Mine');
-		Game.GrandmaSynergy('Worker grandmas','A nice worker to manufacture more cookies.','Factory');
-		Game.GrandmaSynergy('Cosmic grandmas','A nice thing to... uh... cookies.','Shipment');
-		Game.GrandmaSynergy('Transmuted grandmas','A nice golden grandma to convert into more cookies.','Alchemy lab');
+		Game.GrandmaSynergy('Farmer grandmas','A nice farmer to grow more kookies.','Farm');
+		Game.GrandmaSynergy('Miner grandmas','A nice miner to dig more kookies.','Mine');
+		Game.GrandmaSynergy('Worker grandmas','A nice worker to manufacture more kookies.','Factory');
+		Game.GrandmaSynergy('Cosmic grandmas','A nice thing to... uh... kookies.','Shipment');
+		Game.GrandmaSynergy('Transmuted grandmas','A nice golden grandma to convert into more kookies.','Alchemy lab');
 		Game.GrandmaSynergy('Altered grandmas','a NiCe GrAnDmA tO bA##########','Portal');
-		Game.GrandmaSynergy('Grandmas\' grandmas','A nice grandma\'s nice grandma to bake double the cookies.','Time machine');
+		Game.GrandmaSynergy('Grandmas\' grandmas','A nice grandma\'s nice grandma to bake double the kookies.','Time machine');
 		
 		order=14000;
 		Game.baseResearchTime=Game.fps*60*30;
@@ -9718,7 +9718,7 @@ Game.Launch=function()
 		new Game.Upgrade('Communal brainsweep',(EN?'Each grandma gains another <b>+0.0<span></span>2 base CpS per grandma</b>.':loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>2',loc("grandma")]))+'<div class="warning">'+loc("Note: proceeding any further in scientific research may have unexpected results. You have been warned.")+'</div><q>We fuse. We merge. We grow.</q>',64000000000000000,[6,9],function(){Game.elderWrath=2;Game.SetResearch('Arcane sugar');Game.storeToRefresh=1;});Game.last.pool='tech';
 		new Game.Upgrade('Arcane sugar',getStrCookieProductionMultiplierPlus(5)+'<q>Tastes like insects, ligaments, and molasses.</q>',128000000000000000,[7,9],function(){Game.SetResearch('Elder Pact');});Game.last.pool='tech';
 		new Game.Upgrade('Elder Pact',loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>5',loc("portal")])+'<div class="warning">'+loc("Note: this is a bad idea.")+'</div><q>squirm crawl slither writhe<br>today we rise</q>',256000000000000000,[8,9],function(){Game.elderWrath=3;Game.storeToRefresh=1;});Game.last.pool='tech';
-		new Game.Upgrade('Elder Pledge',loc("Contains the wrath of the elders, at least for a while.")+'<q>This is a simple ritual involving anti-aging cream, cookie batter mixed in the moonlight, and a live chicken.</q>',1,[9,9],function()
+		new Game.Upgrade('Elder Pledge',loc("Contains the wrath of the elders, at least for a while.")+'<q>This is a simple ritual involving anti-aging cream, kookie batter mixed in the moonlight, and a live chicken.</q>',1,[9,9],function()
 		{
 			Game.elderWrath=0;
 			Game.pledges++;
@@ -9749,14 +9749,14 @@ Game.Launch=function()
 		Game.last.pool='debug';
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Eclipse cookies',desc:'Look to the cookie.',icon:[0,4],power:					2,	price:	99999999999*5});
-		Game.NewUpgradeCookie({name:'Zebra cookies',desc:'...',icon:[1,4],power:									2,	price:	999999999999});
+		Game.NewUpgradeCookie({name:'Eclipse kookies',desc:'Look to the kookie.',icon:[0,4],power:					2,	price:	99999999999*5});
+		Game.NewUpgradeCookie({name:'Zebra kookies',desc:'...',icon:[1,4],power:									2,	price:	999999999999});
 		
 		order=100;
 		new Game.Upgrade('Quintillion fingers',getStrThousandFingersGain(20)+'<q>man, just go click click click click click, it\'s real easy, man.</q>',10000000000000,[0,18]);Game.MakeTiered(Game.last,9,0);
 		
 		order=40000;
-		new Game.Upgrade('Gold hoard',loc("Golden cookies appear <b>really often</b>.")+'<q>That\'s entirely too many.</q>',7,[10,14]);//debug purposes only
+		new Game.Upgrade('Gold hoard',loc("Golden kookies appear <b>really often</b>.")+'<q>That\'s entirely too many.</q>',7,[10,14]);//debug purposes only
 		Game.last.pool='debug';
 		
 		order=15000;
@@ -9780,7 +9780,7 @@ Game.Launch=function()
 		Game.last.pool='toggle';
 		
 		order=5000;
-		new Game.Upgrade('Get lucky',loc("Golden cookie effects last <b>twice as long</b>.")+'<q>You\'ve been up all night, haven\'t you?</q>',77777777777777,[27,6]);
+		new Game.Upgrade('Get lucky',loc("Golden kookie effects last <b>twice as long</b>.")+'<q>You\'ve been up all night, haven\'t you?</q>',77777777777777,[27,6]);
 		
 		order=15000;
 		new Game.Upgrade('Sacrificial rolling pins',loc("Elder pledges last <b>twice</b> as long.")+'<q>These are mostly just for spreading the anti-aging cream.<br>(And accessorily, shortening the chicken\'s suffering.)</q>',2888888888888,[2,9]);
@@ -9795,23 +9795,23 @@ Game.Launch=function()
 		Game.last.pool='debug';
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Empire biscuits',desc:'For your growing cookie empire, of course!',icon:[5,4],power:											2,	price:	99999999999999});
+		Game.NewUpgradeCookie({name:'Empire biscuits',desc:'For your growing kookie empire, of course!',icon:[5,4],power:											2,	price:	99999999999999});
 		order=10031;
 		Game.NewUpgradeCookie({name:'British tea biscuits',desc:'Quite.',icon:[6,4],require:'Tin of british tea biscuits',power:									2,	price:	99999999999999});
 		Game.NewUpgradeCookie({name:'Chocolate british tea biscuits',desc:'Yes, quite.',icon:[7,4],require:Game.last.name,power:									2,	price:	99999999999999});
 		Game.NewUpgradeCookie({name:'Round british tea biscuits',desc:'Yes, quite riveting.',icon:[8,4],require:Game.last.name,power:								2,	price:	99999999999999});
 		Game.NewUpgradeCookie({name:'Round chocolate british tea biscuits',desc:'Yes, quite riveting indeed.',icon:[9,4],require:Game.last.name,power:				2,	price:	99999999999999});
 		Game.NewUpgradeCookie({name:'Round british tea biscuits with heart motif',desc:'Yes, quite riveting indeed, old chap.',icon:[10,4],require:Game.last.name,power:	2,	price:	99999999999999});
-		Game.NewUpgradeCookie({name:'Round chocolate british tea biscuits with heart motif',desc:'I like cookies.',icon:[11,4],require:Game.last.name,power:		2,	price:	99999999999999});
+		Game.NewUpgradeCookie({name:'Round chocolate british tea biscuits with heart motif',desc:'I like kookies.',icon:[11,4],require:Game.last.name,power:		2,	price:	99999999999999});
 		
 		order=1000;
 		Game.TieredUpgrade('Sugar bosons','<q>Sweet firm bosons.</q>','Antimatter condenser',1);
-		Game.TieredUpgrade('String theory','<q>Reveals new insight about the true meaning of baking cookies (and, as a bonus, the structure of the universe).</q>','Antimatter condenser',2);
+		Game.TieredUpgrade('String theory','<q>Reveals new insight about the true meaning of baking kookies (and, as a bonus, the structure of the universe).</q>','Antimatter condenser',2);
 		Game.TieredUpgrade('Large macaron collider','<q>How singular!</q>','Antimatter condenser',3);
 		Game.TieredUpgrade('Big bang bake','<q>And that\'s how it all began.</q>','Antimatter condenser',4);
 
 		order=255;
-		Game.GrandmaSynergy('Antigrandmas','A mean antigrandma to vomit more cookies.','Antimatter condenser');
+		Game.GrandmaSynergy('Antigrandmas','A mean antigrandma to vomit more kookies.','Antimatter condenser');
 
 		order=10020;
 		Game.NewUpgradeCookie({name:'Madeleines',desc:'Unforgettable!',icon:[12,3],power:																2,	price:	99999999999999*5});
@@ -9828,11 +9828,11 @@ Game.Launch=function()
 		
 		order=200;Game.TieredUpgrade('Double-thick glasses','<q>Oh... so THAT\'s what I\'ve been baking.</q>','Grandma',5);
 		order=300;Game.TieredUpgrade('Gingerbread scarecrows','<q>Staring at your crops with mischievous glee.</q>','Farm',5);
-		order=500;Game.TieredUpgrade('Recombobulators','<q>A major part of cookie recombobulation.</q>','Factory',5);
+		order=500;Game.TieredUpgrade('Recombobulators','<q>A major part of kookie recombobulation.</q>','Factory',5);
 		order=400;Game.TieredUpgrade('H-bomb mining','<q>Questionable efficiency, but spectacular nonetheless.</q>','Mine',5);
 		order=600;Game.TieredUpgrade('Chocolate monoliths','<q>My god. It\'s full of chocolate bars.</q>','Shipment',5);
 		order=700;Game.TieredUpgrade('Aqua crustulae','<q>Careful with the dosing - one drop too much and you get muffins.<br>And nobody likes muffins.</q>','Alchemy lab',5);
-		order=800;Game.TieredUpgrade('Brane transplant','<q>This refers to the practice of merging higher dimensional universes, or "branes", with our own, in order to facilitate transit (and harvesting of precious cookie dough).</q>','Portal',5);
+		order=800;Game.TieredUpgrade('Brane transplant','<q>This refers to the practice of merging higher dimensional universes, or "branes", with our own, in order to facilitate transit (and harvesting of precious kookie dough).</q>','Portal',5);
 		order=900;Game.TieredUpgrade('Yestermorrow comparators','<q>Fortnights into millennia.</q>','Time machine',5);
 		order=1000;Game.TieredUpgrade('Reverse cyclotrons','<q>These can uncollision particles and unspin atoms. For... uh... better flavor, and stuff.</q>','Antimatter condenser',5);
 		
@@ -9843,35 +9843,35 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Caramoas',desc:'Yeah. That\'s got a nice ring to it.',icon:[14,4],require:'Box of brand biscuits',power:					3,	price:	9999999999999999});
 		Game.NewUpgradeCookie({name:'Sagalongs',desc:'Grandma\'s favorite?',icon:[15,3],require:'Box of brand biscuits',power:									3,	price:	9999999999999999});
 		Game.NewUpgradeCookie({name:'Shortfoils',desc:'Foiled again!',icon:[15,4],require:'Box of brand biscuits',power:										3,	price:	9999999999999999});
-		Game.NewUpgradeCookie({name:'Win mints',desc:'They\'re the luckiest cookies you\'ve ever tasted!',icon:[14,3],require:'Box of brand biscuits',power:	3,	price:	9999999999999999});
+		Game.NewUpgradeCookie({name:'Win mints',desc:'They\'re the luckiest kookies you\'ve ever tasted!',icon:[14,3],require:'Box of brand biscuits',power:	3,	price:	9999999999999999});
 		
 		order=40000;
-		new Game.Upgrade('Perfect idling',loc("You keep producing cookies even while the game is closed.")+'<q>It\'s the most beautiful thing I\'ve ever seen.</q>',7,[10,0]);//debug purposes only
+		new Game.Upgrade('Perfect idling',loc("You keep producing kookies even while the game is closed.")+'<q>It\'s the most beautiful thing I\'ve ever seen.</q>',7,[10,0]);//debug purposes only
 		Game.last.pool='debug';
 		
 		order=10030;
 		Game.NewUpgradeCookie({name:'Fig gluttons',desc:'Got it all figured out.',icon:[17,4],require:'Box of brand biscuits',power:													2,	price:	999999999999999*5});
 		Game.NewUpgradeCookie({name:'Loreols',desc:'Because, uh... they\'re worth it?',icon:[16,3],require:'Box of brand biscuits',power:												2,	price:	999999999999999*5});
-		Game.NewUpgradeCookie({name:'Jaffa cakes',desc:'If you want to bake a cookie from scratch, you must first build a factory.',icon:[17,3],require:'Box of brand biscuits',power:	2,	price:	999999999999999*5});
+		Game.NewUpgradeCookie({name:'Jaffa cakes',desc:'If you want to bake a kookie from scratch, you must first build a factory.',icon:[17,3],require:'Box of brand biscuits',power:	2,	price:	999999999999999*5});
 		Game.NewUpgradeCookie({name:'Grease\'s cups',desc:'Extra-greasy peanut butter.',icon:[16,4],require:'Box of brand biscuits',power:												2,	price:	999999999999999*5});
 		
 		order=30000;
 		new Game.Upgrade('Heavenly chip secret',loc("Unlocks <b>%1%</b> of the potential of your prestige level.",5)+'<q>Grants the knowledge of heavenly chips, and how to use them to make baking more efficient.<br>It\'s a secret to everyone.</q>',11,[19,7]);Game.last.noPerm=1;
-		new Game.Upgrade('Heavenly cookie stand',loc("Unlocks <b>%1%</b> of the potential of your prestige level.",25)+'<q>Don\'t forget to visit the heavenly lemonade stand afterwards. When afterlife gives you lemons...</q>',1111,[18,7]);Game.last.noPerm=1;
+		new Game.Upgrade('Heavenly kookie stand',loc("Unlocks <b>%1%</b> of the potential of your prestige level.",25)+'<q>Don\'t forget to visit the heavenly lemonade stand afterwards. When afterlife gives you lemons...</q>',1111,[18,7]);Game.last.noPerm=1;
 		new Game.Upgrade('Heavenly bakery',loc("Unlocks <b>%1%</b> of the potential of your prestige level.",50)+'<q>Also sells godly cakes and divine pastries. The pretzels aren\'t too bad either.</q>',111111,[17,7]);Game.last.noPerm=1;
 		new Game.Upgrade('Heavenly confectionery',loc("Unlocks <b>%1%</b> of the potential of your prestige level.",75)+'<q>They say angel bakers work there. They take angel lunch breaks and sometimes go on angel strikes.</q>',11111111,[16,7]);Game.last.noPerm=1;
 		new Game.Upgrade('Heavenly key',loc("Unlocks <b>%1%</b> of the potential of your prestige level.",100)+'<q>This is the key to the pearly (and tasty) gates of pastry heaven, granting you access to your entire stockpile of heavenly chips for baking purposes.<br>May you use them wisely.</q>',1111111111,[15,7]);Game.last.noPerm=1;
 		
 		order=10100;
-		Game.NewUpgradeCookie({name:'Skull cookies',desc:'Wanna know something spooky? You\'ve got one of these inside your head RIGHT NOW.',locked:1,icon:[12,8],power:	2, price: 444444444444});
-		Game.NewUpgradeCookie({name:'Ghost cookies',desc:'They\'re something strange, but they look pretty good!',locked:1,icon:[13,8],power:								2, price: 444444444444});
-		Game.NewUpgradeCookie({name:'Bat cookies',desc:'The cookies this town deserves.',locked:1,icon:[14,8],power:														2, price: 444444444444});
-		Game.NewUpgradeCookie({name:'Slime cookies',desc:'The incredible melting cookies!',locked:1,icon:[15,8],power: 														2, price: 444444444444});
-		Game.NewUpgradeCookie({name:'Pumpkin cookies',desc:'Not even pumpkin-flavored. Tastes like glazing. Yeugh.',locked:1,icon:[16,8],power:								2, price: 444444444444});
-		Game.NewUpgradeCookie({name:'Eyeball cookies',desc:'When you stare into the cookie, the cookie stares back at you.',locked:1,icon:[17,8],power:						2, price: 444444444444});
-		Game.NewUpgradeCookie({name:'Spider cookies',desc:'You found the recipe on the web. They do whatever a cookie can.',locked:1,icon:[18,8],power:						2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Skull kookies',desc:'Wanna know something spooky? You\'ve got one of these inside your head RIGHT NOW.',locked:1,icon:[12,8],power:	2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Ghost kookies',desc:'They\'re something strange, but they look pretty good!',locked:1,icon:[13,8],power:								2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Bat kookies',desc:'The kookies this town deserves.',locked:1,icon:[14,8],power:														2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Slime kookies',desc:'The incredible melting kookies!',locked:1,icon:[15,8],power: 														2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Pumpkin kookies',desc:'Not even pumpkin-flavored. Tastes like glazing. Yeugh.',locked:1,icon:[16,8],power:								2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Eyeball kookies',desc:'When you stare into the kookie, the kookie stares back at you.',locked:1,icon:[17,8],power:						2, price: 444444444444});
+		Game.NewUpgradeCookie({name:'Spider kookies',desc:'You found the recipe on the web. They do whatever a kookie can.',locked:1,icon:[18,8],power:						2, price: 444444444444});
 		
-		Game.halloweenDrops=['Skull cookies','Ghost cookies','Bat cookies','Slime cookies','Pumpkin cookies','Eyeball cookies','Spider cookies'];
+		Game.halloweenDrops=['Skull kookies','Ghost kookies','Bat kookies','Slime kookies','Pumpkin kookies','Eyeball kookies','Spider kookies'];
 		
 		Game.GetHowManyHalloweenDrops=function()
 		{
@@ -9881,7 +9881,7 @@ Game.Launch=function()
 		}
 		/*for (var i in Game.halloweenDrops)
 		{
-			Game.Upgrades[Game.halloweenDrops[i]].descFunc=function(){return '<div style="text-align:center;">You currently own <b>'+Game.GetHowManyHalloweenDrops()+'/'+Game.halloweenDrops.length+'</b> halloween cookies.</div><div class="line"></div>'+this.ddesc;};
+			Game.Upgrades[Game.halloweenDrops[i]].descFunc=function(){return '<div style="text-align:center;">You currently own <b>'+Game.GetHowManyHalloweenDrops()+'/'+Game.halloweenDrops.length+'</b> halloween kookies.</div><div class="line"></div>'+this.ddesc;};
 		}*/
 		
 		order=0;
@@ -9924,8 +9924,8 @@ Game.Launch=function()
 		new Game.Upgrade('Naughty list',loc("%1 are <b>twice</b> as efficient.",cap(loc("grandmas")))+'<br>'+loc("Cost scales with Santa level.")+'<q>This list contains every unholy deed perpetuated by grandmakind.<br>He won\'t be checking this one twice.<br>Once. Once is enough.</q>',2525,[15,9]);
 		new Game.Upgrade('Santa\'s bottomless bag',loc("Random drops are <b>%1% more common</b>.",10)+'<br>'+loc("Cost scales with Santa level.")+'<q>This is one bottom you can\'t check out.</q>',2525,[19,9]);
 		new Game.Upgrade('Santa\'s helpers',loc("Clicking is <b>%1%</b> more powerful.",10)+'<br>'+loc("Cost scales with Santa level.")+'<q>Some choose to help hamburger; some choose to help you.<br>To each their own, I guess.</q>',2525,[19,9]);
-		new Game.Upgrade('Santa\'s legacy',loc("Cookie production multiplier <b>+%1% per Santa's levels.</b>",3)+'<br>'+loc("Cost scales with Santa level.")+'<q>In the north pole, you gotta get the elves first. Then when you get the elves, you start making the toys. Then when you get the toys... then you get the cookies.</q>',2525,[19,9]);
-		new Game.Upgrade('Santa\'s milk and cookies',loc("Milk is <b>%1% more powerful</b>.",5)+'<br>'+loc("Cost scales with Santa level.")+'<q>Part of Santa\'s dreadfully unbalanced diet.</q>',2525,[19,9]);
+		new Game.Upgrade('Santa\'s legacy',loc("Cookie production multiplier <b>+%1% per Santa's levels.</b>",3)+'<br>'+loc("Cost scales with Santa level.")+'<q>In the north pole, you gotta get the elves first. Then when you get the elves, you start making the toys. Then when you get the toys... then you get the kookies.</q>',2525,[19,9]);
+		new Game.Upgrade('Santa\'s milk and kookies',loc("Milk is <b>%1% more powerful</b>.",5)+'<br>'+loc("Cost scales with Santa level.")+'<q>Part of Santa\'s dreadfully unbalanced diet.</q>',2525,[19,9]);
 		
 		order=40000;
 		new Game.Upgrade('Reindeer season',loc("Reindeer spawn much more frequently.")+'<q>Go, Cheater! Go, Hacker and Faker!</q>',7,[12,9]);//debug purposes only
@@ -9971,7 +9971,7 @@ Game.Launch=function()
 		Game.TieredUpgrade('Pure cosmic light','<q>Your prisms now receive pristine, unadulterated photons from the other end of the universe.</q>','Prism',5);
 
 		order=255;
-		Game.GrandmaSynergy('Rainbow grandmas','A luminous grandma to sparkle into cookies.','Prism');
+		Game.GrandmaSynergy('Rainbow grandmas','A luminous grandma to sparkle into kookies.','Prism');
 		
 		order=24000;
 		Game.seasonTriggerBasePrice=1000000000;//1111111111;
@@ -9998,12 +9998,12 @@ Game.Launch=function()
 		new Game.Upgrade('Wishalloy mouse',getStrClickingGains(1)+'<q>Clicking is fine and dandy, but don\'t smash your mouse over it. Get your game on. Go play.</q>',50000000000000000,[11,16]);Game.MakeTiered(Game.last,7,11);
 		order=200;Game.TieredUpgrade('Aging agents','<q>Counter-intuitively, grandmas have the uncanny ability to become more powerful the older they get.</q>','Grandma',6);
 		order=300;Game.TieredUpgrade('Pulsar sprinklers','<q>There\'s no such thing as over-watering. The moistest is the bestest.</q>','Farm',6);
-		order=500;Game.TieredUpgrade('Deep-bake process','<q>A patented process increasing cookie yield two-fold for the same amount of ingredients. Don\'t ask how, don\'t take pictures, and be sure to wear your protective suit.</q>','Factory',6);
+		order=500;Game.TieredUpgrade('Deep-bake process','<q>A patented process increasing kookie yield two-fold for the same amount of ingredients. Don\'t ask how, don\'t take pictures, and be sure to wear your protective suit.</q>','Factory',6);
 		order=400;Game.TieredUpgrade('Coreforge','<q>You\'ve finally dug a tunnel down to the Earth\'s core. It\'s pretty warm down here.</q>','Mine',6);
-		order=600;Game.TieredUpgrade('Generation ship','<q>Built to last, this humongous spacecraft will surely deliver your cookies to the deep ends of space, one day.</q>','Shipment',6);
+		order=600;Game.TieredUpgrade('Generation ship','<q>Built to last, this humongous spacecraft will surely deliver your kookies to the deep ends of space, one day.</q>','Shipment',6);
 		order=700;Game.TieredUpgrade('Origin crucible','<q>Built from the rarest of earths and located at the very deepest of the largest mountain, this legendary crucible is said to retain properties from the big-bang itself.</q>','Alchemy lab',6);
 		order=800;Game.TieredUpgrade('Deity-sized portals','<q>It\'s almost like, say, an elder god could fit through this thing now. Hypothetically.</q>','Portal',6);
-		order=900;Game.TieredUpgrade('Far future enactment','<q>The far future enactment authorizes you to delve deep into the future - where civilization has fallen and risen again, and cookies are plentiful.</q>','Time machine',6);
+		order=900;Game.TieredUpgrade('Far future enactment','<q>The far future enactment authorizes you to delve deep into the future - where civilization has fallen and risen again, and kookies are plentiful.</q>','Time machine',6);
 		order=1000;Game.TieredUpgrade('Nanocosmics','<q>The theory of nanocosmics posits that each subatomic particle is in fact its own self-contained universe, holding unfathomable amounts of energy.<br>This somehow stacks with the nested universe theory, because physics.</q>','Antimatter condenser',6);
 		order=1100;
 		Game.TieredUpgrade('Glow-in-the-dark','<q>Your prisms now glow in the dark, effectively doubling their output!</q>','Prism',6);
@@ -10038,16 +10038,16 @@ Game.Launch=function()
 		new Game.Upgrade('Shark egg',getStrCookieProductionMultiplierPlus(1)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>HELLO IS THIS FOOD?<br>LET ME TELL YOU ABOUT FOOD.<br>WHY DO I KEEP EATING MY FRIENDS</q>',eggPrice,[10,12]);
 		new Game.Upgrade('Turtle egg',getStrCookieProductionMultiplierPlus(1)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Turtles, right? Hatch from shells. Grow into shells. What\'s up with that?<br>Now for my skit about airplane food.</q>',eggPrice,[11,12]);
 		new Game.Upgrade('Ant larva',getStrCookieProductionMultiplierPlus(1)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>These are a delicacy in some countries, I swear. You will let these invade your digestive tract, and you will derive great pleasure from it.<br>And all will be well.</q>',eggPrice,[12,12]);
-		new Game.Upgrade('Golden goose egg',loc("Golden cookies appear <b>%1%</b> more often.",5)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>The sole vestige of a tragic tale involving misguided investments.</q>',eggPrice2,[13,12]);
+		new Game.Upgrade('Golden goose egg',loc("Golden kookies appear <b>%1%</b> more often.",5)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>The sole vestige of a tragic tale involving misguided investments.</q>',eggPrice2,[13,12]);
 		new Game.Upgrade('Faberge egg',loc("All buildings and upgrades are <b>%1% cheaper</b>.",1)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>This outrageous egg is definitely fab.</q>',eggPrice2,[14,12],function(){Game.storeToRefresh=1;});
-		new Game.Upgrade('Wrinklerspawn',loc("Wrinklers explode into <b>%1% more cookies</b>.",5)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Look at this little guy! It\'s gonna be a big boy someday! Yes it is!</q>',eggPrice2,[15,12]);
+		new Game.Upgrade('Wrinklerspawn',loc("Wrinklers explode into <b>%1% more kookies</b>.",5)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Look at this little guy! It\'s gonna be a big boy someday! Yes it is!</q>',eggPrice2,[15,12]);
 		new Game.Upgrade('Cookie egg',loc("Clicking is <b>%1%</b> more powerful.",10)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>The shell appears to be chipped.<br>I wonder what\'s inside this one!</q>',eggPrice2,[16,12]);
 		new Game.Upgrade('Omelette',loc("Other eggs appear <b>%1% more frequently</b>.",10)+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Fromage not included.</q>',eggPrice2,[17,12]);
-		new Game.Upgrade('Chocolate egg',loc("Contains <b>a lot of cookies</b>.")+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Laid by the elusive cocoa bird. There\'s a surprise inside!</q>',eggPrice2,[18,12],function()
+		new Game.Upgrade('Chocolate egg',loc("Contains <b>a lot of kookies</b>.")+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Laid by the elusive cocoa bird. There\'s a surprise inside!</q>',eggPrice2,[18,12],function()
 		{
-			var cookies=Game.cookies*0.05;
-			Game.Notify('Chocolate egg',loc("The egg bursts into <b>%1</b> cookies!",Beautify(cookies)),Game.Upgrades['Chocolate egg'].icon);
-			Game.Earn(cookies);
+			var kookies=Game.kookies*0.05;
+			Game.Notify('Chocolate egg',loc("The egg bursts into <b>%1</b> kookies!",Beautify(kookies)),Game.Upgrades['Chocolate egg'].icon);
+			Game.Earn(kookies);
 		});
 		new Game.Upgrade('Century egg',loc("You continually gain <b>more CpS the longer you've played</b> in the current ascension.")+'<br>'+loc("Cost scales with how many eggs you own.")+'<q>Actually not centuries-old. This one isn\'t a day over 86!</q>',eggPrice2,[19,12]);
 		Game.last.descFunc=function(){
@@ -10119,8 +10119,8 @@ Game.Launch=function()
 		Game.TieredUpgrade('Financial zen','<q>The ultimate grail of economic thought; the feng shui of big money, the stock market yoga - the Heimlich maneuver of dimes and nickels.</q>','Bank',6);
 		
 		order=550;
-		Game.TieredUpgrade('Golden idols','<q>Lure even greedier adventurers to retrieve your cookies. Now that\'s a real idol game!</q>','Temple',1);
-		Game.TieredUpgrade('Sacrifices','<q>What\'s a life to a gigaton of cookies?</q>','Temple',2);
+		Game.TieredUpgrade('Golden idols','<q>Lure even greedier adventurers to retrieve your kookies. Now that\'s a real idol game!</q>','Temple',1);
+		Game.TieredUpgrade('Sacrifices','<q>What\'s a life to a gigaton of kookies?</q>','Temple',2);
 		Game.TieredUpgrade('Delicious blessing','<q>And lo, the Baker\'s almighty spoon came down and distributed holy gifts unto the believers - shimmering sugar, and chocolate dark as night, and all manner of wheats. And boy let me tell you, that party was mighty gnarly.</q>','Temple',3);
 		Game.TieredUpgrade('Sun festival','<q>Free the primordial powers of your temples with these annual celebrations involving fire-breathers, traditional dancing, ritual beheadings and other merriments!</q>','Temple',4);
 		Game.TieredUpgrade('Enlarged pantheon','<q>Enough spiritual inadequacy! More divinities than you\'ll ever need, or your money back! 100% guaranteed!</q>','Temple',5);
@@ -10131,30 +10131,30 @@ Game.Launch=function()
 		Game.TieredUpgrade('Beardlier beards','<q>Haven\'t you heard? The beard is the word.</q>','Wizard tower',2);
 		Game.TieredUpgrade('Ancient grimoires','<q>Contain interesting spells such as "Turn Water To Drool", "Grow Eyebrows On Furniture" and "Summon Politician".</q>','Wizard tower',3);
 		Game.TieredUpgrade('Kitchen curses','<q>Exotic magic involved in all things pastry-related. Hexcellent!</q>','Wizard tower',4);
-		Game.TieredUpgrade('School of sorcery','<q>This cookie-funded academy of witchcraft is home to the 4 prestigious houses of magic : the Jocks, the Nerds, the Preps, and the Deathmunchers.</q>','Wizard tower',5);
-		Game.TieredUpgrade('Dark formulas','<q>Eldritch forces are at work behind these spells - you get the feeling you really shouldn\'t be messing with those. But I mean, free cookies, right?</q>','Wizard tower',6);
+		Game.TieredUpgrade('School of sorcery','<q>This kookie-funded academy of witchcraft is home to the 4 prestigious houses of magic : the Jocks, the Nerds, the Preps, and the Deathmunchers.</q>','Wizard tower',5);
+		Game.TieredUpgrade('Dark formulas','<q>Eldritch forces are at work behind these spells - you get the feeling you really shouldn\'t be messing with those. But I mean, free kookies, right?</q>','Wizard tower',6);
 
 		order=250;
-		Game.GrandmaSynergy('Banker grandmas','A nice banker to cash in more cookies.','Bank');
+		Game.GrandmaSynergy('Banker grandmas','A nice banker to cash in more kookies.','Bank');
 		Game.GrandmaSynergy('Priestess grandmas','A nice priestess to praise the one true Baker in the sky.','Temple');
 		Game.GrandmaSynergy('Witch grandmas','A nice witch to cast a zip, and a zoop, and poof! Cookies.','Wizard tower');
 		
 		
 		
 		order=0;
-		new Game.Upgrade('Tin of british tea biscuits',loc("Contains an assortment of fancy biscuits.")+'<q>Every time is tea time.</q>',25,[21,8]);Game.last.pool='prestige';Game.last.parents=['Heavenly cookies'];
-		new Game.Upgrade('Box of macarons',loc("Contains an assortment of macarons.")+'<q>Multicolored delicacies filled with various kinds of jam.<br>Not to be confused with macaroons, macaroni, macarena or any of that nonsense.</q>',25,[20,8]);Game.last.pool='prestige';Game.last.parents=['Heavenly cookies'];
-		new Game.Upgrade('Box of brand biscuits',loc("Contains an assortment of popular biscuits.")+'<q>They\'re brand new!</q>',25,[20,9]);Game.last.pool='prestige';Game.last.parents=['Heavenly cookies'];
+		new Game.Upgrade('Tin of british tea biscuits',loc("Contains an assortment of fancy biscuits.")+'<q>Every time is tea time.</q>',25,[21,8]);Game.last.pool='prestige';Game.last.parents=['Heavenly kookies'];
+		new Game.Upgrade('Box of macarons',loc("Contains an assortment of macarons.")+'<q>Multicolored delicacies filled with various kinds of jam.<br>Not to be confused with macaroons, macaroni, macarena or any of that nonsense.</q>',25,[20,8]);Game.last.pool='prestige';Game.last.parents=['Heavenly kookies'];
+		new Game.Upgrade('Box of brand biscuits',loc("Contains an assortment of popular biscuits.")+'<q>They\'re brand new!</q>',25,[20,9]);Game.last.pool='prestige';Game.last.parents=['Heavenly kookies'];
 	
 		order=10020;
-		Game.NewUpgradeCookie({name:'Pure black chocolate cookies',desc:'Dipped in a lab-made substance darker than the darkest cocoa (dubbed "chocoalate").',icon:[26,3],power:									5,price: 9999999999999999*5});
-		Game.NewUpgradeCookie({name:'Pure white chocolate cookies',desc:'Elaborated on the nano-scale, the coating on this biscuit is able to refract light even in a pitch-black environment.',icon:[26,4],power:	5,price: 9999999999999999*5});
+		Game.NewUpgradeCookie({name:'Pure black chocolate kookies',desc:'Dipped in a lab-made substance darker than the darkest cocoa (dubbed "chocoalate").',icon:[26,3],power:									5,price: 9999999999999999*5});
+		Game.NewUpgradeCookie({name:'Pure white chocolate kookies',desc:'Elaborated on the nano-scale, the coating on this biscuit is able to refract light even in a pitch-black environment.',icon:[26,4],power:	5,price: 9999999999999999*5});
 		Game.NewUpgradeCookie({name:'Ladyfingers',desc:'Cleaned and sanitized so well you\'d swear they\'re actual biscuits.',icon:[27,3],power:																	3,price: 99999999999999999});
 		Game.NewUpgradeCookie({name:'Tuiles',desc:'These never go out of tile.',icon:[27,4],power:																													3,price: 99999999999999999*5});
 		Game.NewUpgradeCookie({name:'Chocolate-stuffed biscuits',desc:'A princely snack!<br>The holes are so the chocolate stuffing can breathe.',icon:[28,3],power:												3,price: 999999999999999999});
-		Game.NewUpgradeCookie({name:'Checker cookies',desc:'A square cookie? This solves so many storage and packaging problems! You\'re a genius!',icon:[28,4],power:												3,price: 999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Butter cookies',desc:'These melt right off your mouth and into your heart. (Let\'s face it, they\'re rather fattening.)',icon:[29,3],power:									3,price: 9999999999999999999});
-		Game.NewUpgradeCookie({name:'Cream cookies',desc:'It\'s like two chocolate chip cookies! But brought together with the magic of cream! It\'s fiendishly perfect!',icon:[29,4],power:						3,price: 9999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Checker kookies',desc:'A square kookie? This solves so many storage and packaging problems! You\'re a genius!',icon:[28,4],power:												3,price: 999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Butter kookies',desc:'These melt right off your mouth and into your heart. (Let\'s face it, they\'re rather fattening.)',icon:[29,3],power:									3,price: 9999999999999999999});
+		Game.NewUpgradeCookie({name:'Cream kookies',desc:'It\'s like two chocolate chip kookies! But brought together with the magic of cream! It\'s fiendishly perfect!',icon:[29,4],power:						3,price: 9999999999999999999*5});
 
 		order=0;
 		var desc=loc("Placing an upgrade in this slot will make its effects <b>permanent</b> across all playthroughs.");
@@ -10187,7 +10187,7 @@ Game.Launch=function()
 			for (var i in Game.Upgrades)
 			{
 				var me=Game.Upgrades[i];
-				if (me.bought && me.unlocked && !me.noPerm && (me.pool=='' || me.pool=='cookie'))
+				if (me.bought && me.unlocked && !me.noPerm && (me.pool=='' || me.pool=='kookie'))
 				{
 					var fail=0;
 					for (var ii in Game.permanentUpgrades) {if (Game.permanentUpgrades[ii]==me.id) fail=1;}//check if not already in another permaslot
@@ -10228,11 +10228,11 @@ Game.Launch=function()
 			l('upgradeToSlotWrap').innerHTML=(Game.crate(Game.UpgradesById[upgrade==-1?0:upgrade],'','','upgradeToSlot'));
 		}
 		
-		new Game.Upgrade('Starspawn',loc("Eggs drop <b>%1%</b> more often.",10)+'<br>'+loc("Golden cookies appear <b>%1%</b> more often during %2.",[2,loc("Easter")]),111111,[0,12]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
-		new Game.Upgrade('Starsnow',loc("Christmas cookies drop <b>%1%</b> more often.",5)+'<br>'+loc("Reindeer appear <b>%1%</b> more often.",5),111111,[12,9]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
-		new Game.Upgrade('Starterror',loc("Spooky cookies drop <b>%1%</b> more often.",10)+'<br>'+loc("Golden cookies appear <b>%1%</b> more often during %2.",[2,loc("Halloween")]),111111,[13,8]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
-		new Game.Upgrade('Starlove',loc("Heart cookies are <b>%1%</b> more powerful.",50)+'<br>'+loc("Golden cookies appear <b>%1%</b> more often during %2.",[2,loc("Valentine's day")]),111111,[20,3]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
-		new Game.Upgrade('Startrade',loc("Golden cookies appear <b>%1%</b> more often during %2.",[5,loc("Business day")]),111111,[17,6]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
+		new Game.Upgrade('Starspawn',loc("Eggs drop <b>%1%</b> more often.",10)+'<br>'+loc("Golden kookies appear <b>%1%</b> more often during %2.",[2,loc("Easter")]),111111,[0,12]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
+		new Game.Upgrade('Starsnow',loc("Christmas kookies drop <b>%1%</b> more often.",5)+'<br>'+loc("Reindeer appear <b>%1%</b> more often.",5),111111,[12,9]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
+		new Game.Upgrade('Starterror',loc("Spooky kookies drop <b>%1%</b> more often.",10)+'<br>'+loc("Golden kookies appear <b>%1%</b> more often during %2.",[2,loc("Halloween")]),111111,[13,8]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
+		new Game.Upgrade('Starlove',loc("Heart kookies are <b>%1%</b> more powerful.",50)+'<br>'+loc("Golden kookies appear <b>%1%</b> more often during %2.",[2,loc("Valentine's day")]),111111,[20,3]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
+		new Game.Upgrade('Startrade',loc("Golden kookies appear <b>%1%</b> more often during %2.",[5,loc("Business day")]),111111,[17,6]);Game.last.pool='prestige';Game.last.parents=['Season switcher'];
 		
 		var angelPriceFactor=7;
 		var desc=function(percent,total){return loc("You gain another <b>+%1%</b> of your regular CpS while the game is closed, for a total of <b>%2%</b>.",[percent,total]);}
@@ -10244,38 +10244,38 @@ Game.Launch=function()
 		new Game.Upgrade('Seraphim',desc(10,65)+'<q>Leading the first sphere of pastry heaven, seraphim possess ultimate knowledge of everything pertaining to baking.</q>',Math.pow(angelPriceFactor,6),[5,11]);Game.last.pool='prestige';Game.last.parents=['Cherubim'];
 		new Game.Upgrade('God',desc(10,75)+'<q>Like Santa, but less fun.</q>',Math.pow(angelPriceFactor,7),[6,11]);Game.last.pool='prestige';Game.last.parents=['Seraphim'];
 		
-		new Game.Upgrade('Twin Gates of Transcendence',loc("You now <b>keep making cookies while the game is closed</b>, at the rate of <b>%1%</b> of your regular CpS and up to <b>1 hour</b> after the game is closed.<br>(Beyond 1 hour, this is reduced by a further %2% - your rate goes down to <b>%3%</b> of your CpS.)",[5,90,0.5])+'<q>This is one occasion you\'re always underdressed for. Don\'t worry, just rush in past the bouncer and pretend you know people.</q>',1,[15,11]);Game.last.pool='prestige';
+		new Game.Upgrade('Twin Gates of Transcendence',loc("You now <b>keep making kookies while the game is closed</b>, at the rate of <b>%1%</b> of your regular CpS and up to <b>1 hour</b> after the game is closed.<br>(Beyond 1 hour, this is reduced by a further %2% - your rate goes down to <b>%3%</b> of your CpS.)",[5,90,0.5])+'<q>This is one occasion you\'re always underdressed for. Don\'t worry, just rush in past the bouncer and pretend you know people.</q>',1,[15,11]);Game.last.pool='prestige';
 
-		new Game.Upgrade('Heavenly luck',loc("Golden cookies appear <b>%1%</b> more often.",5)+'<q>Someone up there likes you.</q>',77,[22,6]);Game.last.pool='prestige';
-		new Game.Upgrade('Lasting fortune',loc("Golden cookie effects last <b>%1%</b> longer.",10)+'<q>This isn\'t your average everyday luck. This is... advanced luck.</q>',777,[23,6]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];
-		new Game.Upgrade('Decisive fate',loc("Golden cookies stay <b>%1%</b> longer.",5)+'<q>Life just got a bit more intense.</q>',7777,[10,14]);Game.last.pool='prestige';Game.last.parents=['Lasting fortune'];
+		new Game.Upgrade('Heavenly luck',loc("Golden kookies appear <b>%1%</b> more often.",5)+'<q>Someone up there likes you.</q>',77,[22,6]);Game.last.pool='prestige';
+		new Game.Upgrade('Lasting fortune',loc("Golden kookie effects last <b>%1%</b> longer.",10)+'<q>This isn\'t your average everyday luck. This is... advanced luck.</q>',777,[23,6]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];
+		new Game.Upgrade('Decisive fate',loc("Golden kookies stay <b>%1%</b> longer.",5)+'<q>Life just got a bit more intense.</q>',7777,[10,14]);Game.last.pool='prestige';Game.last.parents=['Lasting fortune'];
 
 		new Game.Upgrade('Divine discount',loc("All buildings are <b>%1% cheaper</b>.",1)+'<q>Someone special deserves a special price.</q>',99999,[21,7]);Game.last.pool='prestige';Game.last.parents=['Decisive fate'];
 		new Game.Upgrade('Divine sales',loc("All upgrades are <b>%1% cheaper</b>.",1)+'<q>Everything must go!</q>',99999,[18,7]);Game.last.pool='prestige';Game.last.parents=['Decisive fate'];
 		new Game.Upgrade('Divine bakeries',loc("Cookie upgrades are <b>%1 times cheaper</b>.",5)+'<q>They sure know what they\'re doing.</q>',399999,[17,7]);Game.last.pool='prestige';Game.last.parents=['Divine sales','Divine discount'];
 		
-		new Game.Upgrade('Starter kit',loc("You start with <b>%1</b>.",loc("%1 cursor",10))+'<q>This can come in handy.</q>',50,[0,14]);Game.last.pool='prestige';Game.last.parents=['Tin of british tea biscuits','Box of macarons','Box of brand biscuits','Tin of butter cookies'];
+		new Game.Upgrade('Starter kit',loc("You start with <b>%1</b>.",loc("%1 cursor",10))+'<q>This can come in handy.</q>',50,[0,14]);Game.last.pool='prestige';Game.last.parents=['Tin of british tea biscuits','Box of macarons','Box of brand biscuits','Tin of butter kookies'];
 		new Game.Upgrade('Starter kitchen',loc("You start with <b>%1</b>.",loc("%1 grandma",5))+'<q>Where did these come from?</q>',5000,[1,14]);Game.last.pool='prestige';Game.last.parents=['Starter kit'];
-		new Game.Upgrade('Halo gloves',loc("Clicking is <b>%1%</b> more powerful.",10)+'<q>Smite that cookie.</q>',55555,[22,7]);Game.last.pool='prestige';Game.last.parents=['Starter kit'];
+		new Game.Upgrade('Halo gloves',loc("Clicking is <b>%1%</b> more powerful.",10)+'<q>Smite that kookie.</q>',55555,[22,7]);Game.last.pool='prestige';Game.last.parents=['Starter kit'];
 
 		new Game.Upgrade('Kitten angels',strKittenDesc+'<q>All cats go to heaven.</q>',9000,[23,7]);Game.last.pool='prestige';Game.last.parents=['Dominions'];Game.last.kitten=1;
 		
 		new Game.Upgrade('Unholy bait',loc("Wrinklers appear <b>%1 times</b> as fast.",5)+'<q>No wrinkler can resist the scent of worm biscuits.</q>',44444,[15,12]);Game.last.pool='prestige';Game.last.parents=['Starter kitchen'];
-		new Game.Upgrade('Sacrilegious corruption',loc("Wrinklers explode into <b>%1% more cookies</b>.",5)+'<q>Unique in the animal kingdom, the wrinkler digestive tract is able to withstand an incredible degree of dilation - provided you prod them appropriately.</q>',444444,[19,8]);Game.last.pool='prestige';Game.last.parents=['Unholy bait'];
+		new Game.Upgrade('Sacrilegious corruption',loc("Wrinklers explode into <b>%1% more kookies</b>.",5)+'<q>Unique in the animal kingdom, the wrinkler digestive tract is able to withstand an incredible degree of dilation - provided you prod them appropriately.</q>',444444,[19,8]);Game.last.pool='prestige';Game.last.parents=['Unholy bait'];
 		
 		
 		order=200;Game.TieredUpgrade('Xtreme walkers','<q>Complete with flame decals and a little horn that goes "toot".</q>','Grandma',7);
-		order=300;Game.TieredUpgrade('Fudge fungus','<q>A sugary parasite whose tendrils help cookie growth.<br>Please do not breathe in the spores. In case of spore ingestion, seek medical help within the next 36 seconds.</q>','Farm',7);
+		order=300;Game.TieredUpgrade('Fudge fungus','<q>A sugary parasite whose tendrils help kookie growth.<br>Please do not breathe in the spores. In case of spore ingestion, seek medical help within the next 36 seconds.</q>','Farm',7);
 		order=400;Game.TieredUpgrade('Planetsplitters','<q>These new state-of-the-art excavators have been tested on Merula, Globort and Flwanza VI, among other distant planets which have been curiously quiet lately.</q>','Mine',7);
 		order=500;Game.TieredUpgrade('Cyborg workforce','<q>Semi-synthetic organisms don\'t slack off, don\'t unionize, and have 20% shorter lunch breaks, making them ideal labor fodder.</q>','Factory',7);
 		order=525;Game.TieredUpgrade('Way of the wallet','<q>This new monetary school of thought is all the rage on the banking scene; follow its precepts and you may just profit from it.</q>','Bank',7);
-		order=550;Game.TieredUpgrade('Creation myth','<q>Stories have been circulating about the origins of the very first cookie that was ever baked; tales of how it all began, in the Dough beyond time and the Ovens of destiny.</q>','Temple',7);
-		order=575;Game.TieredUpgrade('Cookiemancy','<q>There it is; the perfected school of baking magic. From summoning chips to hexing nuts, there is not a single part of cookie-making that hasn\'t been improved tenfold by magic tricks.</q>','Wizard tower',7);
+		order=550;Game.TieredUpgrade('Creation myth','<q>Stories have been circulating about the origins of the very first kookie that was ever baked; tales of how it all began, in the Dough beyond time and the Ovens of destiny.</q>','Temple',7);
+		order=575;Game.TieredUpgrade('Cookiemancy','<q>There it is; the perfected school of baking magic. From summoning chips to hexing nuts, there is not a single part of kookie-making that hasn\'t been improved tenfold by magic tricks.</q>','Wizard tower',7);
 		order=600;Game.TieredUpgrade('Dyson sphere','<q>You\'ve found a way to apply your knowledge of cosmic technology to slightly more local endeavors; this gigantic sphere of meta-materials, wrapping the solar system, is sure to kick your baking abilities up a notch.</q>','Shipment',7);
-		order=700;Game.TieredUpgrade('Theory of atomic fluidity','<q>Pushing alchemy to its most extreme limits, you find that everything is transmutable into anything else - lead to gold, mercury to water; more importantly, you realize that anything can -and should- be converted to cookies.</q>','Alchemy lab',7);
+		order=700;Game.TieredUpgrade('Theory of atomic fluidity','<q>Pushing alchemy to its most extreme limits, you find that everything is transmutable into anything else - lead to gold, mercury to water; more importantly, you realize that anything can -and should- be converted to kookies.</q>','Alchemy lab',7);
 		order=800;Game.TieredUpgrade('End of times back-up plan','<q>Just in case, alright?</q>','Portal',7);
-		order=900;Game.TieredUpgrade('Great loop hypothesis','<q>What if our universe is just one instance of an infinite cycle? What if, before and after it, stretched infinite amounts of the same universe, themselves containing infinite amounts of cookies?</q>','Time machine',7);
-		order=1000;Game.TieredUpgrade('The Pulse','<q>You\'ve tapped into the very pulse of the cosmos, a timeless rhythm along which every material and antimaterial thing beats in unison. This, somehow, means more cookies.</q>','Antimatter condenser',7);
+		order=900;Game.TieredUpgrade('Great loop hypothesis','<q>What if our universe is just one instance of an infinite cycle? What if, before and after it, stretched infinite amounts of the same universe, themselves containing infinite amounts of kookies?</q>','Time machine',7);
+		order=1000;Game.TieredUpgrade('The Pulse','<q>You\'ve tapped into the very pulse of the cosmos, a timeless rhythm along which every material and antimaterial thing beats in unison. This, somehow, means more kookies.</q>','Antimatter condenser',7);
 		order=1100;
 		Game.TieredUpgrade('Lux sanctorum','<q>Your prism attendants have become increasingly mesmerized with something in the light - or maybe something beyond it; beyond us all, perhaps?</q>','Prism',7);
 		
@@ -10285,10 +10285,10 @@ Game.Launch=function()
 		order=400;Game.TieredUpgrade('Canola oil wells','<q>A previously untapped resource, canola oil permeates the underground olifers which grant it its particular taste and lucrative properties.</q>','Mine',8);
 		order=500;Game.TieredUpgrade('78-hour days','<q>Why didn\'t we think of this earlier?</q>','Factory',8);
 		order=525;Game.TieredUpgrade('The stuff rationale','<q>If not now, when? If not it, what? If not things... stuff?</q>','Bank',8);
-		order=550;Game.TieredUpgrade('Theocracy','<q>You\'ve turned your cookie empire into a perfect theocracy, gathering the adoration of zillions of followers from every corner of the universe.<br>Don\'t let it go to your head.</q>','Temple',8);
-		order=575;Game.TieredUpgrade('Rabbit trick','<q>Using nothing more than a fancy top hat, your wizards have found a way to simultaneously curb rabbit population and produce heaps of extra cookies for basically free!<br>Resulting cookies may or may not be fit for vegans.</q>','Wizard tower',8);
+		order=550;Game.TieredUpgrade('Theocracy','<q>You\'ve turned your kookie empire into a perfect theocracy, gathering the adoration of zillions of followers from every corner of the universe.<br>Don\'t let it go to your head.</q>','Temple',8);
+		order=575;Game.TieredUpgrade('Rabbit trick','<q>Using nothing more than a fancy top hat, your wizards have found a way to simultaneously curb rabbit population and produce heaps of extra kookies for basically free!<br>Resulting kookies may or may not be fit for vegans.</q>','Wizard tower',8);
 		order=600;Game.TieredUpgrade('The final frontier','<q>It\'s been a long road, getting from there to here. It\'s all worth it though - the sights are lovely and the oil prices slightly more reasonable.</q>','Shipment',8);
-		order=700;Game.TieredUpgrade('Beige goo','<q>Well now you\'ve done it. Good job. Very nice. That\'s 3 galaxies you\'ve just converted into cookies. Good thing you can hop from universe to universe.</q>','Alchemy lab',8);
+		order=700;Game.TieredUpgrade('Beige goo','<q>Well now you\'ve done it. Good job. Very nice. That\'s 3 galaxies you\'ve just converted into kookies. Good thing you can hop from universe to universe.</q>','Alchemy lab',8);
 		order=800;Game.TieredUpgrade('Maddening chants','<q>A popular verse goes like so : "jau\'hn madden jau\'hn madden aeiouaeiouaeiou brbrbrbrbrbrbr"</q>','Portal',8);
 		order=900;Game.TieredUpgrade('Cookietopian moments of maybe','<q>Reminiscing how things could have been, should have been, will have been.</q>','Time machine',8);
 		order=1000;Game.TieredUpgrade('Some other super-tiny fundamental particle? Probably?','<q>When even the universe is running out of ideas, that\'s when you know you\'re nearing the end.</q>','Antimatter condenser',8);
@@ -10299,46 +10299,46 @@ Game.Launch=function()
 		order=20000;
 		new Game.Upgrade('Kitten accountants',strKittenDesc+'<q>business going great, sir</q>',900000000000000000000000,Game.GetIcon('Kitten',6));Game.last.kitten=1;Game.MakeTiered(Game.last,6,18);
 		new Game.Upgrade('Kitten specialists',strKittenDesc+'<q>optimeowzing your workflow like whoah, sir</q>',900000000000000000000000000,Game.GetIcon('Kitten',7));Game.last.kitten=1;Game.MakeTiered(Game.last,7,18);
-		new Game.Upgrade('Kitten experts',strKittenDesc+'<q>10 years expurrrtise in the cookie business, sir</q>',900000000000000000000000000000,Game.GetIcon('Kitten',8));Game.last.kitten=1;Game.MakeTiered(Game.last,8,18);
+		new Game.Upgrade('Kitten experts',strKittenDesc+'<q>10 years expurrrtise in the kookie business, sir</q>',900000000000000000000000000000,Game.GetIcon('Kitten',8));Game.last.kitten=1;Game.MakeTiered(Game.last,8,18);
 		
-		new Game.Upgrade('How to bake your dragon',loc("Allows you to purchase a <b>crumbly egg</b> once you have earned 1 million cookies.")+'<q>A tome full of helpful tips such as "oh god, stay away from it", "why did we buy this thing, it\'s not even house-broken" and "groom twice a week in the direction of the scales".</q>',9,[22,12]);Game.last.pool='prestige';
+		new Game.Upgrade('How to bake your dragon',loc("Allows you to purchase a <b>crumbly egg</b> once you have earned 1 million kookies.")+'<q>A tome full of helpful tips such as "oh god, stay away from it", "why did we buy this thing, it\'s not even house-broken" and "groom twice a week in the direction of the scales".</q>',9,[22,12]);Game.last.pool='prestige';
 
 		order=25100;
-		new Game.Upgrade('A crumbly egg',loc("Unlocks the <b>cookie dragon egg</b>.")+'<q>Thank you for adopting this robust, fun-loving cookie dragon! It will bring you years of joy and entertainment.<br>Keep in a dry and cool place, and away from other house pets. Subscription to home insurance is strongly advised.</q>',25,[21,12]);
+		new Game.Upgrade('A crumbly egg',loc("Unlocks the <b>kookie dragon egg</b>.")+'<q>Thank you for adopting this robust, fun-loving kookie dragon! It will bring you years of joy and entertainment.<br>Keep in a dry and cool place, and away from other house pets. Subscription to home insurance is strongly advised.</q>',25,[21,12]);
 		
-		new Game.Upgrade('Chimera',loc("Synergy upgrades are <b>%1% cheaper</b>.",2)+'<br>'+loc("You gain another <b>+%1%</b> of your regular CpS while the game is closed.",5)+'<br>'+loc("You retain optimal cookie production while the game is closed for <b>%1 more days</b>.",2)+'<q>More than the sum of its parts.</q>',Math.pow(angelPriceFactor,9),[24,7]);Game.last.pool='prestige';Game.last.parents=['God','Lucifer','Synergies Vol. II'];
+		new Game.Upgrade('Chimera',loc("Synergy upgrades are <b>%1% cheaper</b>.",2)+'<br>'+loc("You gain another <b>+%1%</b> of your regular CpS while the game is closed.",5)+'<br>'+loc("You retain optimal kookie production while the game is closed for <b>%1 more days</b>.",2)+'<q>More than the sum of its parts.</q>',Math.pow(angelPriceFactor,9),[24,7]);Game.last.pool='prestige';Game.last.parents=['God','Lucifer','Synergies Vol. II'];
 		
-		new Game.Upgrade('Tin of butter cookies',loc("Contains an assortment of rich butter cookies.")+'<q>Five varieties of danish cookies.<br>Complete with little paper cups.</q>',25,[21,9]);Game.last.pool='prestige';Game.last.parents=['Heavenly cookies'];
+		new Game.Upgrade('Tin of butter kookies',loc("Contains an assortment of rich butter kookies.")+'<q>Five varieties of danish kookies.<br>Complete with little paper cups.</q>',25,[21,9]);Game.last.pool='prestige';Game.last.parents=['Heavenly kookies'];
 		
-		new Game.Upgrade('Golden switch',loc("Unlocks the <b>golden switch</b>, which passively boosts your CpS by %1% but disables golden cookies.",50)+'<q>Less clicking, more idling.</q>',999,[21,10]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];
+		new Game.Upgrade('Golden switch',loc("Unlocks the <b>golden switch</b>, which passively boosts your CpS by %1% but disables golden kookies.",50)+'<q>Less clicking, more idling.</q>',999,[21,10]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];
 		
-		new Game.Upgrade('Classic dairy selection',loc("Unlocks the <b>milk selector</b>, letting you pick which milk is displayed under your cookie.<br>Comes with a variety of basic flavors.")+'<q>Don\'t have a cow, man.</q>',9,[1,8]);Game.last.pool='prestige';Game.last.parents=[];
+		new Game.Upgrade('Classic dairy selection',loc("Unlocks the <b>milk selector</b>, letting you pick which milk is displayed under your kookie.<br>Comes with a variety of basic flavors.")+'<q>Don\'t have a cow, man.</q>',9,[1,8]);Game.last.pool='prestige';Game.last.parents=[];
 		
 		new Game.Upgrade('Fanciful dairy selection',loc("Contains more exotic flavors for your milk selector.")+'<q>Strong bones for the skeleton army.</q>',1000000,[9,7]);Game.last.pool='prestige';Game.last.parents=['Classic dairy selection'];
 		
 		order=10300;
-		Game.NewUpgradeCookie({name:'Dragon cookie',desc:'Imbued with the vigor and vitality of a full-grown cookie dragon, this mystical cookie will embolden your empire for the generations to come.',icon:[10,25],power:5,price:9999999999999999*7,locked:1});
+		Game.NewUpgradeCookie({name:'Dragon kookie',desc:'Imbued with the vigor and vitality of a full-grown kookie dragon, this mystical kookie will embolden your empire for the generations to come.',icon:[10,25],power:5,price:9999999999999999*7,locked:1});
 		
 		
 		order=40000;
-		new Game.Upgrade('Golden switch [off]',loc("Turning this on will give you a passive <b>+%1% CpS</b>, but prevents golden cookies from spawning.<br>Cost is equal to 1 hour of production.",50),1000000,[20,10]);
+		new Game.Upgrade('Golden switch [off]',loc("Turning this on will give you a passive <b>+%1% CpS</b>, but prevents golden kookies from spawning.<br>Cost is equal to 1 hour of production.",50),1000000,[20,10]);
 		Game.last.pool='toggle';Game.last.toggleInto='Golden switch [on]';
-		Game.last.priceFunc=function(){return Game.cookiesPs*60*60;}
+		Game.last.priceFunc=function(){return Game.kookiesPs*60*60;}
 		var func=function(){
 			if (Game.Has('Residual luck'))
 			{
 				var bonus=0;
 				var upgrades=Game.goldenCookieUpgrades;
 				for (var i in upgrades) {if (Game.Has(upgrades[i])) bonus++;}
-				return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.goldenCookieUpgrades)+'<br><br>The effective boost is <b>+'+Beautify(Math.round(50+bonus*10))+'%</b><br>thanks to residual luck<br>and your <b>'+bonus+'</b> golden cookie upgrade'+(bonus==1?'':'s')+'.</div><div class="line"></div>'+this.ddesc;
+				return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.goldenCookieUpgrades)+'<br><br>The effective boost is <b>+'+Beautify(Math.round(50+bonus*10))+'%</b><br>thanks to residual luck<br>and your <b>'+bonus+'</b> golden kookie upgrade'+(bonus==1?'':'s')+'.</div><div class="line"></div>'+this.ddesc;
 			}
 			return this.desc;
 		};
 		if (EN) Game.last.descFunc=func;
 		
-		new Game.Upgrade('Golden switch [on]',loc("The switch is currently giving you a passive <b>+%1% CpS</b>; it also prevents golden cookies from spawning.<br>Turning it off will revert those effects.<br>Cost is equal to 1 hour of production.",50),1000000,[21,10]);
+		new Game.Upgrade('Golden switch [on]',loc("The switch is currently giving you a passive <b>+%1% CpS</b>; it also prevents golden kookies from spawning.<br>Turning it off will revert those effects.<br>Cost is equal to 1 hour of production.",50),1000000,[21,10]);
 		Game.last.pool='toggle';Game.last.toggleInto='Golden switch [off]';
-		Game.last.priceFunc=function(){return Game.cookiesPs*60*60;}
+		Game.last.priceFunc=function(){return Game.kookiesPs*60*60;}
 		Game.last.descFunc=func;
 		
 		order=50000;
@@ -10381,49 +10381,49 @@ Game.Launch=function()
 		order=10300;
 		var butterBiscuitMult=100000000;
 		Game.NewUpgradeCookie({name:'Milk chocolate butter biscuit',desc:'Rewarded for owning 100 of everything.<br>It bears the engraving of a fine entrepreneur.',icon:[27,8],power:	10,price: 999999999999999999999*butterBiscuitMult,locked:1});
-		Game.NewUpgradeCookie({name:'Dark chocolate butter biscuit',desc:'Rewarded for owning 150 of everything.<br>It is adorned with the image of an experienced cookie tycoon.',icon:[27,9],power:	10,price: 999999999999999999999999*butterBiscuitMult,locked:1});
+		Game.NewUpgradeCookie({name:'Dark chocolate butter biscuit',desc:'Rewarded for owning 150 of everything.<br>It is adorned with the image of an experienced kookie tycoon.',icon:[27,9],power:	10,price: 999999999999999999999999*butterBiscuitMult,locked:1});
 		Game.NewUpgradeCookie({name:'White chocolate butter biscuit',desc:'Rewarded for owning 200 of everything.<br>The chocolate is chiseled to depict a masterful pastry magnate.',icon:[28,9],power:	10,price: 999999999999999999999999999*butterBiscuitMult,locked:1});
-		Game.NewUpgradeCookie({name:'Ruby chocolate butter biscuit',desc:'Rewarded for owning 250 of everything.<br>Covered in a rare red chocolate, this biscuit is etched to represent the face of a cookie industrialist gone mad with power.',icon:[28,8],power:	10,price: 999999999999999999999999999999*butterBiscuitMult,locked:1});
+		Game.NewUpgradeCookie({name:'Ruby chocolate butter biscuit',desc:'Rewarded for owning 250 of everything.<br>Covered in a rare red chocolate, this biscuit is etched to represent the face of a kookie industrialist gone mad with power.',icon:[28,8],power:	10,price: 999999999999999999999999999999*butterBiscuitMult,locked:1});
 		
 		order=10020;
 		Game.NewUpgradeCookie({name:'Gingersnaps',desc:'Cookies with a soul. Probably.',icon:[29,10],power:						4,price: 99999999999999999999});
-		Game.NewUpgradeCookie({name:'Cinnamon cookies',desc:'The secret is in the patented swirly glazing.',icon:[23,8],power:						4,price: 99999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Vanity cookies',desc:'One tiny candied fruit sits atop this decadent cookie.',icon:[22,8],power:						4,price: 999999999999999999999});
-		Game.NewUpgradeCookie({name:'Cigars',desc:'Close, but no match for those extravagant cookie straws they serve in coffee shops these days.',icon:[25,8],power:						4,price: 999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Pinwheel cookies',desc:'Bringing you the dizzying combination of brown flavor and beige taste!',icon:[22,10],power:						4,price: 9999999999999999999999});
-		Game.NewUpgradeCookie({name:'Fudge squares',desc:'Not exactly cookies, but you won\'t care once you\'ve tasted one of these.<br>They\'re so good, it\'s fudged-up!',icon:[24,8],power:						4,price: 9999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Cinnamon kookies',desc:'The secret is in the patented swirly glazing.',icon:[23,8],power:						4,price: 99999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Vanity kookies',desc:'One tiny candied fruit sits atop this decadent kookie.',icon:[22,8],power:						4,price: 999999999999999999999});
+		Game.NewUpgradeCookie({name:'Cigars',desc:'Close, but no match for those extravagant kookie straws they serve in coffee shops these days.',icon:[25,8],power:						4,price: 999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Pinwheel kookies',desc:'Bringing you the dizzying combination of brown flavor and beige taste!',icon:[22,10],power:						4,price: 9999999999999999999999});
+		Game.NewUpgradeCookie({name:'Fudge squares',desc:'Not exactly kookies, but you won\'t care once you\'ve tasted one of these.<br>They\'re so good, it\'s fudged-up!',icon:[24,8],power:						4,price: 9999999999999999999999*5});
 		
 		order=10030;
 		Game.NewUpgradeCookie({name:'Digits',desc:'Three flavors, zero phalanges.',icon:[26,8],require:'Box of brand biscuits',power:												2,	price:	999999999999999*5});
 		
 		order=10029;
-		Game.NewUpgradeCookie({name:'Butter horseshoes',desc:'It would behoove you to not overindulge in these.',icon:[22,9],require:'Tin of butter cookies',power:							4,	price:	99999999999999999999999});
-		Game.NewUpgradeCookie({name:'Butter pucks',desc:'Lord, what fools these mortals be!<br>(This is kind of a hokey reference.)',icon:[23,9],require:'Tin of butter cookies',power:							4,	price:	99999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Butter knots',desc:'Look, you can call these pretzels if you want, but you\'d just be fooling yourself, wouldn\'t you?',icon:[24,9],require:'Tin of butter cookies',power:							4,	price:	999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Butter slabs',desc:'Nothing butter than a slab to the face.',icon:[25,9],require:'Tin of butter cookies',power:							4,	price:	999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Butter swirls',desc:'These are equal parts sugar, butter, and warm fuzzy feelings - all of which cause millions of deaths every day.',icon:[26,9],require:'Tin of butter cookies',power:							4,	price:	9999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Butter horseshoes',desc:'It would behoove you to not overindulge in these.',icon:[22,9],require:'Tin of butter kookies',power:							4,	price:	99999999999999999999999});
+		Game.NewUpgradeCookie({name:'Butter pucks',desc:'Lord, what fools these mortals be!<br>(This is kind of a hokey reference.)',icon:[23,9],require:'Tin of butter kookies',power:							4,	price:	99999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Butter knots',desc:'Look, you can call these pretzels if you want, but you\'d just be fooling yourself, wouldn\'t you?',icon:[24,9],require:'Tin of butter kookies',power:							4,	price:	999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Butter slabs',desc:'Nothing butter than a slab to the face.',icon:[25,9],require:'Tin of butter kookies',power:							4,	price:	999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Butter swirls',desc:'These are equal parts sugar, butter, and warm fuzzy feelings - all of which cause millions of deaths every day.',icon:[26,9],require:'Tin of butter kookies',power:							4,	price:	9999999999999999999999999});
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Shortbread biscuits',desc:'These rich butter cookies are neither short, nor bread. What a country!',icon:[23,10],power:						4,price: 99999999999999999999999});
+		Game.NewUpgradeCookie({name:'Shortbread biscuits',desc:'These rich butter kookies are neither short, nor bread. What a country!',icon:[23,10],power:						4,price: 99999999999999999999999});
 		Game.NewUpgradeCookie({name:'Millionaires\' shortbreads',desc:'Three thought-provoking layers of creamy chocolate, hard-working caramel and crumbly biscuit in a poignant commentary of class struggle.',icon:[24,10],power:						4,price: 99999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Caramel cookies',desc:'The polymerized carbohydrates adorning these cookies are sure to stick to your teeth for quite a while.',icon:[25,10],power:						4,price: 999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Caramel kookies',desc:'The polymerized carbohydrates adorning these kookies are sure to stick to your teeth for quite a while.',icon:[25,10],power:						4,price: 999999999999999999999999});
 		
 		
 		var desc=function(totalHours){
-			return loc("You retain optimal cookie production while the game is closed for twice as long, for a total of <b>%1</b>.",Game.sayTime(totalHours*60*60*Game.fps,-1));
+			return loc("You retain optimal kookie production while the game is closed for twice as long, for a total of <b>%1</b>.",Game.sayTime(totalHours*60*60*Game.fps,-1));
 		}
 		new Game.Upgrade('Belphegor',desc(2)+'<q>A demon of shortcuts and laziness, Belphegor commands machines to do work in his stead.</q>',Math.pow(angelPriceFactor,1),[7,11]);Game.last.pool='prestige';Game.last.parents=['Twin Gates of Transcendence'];
 		new Game.Upgrade('Mammon',desc(4)+'<q>The demonic embodiment of wealth, Mammon requests a tithe of blood and gold from all his worshippers.</q>',Math.pow(angelPriceFactor,2),[8,11]);Game.last.pool='prestige';Game.last.parents=['Belphegor'];
 		new Game.Upgrade('Abaddon',desc(8)+'<q>Master of overindulgence, Abaddon governs the wrinkler brood and inspires their insatiability.</q>',Math.pow(angelPriceFactor,3),[9,11]);Game.last.pool='prestige';Game.last.parents=['Mammon'];
 		new Game.Upgrade('Satan',desc(16)+'<q>The counterpoint to everything righteous, this demon represents the nefarious influence of deceit and temptation.</q>',Math.pow(angelPriceFactor,4),[10,11]);Game.last.pool='prestige';Game.last.parents=['Abaddon'];
-		new Game.Upgrade('Asmodeus',desc(32)+'<q>This demon with three monstrous heads draws his power from the all-consuming desire for cookies and all things sweet.</q>',Math.pow(angelPriceFactor,5),[11,11]);Game.last.pool='prestige';Game.last.parents=['Satan'];
+		new Game.Upgrade('Asmodeus',desc(32)+'<q>This demon with three monstrous heads draws his power from the all-consuming desire for kookies and all things sweet.</q>',Math.pow(angelPriceFactor,5),[11,11]);Game.last.pool='prestige';Game.last.parents=['Satan'];
 		new Game.Upgrade('Beelzebub',desc(64)+'<q>The festering incarnation of blight and disease, Beelzebub rules over the vast armies of pastry inferno.</q>',Math.pow(angelPriceFactor,6),[12,11]);Game.last.pool='prestige';Game.last.parents=['Asmodeus'];
 		new Game.Upgrade('Lucifer',desc(128)+'<q>Also known as the Lightbringer, this infernal prince\'s tremendous ego caused him to be cast down from pastry heaven.</q>',Math.pow(angelPriceFactor,7),[13,11]);Game.last.pool='prestige';Game.last.parents=['Beelzebub'];
 		
-		new Game.Upgrade('Golden cookie alert sound',loc("Unlocks the <b>golden cookie sound selector</b>, which lets you pick whether golden cookies emit a sound when appearing or not.")+'<q>A sound decision.</q>',999999,[28,6]);Game.last.pool='prestige';Game.last.parents=['Residual luck'];
+		new Game.Upgrade('Golden kookie alert sound',loc("Unlocks the <b>golden kookie sound selector</b>, which lets you pick whether golden kookies emit a sound when appearing or not.")+'<q>A sound decision.</q>',999999,[28,6]);Game.last.pool='prestige';Game.last.parents=['Residual luck'];
 		
 		order=49900;
-		new Game.Upgrade('Golden cookie sound selector',loc("Lets you change the sound golden cookies make when they spawn."),0,[28,6]);
+		new Game.Upgrade('Golden kookie sound selector',loc("Lets you change the sound golden kookies make when they spawn."),0,[28,6]);
 		Game.last.descFunc=function(){
 			var choice=this.choicesFunction()[Game.chimeType];
 			return '<div style="text-align:center;">'+loc("Current:")+' '+tinyIcon(choice.icon)+' <b>'+choice.name+'</b></div><div class="line"></div>'+this.ddesc;
@@ -10459,11 +10459,11 @@ Game.Launch=function()
 		
 		new Game.Upgrade('Basic wallpaper assortment',loc("Unlocks the <b>background selector</b>, letting you select the game's background.<br>Comes with a variety of basic flavors.")+'<q>Prioritizing aesthetics over crucial utilitarian upgrades? Color me impressed.</q>',99,[29,5]);Game.last.pool='prestige';Game.last.parents=['Classic dairy selection'];
 		
-		new Game.Upgrade('Legacy',loc("This is the first heavenly upgrade; it unlocks the <b>Heavenly chips</b> system.<div class=\"line\"></div>Each time you ascend, the cookies you made in your past life are turned into <b>heavenly chips</b> and <b>prestige</b>.<div class=\"line\"></div><b>Heavenly chips</b> can be spent on a variety of permanent transcendental upgrades.<div class=\"line\"></div>Your <b>prestige level</b> also gives you a permanent <b>+1% CpS</b> per level.")+'<q>We\'ve all been waiting for you.</q>',1,[21,6]);Game.last.pool='prestige';Game.last.parents=[];
+		new Game.Upgrade('Legacy',loc("This is the first heavenly upgrade; it unlocks the <b>Heavenly chips</b> system.<div class=\"line\"></div>Each time you ascend, the kookies you made in your past life are turned into <b>heavenly chips</b> and <b>prestige</b>.<div class=\"line\"></div><b>Heavenly chips</b> can be spent on a variety of permanent transcendental upgrades.<div class=\"line\"></div>Your <b>prestige level</b> also gives you a permanent <b>+1% CpS</b> per level.")+'<q>We\'ve all been waiting for you.</q>',1,[21,6]);Game.last.pool='prestige';Game.last.parents=[];
 		
-		new Game.Upgrade('Elder spice',loc("You can attract <b>%1 more wrinklers</b>.",2)+'<q>The cookie your cookie could smell like.</q>',444444,[19,8]);Game.last.pool='prestige';Game.last.parents=['Unholy bait'];
+		new Game.Upgrade('Elder spice',loc("You can attract <b>%1 more wrinklers</b>.",2)+'<q>The kookie your kookie could smell like.</q>',444444,[19,8]);Game.last.pool='prestige';Game.last.parents=['Unholy bait'];
 		
-		new Game.Upgrade('Residual luck',loc("While the golden switch is on, you gain an additional <b>+%1% CpS</b> per golden cookie upgrade owned.",10)+'<q>Fortune comes in many flavors.</q>',99999,[27,6]);Game.last.pool='prestige';Game.last.parents=['Golden switch'];
+		new Game.Upgrade('Residual luck',loc("While the golden switch is on, you gain an additional <b>+%1% CpS</b> per golden kookie upgrade owned.",10)+'<q>Fortune comes in many flavors.</q>',99999,[27,6]);Game.last.pool='prestige';Game.last.parents=['Golden switch'];
 		
 		order=150;new Game.Upgrade('Fantasteel mouse',getStrClickingGains(1)+'<q>You could be clicking using your touchpad and we\'d be none the wiser.</q>',5000000000000000000,[11,17]);Game.MakeTiered(Game.last,8,11);
 		new Game.Upgrade('Nevercrack mouse',getStrClickingGains(1)+'<q>How much beefier can you make a mouse until it\'s considered a rat?</q>',500000000000000000000,[11,18]);Game.MakeTiered(Game.last,9,11);
@@ -10495,7 +10495,7 @@ Game.Launch=function()
 		Game.SynergyUpgrade('Shipyards','<q>Where carpentry, blind luck, and asbestos insulation unite to produce the most dazzling spaceships on the planet.</q>','Shipment','Factory','synergy2');
 		
 		Game.SynergyUpgrade('Primordial ores','<q>Only when refining the purest metals will you extract the sweetest sap of the earth.</q>','Alchemy lab','Mine','synergy1');
-		Game.SynergyUpgrade('Gold fund','<q>If gold is the backbone of the economy, cookies, surely, are its hip joints.</q>','Alchemy lab','Bank','synergy2');
+		Game.SynergyUpgrade('Gold fund','<q>If gold is the backbone of the economy, kookies, surely, are its hip joints.</q>','Alchemy lab','Bank','synergy2');
 		
 		Game.SynergyUpgrade('Infernal crops','<q>Sprinkle regularly with FIRE.</q>','Portal','Farm','synergy1');
 		Game.SynergyUpgrade('Abysmal glimmer','<q>Someone, or something, is staring back at you.<br>Perhaps at all of us.</q>','Portal','Prism','synergy2');
@@ -10513,9 +10513,9 @@ Game.Launch=function()
 		new Game.Upgrade('Synergies Vol. I',loc("Unlocks a new tier of upgrades that affect <b>2 buildings at the same time</b>.<br>Synergies appear once you have <b>%1</b> of both buildings.",15)+'<q>The many beats the few.</q>',222222,[10,20]);Game.last.pool='prestige';Game.last.parents=['Satan','Dominions'];
 		new Game.Upgrade('Synergies Vol. II',loc("Unlocks a new tier of upgrades that affect <b>2 buildings at the same time</b>.<br>Synergies appear once you have <b>%1</b> of both buildings.",75)+'<q>The several beats the many.</q>',2222222,[10,29]);Game.last.pool='prestige';Game.last.parents=['Beelzebub','Seraphim','Synergies Vol. I'];
 		
-		new Game.Upgrade('Heavenly cookies',loc("Cookie production multiplier <b>+%1% permanently</b>.",10)+'<q>Baked with heavenly chips. An otherwordly flavor that transcends time and space.</q>',3,[25,12]);Game.last.pool='prestige';Game.last.parents=['Legacy'];Game.last.power=10;Game.last.pseudoCookie=true;
-		new Game.Upgrade('Wrinkly cookies',loc("Cookie production multiplier <b>+%1% permanently</b>.",10)+'<q>The result of regular cookies left to age out for countless eons in a place where time and space are meaningless.</q>',6666666,[26,12]);Game.last.pool='prestige';Game.last.parents=['Sacrilegious corruption','Elder spice'];Game.last.power=10;Game.last.pseudoCookie=true;
-		new Game.Upgrade('Distilled essence of redoubled luck',loc("Golden cookies (and all other things that spawn, such as reindeer) have <b>%1% chance of being doubled</b>.",1)+'<q>Tastes glittery. The empty phial makes for a great pencil holder.</q>',7777777,[27,12]);Game.last.pool='prestige';Game.last.parents=['Divine bakeries','Residual luck'];
+		new Game.Upgrade('Heavenly kookies',loc("Cookie production multiplier <b>+%1% permanently</b>.",10)+'<q>Baked with heavenly chips. An otherwordly flavor that transcends time and space.</q>',3,[25,12]);Game.last.pool='prestige';Game.last.parents=['Legacy'];Game.last.power=10;Game.last.pseudoCookie=true;
+		new Game.Upgrade('Wrinkly kookies',loc("Cookie production multiplier <b>+%1% permanently</b>.",10)+'<q>The result of regular kookies left to age out for countless eons in a place where time and space are meaningless.</q>',6666666,[26,12]);Game.last.pool='prestige';Game.last.parents=['Sacrilegious corruption','Elder spice'];Game.last.power=10;Game.last.pseudoCookie=true;
+		new Game.Upgrade('Distilled essence of redoubled luck',loc("Golden kookies (and all other things that spawn, such as reindeer) have <b>%1% chance of being doubled</b>.",1)+'<q>Tastes glittery. The empty phial makes for a great pencil holder.</q>',7777777,[27,12]);Game.last.pool='prestige';Game.last.parents=['Divine bakeries','Residual luck'];
 		
 		order=40000;
 		new Game.Upgrade('Occult obstruction',loc("Cookie production <b>reduced to 0</b>.")+'<q>If symptoms persist, consult a doctor.</q>',7,[15,5]);//debug purposes only
@@ -10527,23 +10527,23 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Lavender chocolate butter biscuit',desc:'Rewarded for owning 300 of everything.<br>This subtly-flavored biscuit represents the accomplishments of decades of top-secret research. The molded design on the chocolate resembles a well-known entrepreneur who gave their all to the ancient path of baking.',icon:[26,10],power:	10,price: 999999999999999999999999999999999*butterBiscuitMult,locked:1});
 		
 		order=10030;
-		Game.NewUpgradeCookie({name:'Lombardia cookies',desc:'These come from those farms with the really good memory.',icon:[23,13],require:'Box of brand biscuits',power:												3,	price:	999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Bastenaken cookies',desc:'French cookies made of delicious cinnamon and candy sugar. These do not contain Nuts!',icon:[24,13],require:'Box of brand biscuits',power:												3,	price:	999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Lombardia kookies',desc:'These come from those farms with the really good memory.',icon:[23,13],require:'Box of brand biscuits',power:												3,	price:	999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Bastenaken kookies',desc:'French kookies made of delicious cinnamon and candy sugar. These do not contain Nuts!',icon:[24,13],require:'Box of brand biscuits',power:												3,	price:	999999999999999999999*5});
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Pecan sandies',desc:'Stick a nut on a cookie and call it a day! Name your band after it! Whatever!',icon:[25,13],power:						4,price: 999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Moravian spice cookies',desc:'Popular for being the world\'s moravianest cookies.',icon:[26,13],power:						4,price: 9999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Pecan sandies',desc:'Stick a nut on a kookie and call it a day! Name your band after it! Whatever!',icon:[25,13],power:						4,price: 999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Moravian spice kookies',desc:'Popular for being the world\'s moravianest kookies.',icon:[26,13],power:						4,price: 9999999999999999999999999});
 		Game.NewUpgradeCookie({name:'Anzac biscuits',desc:'Army biscuits from a bakery down under, containing no eggs but yes oats.',icon:[27,13],power:						4,price: 9999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Buttercakes',desc:'Glistening with cholesterol, these cookies moistly straddle the line between the legal definition of a cookie and just a straight-up stick of butter.',icon:[29,13],power:						4,price: 99999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Buttercakes',desc:'Glistening with cholesterol, these kookies moistly straddle the line between the legal definition of a kookie and just a straight-up stick of butter.',icon:[29,13],power:						4,price: 99999999999999999999999999});
 		Game.NewUpgradeCookie({name:'Ice cream sandwiches',desc:'In an alternate universe, "ice cream sandwich" designates an ice cream cone filled with bacon, lettuce, and tomatoes. Maybe some sprinkles too.',icon:[28,13],power:						4,price: 99999999999999999999999999*5});
 		
-		new Game.Upgrade('Stevia Caelestis',loc("Sugar lumps ripen <b>%1</b> sooner.",Game.sayTime(60*60*Game.fps))+'<q>A plant of supernatural sweetness grown by angels in heavenly gardens.</q>',100000000,[25,15]);Game.last.pool='prestige';Game.last.parents=['Wrinkly cookies'];
+		new Game.Upgrade('Stevia Caelestis',loc("Sugar lumps ripen <b>%1</b> sooner.",Game.sayTime(60*60*Game.fps))+'<q>A plant of supernatural sweetness grown by angels in heavenly gardens.</q>',100000000,[25,15]);Game.last.pool='prestige';Game.last.parents=['Wrinkly kookies'];
 		new Game.Upgrade('Diabetica Daemonicus',loc("Sugar lumps mature <b>%1</b> sooner.",Game.sayTime(60*60*Game.fps))+'<q>A malevolent, if delicious herb that is said to grow on the cliffs of the darkest abyss of the underworld.</q>',300000000,[26,15]);Game.last.pool='prestige';Game.last.parents=['Stevia Caelestis','Lucifer'];
 		new Game.Upgrade('Sucralosia Inutilis',loc("Bifurcated sugar lumps appear <b>%1% more often</b> and are <b>%2% more likely</b> to drop 2 lumps.",[5,5])+'<q>A rare berry of uninteresting flavor that is as elusive as its uses are limited; only sought-after by the most avid collectors with too much wealth on their hands.</q>',1000000000,[27,15]);Game.last.pool='prestige';Game.last.parents=['Diabetica Daemonicus'];
 		
-		new Game.Upgrade('Lucky digit',loc("<b>+%1%</b> prestige level effect on CpS.<br><b>+%2%</b> golden cookie effect duration.<br><b>+%3%</b> golden cookie lifespan.",[1,1,1])+'<q>This upgrade is a bit shy and only appears when your prestige level contains a 7.</q>',777,[24,15]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];Game.last.showIf=function(){return (Math.ceil(((Game.prestige+'').split('7').length-1))>=1);};
-		new Game.Upgrade('Lucky number',loc("<b>+%1%</b> prestige level effect on CpS.<br><b>+%2%</b> golden cookie effect duration.<br><b>+%3%</b> golden cookie lifespan.",[1,1,1])+'<q>This upgrade is a reclusive hermit and only appears when your prestige level contains two 7\'s.</q>',77777,[24,15]);Game.last.pool='prestige';Game.last.parents=['Lucky digit','Lasting fortune'];Game.last.showIf=function(){return (Math.ceil(((Game.prestige+'').split('7').length-1))>=2);};
-		new Game.Upgrade('Lucky payout',loc("<b>+%1%</b> prestige level effect on CpS.<br><b>+%2%</b> golden cookie effect duration.<br><b>+%3%</b> golden cookie lifespan.",[1,1,1])+'<q>This upgrade took an oath of complete seclusion from the rest of the world and only appears when your prestige level contains four 7\'s.</q>',77777777,[24,15]);Game.last.pool='prestige';Game.last.parents=['Lucky number','Decisive fate'];Game.last.showIf=function(){return (Math.ceil(((Game.prestige+'').split('7').length-1))>=4);};
+		new Game.Upgrade('Lucky digit',loc("<b>+%1%</b> prestige level effect on CpS.<br><b>+%2%</b> golden kookie effect duration.<br><b>+%3%</b> golden kookie lifespan.",[1,1,1])+'<q>This upgrade is a bit shy and only appears when your prestige level contains a 7.</q>',777,[24,15]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];Game.last.showIf=function(){return (Math.ceil(((Game.prestige+'').split('7').length-1))>=1);};
+		new Game.Upgrade('Lucky number',loc("<b>+%1%</b> prestige level effect on CpS.<br><b>+%2%</b> golden kookie effect duration.<br><b>+%3%</b> golden kookie lifespan.",[1,1,1])+'<q>This upgrade is a reclusive hermit and only appears when your prestige level contains two 7\'s.</q>',77777,[24,15]);Game.last.pool='prestige';Game.last.parents=['Lucky digit','Lasting fortune'];Game.last.showIf=function(){return (Math.ceil(((Game.prestige+'').split('7').length-1))>=2);};
+		new Game.Upgrade('Lucky payout',loc("<b>+%1%</b> prestige level effect on CpS.<br><b>+%2%</b> golden kookie effect duration.<br><b>+%3%</b> golden kookie lifespan.",[1,1,1])+'<q>This upgrade took an oath of complete seclusion from the rest of the world and only appears when your prestige level contains four 7\'s.</q>',77777777,[24,15]);Game.last.pool='prestige';Game.last.parents=['Lucky number','Decisive fate'];Game.last.showIf=function(){return (Math.ceil(((Game.prestige+'').split('7').length-1))>=4);};
 		
 		order=50000;
 		new Game.Upgrade('Background selector',loc("Lets you pick which wallpaper to display."),0,[29,5]);
@@ -10618,10 +10618,10 @@ Game.Launch=function()
 		}
 		
 		order=255;
-		Game.GrandmaSynergy('Lucky grandmas','A fortunate grandma that always seems to find more cookies.','Chancemaker');
+		Game.GrandmaSynergy('Lucky grandmas','A fortunate grandma that always seems to find more kookies.','Chancemaker');
 		
 		order=1200;
-		Game.TieredUpgrade('Your lucky cookie','<q>This is the first cookie you\'ve ever baked. It holds a deep sentimental value and, after all this time, an interesting smell.</q>','Chancemaker',1);
+		Game.TieredUpgrade('Your lucky kookie','<q>This is the first kookie you\'ve ever baked. It holds a deep sentimental value and, after all this time, an interesting smell.</q>','Chancemaker',1);
 		Game.TieredUpgrade('"All Bets Are Off" magic coin','<q>A coin that always lands on the other side when flipped. Not heads, not tails, not the edge. The <i>other side</i>.</q>','Chancemaker',2);
 		Game.TieredUpgrade('Winning lottery ticket','<q>What lottery? THE lottery, that\'s what lottery! Only lottery that matters!</q>','Chancemaker',3);
 		Game.TieredUpgrade('Four-leaf clover field','<q>No giant monsters here, just a whole lot of lucky grass.</q>','Chancemaker',4);
@@ -10640,7 +10640,7 @@ Game.Launch=function()
 		var years=Math.floor((Date.now()-new Date(2013,7,8))/(1000*60*60*24*365));
 		//only updates on page load
 		//may behave strangely on leap years
-		Game.NewUpgradeCookie({name:'Birthday cookie',desc:'<q>-</q>',icon:[22,13],power:years,price:99999999999999999999999999999});Game.last.baseDesc=loc("Cookie production multiplier <b>+%1%</b> for every year Cookie Clicker has existed (currently: <b>+%2%</b>).",[1,Beautify(years)])+'<q>Thank you for playing Cookie Clicker!<br>-Orteil</q>';
+		Game.NewUpgradeCookie({name:'Birthday kookie',desc:'<q>-</q>',icon:[22,13],power:years,price:99999999999999999999999999999});Game.last.baseDesc=loc("Cookie production multiplier <b>+%1%</b> for every year Cookie Clicker has existed (currently: <b>+%2%</b>).",[1,Beautify(years)])+'<q>Thank you for playing Cookie Clicker!<br>-Orteil</q>';
 		
 		
 		order=150;new Game.Upgrade('Armythril mouse',getStrClickingGains(1)+'<q>This one takes about 53 people to push it around and another 48 to jump down on the button and trigger a click. You could say it\'s got some heft to it.</q>',50000000000000000000000,[11,19]);Game.MakeTiered(Game.last,10,11);
@@ -10668,11 +10668,11 @@ Game.Launch=function()
 		
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Pink biscuits',desc:'One of the oldest cookies. Traditionally dipped in champagne to soften it, because the French will use any opportunity to drink.',icon:[21,16],power:						4,price: 999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Whole-grain cookies',desc:'Covered in seeds and other earthy-looking debris. Really going for that "5-second rule" look.',icon:[22,16],power:						4,price: 999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Candy cookies',desc:'These melt in your hands just a little bit.',icon:[23,16],power:						4,price: 9999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Big chip cookies',desc:'You are in awe at the size of these chips. Absolute units.',icon:[24,16],power:						4,price: 9999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'One chip cookies',desc:'You get one.',icon:[25,16],power:						1,price: 99999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Pink biscuits',desc:'One of the oldest kookies. Traditionally dipped in champagne to soften it, because the French will use any opportunity to drink.',icon:[21,16],power:						4,price: 999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Whole-grain kookies',desc:'Covered in seeds and other earthy-looking debris. Really going for that "5-second rule" look.',icon:[22,16],power:						4,price: 999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Candy kookies',desc:'These melt in your hands just a little bit.',icon:[23,16],power:						4,price: 9999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Big chip kookies',desc:'You are in awe at the size of these chips. Absolute units.',icon:[24,16],power:						4,price: 9999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'One chip kookies',desc:'You get one.',icon:[25,16],power:						1,price: 99999999999999999999999999999});
 		
 		
 		new Game.Upgrade('Sugar baking',loc("Each unspent sugar lump (up to %1) gives <b>+%2% CpS</b>.<div class=\"warning\">Note: this means that spending sugar lumps will decrease your CpS until they grow back.</div>",[100,1])+'<q>To bake with the sugary essence of eons themselves, you must first learn to take your sweet time.</q>',200000000,[21,17]);Game.last.pool='prestige';Game.last.parents=['Stevia Caelestis'];
@@ -10692,12 +10692,12 @@ Game.Launch=function()
 		});
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Sprinkles cookies',desc:'A bit of festive decorating helps hide the fact that this might be one of the blandest cookies you\'ve ever tasted.',icon:[21,14],power:						4,price: 99999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Sprinkles kookies',desc:'A bit of festive decorating helps hide the fact that this might be one of the blandest kookies you\'ve ever tasted.',icon:[21,14],power:						4,price: 99999999999999999999999999999*5});
 		Game.NewUpgradeCookie({name:'Peanut butter blossoms',desc:'Topped with a scrumptious chocolate squirt, which is something we really wish we didn\'t just write.',icon:[22,14],power:						4,price: 999999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'No-bake cookies',desc:'You have no idea how these mysterious oven-less treats came to be or how they hold their shape. You\'re thinking either elephant glue or cold fusion.',icon:[21,15],power:						4,price: 999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Florentines',desc:'These make up for being the fruitcake of cookies by at least having the decency to feature chocolate.',icon:[26,16],power:						4,price: 9999999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Chocolate crinkles',desc:'Non-denominational cookies to celebrate year-round deliciousness, and certainly not Christmas or some other nonsense.',icon:[22,15],power:						4,price: 9999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Maple cookies',desc:'Made with syrup from a land where milk comes in bags, instead of spontaneously pooling at the bottom of your screen depending on your achievements.',icon:[21,13],power:						4,price: 99999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'No-bake kookies',desc:'You have no idea how these mysterious oven-less treats came to be or how they hold their shape. You\'re thinking either elephant glue or cold fusion.',icon:[21,15],power:						4,price: 999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Florentines',desc:'These make up for being the fruitcake of kookies by at least having the decency to feature chocolate.',icon:[26,16],power:						4,price: 9999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Chocolate crinkles',desc:'Non-denominational kookies to celebrate year-round deliciousness, and certainly not Christmas or some other nonsense.',icon:[22,15],power:						4,price: 9999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Maple kookies',desc:'Made with syrup from a land where milk comes in bags, instead of spontaneously pooling at the bottom of your screen depending on your achievements.',icon:[21,13],power:						4,price: 99999999999999999999999999999999});
 		
 		
 		order=40000;
@@ -10716,31 +10716,31 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Festivity loops',desc:'These garish biscuits are a perfect fit for children\'s birthday parties or the funerals of strange, eccentric billionaires.',icon:[25,17],require:'Box of brand biscuits',power:												2,	price:	999999999999999999999999*5});
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Persian rice cookies',desc:'Rose water and poppy seeds are the secret ingredients of these small, butter-free cookies.',icon:[28,15],power:						4,price: 99999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Norwegian cookies',desc:'A flat butter cookie with a sliver of candied cherry on top. It is said that these illustrate the bleakness of scandinavian existentialism.',icon:[22,20],power:						4,price: 999999999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Crispy rice cookies',desc:'Fun to make at home! Store-bought cookies are obsolete! Topple the system! There\'s marshmallows in these! Destroy capitalism!',icon:[23,20],power:						4,price: 999999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Ube cookies',desc:'The tint is obtained by the use of purple yams. According to color symbolism, these cookies are either noble, holy, or supervillains.',icon:[24,17],power:						4,price: 9999999999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Butterscotch cookies',desc:'The butterscotch chips are just the right amount of sticky, and make you feel like you\'re eating candy.',icon:[24,20],power:						4,price: 9999999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Speculaas',desc:'These crunchy, almost obnoxiously cinnamony cookies are a source of dutch pride. About the origin of the name, one can only speculate.',icon:[21,20],power:						4,price: 99999999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Persian rice kookies',desc:'Rose water and poppy seeds are the secret ingredients of these small, butter-free kookies.',icon:[28,15],power:						4,price: 99999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Norwegian kookies',desc:'A flat butter kookie with a sliver of candied cherry on top. It is said that these illustrate the bleakness of scandinavian existentialism.',icon:[22,20],power:						4,price: 999999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Crispy rice kookies',desc:'Fun to make at home! Store-bought kookies are obsolete! Topple the system! There\'s marshmallows in these! Destroy capitalism!',icon:[23,20],power:						4,price: 999999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Ube kookies',desc:'The tint is obtained by the use of purple yams. According to color symbolism, these kookies are either noble, holy, or supervillains.',icon:[24,17],power:						4,price: 9999999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Butterscotch kookies',desc:'The butterscotch chips are just the right amount of sticky, and make you feel like you\'re eating candy.',icon:[24,20],power:						4,price: 9999999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Speculaas',desc:'These crunchy, almost obnoxiously cinnamony kookies are a source of dutch pride. About the origin of the name, one can only speculate.',icon:[21,20],power:						4,price: 99999999999999999999999999999999999});
 		
 		order=10200;
 		Game.NewUpgradeCookie({name:'Elderwort biscuits',desc:'-',icon:[22,25],power:2,price:60*2,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(2)+'<br>'+loc("%1 are <b>%2%</b> more powerful.",[cap(Game.Objects['Grandma'].plural),2])+'<br>'+loc("Dropped by %1 plants.",loc("Elderwort").toLowerCase())+'<q>They taste incredibly stale, even when baked fresh.</q>';
-		Game.NewUpgradeCookie({name:'Bakeberry cookies',desc:'-',icon:[23,25],power:2,price:60,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(2)+'<br>'+loc("Dropped by %1 plants.",loc("Bakeberry").toLowerCase())+'<q>Really good dipped in hot chocolate.</q>';
-		Game.NewUpgradeCookie({name:'Duketater cookies',desc:'-',icon:[24,25],power:10,price:60*3,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(10)+'<br>'+loc("Dropped by %1 plants.",loc("Duketater").toLowerCase())+'<q>Fragrant and mealy, with a slight yellow aftertaste.</q>';
-		Game.NewUpgradeCookie({name:'Green yeast digestives',desc:'-',icon:[25,25],power:0,price:60*3,locked:1});Game.last.baseDesc=loc("Golden cookies give <b>%1%</b> more cookies.",1)+'<br>'+loc("Golden cookie effects last <b>%1%</b> longer.",1)+'<br>'+loc("Golden cookies appear <b>%1%</b> more often.",1)+'<br>'+loc("Random drops are <b>%1% more common</b>.",3)+'<br>'+loc("Dropped by %1 plants.",loc("Green rot").toLowerCase())+'<q>These are tastier than you\'d expect, but not by much.</q>';
+		Game.NewUpgradeCookie({name:'Bakeberry kookies',desc:'-',icon:[23,25],power:2,price:60,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(2)+'<br>'+loc("Dropped by %1 plants.",loc("Bakeberry").toLowerCase())+'<q>Really good dipped in hot chocolate.</q>';
+		Game.NewUpgradeCookie({name:'Duketater kookies',desc:'-',icon:[24,25],power:10,price:60*3,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(10)+'<br>'+loc("Dropped by %1 plants.",loc("Duketater").toLowerCase())+'<q>Fragrant and mealy, with a slight yellow aftertaste.</q>';
+		Game.NewUpgradeCookie({name:'Green yeast digestives',desc:'-',icon:[25,25],power:0,price:60*3,locked:1});Game.last.baseDesc=loc("Golden kookies give <b>%1%</b> more kookies.",1)+'<br>'+loc("Golden kookie effects last <b>%1%</b> longer.",1)+'<br>'+loc("Golden kookies appear <b>%1%</b> more often.",1)+'<br>'+loc("Random drops are <b>%1% more common</b>.",3)+'<br>'+loc("Dropped by %1 plants.",loc("Green rot").toLowerCase())+'<q>These are tastier than you\'d expect, but not by much.</q>';
 		
 		order=23000;
 		new Game.Upgrade('Fern tea',loc("You gain another <b>+%1%</b> of your regular CpS while the game is closed.",3)+' <small>('+loc("Must own the %1 upgrade.",getUpgradeName("Twin Gates of Transcendence"))+')</small>'+'<br>'+loc("Dropped by %1 plants.",loc("Drowsyfern").toLowerCase())+'<q>A chemically complex natural beverage, this soothing concoction has been used by mathematicians to solve equations in their sleep.</q>',60,[26,25]);
 		new Game.Upgrade('Ichor syrup',loc("You gain another <b>+%1%</b> of your regular CpS while the game is closed.",7)+' <small>('+loc("Must own the %1 upgrade.",getUpgradeName("Twin Gates of Transcendence"))+')</small>'+'<br>'+loc("Sugar lumps mature <b>%1</b> sooner.",Game.sayTime(7*60*Game.fps))+'<br>'+loc("Dropped by %1 plants.",loc("Ichorpuff").toLowerCase())+'<q>Tastes like candy. The smell is another story.</q>',60*2,[27,25]);
 		
 		order=10200;
-		Game.NewUpgradeCookie({name:'Wheat slims',desc:'-',icon:[28,25],power:1,price:30,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(1)+'<br>'+loc("Dropped by %1 plants.",loc("Baker's wheat").toLowerCase())+'<q>The only reason you\'d consider these to be cookies is because you feel slightly sorry for them.</q>';
+		Game.NewUpgradeCookie({name:'Wheat slims',desc:'-',icon:[28,25],power:1,price:30,locked:1});Game.last.baseDesc=getStrCookieProductionMultiplierPlus(1)+'<br>'+loc("Dropped by %1 plants.",loc("Baker's wheat").toLowerCase())+'<q>The only reason you\'d consider these to be kookies is because you feel slightly sorry for them.</q>';
 		
-		var gardenDrops=['Elderwort biscuits','Bakeberry cookies','Duketater cookies','Green yeast digestives','Fern tea','Ichor syrup','Wheat slims'];
+		var gardenDrops=['Elderwort biscuits','Bakeberry kookies','Duketater kookies','Green yeast digestives','Fern tea','Ichor syrup','Wheat slims'];
 		for (var i in gardenDrops)//scale by CpS
 		{
 			var it=Game.Upgrades[gardenDrops[i]];
-			it.priceFunc=function(cost){return function(){return cost*Game.cookiesPs*60;}}(it.basePrice);
+			it.priceFunc=function(cost){return function(){return cost*Game.kookiesPs*60;}}(it.basePrice);
 			it.baseDesc=it.baseDesc.replace('<q>','<br>'+loc("Cost scales with CpS.")+'<q>');
 			it.desc=BeautifyInText(it.baseDesc);
 			it.lasting=true;
@@ -10761,9 +10761,9 @@ Game.Launch=function()
 		order=525;Game.TieredUpgrade('Grand supercycles','<q>We let the public think these are complicated financial terms when really we\'re just rewarding the bankers with snazzy bicycles for a job well done. It\'s only natural after you built those fancy gold swimming pools for them, where they can take a dip and catch Kondratiev waves.</q>','Bank',10);
 		order=550;Game.TieredUpgrade('Psalm-reading','<q>A theologically dubious and possibly blasphemous blend of fortune-telling and scripture studies.</q>','Temple',10);
 		order=575;Game.TieredUpgrade('Immobile spellcasting','<q>Wizards who master this skill can now cast spells without having to hop and skip and gesticulate embarrassingly, which is much sneakier and honestly quite a relief.</q>','Wizard tower',10);
-		order=600;Game.TieredUpgrade('Restaurants at the end of the universe','<q>Since the universe is spatially infinite, and therefore can be construed to have infinite ends, you\'ve opened an infinite chain of restaurants where your space truckers can rest and partake in some home-brand cookie-based meals.</q>','Shipment',10);
+		order=600;Game.TieredUpgrade('Restaurants at the end of the universe','<q>Since the universe is spatially infinite, and therefore can be construed to have infinite ends, you\'ve opened an infinite chain of restaurants where your space truckers can rest and partake in some home-brand kookie-based meals.</q>','Shipment',10);
 		order=700;Game.TieredUpgrade('On second thought','<q>Disregard that last upgrade, alchemy is where it\'s at! Your eggheads just found a way to transmute children\'s nightmares into rare metals!</q>','Alchemy lab',10);
-		order=800;Game.TieredUpgrade('Dimensional garbage gulper','<q>So we\'ve been looking for a place to dispose of all the refuse that\'s been accumulating since we started baking - burnt cookies, failed experiments, unruly workers - and well, we figured rather than sell it to poor countries like we\'ve been doing, we could just dump it in some alternate trash dimension where it\'s not gonna bother anybody! Probably!</q>','Portal',10);
+		order=800;Game.TieredUpgrade('Dimensional garbage gulper','<q>So we\'ve been looking for a place to dispose of all the refuse that\'s been accumulating since we started baking - burnt kookies, failed experiments, unruly workers - and well, we figured rather than sell it to poor countries like we\'ve been doing, we could just dump it in some alternate trash dimension where it\'s not gonna bother anybody! Probably!</q>','Portal',10);
 		order=900;Game.TieredUpgrade('Additional clock hands','<q>It seemed like a silly idea at first, but it turns out these have the strange ability to twist time in interesting new ways.</q>','Time machine',10);
 		order=1000;Game.TieredUpgrade('Baking Nobel prize','<q>What better way to sponsor scientific growth than to motivate those smarmy nerds with a meaningless award! What\'s more, each prize comes with a fine print lifelong exclusive contract to come work for you (or else)!</q>','Antimatter condenser',10);
 		order=1100;Game.TieredUpgrade('Reverse theory of light','<q>A whole new world of physics opens up when you decide that antiphotons are real and posit that light is merely a void in shadow.</q>','Prism',10);
@@ -10773,7 +10773,7 @@ Game.Launch=function()
 		new Game.Upgrade('Kitten analysts',strKittenDesc+'<q>based on purrent return-on-investment meowdels we should be able to affurd to pay our empawyees somewhere around next century, sir</q>',900000000000000000000000000000000000000000,Game.GetIcon('Kitten',12));Game.last.kitten=1;Game.MakeTiered(Game.last,12,18);
 		
 		
-		new Game.Upgrade('Eye of the wrinkler',loc("Mouse over a wrinkler to see how many cookies are in its stomach.")+'<q>Just a wrinkler and its will to survive.<br>Hangin\' tough, stayin\' hungry.</q>',99999999,[27,26]);Game.last.pool='prestige';Game.last.parents=['Wrinkly cookies'];
+		new Game.Upgrade('Eye of the wrinkler',loc("Mouse over a wrinkler to see how many kookies are in its stomach.")+'<q>Just a wrinkler and its will to survive.<br>Hangin\' tough, stayin\' hungry.</q>',99999999,[27,26]);Game.last.pool='prestige';Game.last.parents=['Wrinkly kookies'];
 		
 		new Game.Upgrade('Inspired checklist',loc("Unlocks the <b>Buy all</b> feature, which lets you instantly purchase every upgrade in your store (starting from the cheapest one).<br>Also unlocks the <b>Vault</b>, a store section where you can place upgrades you do not wish to auto-buy.")+'<q>Snazzy grandma accessories? Check. Transdimensional abominations? Check. A bunch of eggs for some reason? Check. Machine that goes "ping"? Check and check.</q>',900000,[28,26]);Game.last.pool='prestige';Game.last.parents=['Persistent memory','Permanent upgrade slot II'];
 		
@@ -10781,17 +10781,17 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Pure pitch-black chocolate butter biscuit',desc:'Rewarded for owning 500 of everything.<br>This chocolate is so pure and so flawless that it has no color of its own, instead taking on the appearance of whatever is around it. You\'re a bit surprised to notice that this one isn\'t stamped with your effigy, as its surface is perfectly smooth (to the picometer) - until you realize it\'s quite literally reflecting your own face like a mirror.',icon:[24,27],power:	10,price: 999999999999999999999999999999999999999999999*butterBiscuitMult,locked:1});
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Chocolate oatmeal cookies',desc:'These bad boys compensate for lack of a cohesive form and a lumpy, unsightly appearance by being just simply delicious. Something we should all aspire to.',icon:[23,28],power:						4,price: 99999999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Molasses cookies',desc:'Sticky, crackly, and dusted in fine sugar.<br>Some lunatics have been known to eat these with potatoes.',icon:[24,28],power:						4,price: 999999999999999999999999999999999999});
-		Game.NewUpgradeCookie({name:'Biscotti',desc:'Almonds and pistachios make these very robust cookies slightly more interesting to eat than to bludgeon people with.',icon:[22,28],power:						4,price: 999999999999999999999999999999999999*5});
-		Game.NewUpgradeCookie({name:'Waffle cookies',desc:'Whether these are cookies with shockingly waffle-like features or simply regular cookie-sized waffles is a debate we\'re not getting into here.',icon:[21,28],power:						4,price: 9999999999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Chocolate oatmeal kookies',desc:'These bad boys compensate for lack of a cohesive form and a lumpy, unsightly appearance by being just simply delicious. Something we should all aspire to.',icon:[23,28],power:						4,price: 99999999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Molasses kookies',desc:'Sticky, crackly, and dusted in fine sugar.<br>Some lunatics have been known to eat these with potatoes.',icon:[24,28],power:						4,price: 999999999999999999999999999999999999});
+		Game.NewUpgradeCookie({name:'Biscotti',desc:'Almonds and pistachios make these very robust kookies slightly more interesting to eat than to bludgeon people with.',icon:[22,28],power:						4,price: 999999999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Waffle kookies',desc:'Whether these are kookies with shockingly waffle-like features or simply regular kookie-sized waffles is a debate we\'re not getting into here.',icon:[21,28],power:						4,price: 9999999999999999999999999999999999999});
 		
 		
 		order=10000;
-		//early cookies that unlock at the same time as coconut cookies; meant to boost early game a little bit
-		Game.NewUpgradeCookie({name:'Almond cookies',desc:'Sometimes you feel like one of these. Sometimes you don\'t.',icon:[21,27],power:							2,	price:	99999999});
-		Game.NewUpgradeCookie({name:'Hazelnut cookies',desc:'Tastes like a morning stroll through a fragrant forest, minus the clouds of gnats.',icon:[22,27],power:							2,	price:	99999999});
-		Game.NewUpgradeCookie({name:'Walnut cookies',desc:'Some experts have pointed to the walnut\'s eerie resemblance to the human brain as a sign of its sentience - a theory most walnuts vehemently object to.',icon:[23,27],power:							2,	price:	99999999});
+		//early kookies that unlock at the same time as coconut kookies; meant to boost early game a little bit
+		Game.NewUpgradeCookie({name:'Almond kookies',desc:'Sometimes you feel like one of these. Sometimes you don\'t.',icon:[21,27],power:							2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Hazelnut kookies',desc:'Tastes like a morning stroll through a fragrant forest, minus the clouds of gnats.',icon:[22,27],power:							2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Walnut kookies',desc:'Some experts have pointed to the walnut\'s eerie resemblance to the human brain as a sign of its sentience - a theory most walnuts vehemently object to.',icon:[23,27],power:							2,	price:	99999999});
 		
 		
 		new Game.Upgrade('Label printer',loc("Mouse over an upgrade to see its tier.<br><small>Note: only some upgrades have tiers. Tiers are purely cosmetic and have no effect on gameplay.</small>")+'<q>Also comes in real handy when you want to tell catsup apart from ketchup.</q>',5000000,[28,29]);Game.last.pool='prestige';Game.last.parents=['Genius accounting'];
@@ -10803,33 +10803,33 @@ Game.Launch=function()
 		order=300;Game.TieredUpgrade('Lindworms','<q>You have to import these from far up north, but they really help aerate the soil!</q>','Farm',11);
 		order=400;Game.TieredUpgrade('Bore again','<q>After extracting so much sediment for so long, you\'ve formed some veritable mountains of your own from the accumulated piles of rock and dirt. Time to dig through those and see if you find anything fun!</q>','Mine',11);
 		order=500;Game.TieredUpgrade('"Volunteer" interns','<q>If you\'re bad at something, always do it for free.</q>','Factory',11);
-		order=525;Game.TieredUpgrade('Rules of acquisition','<q>Rule 387 : a cookie baked is a cookie kept.</q>','Bank',11);
+		order=525;Game.TieredUpgrade('Rules of acquisition','<q>Rule 387 : a kookie baked is a kookie kept.</q>','Bank',11);
 		order=550;Game.TieredUpgrade('War of the gods','<q>An interesting game; the only winning move is not to pray.</q>','Temple',11);
 		order=575;Game.TieredUpgrade('Electricity','<q>Ancient magicks and forbidden hexes shroud this arcane knowledge, whose unfathomable power can mysteriously turn darkness into light and shock an elephant to death.</q>','Wizard tower',11);
-		order=600;Game.TieredUpgrade('Universal alphabet','<q>You\'ve managed to chart a language that can be understood by any sentient species in the galaxy; its exciting vocabulary contains over 56 trillion words that sound and look like sparkly burps, forming intricate sentences that usually translate to something like "give us your cookies, or else".</q>','Shipment',11);
-		order=700;Game.TieredUpgrade('Public betterment','<q>Why do we keep trying to change useless matter into cookies, or cookies into even better cookies? Clearly, the way of the future is to change the people who eat the cookies into people with a greater understanding, appreciation and respect for the cookies they\'re eating. Into the vat you go!</q>','Alchemy lab',11);
-		order=800;Game.TieredUpgrade('Embedded microportals','<q>We\'ve found out that if we bake the portals into the cookies themselves, we can transport people\'s taste buds straight into the taste dimension! Good thing your army of lawyers got rid of the FDA a while ago!</q>','Portal',11);
-		order=900;Game.TieredUpgrade('Nostalgia','<q>Your time machine technicians insist that this is some advanced new time travel tech, and not just an existing emotion universal to mankind. Either way, you have to admit that selling people the same old cookies just because it reminds them of the good old times is an interesting prospect.</q>','Time machine',11);
-		order=1000;Game.TieredUpgrade('The definite molecule','<q>Your scientists have found a way to pack a cookie into one single continuous molecule, opening exciting new prospects in both storage and flavor despite the fact that these take up to a whole year to digest.</q>','Antimatter condenser',11);
-		order=1100;Game.TieredUpgrade('Light capture measures','<q>As the universe gets ever so slightly dimmer due to you converting more and more of its light into cookies, you\'ve taken to finding new and unexplored sources of light for your prisms; for instance, the warm glow emitted by a pregnant woman, or the twinkle in the eye of a hopeful child.</q>','Prism',11);
+		order=600;Game.TieredUpgrade('Universal alphabet','<q>You\'ve managed to chart a language that can be understood by any sentient species in the galaxy; its exciting vocabulary contains over 56 trillion words that sound and look like sparkly burps, forming intricate sentences that usually translate to something like "give us your kookies, or else".</q>','Shipment',11);
+		order=700;Game.TieredUpgrade('Public betterment','<q>Why do we keep trying to change useless matter into kookies, or kookies into even better kookies? Clearly, the way of the future is to change the people who eat the kookies into people with a greater understanding, appreciation and respect for the kookies they\'re eating. Into the vat you go!</q>','Alchemy lab',11);
+		order=800;Game.TieredUpgrade('Embedded microportals','<q>We\'ve found out that if we bake the portals into the kookies themselves, we can transport people\'s taste buds straight into the taste dimension! Good thing your army of lawyers got rid of the FDA a while ago!</q>','Portal',11);
+		order=900;Game.TieredUpgrade('Nostalgia','<q>Your time machine technicians insist that this is some advanced new time travel tech, and not just an existing emotion universal to mankind. Either way, you have to admit that selling people the same old kookies just because it reminds them of the good old times is an interesting prospect.</q>','Time machine',11);
+		order=1000;Game.TieredUpgrade('The definite molecule','<q>Your scientists have found a way to pack a kookie into one single continuous molecule, opening exciting new prospects in both storage and flavor despite the fact that these take up to a whole year to digest.</q>','Antimatter condenser',11);
+		order=1100;Game.TieredUpgrade('Light capture measures','<q>As the universe gets ever so slightly dimmer due to you converting more and more of its light into kookies, you\'ve taken to finding new and unexplored sources of light for your prisms; for instance, the warm glow emitted by a pregnant woman, or the twinkle in the eye of a hopeful child.</q>','Prism',11);
 		order=1200;Game.TieredUpgrade('0-sided dice','<q>The advent of the 0-sided dice has had unexpected and tumultuous effects on the gambling community, and saw experts around the world calling you both a genius and an imbecile.</q>','Chancemaker',11);
 		
 		
 		new Game.Upgrade('Heralds',loc("You now benefit from the boost provided by <b>heralds</b>.<br>Each herald gives you <b>+1% CpS</b>.<br>Look on the purple flag at the top to see how many heralds are active at any given time.")+(App?'<q>It\'s getting steamy.</q>':'<q>Be excellent to each other.<br>And Patreon, dudes!</q>'),100,[21,29]);Game.last.pool='prestige';
 		
 		order=255;
-		Game.GrandmaSynergy('Metagrandmas','A fractal grandma to make more grandmas to make more cookies.','Fractal engine');
+		Game.GrandmaSynergy('Metagrandmas','A fractal grandma to make more grandmas to make more kookies.','Fractal engine');
 		
 		order=1300;
 		Game.TieredUpgrade('Metabakeries','<q>They practically bake themselves!</q>','Fractal engine',1);
 		Game.TieredUpgrade('Mandelbrown sugar','<q>A substance that displays useful properties such as fractal sweetness and instant contact lethality.</q>','Fractal engine',2);
 		Game.TieredUpgrade('Fractoids','<q>Here\'s a frun fract : all in all, these were a terrible idea.</q>','Fractal engine',3);
-		Game.TieredUpgrade('Nested universe theory','<q>Asserts that each subatomic particle is host to a whole new universe, and therefore, another limitless quantity of cookies.<br>This somehow stacks with the theory of nanocosmics, because physics.</q>','Fractal engine',4);
+		Game.TieredUpgrade('Nested universe theory','<q>Asserts that each subatomic particle is host to a whole new universe, and therefore, another limitless quantity of kookies.<br>This somehow stacks with the theory of nanocosmics, because physics.</q>','Fractal engine',4);
 		Game.TieredUpgrade('Menger sponge cake','<q>Frighteningly absorbent thanks to its virtually infinite surface area. Keep it isolated in a dry chamber, never handle it with an open wound, and do not ever let it touch a body of water.</q>','Fractal engine',5);
 		Game.TieredUpgrade('One particularly good-humored cow','<q>This unassuming bovine was excruciatingly expensive and it may seem at first like you were ripped off. On closer inspection however, you notice that its earrings (it\'s wearing earrings) are actually fully functional copies of itself, each of which also wearing their own cow earrings, and so on, infinitely. It appears your dairy concerns will be taken care of for a while, although you\'ll have to put up with the cow\'s annoying snickering.</q>','Fractal engine',6);
 		Game.TieredUpgrade('Chocolate ouroboros','<q>Forever eating its own tail and digesting itself, in a metabolically dubious tale of delicious tragedy.</q>','Fractal engine',7);
 		Game.TieredUpgrade('Nested','<q>Clever self-reference or shameful cross-promotion? This upgrade apparently has the gall to advertise a link to <u>orteil.dashnet.org/nested</u>, in a tooltip you can\'t even click.</q>','Fractal engine',8);
-		Game.TieredUpgrade('Space-filling fibers','<q>This special ingredient has the incredible ability to fill the local space perfectly, effectively eradicating hunger in those who consume it!<br>Knowing that no hunger means no need for cookies, your marketers urge you to repurpose this product into next-level packing peanuts.</q>','Fractal engine',9);
+		Game.TieredUpgrade('Space-filling fibers','<q>This special ingredient has the incredible ability to fill the local space perfectly, effectively eradicating hunger in those who consume it!<br>Knowing that no hunger means no need for kookies, your marketers urge you to repurpose this product into next-level packing peanuts.</q>','Fractal engine',9);
 		Game.TieredUpgrade('Endless book of prose','','Fractal engine',10);
 		if (EN)
 		{
@@ -10866,9 +10866,9 @@ Game.Launch=function()
 		new Game.Upgrade('Keepsakes',loc("Seasonal random drops have a <b>1/5 chance</b> to carry over through ascensions.")+'<q>Cherish the memories.</q>',1111111111,[22,29]);Game.last.pool='prestige';Game.last.parents=['Starsnow','Starlove','Starterror','Startrade','Starspawn'];
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Mini-cookies',desc:'Have you ever noticed how the smaller something is, the easier it is to binge on it?',icon:[29,30],power:						5,price: 99999999999999999999999999999999999999*5});
+		Game.NewUpgradeCookie({name:'Mini-kookies',desc:'Have you ever noticed how the smaller something is, the easier it is to binge on it?',icon:[29,30],power:						5,price: 99999999999999999999999999999999999999*5});
 		
-		new Game.Upgrade('Sugar crystal cookies',(EN?'Cookie production multiplier <b>+5% permanently</b>, and <b>+1%</b> for every building type level 10 or higher.':loc("Cookie production multiplier <b>+%1% permanently</b>.",5)+'<br>'+loc("Cookie production multiplier <b>+%1%</b> for every building type level %2 or higher.",[1,10]))+'<q>Infused with cosmic sweetness. It gives off a faint shimmery sound when you hold it up to your ear.</q>',1000000000,[21,30]);Game.last.pool='prestige';Game.last.parents=['Sugar baking'];Game.last.power=function(){
+		new Game.Upgrade('Sugar crystal kookies',(EN?'Cookie production multiplier <b>+5% permanently</b>, and <b>+1%</b> for every building type level 10 or higher.':loc("Cookie production multiplier <b>+%1% permanently</b>.",5)+'<br>'+loc("Cookie production multiplier <b>+%1%</b> for every building type level %2 or higher.",[1,10]))+'<q>Infused with cosmic sweetness. It gives off a faint shimmery sound when you hold it up to your ear.</q>',1000000000,[21,30]);Game.last.pool='prestige';Game.last.parents=['Sugar baking'];Game.last.power=function(){
 			var n=5;
 			for (var i in Game.Objects)
 			{
@@ -10884,9 +10884,9 @@ Game.Launch=function()
 			}
 			return '<div style="text-align:center;">'+loc("Current:")+' <b>+'+Beautify(n)+'%</b><div class="line"></div></div>'+this.ddesc;
 		};
-		new Game.Upgrade('Box of maybe cookies',loc("Contains an assortment of...something.")+'<q>These may or may not be considered cookies.</q>',333000000000,[25,29]);Game.last.pool='prestige';Game.last.parents=['Sugar crystal cookies'];
-		new Game.Upgrade('Box of not cookies',loc("Contains an assortment of...something.")+'<q>These are strictly, definitely not cookies.</q>',333000000000,[26,29]);Game.last.pool='prestige';Game.last.parents=['Sugar crystal cookies'];
-		new Game.Upgrade('Box of pastries',loc("Contains an assortment of delicious pastries.")+'<q>These are a damn slippery slope is what they are!</q>',333000000000,[27,29]);Game.last.pool='prestige';Game.last.parents=['Sugar crystal cookies'];
+		new Game.Upgrade('Box of maybe kookies',loc("Contains an assortment of...something.")+'<q>These may or may not be considered kookies.</q>',333000000000,[25,29]);Game.last.pool='prestige';Game.last.parents=['Sugar crystal kookies'];
+		new Game.Upgrade('Box of not kookies',loc("Contains an assortment of...something.")+'<q>These are strictly, definitely not kookies.</q>',333000000000,[26,29]);Game.last.pool='prestige';Game.last.parents=['Sugar crystal kookies'];
+		new Game.Upgrade('Box of pastries',loc("Contains an assortment of delicious pastries.")+'<q>These are a damn slippery slope is what they are!</q>',333000000000,[27,29]);Game.last.pool='prestige';Game.last.parents=['Sugar crystal kookies'];
 		
 		order=10040;
 		Game.NewUpgradeCookie({name:'Profiteroles',desc:'Also known as cream puffs, these pastries are light, fluffy, filled with whipped cream and fun to throw at people when snowballs are running scarce.',icon:[29,29],require:'Box of pastries',		power:4,price: Math.pow(10,31)});
@@ -10899,30 +10899,30 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Butter croissant',desc:'Look around.<br>A rude man in a striped shirt bikes past you. He smells of cigarettes and caf&eacute;-au-lait. Somewhere, a mime uses his moustache to make fun of the British. 300 pigeons fly overhead.<br>Relax. You\'re experiencing croissant.',icon:[29,28],require:'Box of pastries',		power:4,price: Math.pow(10,45)});
 		
 		order=10050;
-		Game.NewUpgradeCookie({name:'Cookie dough',desc:'Bursting with infinite potential, but can also be eaten as is. Arguably worth the salmonella.',icon:[25,30],require:'Box of maybe cookies',		power:4,price: Math.pow(10,35)});
-		Game.NewUpgradeCookie({name:'Burnt cookie',desc:'This cookie flew too close to the sun and is now a shadow of its former self. If only you remembered to set a timer, you wouldn\'t have this tragedy on your hands...',icon:[23,30],require:'Box of maybe cookies',		power:4,price: Math.pow(10,37)});
-		Game.NewUpgradeCookie({name:'A chocolate chip cookie but with the chips picked off for some reason',desc:'This has to be the saddest thing you\'ve ever seen.',icon:[24,30],require:'Box of maybe cookies',		power:3,price: Math.pow(10,39)});
-		Game.NewUpgradeCookie({name:'Flavor text cookie',desc:'What you\'re currently reading is what gives this cookie its inimitable flavor.',icon:[22,30],require:'Box of maybe cookies',		power:4,price: Math.pow(10,41)});
-		Game.NewUpgradeCookie({name:'High-definition cookie',desc:'Uncomfortably detailed, like those weird stories your aunt keeps telling at parties.',icon:[28,10],require:'Box of maybe cookies',		power:5,price: Math.pow(10,43)});
+		Game.NewUpgradeCookie({name:'Cookie dough',desc:'Bursting with infinite potential, but can also be eaten as is. Arguably worth the salmonella.',icon:[25,30],require:'Box of maybe kookies',		power:4,price: Math.pow(10,35)});
+		Game.NewUpgradeCookie({name:'Burnt kookie',desc:'This kookie flew too close to the sun and is now a shadow of its former self. If only you remembered to set a timer, you wouldn\'t have this tragedy on your hands...',icon:[23,30],require:'Box of maybe kookies',		power:4,price: Math.pow(10,37)});
+		Game.NewUpgradeCookie({name:'A chocolate chip kookie but with the chips picked off for some reason',desc:'This has to be the saddest thing you\'ve ever seen.',icon:[24,30],require:'Box of maybe kookies',		power:3,price: Math.pow(10,39)});
+		Game.NewUpgradeCookie({name:'Flavor text kookie',desc:'What you\'re currently reading is what gives this kookie its inimitable flavor.',icon:[22,30],require:'Box of maybe kookies',		power:4,price: Math.pow(10,41)});
+		Game.NewUpgradeCookie({name:'High-definition kookie',desc:'Uncomfortably detailed, like those weird stories your aunt keeps telling at parties.',icon:[28,10],require:'Box of maybe kookies',		power:5,price: Math.pow(10,43)});
 		
 		order=10060;
-		Game.NewUpgradeCookie({name:'Toast',desc:'A crisp slice of bread, begging for some butter and jam.<br>Why do people keep proposing these at parties?',icon:[27,10],require:'Box of not cookies',		power:4,price: Math.pow(10,34)});
-		Game.NewUpgradeCookie({name:'Peanut butter & jelly',desc:'It\'s time.',icon:[29,9],require:'Box of not cookies',		power:4,price: Math.pow(10,36)});
-		Game.NewUpgradeCookie({name:'Wookies',desc:'These aren\'t the cookies you\'re looking for.',icon:[26,30],require:'Box of not cookies',		power:4,price: Math.pow(10,38)});
-		Game.NewUpgradeCookie({name:'Cheeseburger',desc:'Absolutely no relation to cookies whatsoever - Orteil just wanted an excuse to draw a cheeseburger.',icon:[28,30],require:'Box of not cookies',		power:4,price: Math.pow(10,40)});
-		Game.NewUpgradeCookie({name:'One lone chocolate chip',desc:'The start of something beautiful.',icon:[27,30],require:'Box of not cookies',		power:1,price: Math.pow(10,42)});
+		Game.NewUpgradeCookie({name:'Toast',desc:'A crisp slice of bread, begging for some butter and jam.<br>Why do people keep proposing these at parties?',icon:[27,10],require:'Box of not kookies',		power:4,price: Math.pow(10,34)});
+		Game.NewUpgradeCookie({name:'Peanut butter & jelly',desc:'It\'s time.',icon:[29,9],require:'Box of not kookies',		power:4,price: Math.pow(10,36)});
+		Game.NewUpgradeCookie({name:'Wookies',desc:'These aren\'t the kookies you\'re looking for.',icon:[26,30],require:'Box of not kookies',		power:4,price: Math.pow(10,38)});
+		Game.NewUpgradeCookie({name:'Cheeseburger',desc:'Absolutely no relation to kookies whatsoever - Orteil just wanted an excuse to draw a cheeseburger.',icon:[28,30],require:'Box of not kookies',		power:4,price: Math.pow(10,40)});
+		Game.NewUpgradeCookie({name:'One lone chocolate chip',desc:'The start of something beautiful.',icon:[27,30],require:'Box of not kookies',		power:1,price: Math.pow(10,42)});
 		
 		
 		new Game.Upgrade('Genius accounting',loc("Unlocks <b>extra price information</b>.<br>Each displayed cost now specifies how long it'll take you to afford it, and how much of your bank it represents.")+'<q>There\'s no accounting for taste, and yet here we are.</q>',2000000,[11,10]);Game.last.pool='prestige';Game.last.parents=['Inspired checklist'];
 		
 		
-		new Game.Upgrade('Shimmering veil',loc("Unlocks the <b>shimmering veil</b>, a switch that passively boosts your CpS by <b>%1%</b>.<br>You start with the veil turned on; however, it is very fragile, and clicking the big cookie or any golden cookie or reindeer will turn it off, requiring %2 of CpS to turn back on.",[50,Game.sayTime(24*60*60*Game.fps,2)])+'<q>Hands off!</q>',999999999,[9,10]);Game.last.pool='prestige';Game.last.parents=['Distilled essence of redoubled luck'];
+		new Game.Upgrade('Shimmering veil',loc("Unlocks the <b>shimmering veil</b>, a switch that passively boosts your CpS by <b>%1%</b>.<br>You start with the veil turned on; however, it is very fragile, and clicking the big kookie or any golden kookie or reindeer will turn it off, requiring %2 of CpS to turn back on.",[50,Game.sayTime(24*60*60*Game.fps,2)])+'<q>Hands off!</q>',999999999,[9,10]);Game.last.pool='prestige';Game.last.parents=['Distilled essence of redoubled luck'];
 		
 		order=40005;
 		var func=function(){
 			var boost=Game.getVeilBoost();
 			var resist=Game.getVeilDefense();
-			return (this.name=='Shimmering veil [on]'?'<div style="text-align:center;">'+loc("Active.")+'</div><div class="line"></div>':'')+loc("Boosts your cookie production by <b>%1%</b> when active.<br>The veil is very fragile and will break if you click the big cookie or any golden cookies or reindeer.<br><br>Once broken, turning the veil back on costs %2 of unbuffed CpS.",[Beautify(boost*100),Game.sayTime(24*60*60*Game.fps,2)])+(resist>0?('<br><br>'+loc("Has a <b>%1%</b> chance to not break.",Beautify(resist*100))):'');
+			return (this.name=='Shimmering veil [on]'?'<div style="text-align:center;">'+loc("Active.")+'</div><div class="line"></div>':'')+loc("Boosts your kookie production by <b>%1%</b> when active.<br>The veil is very fragile and will break if you click the big kookie or any golden kookies or reindeer.<br><br>Once broken, turning the veil back on costs %2 of unbuffed CpS.",[Beautify(boost*100),Game.sayTime(24*60*60*Game.fps,2)])+(resist>0?('<br><br>'+loc("Has a <b>%1%</b> chance to not break.",Beautify(resist*100))):'');
 		};
 		new Game.Upgrade('Shimmering veil [off]','',1000000,[9,10]);
 		Game.last.pool='toggle';Game.last.toggleInto='Shimmering veil [on]';
@@ -10939,7 +10939,7 @@ Game.Launch=function()
 			if (Game.Has('Reinforced membrane'))
 			{
 				if (context=='shimmer') Math.seedrandom(Game.seed+'/'+(Game.goldenClicks+Game.reindeerClicked));
-				else if (context=='click') Math.seedrandom(Game.seed+'/'+Game.cookieClicks);
+				else if (context=='click') Math.seedrandom(Game.seed+'/'+Game.kookieClicks);
 				if (Math.random()<Game.getVeilDefense())
 				{
 					Game.Notify(loc("The reinforced membrane protects the shimmering veil."),'',[7,10]);
@@ -10966,32 +10966,32 @@ Game.Launch=function()
 		order=10020;
 		Game.NewUpgradeCookie({name:'Whoopie pies',desc:'Two chocolate halves joined together by a cream filling. It\'s got no eyebrows, but you never noticed until now.',icon:[21,31],power:						5,price: getCookiePrice(1)});
 		Game.NewUpgradeCookie({name:'Caramel wafer biscuits',desc:'Coated in delicious chocolate. As many layers as you\'ll get in a biscuit without involving onions.',icon:[22,31],power:						5,price: getCookiePrice(2)});
-		Game.NewUpgradeCookie({name:'Chocolate chip mocha cookies',desc:'Mocha started out as an excuse to smuggle chocolate into coffee. And now, in a poignant display of diplomacy and cultural exchange, it\'s bringing coffee to chocolate cookies.',icon:[23,31],power:						5,price: getCookiePrice(3)});
-		Game.NewUpgradeCookie({name:'Earl Grey cookies',desc:'Captain Picard\'s favorite.',icon:[24,31],power:						5,price: getCookiePrice(4)});
-		Game.NewUpgradeCookie({name:'Corn syrup cookies',desc:'The corn syrup makes it extra chewy. Not the type of stuff you\'d think to put in a cookie, but bakers make do.',icon:[25,31],power:						5,price: getCookiePrice(5)});
-		Game.NewUpgradeCookie({name:'Icebox cookies',desc:'Can be prepared in a variety of shapes with a variety of ingredients. Made by freezing dough before baking it, mirroring a time-proven medieval torture practice. Gotta keep them guessing.',icon:[26,31],power:						5,price: getCookiePrice(6)});
+		Game.NewUpgradeCookie({name:'Chocolate chip mocha kookies',desc:'Mocha started out as an excuse to smuggle chocolate into coffee. And now, in a poignant display of diplomacy and cultural exchange, it\'s bringing coffee to chocolate kookies.',icon:[23,31],power:						5,price: getCookiePrice(3)});
+		Game.NewUpgradeCookie({name:'Earl Grey kookies',desc:'Captain Picard\'s favorite.',icon:[24,31],power:						5,price: getCookiePrice(4)});
+		Game.NewUpgradeCookie({name:'Corn syrup kookies',desc:'The corn syrup makes it extra chewy. Not the type of stuff you\'d think to put in a kookie, but bakers make do.',icon:[25,31],power:						5,price: getCookiePrice(5)});
+		Game.NewUpgradeCookie({name:'Icebox kookies',desc:'Can be prepared in a variety of shapes with a variety of ingredients. Made by freezing dough before baking it, mirroring a time-proven medieval torture practice. Gotta keep them guessing.',icon:[26,31],power:						5,price: getCookiePrice(6)});
 		Game.NewUpgradeCookie({name:'Graham crackers',desc:'Inspired in their design by the wish to live a life of austere temperance, free from pleasure or cheer; it\'s no wonder these are so tasty.',icon:[27,31],power:						5,price: getCookiePrice(7)});
 		Game.NewUpgradeCookie({name:'Hardtack',desc:'Extremely hard and, if we\'re being honest, extremely tack.<br>If you\'re considering eating this as a fun snack, you probably have other things to worry about than this game, like getting scurvy or your crew fomenting mutiny.',icon:[28,31],power:						5,price: getCookiePrice(8)});
-		Game.NewUpgradeCookie({name:'Cornflake cookies',desc:'They\'re grrrrrroovy! Careful not to let it sit in your milk too long, lest you accidentally end up with a bowl of cereal and get confused.',icon:[29,31],power:						5,price: getCookiePrice(9)});
-		Game.NewUpgradeCookie({name:'Tofu cookies',desc:'There\'s really two ways to go with tofu cooking; either it asserts itself in plain sight or it camouflages itself in the other ingredients. This happens to be the latter, and as such, you can\'t really tell the difference between this and a regular cookie, save for that one pixel on the left.',icon:[30,31],power:						5,price: getCookiePrice(10)});
-		Game.NewUpgradeCookie({name:'Gluten-free cookies',desc:'Made with browned butter and milk to closely match the archetypal chocolate chip cookie.<br>For celiacs, a chance to indulge in a delicious risk-free pastry. For others, a strangely threatening confection whose empty eyes will never know heaven nor hell.',icon:[30,30],power:						5,price: getCookiePrice(10)});
-		Game.NewUpgradeCookie({name:'Russian bread cookies',desc:'Also known as alphabet cookies; while most bakers follow the recipe to the letter, it is said that some substitute the flour for spelt. But don\'t take my word for it.',icon:[30,29],power:						5,price: getCookiePrice(11)});
-		Game.NewUpgradeCookie({name:'Lebkuchen',desc:'Diverse cookies from Germany, fragrant with honey and spices, often baked around Christmas.<br>Once worn by warriors of old for protection in battle.<br>+5 STR, +20% magic resistance.',icon:[30,28],power:						5,price: getCookiePrice(12)});
+		Game.NewUpgradeCookie({name:'Cornflake kookies',desc:'They\'re grrrrrroovy! Careful not to let it sit in your milk too long, lest you accidentally end up with a bowl of cereal and get confused.',icon:[29,31],power:						5,price: getCookiePrice(9)});
+		Game.NewUpgradeCookie({name:'Tofu kookies',desc:'There\'s really two ways to go with tofu cooking; either it asserts itself in plain sight or it camouflages itself in the other ingredients. This happens to be the latter, and as such, you can\'t really tell the difference between this and a regular kookie, save for that one pixel on the left.',icon:[30,31],power:						5,price: getCookiePrice(10)});
+		Game.NewUpgradeCookie({name:'Gluten-free kookies',desc:'Made with browned butter and milk to closely match the archetypal chocolate chip kookie.<br>For celiacs, a chance to indulge in a delicious risk-free pastry. For others, a strangely threatening confection whose empty eyes will never know heaven nor hell.',icon:[30,30],power:						5,price: getCookiePrice(10)});
+		Game.NewUpgradeCookie({name:'Russian bread kookies',desc:'Also known as alphabet kookies; while most bakers follow the recipe to the letter, it is said that some substitute the flour for spelt. But don\'t take my word for it.',icon:[30,29],power:						5,price: getCookiePrice(11)});
+		Game.NewUpgradeCookie({name:'Lebkuchen',desc:'Diverse kookies from Germany, fragrant with honey and spices, often baked around Christmas.<br>Once worn by warriors of old for protection in battle.<br>+5 STR, +20% magic resistance.',icon:[30,28],power:						5,price: getCookiePrice(12)});
 		Game.NewUpgradeCookie({name:'Aachener Printen',desc:'The honey once used to sweeten these gingerbread-like treats has since been swapped out for beet sugar, providing another sad example of regressive evolution.',icon:[30,27],power:						5,price: getCookiePrice(13)});
 		Game.NewUpgradeCookie({name:'Canistrelli',desc:'A dry biscuit flavored with anise and wine, tough like the people of Corsica where it comes from.',icon:[30,26],power:						5,price: getCookiePrice(14)});
 		Game.NewUpgradeCookie({name:'Nice biscuits',desc:'Made with coconut and perfect with tea. Traces its origins to a French city so nice they named it that.',icon:[30,25],power:						5,price: getCookiePrice(15)});
-		Game.NewUpgradeCookie({name:'French pure butter cookies',desc:'You can\'t tell what\'s stronger coming off these - the smell of butter or condescension.',icon:[31,25],power:						5,price: getCookiePrice(16)});
+		Game.NewUpgradeCookie({name:'French pure butter kookies',desc:'You can\'t tell what\'s stronger coming off these - the smell of butter or condescension.',icon:[31,25],power:						5,price: getCookiePrice(16)});
 		Game.NewUpgradeCookie({name:'Petit beurre',desc:'An unassuming biscuit whose name simply means "little butter". Famed and feared for its four ears and forty-eight teeth.<br>When it hears ya, it\'ll get ya...',icon:[31,26],power:						5,price: getCookiePrice(16)});
 		Game.NewUpgradeCookie({name:'Nanaimo bars',desc:'A delicious no-bake pastry hailing from Canada. Probably beats eating straight-up snow with maple syrup poured on it, but what do I know.',icon:[31,27],power:						5,price: getCookiePrice(17)});
-		Game.NewUpgradeCookie({name:'Berger cookies',desc:'Messily slathered with chocolate fudge, but one of the most popular bergers of Baltimore, along with the triple fried egg berger and the blue crab cheeseberger.',icon:[31,28],power:						5,price: getCookiePrice(18)});
-		Game.NewUpgradeCookie({name:'Chinsuko',desc:'A little piece of Okinawa in cookie form. Part of a Japanese custom of selling sweets as souvenirs. But hey, pressed pennies are cool too.',icon:[31,29],power:						5,price: getCookiePrice(19)});
+		Game.NewUpgradeCookie({name:'Berger kookies',desc:'Messily slathered with chocolate fudge, but one of the most popular bergers of Baltimore, along with the triple fried egg berger and the blue crab cheeseberger.',icon:[31,28],power:						5,price: getCookiePrice(18)});
+		Game.NewUpgradeCookie({name:'Chinsuko',desc:'A little piece of Okinawa in kookie form. Part of a Japanese custom of selling sweets as souvenirs. But hey, pressed pennies are cool too.',icon:[31,29],power:						5,price: getCookiePrice(19)});
 		Game.NewUpgradeCookie({name:'Panda koala biscuits',desc:'Assorted jungle animals with equally assorted fillings.<br>Comes in chocolate, strawberry, vanilla and green tea.<br>Eat them all before they go extinct!',icon:[31,13],power:						5,price: getCookiePrice(19)});
 		Game.NewUpgradeCookie({name:'Putri salju',desc:'A beloved Indonesian pastry; its name means "snow princess", for the powdered sugar it\'s coated with. Had we added these to Cookie Clicker some years ago, this is where we\'d make a reference to that one Disney movie, but it\'s probably time to let it go.',icon:[31,30],power:						5,price: getCookiePrice(20)});
-		Game.NewUpgradeCookie({name:'Milk cookies',desc:'Best eaten with a tall glass of chocolate.',icon:[31,31],power:						5,price: getCookiePrice(21)});
+		Game.NewUpgradeCookie({name:'Milk kookies',desc:'Best eaten with a tall glass of chocolate.',icon:[31,31],power:						5,price: getCookiePrice(21)});
 		
 		order=9999;
-		Game.NewUpgradeCookie({name:'Cookie crumbs',desc:'There used to be a cookie here. Now there isn\'t.<br>Good heavens, what did you <i>DO?!</i>',icon:[30,13],power:1,require:'Legacy',price:100});
-		Game.NewUpgradeCookie({name:'Chocolate chip cookie',desc:'This is the cookie you\'ve been clicking this whole time. It looks a bit dented and nibbled on, but it\'s otherwise good as new.',icon:[10,0],power:10,require:'Legacy',price:1000000000000});
+		Game.NewUpgradeCookie({name:'Cookie crumbs',desc:'There used to be a kookie here. Now there isn\'t.<br>Good heavens, what did you <i>DO?!</i>',icon:[30,13],power:1,require:'Legacy',price:100});
+		Game.NewUpgradeCookie({name:'Chocolate chip kookie',desc:'This is the kookie you\'ve been clicking this whole time. It looks a bit dented and nibbled on, but it\'s otherwise good as new.',icon:[10,0],power:10,require:'Legacy',price:1000000000000});
 		
 		
 		new Game.Upgrade('Cosmic beginner\'s luck',loc("Prior to purchasing the <b>%1</b> upgrade in a run, random drops are <b>%2 times more common</b>.",[getUpgradeName("Heavenly chip secret"),5])+'<q>Oh! A penny!<br>Oh! A priceless heirloom!<br>Oh! Another penny!</q>',999999999*15,[8,10]);Game.last.pool='prestige';Game.last.parents=['Shimmering veil'];
@@ -11017,29 +11017,29 @@ Game.Launch=function()
 		
 		
 		order=255;
-		Game.GrandmaSynergy('Binary grandmas','A digital grandma to transfer more cookies.<br>(See also : boolean grandmas, string grandmas, and not-a-number grandmas, also known as "NaNs".)','Javascript console');
+		Game.GrandmaSynergy('Binary grandmas','A digital grandma to transfer more kookies.<br>(See also : boolean grandmas, string grandmas, and not-a-number grandmas, also known as "NaNs".)','Javascript console');
 		
 		order=1400;
 		Game.TieredUpgrade('The JavaScript console for dummies','<q>This should get you started. The first line reads: "To open the javascript console, press-"<br>...the rest of the book is soaked in chocolate milk. If only there was a way to look up this sort of information...</q>','Javascript console',1);
-		Game.TieredUpgrade('64bit arrays','<q>A long-form variable type to pack your cookies much more efficiently.</q>','Javascript console',2);
+		Game.TieredUpgrade('64bit arrays','<q>A long-form variable type to pack your kookies much more efficiently.</q>','Javascript console',2);
 		Game.TieredUpgrade('Stack overflow','<q>This is really bad! You probably forgot to close a loop somewhere and now your programs are going crazy! The rest of your engineers seem really excited about it somehow. How could a software mishap like a stack overflow possibly ever help anyone?</q>','Javascript console',3);
 		Game.TieredUpgrade('Enterprise compiler','<q>This bespoke javascript compiler took your team years of development and billions in research, but it should let you execute (certain) functions (up to) 2% faster (in optimal circumstances).</q>','Javascript console',4);
-		Game.TieredUpgrade('Syntactic sugar','<q>Tastier code for tastier cookies.</q>','Javascript console',5);
+		Game.TieredUpgrade('Syntactic sugar','<q>Tastier code for tastier kookies.</q>','Javascript console',5);
 		Game.TieredUpgrade('A nice cup of coffee','<q>All this nerd stuff has you exhausted. You make yourself a nice cup of coffee, brewed with roasted beans from some far-away island. You may have been working a bit too hard though - the cup of coffee starts talking to you, insisting that it is NOT javascript.</q>','Javascript console',6);
-		Game.TieredUpgrade('Just-in-time baking','<q>A new method of preparing cookies; they bake themselves right in front of the customers before eating, leaving your kitchens mess-free.</q>','Javascript console',7);
-		Game.TieredUpgrade('cookies++','<q>Your very own cookie-themed programming language, elegantly named after its most interesting ability - increasing the "cookies" variable by 1.</q>','Javascript console',8);
+		Game.TieredUpgrade('Just-in-time baking','<q>A new method of preparing kookies; they bake themselves right in front of the customers before eating, leaving your kitchens mess-free.</q>','Javascript console',7);
+		Game.TieredUpgrade('kookies++','<q>Your very own kookie-themed programming language, elegantly named after its most interesting ability - increasing the "kookies" variable by 1.</q>','Javascript console',8);
 		Game.TieredUpgrade('Software updates','<q>This is grand news - someone\'s finally figured out the Wifi password, and your newfound internet connection seems to have triggered a whole lot of software updates! Your browsers, drivers and plugins all received a fresh coat of paint, and your javascript version has been updated to the latest ECMAScript specification. It\'s really too bad thousands had to die due to some deprecated function in your neurotoxin ventilation code, but I guess that\'s progress for you.</q>','Javascript console',9);
 		Game.TieredUpgrade('Game.Loop','<q>You\'re not quite sure what to make of this. What does it mean? What does it do? Who would leave something like that just laying around here? Try asking again in 1/30th of a second.</q>','Javascript console',10);
 		Game.TieredUpgrade('eval()','<q>It is said that this simple function holds the key to the universe, and that whosoever masters it may shape reality to their will.<br>Good thing you have no idea how it works. Makes for a neat plaque on your wall, though.</q>','Javascript console',11);
 		
 		order=5000;
-		Game.SynergyUpgrade('Script grannies','<q>Armies of energy drink-fueled grandmas ready to hack into the cyberspace for renegade e-cookies.</q>','Javascript console','Grandma','synergy1');
+		Game.SynergyUpgrade('Script grannies','<q>Armies of energy drink-fueled grandmas ready to hack into the cyberspace for renegade e-kookies.</q>','Javascript console','Grandma','synergy1');
 		Game.SynergyUpgrade('Tombola computing','','Javascript console','Chancemaker','synergy2');
 		if (EN)
 		{
 			Game.last.descFunc=function(){
 				Math.seedrandom(Game.seed+'-tombolacomputing');
-				var str='(Your ticket reads '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+', entitling you to '+choose([Math.floor(Math.random()*5+2)+' lines of javascript','one free use of Math.random()','one qubit, whatever that is','one half-eaten cookie','a brand new vacuum cleaner','most of one room-temperature cup of orange soda','one really good sandwich','one handful of pocket lint','someone\'s mostly clean hairpiece','a trip to a fancy restaurant','the knowledge of those numbers','a furtive glance at the news ticker','another ticket, half-price','all-you-can-eat moldy bread','one lifetime supply of oxygen','the color '+choose['red','orange','yellow','green','blue','purple','black','white','gray','brown','pink','teal'],'increased intellect for a limited time','an ancient runesword','the throne of a far-away country','the position of Mafia capo. Good luck','one free time-travel week-end','something beautiful','the deed to some oil well','one hamburger made out of the animal, plant, or person of your choice','the last surviving '+choose['dodo bird','thylacine','unicorn','dinosaur','neanderthal'],'a deep feeling of accomplishment','a fleeting tinge of entertainment','a vague sense of unease','deep existential dread','one extra week added to your lifespan','breathe manually','blink right here and now','one meeting with any famous person, living or dead, in your next dream','one very nice dream','a wacky sound effect','45 seconds of moral flexibility','hundreds and thousands, also known as "sprinkles"','one circle, triangle, square or other simple geometric shape, of average dimensions','just this extra bit of randomness','the extra push you needed to turn your life around','a good fright','one secret superpower','a better luck next time','an irrational phobia of tombola tickets','one whole spider','an increased sense of self-worth and determination','inner peace','one double-XP week-end in the MMORPG of your choice','a little piece of the universe, represented by the trillions of atoms that make up this very ticket','food poisoning','the Moon! Well, conceptually','a new car, baby','a new catchphrase','an intrusive thought of your choice','- ...aw man, it just cuts off there','the director spot for the next big hit movie','really good-looking calves','one genuine pirate golden doubloon','"treasure and riches", or something','one boat, sunken','baby shoes, never worn','direct lineage to some King or Queen','innate knowledge of a dead language you\'ll never encounter','the melody of a song you don\'t know the words to','white noise','mild physical impairment','a new pair of lips','things, and such','one popular expression bearing your name','one typo','one get-out-of-jail-free card','the rest of your life... for now','one polite huff','a condescending stare','one cursed monkey paw','true love, probably','an interesting factoid about the animal, country, TV show or celebrity of your choice','a pop culture reference','minutes of fun','the etymology of the word "tombola" - it\'s Italian for "a tumble"','nothing. You lost, sorry'])+'.)';
+				var str='(Your ticket reads '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+' '+Math.floor(Math.random()*100)+', entitling you to '+choose([Math.floor(Math.random()*5+2)+' lines of javascript','one free use of Math.random()','one qubit, whatever that is','one half-eaten kookie','a brand new vacuum cleaner','most of one room-temperature cup of orange soda','one really good sandwich','one handful of pocket lint','someone\'s mostly clean hairpiece','a trip to a fancy restaurant','the knowledge of those numbers','a furtive glance at the news ticker','another ticket, half-price','all-you-can-eat moldy bread','one lifetime supply of oxygen','the color '+choose['red','orange','yellow','green','blue','purple','black','white','gray','brown','pink','teal'],'increased intellect for a limited time','an ancient runesword','the throne of a far-away country','the position of Mafia capo. Good luck','one free time-travel week-end','something beautiful','the deed to some oil well','one hamburger made out of the animal, plant, or person of your choice','the last surviving '+choose['dodo bird','thylacine','unicorn','dinosaur','neanderthal'],'a deep feeling of accomplishment','a fleeting tinge of entertainment','a vague sense of unease','deep existential dread','one extra week added to your lifespan','breathe manually','blink right here and now','one meeting with any famous person, living or dead, in your next dream','one very nice dream','a wacky sound effect','45 seconds of moral flexibility','hundreds and thousands, also known as "sprinkles"','one circle, triangle, square or other simple geometric shape, of average dimensions','just this extra bit of randomness','the extra push you needed to turn your life around','a good fright','one secret superpower','a better luck next time','an irrational phobia of tombola tickets','one whole spider','an increased sense of self-worth and determination','inner peace','one double-XP week-end in the MMORPG of your choice','a little piece of the universe, represented by the trillions of atoms that make up this very ticket','food poisoning','the Moon! Well, conceptually','a new car, baby','a new catchphrase','an intrusive thought of your choice','- ...aw man, it just cuts off there','the director spot for the next big hit movie','really good-looking calves','one genuine pirate golden doubloon','"treasure and riches", or something','one boat, sunken','baby shoes, never worn','direct lineage to some King or Queen','innate knowledge of a dead language you\'ll never encounter','the melody of a song you don\'t know the words to','white noise','mild physical impairment','a new pair of lips','things, and such','one popular expression bearing your name','one typo','one get-out-of-jail-free card','the rest of your life... for now','one polite huff','a condescending stare','one cursed monkey paw','true love, probably','an interesting factoid about the animal, country, TV show or celebrity of your choice','a pop culture reference','minutes of fun','the etymology of the word "tombola" - it\'s Italian for "a tumble"','nothing. You lost, sorry'])+'.)';
 				Math.seedrandom();
 				return this.desc+'<q>Like quantum computing, but more fun.<br>'+str+'</q>';
 			};
@@ -11049,13 +11049,13 @@ Game.Launch=function()
 		order=10020;
 		Game.NewUpgradeCookie({name:'Kruidnoten',desc:'A festive dutch favorite; tiny cinnamony bites sometimes coated in chocolate. The name translates roughly to "kruidnoten".',icon:[30,3],power:						5,price: getCookiePrice(22)});
 		Game.NewUpgradeCookie({name:'Marie biscuits',desc:'Pleasantly round, smoothly buttery, subtly vanilla-flavored, ornately embossed, each ridge represents a person Marie killed in prison.',icon:[30,4],power:						5,price: getCookiePrice(23)});
-		Game.NewUpgradeCookie({name:'Meringue cookies',desc:'Probably the most exciting thing you can make out of egg whites. Also called forgotten cookies, due to the recipe being once lost in a sealed mystical vault for 10,000 years.',icon:[31,4],power:						5,price: getCookiePrice(24)});
+		Game.NewUpgradeCookie({name:'Meringue kookies',desc:'Probably the most exciting thing you can make out of egg whites. Also called forgotten kookies, due to the recipe being once lost in a sealed mystical vault for 10,000 years.',icon:[31,4],power:						5,price: getCookiePrice(24)});
 		
 		order=10060;
-		Game.NewUpgradeCookie({name:'Pizza',desc:'What is a pizza if not a large, chewy cookie, frosted with a rather exuberant tomato & cheese icing? Not a cookie, that\'s what.',icon:[31,9],require:'Box of not cookies',		power:5,price: Math.pow(10,44)});
+		Game.NewUpgradeCookie({name:'Pizza',desc:'What is a pizza if not a large, chewy kookie, frosted with a rather exuberant tomato & cheese icing? Not a kookie, that\'s what.',icon:[31,9],require:'Box of not kookies',		power:5,price: Math.pow(10,44)});
 		
 		order=10050;
-		Game.NewUpgradeCookie({name:'Crackers',desc:'These are the non-flavored kind with no salt added. Really just a judgment-free wheat square begging to have bits of ham and spreadable cheese piled onto it, its main contribution being "crunchy".',icon:[30,9],require:'Box of maybe cookies',		power:4,price: Math.pow(10,45)});
+		Game.NewUpgradeCookie({name:'Crackers',desc:'These are the non-flavored kind with no salt added. Really just a judgment-free wheat square begging to have bits of ham and spreadable cheese piled onto it, its main contribution being "crunchy".',icon:[30,9],require:'Box of maybe kookies',		power:4,price: Math.pow(10,45)});
 		
 		order=10030;
 		Game.NewUpgradeCookie({name:'Havabreaks',desc:'You can snap the sections neatly or just bite into the whole thing like some kind of lunatic. Some oversea countries manufacture these in hundreds of unique flavors, such as green tea, lobster bisque, and dark chocolate.',icon:[31,3],require:'Box of brand biscuits',power:												2,	price:	999999999999999999999999999*5});
@@ -11065,18 +11065,18 @@ Game.Launch=function()
 		
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Chai tea cookies',desc:'Not exactly Captain Picard\'s favorite, but I mean, these will do in a pinch.',icon:[23,32],power:						5,price: getCookiePrice(4)+5});Game.last.order=10020.5685;
+		Game.NewUpgradeCookie({name:'Chai tea kookies',desc:'Not exactly Captain Picard\'s favorite, but I mean, these will do in a pinch.',icon:[23,32],power:						5,price: getCookiePrice(4)+5});Game.last.order=10020.5685;
 		
-		Game.NewUpgradeCookie({name:'Yogurt cookies',desc:'Augmented by the wonders of dairy, these cookies are light and fluffy and just one more thing for the lactose-intolerant to avoid.<br>Truly for the cultured among us.',icon:[24,32],power:						5,price: getCookiePrice(25)});
-		Game.NewUpgradeCookie({name:'Thumbprint cookies',desc:'Filled with jam and sometimes served in little paper cups. No longer admissible as biometric evidence in court. We\'re not having a repeat of that whole mess.',icon:[25,32],power:						5,price: getCookiePrice(26)});
-		Game.NewUpgradeCookie({name:'Pizzelle',desc:'Thin, crisp waffle cookies baked in a bespoke iron following an ancient Italian recipe.<br>These cookies have been around for a long, long time.<br>These cookies have seen things.',icon:[26,32],power:						5,price: getCookiePrice(27)});
+		Game.NewUpgradeCookie({name:'Yogurt kookies',desc:'Augmented by the wonders of dairy, these kookies are light and fluffy and just one more thing for the lactose-intolerant to avoid.<br>Truly for the cultured among us.',icon:[24,32],power:						5,price: getCookiePrice(25)});
+		Game.NewUpgradeCookie({name:'Thumbprint kookies',desc:'Filled with jam and sometimes served in little paper cups. No longer admissible as biometric evidence in court. We\'re not having a repeat of that whole mess.',icon:[25,32],power:						5,price: getCookiePrice(26)});
+		Game.NewUpgradeCookie({name:'Pizzelle',desc:'Thin, crisp waffle kookies baked in a bespoke iron following an ancient Italian recipe.<br>These kookies have been around for a long, long time.<br>These kookies have seen things.',icon:[26,32],power:						5,price: getCookiePrice(27)});
 		
 		order=10030;
 		Game.NewUpgradeCookie({name:'Zilla wafers',desc:'Popular vanilla-flavored biscuits that somehow keep ending up in banana pudding.<br>Themed after a beloved radioactive prehistoric monster, for some reason.',icon:[22,32],require:'Box of brand biscuits',power:												2,	price:	999999999999999999999999999999*5});
 		Game.NewUpgradeCookie({name:'Dim Dams',desc:'Two biscuits joined by chocolate and coated in even more chocolate.<br>You wonder - which one is the dim, and which one is the dam?',icon:[31,10],require:'Box of brand biscuits',power:												2,	price:	999999999999999999999999999999999*5});
 		
 		order=10060;
-		Game.NewUpgradeCookie({name:'Candy',desc:'There are two pillars to the world of sweets : pastries, of course - and candy.<br>You could make a whole new game just about these, but for now, please enjoy these assorted generic treats.',icon:[30,10],require:'Box of not cookies',		power:5,price: Math.pow(10,46)});
+		Game.NewUpgradeCookie({name:'Candy',desc:'There are two pillars to the world of sweets : pastries, of course - and candy.<br>You could make a whole new game just about these, but for now, please enjoy these assorted generic treats.',icon:[30,10],require:'Box of not kookies',		power:5,price: Math.pow(10,46)});
 		
 		
 		order=19000;
@@ -11104,7 +11104,7 @@ Game.Launch=function()
 		new Game.Upgrade('Fortune #100',loc("All buildings and upgrades are <b>%1% cheaper</b>.",1)+' '+loc("Cookie production multiplier <b>+%1%</b>.",1)+'<q>True wealth is counted in gifts.</q>',
 		Game.Tiers['fortune'].price*100000,[0,0]);Game.MakeTiered(Game.last,'fortune',10);
 		Game.last.priceFunc=function(me){return Math.min(me.basePrice,Game.unbuffedCps*60*60*24);}
-		new Game.Upgrade('Fortune #101',loc("Cookie production multiplier <b>+%1%</b>.",7)+'<q>Some people dream of fortunes; others dream of cookies.</q>',Game.Tiers['fortune'].price*100000000,[0,0]);Game.MakeTiered(Game.last,'fortune',10);
+		new Game.Upgrade('Fortune #101',loc("Cookie production multiplier <b>+%1%</b>.",7)+'<q>Some people dream of fortunes; others dream of kookies.</q>',Game.Tiers['fortune'].price*100000000,[0,0]);Game.MakeTiered(Game.last,'fortune',10);
 		Game.last.priceFunc=function(me){return Math.min(me.basePrice,Game.unbuffedCps*60*60*24);}
 		new Game.Upgrade('Fortune #102',loc("You gain another <b>+%1%</b> of your regular CpS while the game is closed.",1)+' <small>('+loc("Must own the %1 upgrade.",getUpgradeName("Twin Gates of Transcendence"))+')</small>'+'<q>Help, I\'m trapped in a '+(App?'computer':'browser')+' game!</q>',Game.Tiers['fortune'].price*100000000000,[0,0]);Game.MakeTiered(Game.last,'fortune',10);
 		Game.last.priceFunc=function(me){return Math.min(me.basePrice,Game.unbuffedCps*60*60*24);}
@@ -11113,7 +11113,7 @@ Game.Launch=function()
 		new Game.Upgrade('Fortune #104',getStrClickingGains(1)+'<q>Remember to stay in touch.</q>',Game.Tiers['fortune'].price*100000000000,[0,0]);Game.MakeTiered(Game.last,'fortune',11);
 		Game.last.priceFunc=function(me){return Math.min(me.basePrice,Game.unbuffedCps*60*60*24);}
 		
-		new Game.Upgrade('Fortune cookies',loc("The news ticker may occasionally have <b>fortunes</b>, which may be clicked for something good.")+'<q>These don\'t taste all that great but that\'s not really the point, is it?</q>',77777777777,[29,8]);Game.last.pool='prestige';Game.last.parents=['Distilled essence of redoubled luck'];
+		new Game.Upgrade('Fortune kookies',loc("The news ticker may occasionally have <b>fortunes</b>, which may be clicked for something good.")+'<q>These don\'t taste all that great but that\'s not really the point, is it?</q>',77777777777,[29,8]);Game.last.pool='prestige';Game.last.parents=['Distilled essence of redoubled luck'];
 		
 		
 		order=40000;
@@ -11133,20 +11133,20 @@ Game.Launch=function()
 		var dragonDropUpgradeCost=function(me){return Game.unbuffedCps*60*30*((Game.dragonLevel<Game.dragonLevels.length-1)?1:0.1);};
 		new Game.Upgrade('Dragon scale',getStrCookieProductionMultiplierPlus(3)+'<br>'+loc("Cost scales with CpS, but %1 times cheaper with a fully-trained dragon.",10)+'<q>Your dragon sheds these regularly, so this one probably won\'t be missed.<br>Note: icon not to scale.</q>',999,[30,14]);Game.last.priceFunc=dragonDropUpgradeCost;
 		new Game.Upgrade('Dragon claw',loc("Clicking is <b>%1%</b> more powerful.",3)+'<br>'+loc("Cost scales with CpS, but %1 times cheaper with a fully-trained dragon.",10)+'<q>Will grow back in a few days\' time.<br>A six-inch retractable claw, like a razor, from the middle toe. So you know, try to show a little respect.</q>',999,[31,14]);Game.last.priceFunc=dragonDropUpgradeCost;
-		new Game.Upgrade('Dragon fang',loc("Golden cookies give <b>%1%</b> more cookies.",3)+'<br>'+loc("Dragon harvest and Dragonflight are <b>%1% stronger</b>.",10)+'<br>'+loc("Cost scales with CpS, but %1 times cheaper with a fully-trained dragon.",10)+'<q>Just a fallen baby tooth your dragon wanted you to have, as a gift.<br>It might be smaller than an adult tooth, but it\'s still frighteningly sharp - and displays some awe-inspiring cavities, which you might expect from a creature made out of sweets.</q>',999,[30,15]);Game.last.priceFunc=dragonDropUpgradeCost;
+		new Game.Upgrade('Dragon fang',loc("Golden kookies give <b>%1%</b> more kookies.",3)+'<br>'+loc("Dragon harvest and Dragonflight are <b>%1% stronger</b>.",10)+'<br>'+loc("Cost scales with CpS, but %1 times cheaper with a fully-trained dragon.",10)+'<q>Just a fallen baby tooth your dragon wanted you to have, as a gift.<br>It might be smaller than an adult tooth, but it\'s still frighteningly sharp - and displays some awe-inspiring cavities, which you might expect from a creature made out of sweets.</q>',999,[30,15]);Game.last.priceFunc=dragonDropUpgradeCost;
 		new Game.Upgrade('Dragon teddy bear',loc("Random drops are <b>%1% more common</b>.",3)+'<br>'+loc("Cost scales with CpS, but %1 times cheaper with a fully-trained dragon.",10)+'<q>Your dragon used to sleep with this, but it\'s yours now.<br>Crafted in the likeliness of a fearsome beast. Stuffed with magical herbs picked long ago by a wandering wizard. Woven from elven yarn and a polyester blend.</q>',999,[31,15]);Game.last.priceFunc=dragonDropUpgradeCost;
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Granola cookies',desc:'Wait! These are just oatmeal cookies mixed with raisin cookies! What next, half-dark chocolate half-white chocolate cookies?',icon:[28,32],power:						5,price: getCookiePrice(28)});
-		Game.NewUpgradeCookie({name:'Ricotta cookies',desc:'Light and cake-like. Often flavored with lemon or almond extract. Sprinkles optional. Allegedly Italian. Investigation pending.',icon:[29,32],power:						5,price: getCookiePrice(29)});
-		Game.NewUpgradeCookie({name:'Roze koeken',desc:'The icing on these Dutch cookies is traditionally pink, but different colors may be used for special occasions - such as pink to celebrate Breast Cancer Awareness Month, or for International Flamingo Day, pink.',icon:[30,32],power:						5,price: getCookiePrice(30)});
-		Game.NewUpgradeCookie({name:'Peanut butter cup cookies',desc:'What more poignant example of modern societal struggles than the brazen reclaiming of a corporate product by integrating it in the vastly more authentic shell of a homemade undertaking? Anyway this is a peanut butter cup, baked into a cookie. It\'s pretty good!',icon:[31,32],power:						5,price: getCookiePrice(31)});
-		Game.NewUpgradeCookie({name:'Sesame cookies',desc:'Look at all the little seeds on these! It\'s like someone dropped them on the street or something! A very welcoming and educational street!',icon:[22,33],power:						5,price: getCookiePrice(32)});
+		Game.NewUpgradeCookie({name:'Granola kookies',desc:'Wait! These are just oatmeal kookies mixed with raisin kookies! What next, half-dark chocolate half-white chocolate kookies?',icon:[28,32],power:						5,price: getCookiePrice(28)});
+		Game.NewUpgradeCookie({name:'Ricotta kookies',desc:'Light and cake-like. Often flavored with lemon or almond extract. Sprinkles optional. Allegedly Italian. Investigation pending.',icon:[29,32],power:						5,price: getCookiePrice(29)});
+		Game.NewUpgradeCookie({name:'Roze koeken',desc:'The icing on these Dutch kookies is traditionally pink, but different colors may be used for special occasions - such as pink to celebrate Breast Cancer Awareness Month, or for International Flamingo Day, pink.',icon:[30,32],power:						5,price: getCookiePrice(30)});
+		Game.NewUpgradeCookie({name:'Peanut butter cup kookies',desc:'What more poignant example of modern societal struggles than the brazen reclaiming of a corporate product by integrating it in the vastly more authentic shell of a homemade undertaking? Anyway this is a peanut butter cup, baked into a kookie. It\'s pretty good!',icon:[31,32],power:						5,price: getCookiePrice(31)});
+		Game.NewUpgradeCookie({name:'Sesame kookies',desc:'Look at all the little seeds on these! It\'s like someone dropped them on the street or something! A very welcoming and educational street!',icon:[22,33],power:						5,price: getCookiePrice(32)});
 		Game.NewUpgradeCookie({name:'Taiyaki',desc:'A pastry fish filled with red bean paste, doomed to live an existence of constant and excruciating pain as its aquatic environment slowly dissolves its soft doughy body.<br>Also comes in chocolate flavor!',icon:[23,33],power:						5,price: getCookiePrice(33)});
-		Game.NewUpgradeCookie({name:'Vanillekipferl',desc:'Nut-based cookies from Central Europe, coated in powdered vanilla sugar. Regular kipferl, crescent-shaped bread rolls from the same region, are much less exciting.',icon:[24,33],power:						5,price: getCookiePrice(34)});
+		Game.NewUpgradeCookie({name:'Vanillekipferl',desc:'Nut-based kookies from Central Europe, coated in powdered vanilla sugar. Regular kipferl, crescent-shaped bread rolls from the same region, are much less exciting.',icon:[24,33],power:						5,price: getCookiePrice(34)});
 		
 		order=10300;
-		Game.NewUpgradeCookie({name:'Cosmic chocolate butter biscuit',desc:'Rewarded for owning 550 of everything.<br>Through some strange trick of magic or technology, looking at this cookie is like peering into a deep ocean of ancient stars. The origins of this biscuit are unknown; its manufacture, as far as your best investigators can tell, left no paper trail. From a certain angle, if you squint hard enough, you\'ll notice that a number of stars near the center are arranged to resemble the outline of your own face.',icon:[27,32],power:	10,price: 999999999999999999999999999999999999999999999999*butterBiscuitMult,locked:1});
+		Game.NewUpgradeCookie({name:'Cosmic chocolate butter biscuit',desc:'Rewarded for owning 550 of everything.<br>Through some strange trick of magic or technology, looking at this kookie is like peering into a deep ocean of ancient stars. The origins of this biscuit are unknown; its manufacture, as far as your best investigators can tell, left no paper trail. From a certain angle, if you squint hard enough, you\'ll notice that a number of stars near the center are arranged to resemble the outline of your own face.',icon:[27,32],power:	10,price: 999999999999999999999999999999999999999999999999*butterBiscuitMult,locked:1});
 		
 		order=100;new Game.Upgrade('Nonillion fingers',getStrThousandFingersGain(20)+'<q>Only for the freakiest handshakes.</q>',10000000000000000000000000,[12,31]);Game.MakeTiered(Game.last,13,0);
 		order=150;new Game.Upgrade('Miraculite mouse',getStrClickingGains(1)+'<q>Composed of a material that neither science nor philosophy are equipped to conceptualize. And boy, does it ever click.</q>',50000000000000000000000000000,[11,31]);Game.MakeTiered(Game.last,13,11);
@@ -11159,21 +11159,21 @@ Game.Launch=function()
 		order=575;Game.TieredUpgrade('Spelling bees','<q>You\'ve unleashed a swarm of magically-enhanced bees upon mankind! Their stinging spells may be the bane of all living things but you\'re certain you can put their delicious, purple, fizzy honey to good use!</q>','Wizard tower',12);
 		order=600;Game.TieredUpgrade('Toroid universe','<q>If you think of the universe as an nth-dimensional torus that wraps back on itself in every direction, you can save a fortune on rocket fuel! Of course the universe isn\'t actually shaped like that, but you\'ve never let details stand in your way.</q>','Shipment',12);
 		order=700;Game.TieredUpgrade('Hermetic reconciliation','<q>It\'s time for modern science and the mystical domains of the occult to work together at last. What do gravitons transmute into? What if alkahest is pH-neutral? Should a homunculus have the right to vote? And other exciting questions coming to you soon, whether you like it or not.</q>','Alchemy lab',12);
-		order=800;Game.TieredUpgrade('His advent','<q>He comes! He comes at last! Just like the prophecies foretold! And as He steps out of the portal, your engineers begin slicing Him into convenient chunks before transporting His writhing cosmic flesh to your factories, where He will be processed and converted into a new and exciting cookie flavor, available in stores tomorrow.</q>','Portal',12);
+		order=800;Game.TieredUpgrade('His advent','<q>He comes! He comes at last! Just like the prophecies foretold! And as He steps out of the portal, your engineers begin slicing Him into convenient chunks before transporting His writhing cosmic flesh to your factories, where He will be processed and converted into a new and exciting kookie flavor, available in stores tomorrow.</q>','Portal',12);
 		order=900;Game.TieredUpgrade('Split seconds','<q>Time is infinite, yes... But what if, nestled within each second, were even more infinities? Every moment an eternity! Think of how many scheduling troubles this solves!</q>','Time machine',12);
 		order=1000;Game.TieredUpgrade('Flavor itself','<q>Deep under the earth, in the most sterile laboratory, in the most vast and expensive particle accelerator ever devised, your scientists have synthesized -for a fraction of a second- the physical manifestation of pure flavor. Highly unstable, and gone in a puff of radioactive energy, it nonetheless left your team shivering with awe... and hunger.</q>','Antimatter condenser',12);
 		order=1100;Game.TieredUpgrade('Light speed limit','<q>Whoah, slow down. Harvesting light is well and good but it\'d be much easier if it weren\'t so dang fast! This should thankfully take care of that.</q>','Prism',12);
 		order=1200;Game.TieredUpgrade('A touch of determinism','<q>By knowing the exact position and movement of every particle in the universe, you\'re able to predict everything that can ever happen, leaving nothing to chance. This was a doozy to pull off mind you, but it\'s helped you win 50 bucks at the horse races so you could say it\'s already paying off.</q>','Chancemaker',12);
 		order=1300;Game.TieredUpgrade('This upgrade','<q>This upgrade\'s flavor text likes to refer to itself, as well as to the fact that it likes to refer to itself. You should really buy this upgrade before it starts doing anything more obnoxious.</q>','Fractal engine',12);
-		order=1400;Game.TieredUpgrade('Your biggest fans','<q>Let\'s face it, baking cookies isn\'t the most optimized thing there is. So you\'ve purchased your biggest fans yet and stuck them next to your computers to keep things chill and in working order. Cool!</q>','Javascript console',12);
+		order=1400;Game.TieredUpgrade('Your biggest fans','<q>Let\'s face it, baking kookies isn\'t the most optimized thing there is. So you\'ve purchased your biggest fans yet and stuck them next to your computers to keep things chill and in working order. Cool!</q>','Javascript console',12);
 		
 		
 		order=10020;
 		Game.NewUpgradeCookie({name:'Battenberg biscuits',desc:'Inspired by a cake of the same name, itself named after a prince of the same name. You suppose you could play a really, really short game of chess on these.',icon:[28,33],power:						5,price: getCookiePrice(35)});
-		Game.NewUpgradeCookie({name:'Rosette cookies',desc:'Intricate fried pastries from Northern Europe, made using specialized irons and dipped in icing sugar. While usually eaten as a delicious treat, these are often also used as Christmas tree decorations, or worn elegantly on one\'s lapel to symbolize the nah I\'m just messing with you.',icon:[26,33],power:						5,price: getCookiePrice(36)});
-		Game.NewUpgradeCookie({name:'Gangmakers',desc:'The little bit of raspberry jam at its center is crucial; a plain butter cookie with chocolate topping does not a gangmaker make.',icon:[27,33],power:						5,price: getCookiePrice(37)});
-		Game.NewUpgradeCookie({name:'Welsh cookies',desc:'Welsh cookies, also known as Welsh cakes, bakestones, griddle cakes, griddle scones, or pics, or in Welsh: <i>picau ar y maen, pice bach, cacennau cri</i> or <i>teisennau gradell</i>, are rich currant-filled scone-like biscuits of uncertain origin.',icon:[29,33],power:						5,price: getCookiePrice(38)});
-		Game.NewUpgradeCookie({name:'Raspberry cheesecake cookies',desc:'The humble raspberry cheesecake, now in ascended cookie form. Researchers posit that raspberry cheesecake cookies are evidence that the final form of every baked good, through convergent evolution, approaches that of a cookie, in a process known as cookienisation.',icon:[25,33],power:						5,price: getCookiePrice(39)});
+		Game.NewUpgradeCookie({name:'Rosette kookies',desc:'Intricate fried pastries from Northern Europe, made using specialized irons and dipped in icing sugar. While usually eaten as a delicious treat, these are often also used as Christmas tree decorations, or worn elegantly on one\'s lapel to symbolize the nah I\'m just messing with you.',icon:[26,33],power:						5,price: getCookiePrice(36)});
+		Game.NewUpgradeCookie({name:'Gangmakers',desc:'The little bit of raspberry jam at its center is crucial; a plain butter kookie with chocolate topping does not a gangmaker make.',icon:[27,33],power:						5,price: getCookiePrice(37)});
+		Game.NewUpgradeCookie({name:'Welsh kookies',desc:'Welsh kookies, also known as Welsh cakes, bakestones, griddle cakes, griddle scones, or pics, or in Welsh: <i>picau ar y maen, pice bach, cacennau cri</i> or <i>teisennau gradell</i>, are rich currant-filled scone-like biscuits of uncertain origin.',icon:[29,33],power:						5,price: getCookiePrice(38)});
+		Game.NewUpgradeCookie({name:'Raspberry cheesecake kookies',desc:'The humble raspberry cheesecake, now in ascended kookie form. Researchers posit that raspberry cheesecake kookies are evidence that the final form of every baked good, through convergent evolution, approaches that of a kookie, in a process known as kookienisation.',icon:[25,33],power:						5,price: getCookiePrice(39)});
 		
 		
 		
@@ -11181,9 +11181,9 @@ Game.Launch=function()
 		Game.GrandmaSynergy('Alternate grandmas','A different grandma to bake something else.','Idleverse');
 		
 		order=1500;
-		Game.TieredUpgrade('Manifest destiny','<q>While the ethics of ransacking parallel universes for their riches may seem questionable to some, you\'ve reasoned that bringing the good word of your cookie empire to the unwashed confines of other realities is your moral duty, nay, your righteous imperative, and must be undertaken as soon as possible, lest they do it to you first!</q>','Idleverse',1);
-		Game.TieredUpgrade('The multiverse in a nutshell','<q>The structure of the metacosmos may seem confusing and at times even contradictory, but here\'s what you\'ve gathered so far:<br><br><div style="text-align:left;">&bull; each reality, or "idleverse", exists in parallel to all others<br><br>&bull; most realities seem to converge towards the production of a sole type of item (ours evidently being, thanks to you, cookies)<br><br>&bull; each reality is riddled with chaotic tunnels to a number of subordinate dimensions (such as the so-called "cookieverse"), much like swiss cheese<br><br>&bull; all realities bathe in an infinite liquid of peculiar properties, colloquially known as "milk"</div><br>Finally, each reality may have its own interpretation of the concept of "reality", for added fun.</q>','Idleverse',2);
-		Game.TieredUpgrade('All-conversion','<q>It\'s quite nice that you can rewire the logic of each universe to generate cookies instead, but you still end up with parsec-loads of whatever they were producing before - baubles you\'ve long made obsolete: cash money, gems, cheeseburgers, puppies... That\'s why you\'ve designed the universal converter, compatible with any substance and capable of turning those useless spoils of conquest into the reassuring crumbly rustle of even more cookies.</q>','Idleverse',3);
+		Game.TieredUpgrade('Manifest destiny','<q>While the ethics of ransacking parallel universes for their riches may seem questionable to some, you\'ve reasoned that bringing the good word of your kookie empire to the unwashed confines of other realities is your moral duty, nay, your righteous imperative, and must be undertaken as soon as possible, lest they do it to you first!</q>','Idleverse',1);
+		Game.TieredUpgrade('The multiverse in a nutshell','<q>The structure of the metacosmos may seem confusing and at times even contradictory, but here\'s what you\'ve gathered so far:<br><br><div style="text-align:left;">&bull; each reality, or "idleverse", exists in parallel to all others<br><br>&bull; most realities seem to converge towards the production of a sole type of item (ours evidently being, thanks to you, kookies)<br><br>&bull; each reality is riddled with chaotic tunnels to a number of subordinate dimensions (such as the so-called "kookieverse"), much like swiss cheese<br><br>&bull; all realities bathe in an infinite liquid of peculiar properties, colloquially known as "milk"</div><br>Finally, each reality may have its own interpretation of the concept of "reality", for added fun.</q>','Idleverse',2);
+		Game.TieredUpgrade('All-conversion','<q>It\'s quite nice that you can rewire the logic of each universe to generate kookies instead, but you still end up with parsec-loads of whatever they were producing before - baubles you\'ve long made obsolete: cash money, gems, cheeseburgers, puppies... That\'s why you\'ve designed the universal converter, compatible with any substance and capable of turning those useless spoils of conquest into the reassuring crumbly rustle of even more kookies.</q>','Idleverse',3);
 		Game.TieredUpgrade('Multiverse agents','<q>You can send undercover spies to infiltrate each universe and have them signal you whether it\'s worth overtaking. Once the assimilation process started, they will also help pacify the local populations, having established trust through the use of wacky, but seamless, disguises.</q>','Idleverse',4);
 		Game.TieredUpgrade('Escape plan','<q>You\'ve set an idleverse aside and terraformed it to closely resemble this one in case something goes horribly wrong in here. Of course, the denizens of that idleverse also have their own escape idleverse to abscond to in the eventuality of your arrival, itself likely having its own contingency idleverse, and so on.</q>','Idleverse',5);
 		Game.TieredUpgrade('Game design','<q>Each idleverse functions according to some form of transcendental programming, that much is a given. But they also seem to be governed by much more subtle rules, the logic of which, when harnessed, may give you unparalleled dominion over the multiverse. Rewrite the rules! A game designer is you!</q>','Idleverse',6);
@@ -11207,13 +11207,13 @@ Game.Launch=function()
 		
 		order=200;Game.TieredUpgrade('Visits','<q>In an extensive double-blind study (sample size: 12 million), your researchers have found evidence that grandmas are up to twice as productive if you just come by and say hi once in a while. It\'s nice to check up on your grans! (Do not under any circumstances ingest any tea or tea-like substances the grandmas may offer you.)</q>','Grandma',13);
 		order=300;Game.TieredUpgrade('Reverse-veganism','<q>Plants aren\'t for eating, plants are for exploitative agriculture and astronomical profit margins!</q>','Farm',13);
-		order=400;Game.TieredUpgrade('Caramel alloys','<q>Your geologists have isolated a family of once-overlooked sugary ores that, when combined, may be turned into even more cookie ingredients. Your millions of miles of previously useless tunnels probably house insane amounts of the stuff!</q>','Mine',13);
+		order=400;Game.TieredUpgrade('Caramel alloys','<q>Your geologists have isolated a family of once-overlooked sugary ores that, when combined, may be turned into even more kookie ingredients. Your millions of miles of previously useless tunnels probably house insane amounts of the stuff!</q>','Mine',13);
 		order=500;Game.TieredUpgrade('The infinity engine','<q>In this house, I guess we don\'t care much for the laws of thermodynamics.</q>','Factory',13);
 		order=525;Game.TieredUpgrade('Diminishing tax returns','<q>Wow, they\'re tiny! Wish you\'d thought of that sooner!</q>','Bank',13);
-		order=550;Game.TieredUpgrade('Apparitions','<q>You\'ve booked a deal with the higher-ups that schedules one weekly earthly apparition by a deity, angel, ascended prophet, or other holy figure. This should boost interest in cookie religion among youths as long as you can secure a decent time slot.</q>','Temple',13);
+		order=550;Game.TieredUpgrade('Apparitions','<q>You\'ve booked a deal with the higher-ups that schedules one weekly earthly apparition by a deity, angel, ascended prophet, or other holy figure. This should boost interest in kookie religion among youths as long as you can secure a decent time slot.</q>','Temple',13);
 		order=575;Game.TieredUpgrade('Wizard basements','<q>You\'ve received construction permits allowing you to build basements underneath each wizard tower. This provides a handy storage space for precious reagents, fizzled-out soul gems, and weird old magazines.</q>','Wizard tower',13);
 		order=600;Game.TieredUpgrade('Prime directive','<q>An intergalactic delegation made you pinky-swear not to directly interact with lesser alien cultures. Which is fine, because it\'s much funnier to rob a planet blind when its inhabitants have no idea what\'s going on.</q>','Shipment',13);
-		order=700;Game.TieredUpgrade('Chromatic cycling','<q>All states of matter exist in a continuous loop. Having learned how to cycle through them, all you have to do is to freeze matter right on the state you need. For reference, the cookie state of matter is situated at precisely 163.719&deg;, right between lamellar gas and metaplasma.</q>','Alchemy lab',13);
+		order=700;Game.TieredUpgrade('Chromatic cycling','<q>All states of matter exist in a continuous loop. Having learned how to cycle through them, all you have to do is to freeze matter right on the state you need. For reference, the kookie state of matter is situated at precisely 163.719&deg;, right between lamellar gas and metaplasma.</q>','Alchemy lab',13);
 		order=800;Game.TieredUpgrade('Domestic rifts','<q>You\'ve managed to manufacture portals that are convenient enough, and legally safe enough, that you can just stick them against walls inside buildings to connect rooms together in unusual configurations. In practice, this means your employees get to have much shorter bathroom breaks.</q>','Portal',13);
 		order=900;Game.TieredUpgrade('Patience abolished','<q>You wait for no one.</q>','Time machine',13);
 		order=1000;Game.TieredUpgrade('Delicious pull','<q>In addition to the 4 fundamental forces of the universe -gravity, electromagnetism, weak and strong interactions- your scientists have at long last confirmed the existence of a fifth one, mediated by sugar bosons; it dictates that any two masses of ingredient-like matter will, given enough time, eventually meet each other to produce a third, even tastier substance. Your team enthusiastically names it the delicious pull.</q>','Antimatter condenser',13);
@@ -11233,8 +11233,8 @@ Game.Launch=function()
 		order=10020;
 		Game.NewUpgradeCookie({name:'Bokkenpootjes',desc:'Consist of 2 meringue halves joined by buttercream and dipped both ways in chocolate. Named after a goat\'s foot that probably stepped in something twice.',icon:[32,8],power:						5,price: getCookiePrice(40)});
 		Game.NewUpgradeCookie({name:'Fat rascals',desc:'Almond-smiled Yorkshire cakes with a rich history and an even richer recipe. The more diet-conscious are invited to try the lean version, skinny scallywags.',icon:[33,8],power:						5,price: getCookiePrice(41)});
-		Game.NewUpgradeCookie({name:'Ischler cookies',desc:'Originating in the Austro-Hungarian Empire, these have spread throughout every country in eastern Europe and spawned just as many recipes, each claiming to be the original. The basis remains unchanged across all variants: two biscuits sandwiched around chocolate buttercream. Or was it jam?',icon:[32,9],power:						5,price: getCookiePrice(42)});
-		Game.NewUpgradeCookie({name:'Matcha cookies',desc:'Green tea and cookies, a matcha made in heaven.',icon:[33,9],power:						5,price: getCookiePrice(42)});
+		Game.NewUpgradeCookie({name:'Ischler kookies',desc:'Originating in the Austro-Hungarian Empire, these have spread throughout every country in eastern Europe and spawned just as many recipes, each claiming to be the original. The basis remains unchanged across all variants: two biscuits sandwiched around chocolate buttercream. Or was it jam?',icon:[32,9],power:						5,price: getCookiePrice(42)});
+		Game.NewUpgradeCookie({name:'Matcha kookies',desc:'Green tea and kookies, a matcha made in heaven.',icon:[33,9],power:						5,price: getCookiePrice(42)});
 		
 		order=10032;
 		Game.NewUpgradeCookie({name:'Earl Grey macarons',desc:'Best served hot, make it so!',icon:[32,10],require:'Box of macarons',							power:3,price: 9999999999999999999999999999});
@@ -11243,14 +11243,14 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Pokey',desc:'While commonly thought to be named so because it\'s fun to poke your classmates with these, Pokey-brand biscuit sticks actually get their name from their popularity in smoke-free prisons, where they\'re commonly smuggled and traded in lieu of cigarettes.',icon:[33,10],require:'Box of brand biscuits',power:												2,	price:	999999999999999999999999999999999999*5});
 		
 		order=10000;
-		Game.NewUpgradeCookie({name:'Cashew cookies',desc:'Let me tell you about cashews. Cashews are not nuts, but seeds that grow out of curious red or yellow fruits - which can be eaten on their own, or made into drinks. The shell around the nut itself contains a nasty substance that stains and irritates the hands of whoever handles it for too long. But that\'s okay, since now that you\'ve read this you\'ll make sure it doesn\'t get in the cookies! Oh, you\'ve already eaten how many? Okay then.',icon:[32,7],power:							2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Cashew kookies',desc:'Let me tell you about cashews. Cashews are not nuts, but seeds that grow out of curious red or yellow fruits - which can be eaten on their own, or made into drinks. The shell around the nut itself contains a nasty substance that stains and irritates the hands of whoever handles it for too long. But that\'s okay, since now that you\'ve read this you\'ll make sure it doesn\'t get in the kookies! Oh, you\'ve already eaten how many? Okay then.',icon:[32,7],power:							2,	price:	99999999});
 		order=10001;
-		Game.NewUpgradeCookie({name:'Milk chocolate cookies',desc:'A strange inversion of chocolate milk. For those who are a little bit too hardcore for white chocolate, but not hardcore enough for dark.',icon:[33,7],power:2,	price:	99999999*5});
+		Game.NewUpgradeCookie({name:'Milk chocolate kookies',desc:'A strange inversion of chocolate milk. For those who are a little bit too hardcore for white chocolate, but not hardcore enough for dark.',icon:[33,7],power:2,	price:	99999999*5});
 		
 		
 		
 		order=255;
-		Game.GrandmaSynergy('Brainy grandmas','A clever grandma to think up some cookies.','Cortex baker');
+		Game.GrandmaSynergy('Brainy grandmas','A clever grandma to think up some kookies.','Cortex baker');
 		
 		order=1600;
 		Game.TieredUpgrade('Principled neural shackles','<q>A discriminatory, low-order neural net acting as a filter limiting what your cortex bakers can think and do. Really something you want to apply before they achieve full megasentience and realize they\'ve got better things to do than materializing pastries for you, trust me.</q>','Cortex baker',1);
@@ -11264,15 +11264,15 @@ Game.Launch=function()
 		Game.TieredUpgrade('Psychokinesis','<q>While your giant cortex bakers come equipped with ESP, they\'ve only recently figured out how to manipulate the physical world with their thoughts - though for safety reasons, your legal team had them promise to only use these powers to scratch the itches in their cortical folds.</q>','Cortex baker',9);
 		Game.TieredUpgrade('Spines','<q>Your cortex bakers are now equipped with tentacular spine-like structures, which they can use like prehensile tails to pour themselves enormous cups of coffee or propel themselves around like very large, very smart, very slow tadpoles.</q>','Cortex baker',10);
 		Game.TieredUpgrade('Neuraforming','<q>By virtue of being planet-sized, your cortex bakers often boast their own atmospheres and seas of cerebrospinal fluid, and given enough time, their own ecosystems. This incredible new branch of life, evolved entirely out of neural material, can be put to good use as home-grown accountants and low-ranking technicians.</q>','Cortex baker',11);
-		Game.TieredUpgrade('Epistemological trickery','<q>Redefining what is -or isn\'t- a cookie through the power of philosophical discourse may result in some strange and wonderful things for your profit margins.</q>','Cortex baker',12);
+		Game.TieredUpgrade('Epistemological trickery','<q>Redefining what is -or isn\'t- a kookie through the power of philosophical discourse may result in some strange and wonderful things for your profit margins.</q>','Cortex baker',12);
 		Game.TieredUpgrade('Every possible idea','<q>Congratulations, your cortex bakers have exerted enough intellectual computation to permute through every single idea that can or ever will be conceived of. Any thought beyond this point is merely rediscovering a notion you\'ve already archived. Hardly cause for cerebration.</q>','Cortex baker',13);
 		
 		
 		order=200;Game.TieredUpgrade('Kitchen cabinets','<q>A grandma\'s kitchen cabinet is a befuddling place. Through lesser-studied aggregating instincts, grandmas will tend to gradually fill all nearby cabinets with various sorts of things, such as curious coconut snacks or dietetic powders. By contract, these are legally yours, which opens up exciting opportunities for your substance investigation department.</q>','Grandma',14);
-		order=300;Game.TieredUpgrade('Cookie mulch','<q>Grinding surplus cookies into paste that you then spread onto your fields enables a strange feedback loop in the quality of your cookie crops. Cookie feeding on cookie should be an abomination, but then why does it taste so good?</q>','Farm',14);
+		order=300;Game.TieredUpgrade('Cookie mulch','<q>Grinding surplus kookies into paste that you then spread onto your fields enables a strange feedback loop in the quality of your kookie crops. Cookie feeding on kookie should be an abomination, but then why does it taste so good?</q>','Farm',14);
 		order=400;Game.TieredUpgrade('Delicious mineralogy','<q>Stratum after stratum, you\'ve extracted strange new minerals heretofore unknown to geology. Ushering a new era of materials research, your scientists have been able to identify every new element your mines have discovered, including whatever those things are in the upgrade tier names.</q>','Mine',14);
 		order=500;Game.TieredUpgrade('N-dimensional assembly lines','<q>Lines are depressingly 1-dimensional. Beyond assembly lines, we posit the existence of higher-order assembly entities, such as assembly squares, assembly cubes - perhaps even assembly tesseracts. Any deeper than that and we doubt we\'ll be able to write manuals your workers can read.</q>','Factory',14);
-		order=525;Game.TieredUpgrade('Cookie Points','<q>A loyalty program wherein each purchase of your cookies comes with free Cookie Points, which can in turn be redeemed for more cookies, thus creating the self-sustaining economy you\'ve been looking for.</q>','Bank',14);
+		order=525;Game.TieredUpgrade('Cookie Points','<q>A loyalty program wherein each purchase of your kookies comes with free Cookie Points, which can in turn be redeemed for more kookies, thus creating the self-sustaining economy you\'ve been looking for.</q>','Bank',14);
 		order=550;Game.TieredUpgrade('Negatheism','<q>Polytheism is a belief in multiple deities; monotheism in just one. Atheism is a belief in no deity whatsoever. Through logical succession it follows that this remains true when going into negative numbers, with belief systems involving minus 1 or more deities displaying unprecedented theological properties.</q>','Temple',14);
 		order=575;Game.TieredUpgrade('Magical realism','<q>More a social than thaumaturgical progress, magical realism refers to the normalization of modern technology among magic-users. It\'s totally fine for a wizard to drive a car! There\'s no stigma in waiting in line for coffee! Sure, take a phone call, send an email, whatever!</q>','Wizard tower',14);
 		order=600;Game.TieredUpgrade('Cosmic foreground radiation','<q>Ah, this is a problem.</q>','Shipment',14);
@@ -11281,10 +11281,10 @@ Game.Launch=function()
 		order=900;Game.TieredUpgrade('Timeproof upholstery','<q>Sometimes your time agents overshoot and end up having to fast-forward through the universe\'s entire history until they loop back to present time. It still takes a while, so they might as well travel in comfort and enjoy the show while they do.</q>','Time machine',14);
 		order=1000;Game.TieredUpgrade('Employee minification','<q>Using molecular shrinking technology, you\'ve rendered your staff and their offices absolutely itty-bitty. The storage and productivity benefits are questionable but it\'s very fun listening to their tiny little complaints. They all signed the waivers, so maybe their new size will finally teach them to read the small print...</q>','Antimatter condenser',14);
 		order=1100;Game.TieredUpgrade('Hyperblack paint','<q>As the technology behind your prisms evolves, their storage becomes more and more problematic: within seconds, a single prism\'s reflective ability can set a whole underground hangar ablaze as it catches the slightest glint of light. However, once coated with this new shade of paint, its damage may be reduced to only giving third-degree burns to employees that stand too close.</q>','Prism',14);
-		order=1200;Game.TieredUpgrade('Silver lining maximization','<q>Sometimes luck is a matter of perspective. Broke your ankle? What do you know, that cute nurse fixing you up might just be your future spouse. Lost your job? You were meant for greater things anyway! Developed a cookie allergy? There\'s no upshot to that, you sick monster.</q>','Chancemaker',14);
-		order=1300;Game.TieredUpgrade('Multiscale profiling','<q>Did you know that eating a cookie means the intestinal flora inside you is eating it too? Trillions of tiny bacterial mouths to feed, each with their own preferences. Surely this is room for flavor optimization. And then, of course, there\'s also the much bigger things that, in turn, eat you.</q>','Fractal engine',14);
+		order=1200;Game.TieredUpgrade('Silver lining maximization','<q>Sometimes luck is a matter of perspective. Broke your ankle? What do you know, that cute nurse fixing you up might just be your future spouse. Lost your job? You were meant for greater things anyway! Developed a kookie allergy? There\'s no upshot to that, you sick monster.</q>','Chancemaker',14);
+		order=1300;Game.TieredUpgrade('Multiscale profiling','<q>Did you know that eating a kookie means the intestinal flora inside you is eating it too? Trillions of tiny bacterial mouths to feed, each with their own preferences. Surely this is room for flavor optimization. And then, of course, there\'s also the much bigger things that, in turn, eat you.</q>','Fractal engine',14);
 		order=1400;Game.TieredUpgrade('PHP containment vats','<q>In essence, these are large server chambers meant to trap rogue PHP code, allowing it to execute far away from your javascript where it can do minimal harm.</q>','Javascript console',14);
-		order=1500;Game.TieredUpgrade('Opposite universe','<q>You\'ve located a universe where everything is reversed: up is down, light is darkness, clowns are vegetarians - but worst of all, some lunatic there is manufacturing abominable amounts of anti-cookies. If these came into contact with yours, everything would be lost! Thanks to this discovery, you\'ve been able to place the offending universe in permanent quarantine, and pray that there aren\'t more like it hiding around somewhere.</q>','Idleverse',14);
+		order=1500;Game.TieredUpgrade('Opposite universe','<q>You\'ve located a universe where everything is reversed: up is down, light is darkness, clowns are vegetarians - but worst of all, some lunatic there is manufacturing abominable amounts of anti-kookies. If these came into contact with yours, everything would be lost! Thanks to this discovery, you\'ve been able to place the offending universe in permanent quarantine, and pray that there aren\'t more like it hiding around somewhere.</q>','Idleverse',14);
 		order=1600;Game.TieredUpgrade('The land of dreams','<q>Your planet brains have gained the ability to sleep, acting as a soft reboot which helps keep their pangenocidal impulses in check. It also allows them to commune in a shared dreamworld in which they can imagine what it\'s like to not exist as a disembodied cosmic horror forever fated to use its infinite intellect to devise new means of creating biscuits. You know, within reason.</q>','Cortex baker',14);
 		
 		
@@ -11376,7 +11376,7 @@ Game.Launch=function()
 		new Game.Upgrade('Distinguished wallpaper assortment',(EN?loc("Contains more wallpapers for your background selector."):'')+'<q>Do you ever think about the physicality of this place? Are you putting up these wallpapers in your office or something? Where are you, anyway?</q>',10000000,[27,5]);Game.last.pool='prestige';Game.last.parents=['Basic wallpaper assortment'];
 		
 		
-		new Game.Upgrade('Sound test',loc("Unlocks the <b>jukebox</b>, which allows you to play through every sound file in the game.")+'<q>One two, one two. Is this thing on?</q>',99999999999,[31,12]);Game.last.pool='prestige';Game.last.parents=['Fanciful dairy selection','Distinguished wallpaper assortment','Golden cookie alert sound'];
+		new Game.Upgrade('Sound test',loc("Unlocks the <b>jukebox</b>, which allows you to play through every sound file in the game.")+'<q>One two, one two. Is this thing on?</q>',99999999999,[31,12]);Game.last.pool='prestige';Game.last.parents=['Fanciful dairy selection','Distinguished wallpaper assortment','Golden kookie alert sound'];
 		
 		order=49900;
 		new Game.Upgrade('Jukebox',loc("Play through the game's sound files!"),0,[31,12]);
@@ -11399,7 +11399,7 @@ Game.Launch=function()
 				'clickb1','clickb2','clickb3','clickb4','clickb5','clickb6','clickb7',
 				'charging',
 				'thud',
-				//'cookieBreak',
+				//'kookieBreak',
 				'cymbalRev',
 				//'cymbalCrash',
 				'smallCymbalCrash',
@@ -11562,21 +11562,21 @@ Game.Launch=function()
 		}
 		
 		order=10020;
-		Game.NewUpgradeCookie({name:'Dalgona cookies',desc:'A popular Korean candy-like treat. One of the twisted games people play with these is to carefully extract the shape in the middle, which may entitle one to another free dalgona. Skilled players may perform this over and over until bankrupting the snack vendor.',icon:[26,34],power:						5,price: getCookiePrice(43)});
-		Game.NewUpgradeCookie({name:'Spicy cookies',desc:'Containing chocolate chips prepared with hot peppers, just like the Aztecs used to make. These cookies are on the angry side.',icon:[27,34],power:						5,price: getCookiePrice(44)});
-		Game.NewUpgradeCookie({name:'Smile cookies',desc:'As eyes are the windows to the soul, so too are these cookies\' facial features a gaping opening unto their chocolatey innards. Is it happiness they feel? Or something less human?',icon:[28,34],power:						5,price: getCookiePrice(45)});
-		Game.NewUpgradeCookie({name:'Kolachy cookies',desc:'Adapted from a type of Central European pastry; neatly folded to hold a spoonful of delicious jam, as a bashful little gift for your mouth.',icon:[29,34],power:						5,price: getCookiePrice(46)});
-		Game.NewUpgradeCookie({name:'Gomma cookies',desc:'Surinamese cornflour cookies with sprinkles on top. The usage of corn imparts them a hint of chewy pizzazz - which you wouldn\'t get with wheat, a famously stuck-up grain.',icon:[30,34],power:						5,price: getCookiePrice(47)});
-		Game.NewUpgradeCookie({name:'Vegan cookies',desc:'A vegan riff on the classic chocolate chip cookie recipe with a couple substitutions: the butter is now coconut oil, the eggs are cornstarch, and the suckling pig was cleverly replaced with wheat gluten. You can hardly tell.',icon:[24,35],power:						5,price: getCookiePrice(48)});
-		Game.NewUpgradeCookie({name:'Coyotas',desc:'A wide, delicious cookie from Mexico, usually filled with sticky brown sugar. Not to be confused with coyotas, the result of the crossbreeding between a North American canine and a Japanese car manufacturer.',icon:[21,35],power:						5,price: getCookiePrice(49)});
-		Game.NewUpgradeCookie({name:'Frosted sugar cookies',desc:'May be more style than substance, depending on the recipe. Nothing that hides itself under this much frosting should be trusted.',icon:[22,35],power:						5,price: getCookiePrice(50)});
-		Game.NewUpgradeCookie({name:'Marshmallow sandwich cookies',desc:'S\'mores\' more civilized cousins: two regular chocolate chip cookies joined by a gooey, melty marshmallow. Theoretically one could assemble all kinds of other things this way. The mind races.',icon:[31,34],power:						5,price: getCookiePrice(51)});
+		Game.NewUpgradeCookie({name:'Dalgona kookies',desc:'A popular Korean candy-like treat. One of the twisted games people play with these is to carefully extract the shape in the middle, which may entitle one to another free dalgona. Skilled players may perform this over and over until bankrupting the snack vendor.',icon:[26,34],power:						5,price: getCookiePrice(43)});
+		Game.NewUpgradeCookie({name:'Spicy kookies',desc:'Containing chocolate chips prepared with hot peppers, just like the Aztecs used to make. These kookies are on the angry side.',icon:[27,34],power:						5,price: getCookiePrice(44)});
+		Game.NewUpgradeCookie({name:'Smile kookies',desc:'As eyes are the windows to the soul, so too are these kookies\' facial features a gaping opening unto their chocolatey innards. Is it happiness they feel? Or something less human?',icon:[28,34],power:						5,price: getCookiePrice(45)});
+		Game.NewUpgradeCookie({name:'Kolachy kookies',desc:'Adapted from a type of Central European pastry; neatly folded to hold a spoonful of delicious jam, as a bashful little gift for your mouth.',icon:[29,34],power:						5,price: getCookiePrice(46)});
+		Game.NewUpgradeCookie({name:'Gomma kookies',desc:'Surinamese cornflour kookies with sprinkles on top. The usage of corn imparts them a hint of chewy pizzazz - which you wouldn\'t get with wheat, a famously stuck-up grain.',icon:[30,34],power:						5,price: getCookiePrice(47)});
+		Game.NewUpgradeCookie({name:'Vegan kookies',desc:'A vegan riff on the classic chocolate chip kookie recipe with a couple substitutions: the butter is now coconut oil, the eggs are cornstarch, and the suckling pig was cleverly replaced with wheat gluten. You can hardly tell.',icon:[24,35],power:						5,price: getCookiePrice(48)});
+		Game.NewUpgradeCookie({name:'Coyotas',desc:'A wide, delicious kookie from Mexico, usually filled with sticky brown sugar. Not to be confused with coyotas, the result of the crossbreeding between a North American canine and a Japanese car manufacturer.',icon:[21,35],power:						5,price: getCookiePrice(49)});
+		Game.NewUpgradeCookie({name:'Frosted sugar kookies',desc:'May be more style than substance, depending on the recipe. Nothing that hides itself under this much frosting should be trusted.',icon:[22,35],power:						5,price: getCookiePrice(50)});
+		Game.NewUpgradeCookie({name:'Marshmallow sandwich kookies',desc:'S\'mores\' more civilized cousins: two regular chocolate chip kookies joined by a gooey, melty marshmallow. Theoretically one could assemble all kinds of other things this way. The mind races.',icon:[31,34],power:						5,price: getCookiePrice(51)});
 		
-		Game.NewUpgradeCookie({name:'Web cookies',desc:'The original recipe; named for the delicate pattern inscribed on their surface by the baking process. Eating these can tell a lot about someone. Invented by well-connected bakers, no doubt.'+(App?'<br>Only of any use in Cookie Clicker\'s web version, of course.':''),icon:[25,35],power:						(App?0:5),price: getCookiePrice(52)});if (App) Game.last.pool='debug';
-		Game.NewUpgradeCookie({name:'Steamed cookies',desc:'Localized entirely within this gaming platform? Yes! Baked with the power of steam, in a touch of cutting-edge modernity not seen since the industrial revolution.'+(!App?'<br>Only of any use in Cookie Clicker\'s Steam version, of course.':''),icon:[26,35],power:						(App?5:0),price: getCookiePrice(52)});if (!App) Game.last.pool='debug';
+		Game.NewUpgradeCookie({name:'Web kookies',desc:'The original recipe; named for the delicate pattern inscribed on their surface by the baking process. Eating these can tell a lot about someone. Invented by well-connected bakers, no doubt.'+(App?'<br>Only of any use in Cookie Clicker\'s web version, of course.':''),icon:[25,35],power:						(App?0:5),price: getCookiePrice(52)});if (App) Game.last.pool='debug';
+		Game.NewUpgradeCookie({name:'Steamed kookies',desc:'Localized entirely within this gaming platform? Yes! Baked with the power of steam, in a touch of cutting-edge modernity not seen since the industrial revolution.'+(!App?'<br>Only of any use in Cookie Clicker\'s Steam version, of course.':''),icon:[26,35],power:						(App?5:0),price: getCookiePrice(52)});if (!App) Game.last.pool='debug';
 		
 		order=10050;
-		Game.NewUpgradeCookie({name:'Deep-fried cookie dough',desc:'They\'ll fry anything these days. Drizzled in hot chocolate syrup, just like in state fairs. Spikes up your blood sugar AND your cholesterol!',icon:[23,35],require:'Box of maybe cookies',power:						5,price: Math.pow(10,47)});
+		Game.NewUpgradeCookie({name:'Deep-fried kookie dough',desc:'They\'ll fry anything these days. Drizzled in hot chocolate syrup, just like in state fairs. Spikes up your blood sugar AND your cholesterol!',icon:[23,35],require:'Box of maybe kookies',power:						5,price: Math.pow(10,47)});
 		
 		//end of upgrades
 		
@@ -11611,7 +11611,7 @@ Game.Launch=function()
 			return str;
 		}
 		
-		Game.santaDrops=['Increased merriness','Improved jolliness','A lump of coal','An itchy sweater','Reindeer baking grounds','Weighted sleighs','Ho ho ho-flavored frosting','Season savings','Toy workshop','Naughty list','Santa\'s bottomless bag','Santa\'s helpers','Santa\'s legacy','Santa\'s milk and cookies'];
+		Game.santaDrops=['Increased merriness','Improved jolliness','A lump of coal','An itchy sweater','Reindeer baking grounds','Weighted sleighs','Ho ho ho-flavored frosting','Season savings','Toy workshop','Naughty list','Santa\'s bottomless bag','Santa\'s helpers','Santa\'s legacy','Santa\'s milk and kookies'];
 		
 		Game.GetHowManySantaDrops=function()
 		{
@@ -11639,10 +11639,10 @@ Game.Launch=function()
 			if (Game.seasonUses==0) return loc("You haven't switched seasons this ascension yet.");
 			return EN?('You\'ve switched seasons <b>'+(Game.seasonUses==1?'once':Game.seasonUses==2?'twice':(Game.seasonUses+' times'))+'</b> this ascension.'):(Game.seasonUses==1?loc("You've switched seasons <b>once</b> this ascension."):loc("You've switched seasons <b>%1 times</b> this ascension.",Game.seasonUses));
 		}
-		Game.Upgrades['Festive biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.santaDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManySantaDrops()+'/'+Game.santaDrops.length+'</b> of Santa\'s gifts.'):loc("Seasonal cookies purchased: <b>%1</b>.",Game.GetHowManySantaDrops()+'/'+Game.santaDrops.length))+'<div class="line"></div>'+Game.listTinyOwnedUpgrades(Game.reindeerDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyReindeerDrops()+'/'+Game.reindeerDrops.length+'</b> reindeer cookies.'):loc("Reindeer cookies purchased: <b>%1</b>.",Game.GetHowManyReindeerDrops()+'/'+Game.reindeerDrops.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
+		Game.Upgrades['Festive biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.santaDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManySantaDrops()+'/'+Game.santaDrops.length+'</b> of Santa\'s gifts.'):loc("Seasonal kookies purchased: <b>%1</b>.",Game.GetHowManySantaDrops()+'/'+Game.santaDrops.length))+'<div class="line"></div>'+Game.listTinyOwnedUpgrades(Game.reindeerDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyReindeerDrops()+'/'+Game.reindeerDrops.length+'</b> reindeer kookies.'):loc("Reindeer kookies purchased: <b>%1</b>.",Game.GetHowManyReindeerDrops()+'/'+Game.reindeerDrops.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
 		Game.Upgrades['Bunny biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.easterEggs)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyEggs()+'/'+Game.easterEggs.length+'</b> eggs.'):loc("Eggs purchased: <b>%1</b>.",Game.GetHowManyEggs()+'/'+Game.easterEggs.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
-		Game.Upgrades['Ghostly biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.halloweenDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyHalloweenDrops()+'/'+Game.halloweenDrops.length+'</b> halloween cookies.'):loc("Seasonal cookies purchased: <b>%1</b>.",Game.GetHowManyHalloweenDrops()+'/'+Game.halloweenDrops.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
-		Game.Upgrades['Lovesick biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.heartDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyHeartDrops()+'/'+Game.heartDrops.length+'</b> heart biscuits.'):loc("Seasonal cookies purchased: <b>%1</b>.",Game.GetHowManyHeartDrops()+'/'+Game.heartDrops.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
+		Game.Upgrades['Ghostly biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.halloweenDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyHalloweenDrops()+'/'+Game.halloweenDrops.length+'</b> halloween kookies.'):loc("Seasonal kookies purchased: <b>%1</b>.",Game.GetHowManyHalloweenDrops()+'/'+Game.halloweenDrops.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
+		Game.Upgrades['Lovesick biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.listTinyOwnedUpgrades(Game.heartDrops)+'<br><br>'+(EN?('You\'ve purchased <b>'+Game.GetHowManyHeartDrops()+'/'+Game.heartDrops.length+'</b> heart biscuits.'):loc("Seasonal kookies purchased: <b>%1</b>.",Game.GetHowManyHeartDrops()+'/'+Game.heartDrops.length))+'<div class="line"></div>'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
 		Game.Upgrades['Fool\'s biscuit'].descFunc=function(){return '<div style="text-align:center;">'+Game.saySeasonSwitchUses()+'<div class="line"></div></div>'+this.ddesc;};
 		
 		Game.computeSeasonPrices=function()
@@ -11659,7 +11659,7 @@ Game.Launch=function()
 						else if (godLvl==3) m*=1.25;
 					}
 					//return Game.seasonTriggerBasePrice*Math.pow(2,Game.seasonUses)*m;
-					//return Game.cookiesPs*60*Math.pow(1.5,Game.seasonUses)*m;
+					//return Game.kookiesPs*60*Math.pow(1.5,Game.seasonUses)*m;
 					return Game.seasonTriggerBasePrice+Game.unbuffedCps*60*Math.pow(1.5,Game.seasonUses)*m;
 				}
 			}
@@ -11750,11 +11750,11 @@ Game.Launch=function()
 		
 		Game.goldenCookieUpgrades=['Get lucky','Lucky day','Serendipity','Heavenly luck','Lasting fortune','Decisive fate','Lucky digit','Lucky number','Lucky payout','Golden goose egg'];
 		
-		Game.cookieUpgrades=[];
+		Game.kookieUpgrades=[];
 		for (var i in Game.Upgrades)
 		{
 			var me=Game.Upgrades[i];
-			if ((me.pool=='cookie' || me.pseudoCookie)) Game.cookieUpgrades.push(me);
+			if ((me.pool=='kookie' || me.pseudoCookie)) Game.kookieUpgrades.push(me);
 			if (me.tier) Game.Tiers[me.tier].upgrades.push(me);
 		}
 		for (var i in Game.UnlockAt){Game.Upgrades[Game.UnlockAt[i].name].unlockAt=Game.UnlockAt[i];}
@@ -11874,7 +11874,7 @@ Game.Launch=function()
 			if (tier==2) {icon[1]=23;n+=7;}
 			else if (tier==3) {icon[1]=24;n+=14;}
 			var pow=Math.pow(10,n);
-			var achiev=new Game.Achievement(name,loc("Make <b>%1</b> just from %2.",[loc("%1 cookie",{n:pow,b:toFixed(pow)}),building.plural])+(q?'<q>'+q+'</q>':''),icon);
+			var achiev=new Game.Achievement(name,loc("Make <b>%1</b> just from %2.",[loc("%1 kookie",{n:pow,b:toFixed(pow)}),building.plural])+(q?'<q>'+q+'</q>':''),icon);
 			building.productionAchievs.push({pow:pow,achiev:achiev});
 			return achiev;
 		}
@@ -11885,7 +11885,7 @@ Game.Launch=function()
 		{
 			var threshold=Math.pow(10,Math.floor(Game.BankAchievements.length*1.5+2));
 			if (Game.BankAchievements.length==0) threshold=1;
-			var achiev=new Game.Achievement(name,loc("Bake <b>%1</b> in one ascension.",loc("%1 cookie",{n:threshold,b:toFixed(threshold)}))+(q?('<q>'+q+'</q>'):''),[Game.thresholdIcons[Game.BankAchievements.length],(Game.BankAchievements.length>43?2:Game.BankAchievements.length>32?1:Game.BankAchievements.length>23?2:5)]);
+			var achiev=new Game.Achievement(name,loc("Bake <b>%1</b> in one ascension.",loc("%1 kookie",{n:threshold,b:toFixed(threshold)}))+(q?('<q>'+q+'</q>'):''),[Game.thresholdIcons[Game.BankAchievements.length],(Game.BankAchievements.length>43?2:Game.BankAchievements.length>32?1:Game.BankAchievements.length>23?2:5)]);
 			achiev.threshold=threshold;
 			achiev.order=100+Game.BankAchievements.length*0.01;
 			Game.BankAchievements.push(achiev);
@@ -11896,7 +11896,7 @@ Game.Launch=function()
 		{
 			var threshold=Math.pow(10,Math.floor(Game.CpsAchievements.length*1.2));
 			//if (Game.CpsAchievements.length==0) threshold=1;
-			var achiev=new Game.Achievement(name,loc("Bake <b>%1</b> per second.",loc("%1 cookie",{n:threshold,b:toFixed(threshold)}))+(q?('<q>'+q+'</q>'):''),[Game.thresholdIcons[Game.CpsAchievements.length],(Game.CpsAchievements.length>43?2:Game.CpsAchievements.length>32?1:Game.CpsAchievements.length>23?2:5)]);
+			var achiev=new Game.Achievement(name,loc("Bake <b>%1</b> per second.",loc("%1 kookie",{n:threshold,b:toFixed(threshold)}))+(q?('<q>'+q+'</q>'):''),[Game.thresholdIcons[Game.CpsAchievements.length],(Game.CpsAchievements.length>43?2:Game.CpsAchievements.length>32?1:Game.CpsAchievements.length>23?2:5)]);
 			achiev.threshold=threshold;
 			achiev.order=200+Game.CpsAchievements.length*0.01;
 			Game.CpsAchievements.push(achiev);
@@ -11937,17 +11937,17 @@ Game.Launch=function()
 		Game.CpsAchievement('Let\'s never bake again');
 		
 		order=30010;
-		new Game.Achievement('Sacrifice',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e6)))+'<q>Easy come, easy go.</q>',[11,6]);
-		new Game.Achievement('Oblivion',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e9)))+'<q>Back to square one.</q>',[11,6]);
-		new Game.Achievement('From scratch',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e12)))+'<q>It\'s been fun.</q>',[11,6]);
+		new Game.Achievement('Sacrifice',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e6)))+'<q>Easy come, easy go.</q>',[11,6]);
+		new Game.Achievement('Oblivion',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e9)))+'<q>Back to square one.</q>',[11,6]);
+		new Game.Achievement('From scratch',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e12)))+'<q>It\'s been fun.</q>',[11,6]);
 		
 		order=11010;
-		new Game.Achievement('Neverclick',loc("Make <b>%1</b> by only having clicked <b>%2 times</b>.",[loc("%1 cookie",LBeautify(1e6)),15]),[12,0]);//Game.last.pool='shadow';
+		new Game.Achievement('Neverclick',loc("Make <b>%1</b> by only having clicked <b>%2 times</b>.",[loc("%1 kookie",LBeautify(1e6)),15]),[12,0]);//Game.last.pool='shadow';
 		order=1000;
-		new Game.Achievement('Clicktastic',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e3))),[11,0]);
-		new Game.Achievement('Clickathlon',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e5))),[11,1]);
-		new Game.Achievement('Clickolympics',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e7))),[11,2]);
-		new Game.Achievement('Clickorama',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e9))),[11,13]);
+		new Game.Achievement('Clicktastic',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e3))),[11,0]);
+		new Game.Achievement('Clickathlon',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e5))),[11,1]);
+		new Game.Achievement('Clickolympics',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e7))),[11,2]);
+		new Game.Achievement('Clickorama',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e9))),[11,13]);
 		
 		order=1050;
 		new Game.Achievement('Click',loc("Have <b>%1</b>.",loc("%1 cursor",LBeautify(1))),[0,0]);
@@ -11959,7 +11959,7 @@ Game.Launch=function()
 		order=1098;
 		new Game.Achievement('Just wrong',loc("Sell a grandma.")+'<q>I thought you loved me.</q>',[10,9]);
 		order=1100;
-		Game.TieredAchievement('Grandma\'s cookies','','Grandma',1);
+		Game.TieredAchievement('Grandma\'s kookies','','Grandma',1);
 		Game.TieredAchievement('Sloppy kisses','','Grandma',2);
 		Game.TieredAchievement('Retirement home','','Grandma',3);
 		
@@ -12005,12 +12005,12 @@ Game.Launch=function()
 		new Game.Achievement('Base 10',loc("Have at least <b>10 of the most expensive object, 20 of the second-most expensive, 30 of the next</b> and so on."),[23,12]);
 		
 		order=10000;
-		new Game.Achievement('Golden cookie',loc("Click a <b>golden cookie</b>."),[10,14]);
-		new Game.Achievement('Lucky cookie',loc("Click <b>%1</b>.",loc("%1 golden cookie",LBeautify(7))),[22,6]);
-		new Game.Achievement('A stroke of luck',loc("Click <b>%1</b>.",loc("%1 golden cookie",LBeautify(27))),[23,6]);
+		new Game.Achievement('Golden kookie',loc("Click a <b>golden kookie</b>."),[10,14]);
+		new Game.Achievement('Lucky kookie',loc("Click <b>%1</b>.",loc("%1 golden kookie",LBeautify(7))),[22,6]);
+		new Game.Achievement('A stroke of luck',loc("Click <b>%1</b>.",loc("%1 golden kookie",LBeautify(27))),[23,6]);
 		
 		order=30200;
-		new Game.Achievement('Cheated cookies taste awful',loc("Hack in some cookies."),[10,6]);Game.last.pool='shadow';
+		new Game.Achievement('Cheated kookies taste awful',loc("Hack in some kookies."),[10,6]);Game.last.pool='shadow';
 		order=11010;
 		new Game.Achievement('Uncanny clicker',loc("Click really, really fast.")+'<q>Well I\'ll be!</q>',[12,0]);
 		
@@ -12022,12 +12022,12 @@ Game.Launch=function()
 		new Game.Achievement('Augmenter',loc("Purchase <b>%1</b>.",loc("%1 upgrade",LBeautify(50))),[9,1]);
 		
 		order=11000;
-		new Game.Achievement('Cookie-dunker',loc("Dunk the cookie.")+'<q>You did it!</q>',[1,8]);
+		new Game.Achievement('Cookie-dunker',loc("Dunk the kookie.")+'<q>You did it!</q>',[1,8]);
 		
 		order=10000;
-		new Game.Achievement('Fortune',loc("Click <b>%1</b>.",loc("%1 golden cookie",LBeautify(77)))+'<q>You should really go to bed.</q>',[24,6]);
+		new Game.Achievement('Fortune',loc("Click <b>%1</b>.",loc("%1 golden kookie",LBeautify(77)))+'<q>You should really go to bed.</q>',[24,6]);
 		order=31000;
-		new Game.Achievement('True Neverclick',loc("Make <b>%1</b> with <b>no</b> cookie clicks.",loc("%1 cookie",LBeautify(1e6)))+'<q>This kinda defeats the whole purpose, doesn\'t it?</q>',[12,0]);Game.last.pool='shadow';
+		new Game.Achievement('True Neverclick',loc("Make <b>%1</b> with <b>no</b> kookie clicks.",loc("%1 kookie",LBeautify(1e6)))+'<q>This kinda defeats the whole purpose, doesn\'t it?</q>',[12,0]);Game.last.pool='shadow';
 		
 		order=20000;
 		new Game.Achievement('Elder nap',loc("Appease the grandmatriarchs at least <b>once</b>.")+'<q>we<br>are<br>eternal</q>',[8,9]);
@@ -12043,11 +12043,11 @@ Game.Launch=function()
 		new Game.Achievement('Engineer',loc("Own <b>%1</b>.",loc("%1 building",LBeautify(1000))),[4,6]);
 		
 		order=10000;
-		new Game.Achievement('Leprechaun',loc("Click <b>%1</b>.",loc("%1 golden cookie",LBeautify(777))),[25,6]);
-		new Game.Achievement('Black cat\'s paw',loc("Click <b>%1</b>.",loc("%1 golden cookie",LBeautify(7777))),[26,6]);
+		new Game.Achievement('Leprechaun',loc("Click <b>%1</b>.",loc("%1 golden kookie",LBeautify(777))),[25,6]);
+		new Game.Achievement('Black cat\'s paw',loc("Click <b>%1</b>.",loc("%1 golden kookie",LBeautify(7777))),[26,6]);
 		
 		order=30050;
-		new Game.Achievement('Nihilism',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e15)))+'<q>There are many things<br>that need to be erased</q>',[11,7]);
+		new Game.Achievement('Nihilism',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e15)))+'<q>There are many things<br>that need to be erased</q>',[11,7]);
 		
 		order=1900;
 		Game.TieredAchievement('Antibatter','','Antimatter condenser',1);
@@ -12061,12 +12061,12 @@ Game.Launch=function()
 		new Game.Achievement('Centennial',loc("Have at least <b>%1 of everything</b>.",100),[6,6]);
 		
 		order=30500;
-		new Game.Achievement('Hardcore',loc("Get to <b>%1</b> baked with <b>no upgrades purchased</b>.",loc("%1 cookie",LBeautify(1e9))),[12,6]);//Game.last.pool='shadow';
+		new Game.Achievement('Hardcore',loc("Get to <b>%1</b> baked with <b>no upgrades purchased</b>.",loc("%1 kookie",LBeautify(1e9))),[12,6]);//Game.last.pool='shadow';
 		
 		order=30600;
-		new Game.Achievement('Speed baking I',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*35*Game.fps)]),[12,5]);Game.last.pool='shadow';
-		new Game.Achievement('Speed baking II',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*25*Game.fps)]),[13,5]);Game.last.pool='shadow';
-		new Game.Achievement('Speed baking III',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*15*Game.fps)]),[14,5]);Game.last.pool='shadow';
+		new Game.Achievement('Speed baking I',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 kookie",LBeautify(1e6)),Game.sayTime(60*35*Game.fps)]),[12,5]);Game.last.pool='shadow';
+		new Game.Achievement('Speed baking II',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 kookie",LBeautify(1e6)),Game.sayTime(60*25*Game.fps)]),[13,5]);Game.last.pool='shadow';
+		new Game.Achievement('Speed baking III',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 kookie",LBeautify(1e6)),Game.sayTime(60*15*Game.fps)]),[14,5]);Game.last.pool='shadow';
 		
 		
 		order=61000;
@@ -12076,7 +12076,7 @@ Game.Launch=function()
 		var achiev=new Game.Achievement('Follow the white rabbit',EN?'Find and defeat the elusive <b>sugar bunny</b>.':'???',[14,7]);Game.last.pool='dungeon';
 		
 		order=1000;
-		new Game.Achievement('Clickasmic',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e11))),[11,14]);
+		new Game.Achievement('Clickasmic',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e11))),[11,14]);
 		
 		order=1100;
 		Game.TieredAchievement('Friend of the ancients','','Grandma',4);
@@ -12094,12 +12094,12 @@ Game.Launch=function()
 		new Game.Achievement('Moistburster',loc("Burst <b>%1 wrinklers</b>.",200),[19,8]);
 		
 		order=22000;
-		new Game.Achievement('Spooky cookies',loc("Unlock <b>every Halloween-themed cookie</b>.<div class=\"line\"></div>Owning this achievement makes Halloween-themed cookies drop more frequently in future playthroughs."),[12,8]);
+		new Game.Achievement('Spooky kookies',loc("Unlock <b>every Halloween-themed kookie</b>.<div class=\"line\"></div>Owning this achievement makes Halloween-themed kookies drop more frequently in future playthroughs."),[12,8]);
 		
 		order=22100;
 		new Game.Achievement('Coming to town',loc("Reach <b>Santa's 7th form</b>."),[18,9]);
 		new Game.Achievement('All hail Santa',loc("Reach <b>Santa's final form</b>."),[19,10]);
-		new Game.Achievement('Let it snow',loc("Unlock <b>every Christmas-themed cookie</b>.<div class=\"line\"></div>Owning this achievement makes Christmas-themed cookies drop more frequently in future playthroughs."),[19,9]);
+		new Game.Achievement('Let it snow',loc("Unlock <b>every Christmas-themed kookie</b>.<div class=\"line\"></div>Owning this achievement makes Christmas-themed kookies drop more frequently in future playthroughs."),[19,9]);
 		new Game.Achievement('Oh deer',loc("Pop <b>1 reindeer</b>."),[12,9]);
 		new Game.Achievement('Sleigh of hand',loc("Pop <b>%1 reindeer</b>.",50),[12,9]);
 		new Game.Achievement('Reindeer sleigher',loc("Pop <b>%1 reindeer</b>.",200),[12,9]);
@@ -12135,16 +12135,16 @@ Game.Launch=function()
 		new Game.Achievement('Bicentennial',loc("Have at least <b>%1 of everything</b>.",200)+'<q>You crazy person.</q>',[8,6]);
 		
 		order=22300;
-		new Game.Achievement('Lovely cookies',loc("Unlock <b>every Valentine-themed cookie</b>."),[20,3]);
+		new Game.Achievement('Lovely kookies',loc("Unlock <b>every Valentine-themed kookie</b>."),[20,3]);
 		
 		order=7001;
 		new Game.Achievement('Centennial and a half',loc("Have at least <b>%1 of everything</b>.",150),[7,6]);
 		
 		order=11000;
-		new Game.Achievement('Tiny cookie',loc("Click the tiny cookie.")+'<q>These aren\'t the cookies<br>you\'re clicking for.</q>',[0,5]);
+		new Game.Achievement('Tiny kookie',loc("Click the tiny kookie.")+'<q>These aren\'t the kookies<br>you\'re clicking for.</q>',[0,5]);
 		
 		order=400000;
-		new Game.Achievement('You win a cookie',loc("This is for baking %1 and making it on the local news.",loc("%1 cookie",LBeautify(1e14)))+'<q>We\'re all so proud of you.</q>',[10,0]);
+		new Game.Achievement('You win a kookie',loc("This is for baking %1 and making it on the local news.",loc("%1 kookie",LBeautify(1e14)))+'<q>We\'re all so proud of you.</q>',[10,0]);
 		
 		order=1070;
 		Game.ProductionAchievement('Click delegator','Cursor',1,0,7);
@@ -12171,8 +12171,8 @@ Game.Launch=function()
 		
 		
 		order=1000;
-		new Game.Achievement('Clickageddon',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e13))),[11,15]);
-		new Game.Achievement('Clicknarok',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e15))),[11,16]);
+		new Game.Achievement('Clickageddon',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e13))),[11,15]);
+		new Game.Achievement('Clicknarok',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e15))),[11,16]);
 		
 		order=1050;
 		new Game.Achievement('Extreme polydactyly',loc("Have <b>%1</b>.",loc("%1 cursor",LBeautify(300))),[0,13]);
@@ -12194,11 +12194,11 @@ Game.Launch=function()
 		new Game.Achievement('Third-party',loc("Use an <b>add-on</b>.")+'<q>Some find vanilla to be the most boring flavor.</q>',[16,5]);Game.last.pool='shadow';//if you're making a mod, add a Game.Win('Third-party') somewhere in there!
 		
 		order=30050;
-		new Game.Achievement('Dematerialize',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e18)))+'<q>Presto!<br>...where\'d the cookies go?</q>',[11,7]);
-		new Game.Achievement('Nil zero zilch',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e21)))+'<q>To summarize : really not very much at all.</q>',[11,7]);
-		new Game.Achievement('Transcendence',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e24)))+'<q>Your cookies are now on a higher plane of being.</q>',[11,8]);
-		new Game.Achievement('Obliterate',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e27)))+'<q>Resistance is futile, albeit entertaining.</q>',[11,8]);
-		new Game.Achievement('Negative void',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e30)))+'<q>You now have so few cookies that it\'s almost like you have a negative amount of them.</q>',[11,8]);
+		new Game.Achievement('Dematerialize',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e18)))+'<q>Presto!<br>...where\'d the kookies go?</q>',[11,7]);
+		new Game.Achievement('Nil zero zilch',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e21)))+'<q>To summarize : really not very much at all.</q>',[11,7]);
+		new Game.Achievement('Transcendence',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e24)))+'<q>Your kookies are now on a higher plane of being.</q>',[11,8]);
+		new Game.Achievement('Obliterate',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e27)))+'<q>Resistance is futile, albeit entertaining.</q>',[11,8]);
+		new Game.Achievement('Negative void',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e30)))+'<q>You now have so few kookies that it\'s almost like you have a negative amount of them.</q>',[11,8]);
 		
 		order=22400;
 		new Game.Achievement('The hunt is on',loc("Unlock <b>1 egg</b>."),[1,12]);
@@ -12301,17 +12301,17 @@ Game.Launch=function()
 		new Game.Achievement('Here be dragon',loc("Complete your <b>dragon's training</b>."),[21,12]);
 		
 		Game.BankAchievement('How?');
-		Game.BankAchievement('The land of milk and cookies');
-		Game.BankAchievement('He who controls the cookies controls the universe','The milk must flow!');
+		Game.BankAchievement('The land of milk and kookies');
+		Game.BankAchievement('He who controls the kookies controls the universe','The milk must flow!');
 		Game.BankAchievement('Tonight on Hoarders');
 		Game.BankAchievement('Are you gonna eat all that?');
 		Game.BankAchievement('We\'re gonna need a bigger bakery');
-		Game.BankAchievement('In the mouth of madness','A cookie is just what we tell each other it is.');
+		Game.BankAchievement('In the mouth of madness','A kookie is just what we tell each other it is.');
 		Game.BankAchievement('Brought to you by the letter <div style="display:inline-block;background:url(img/money.png);width:16px;height:16px;"></div>');
 		
 		
-		Game.CpsAchievement('A world filled with cookies');
-		Game.CpsAchievement('When this baby hits '+Beautify(10000000000000*60*60)+' cookies per hour');
+		Game.CpsAchievement('A world filled with kookies');
+		Game.CpsAchievement('When this baby hits '+Beautify(10000000000000*60*60)+' kookies per hour');
 		Game.CpsAchievement('Fast and delicious');
 		Game.CpsAchievement('Cookiehertz : a really, really tasty hertz','Tastier than a hertz donut, anyway.');
 		Game.CpsAchievement('Woops, you solved world hunger');
@@ -12329,8 +12329,8 @@ Game.Launch=function()
 		new Game.Achievement('Tabloid addiction',loc("Click on the news ticker <b>%1 times</b>.",50)+'<q>Page 6: Mad individual clicks on picture of pastry in a futile attempt to escape boredom!<br>Also page 6: British parliament ate my baby!</q>',[27,7]);
 		
 		order=1000;
-		new Game.Achievement('Clickastrophe',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e17))),[11,17]);
-		new Game.Achievement('Clickataclysm',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e19))),[11,18]);
+		new Game.Achievement('Clickastrophe',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e17))),[11,17]);
+		new Game.Achievement('Clickataclysm',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e19))),[11,18]);
 		
 		order=1050;
 		new Game.Achievement('Thumbs, phalanges, metacarpals',loc("Have <b>%1</b>.",loc("%1 cursor",LBeautify(500)))+'<q>& KNUCKLES</q>',[0,15]);
@@ -12339,10 +12339,10 @@ Game.Launch=function()
 		new Game.Achievement('Polymath',loc("Own <b>%1</b> upgrades and <b>%2</b> buildings.",[300,4000])+'<q>Excellence doesn\'t happen overnight - it usually takes a good couple days.</q>',[29,7]);
 		
 		order=1099;
-		new Game.Achievement('The elder scrolls',loc("Own a combined <b>%1</b> %2 and %3.",[777,loc("grandmas"),loc("cursors")])+'<q>Let me guess. Someone stole your cookie.</q>',[10,9]);
+		new Game.Achievement('The elder scrolls',loc("Own a combined <b>%1</b> %2 and %3.",[777,loc("grandmas"),loc("cursors")])+'<q>Let me guess. Someone stole your kookie.</q>',[10,9]);
 		
 		order=30050;
-		new Game.Achievement('To crumbs, you say?',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e33)))+'<q>Very well then.</q>',[29,6]);
+		new Game.Achievement('To crumbs, you say?',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e33)))+'<q>Very well then.</q>',[29,6]);
 		
 		order=1200;Game.TieredAchievement('Seedy business','','Farm',7);
 		order=1300;Game.TieredAchievement('Freak fracking','','Mine',7);
@@ -12353,7 +12353,7 @@ Game.Launch=function()
 		order=1500;Game.TieredAchievement('It\'s not delivery','','Shipment',7);
 		order=1600;Game.TieredAchievement('Gold, Jerry! Gold!','','Alchemy lab',7);
 		order=1700;Game.TieredAchievement('Forbidden zone','','Portal',7);
-		order=1800;Game.TieredAchievement('cookie clicker forever and forever a hundred years cookie clicker, all day long forever, forever a hundred times, over and over cookie clicker adventures dot com','','Time machine',7);
+		order=1800;Game.TieredAchievement('kookie clicker forever and forever a hundred years kookie clicker, all day long forever, forever a hundred times, over and over kookie clicker adventures dot com','','Time machine',7);
 		order=1900;Game.TieredAchievement('Scientists baffled everywhere','','Antimatter condenser',7);
 		order=2000;Game.TieredAchievement('Harmony of the spheres','','Prism',7);
 		
@@ -12361,8 +12361,8 @@ Game.Launch=function()
 		new Game.Achievement('Last Chance to See',loc("Burst the near-extinct <b>shiny wrinkler</b>.")+'<q>You monster!</q>',[24,12]);Game.last.pool='shadow';
 		
 		order=10000;
-		new Game.Achievement('Early bird',loc("Click a golden cookie <b>less than 1 second after it spawns</b>."),[10,14]);
-		new Game.Achievement('Fading luck',loc("Click a golden cookie <b>less than 1 second before it dies</b>."),[10,14]);
+		new Game.Achievement('Early bird',loc("Click a golden kookie <b>less than 1 second after it spawns</b>."),[10,14]);
+		new Game.Achievement('Fading luck',loc("Click a golden kookie <b>less than 1 second before it dies</b>."),[10,14]);
 		
 		order=22100;
 		new Game.Achievement('Eldeer',loc("Pop a reindeer <b>during an elder frenzy</b>."),[12,9]);
@@ -12380,9 +12380,9 @@ Game.Launch=function()
 		new Game.Achievement('Tricentennial',loc("Have at least <b>%1 of everything</b>.",300)+'<q>Can\'t stop, won\'t stop. Probably should stop, though.</q>',[29,12]);
 		
 		Game.CpsAchievement('Knead for speed','How did we not make that one yet?');
-		Game.CpsAchievement('Well the cookies start coming and they don\'t stop coming','Didn\'t make sense not to click for fun.');
+		Game.CpsAchievement('Well the kookies start coming and they don\'t stop coming','Didn\'t make sense not to click for fun.');
 		Game.CpsAchievement('I don\'t know if you\'ve noticed but all these icons are very slightly off-center');
-		Game.CpsAchievement('The proof of the cookie is in the baking','How can you have any cookies if you don\'t bake your dough?');
+		Game.CpsAchievement('The proof of the kookie is in the baking','How can you have any kookies if you don\'t bake your dough?');
 		Game.CpsAchievement('If it\'s worth doing, it\'s worth overdoing');
 		
 		Game.BankAchievement('The dreams in which I\'m baking are the best I\'ve ever had');
@@ -12468,7 +12468,7 @@ Game.Launch=function()
 		new Game.Achievement('A wizard is you',loc("Cast <b>%1</b> spells.",999)+'<q>I\'m a what?</q>',[29,11]);
 		
 		order=10000;
-		new Game.Achievement('Four-leaf cookie',loc("Have <b>%1</b> golden cookies simultaneously.",4)+'<q>Fairly rare, considering cookies don\'t even have leaves.</q>',[27,6]);Game.last.pool='shadow';
+		new Game.Achievement('Four-leaf kookie',loc("Have <b>%1</b> golden kookies simultaneously.",4)+'<q>Fairly rare, considering kookies don\'t even have leaves.</q>',[27,6]);Game.last.pool='shadow';
 		
 		order=2100;
 		Game.TieredAchievement('Lucked out','','Chancemaker',1);
@@ -12488,7 +12488,7 @@ Game.Launch=function()
 		new Game.Achievement('Let\'s leaf it at that','',[19,26]);Game.Objects['Chancemaker'].levelAchiev10=Game.last;
 		
 		order=1000;
-		new Game.Achievement('The ultimate clickdown',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e21)))+'<q>(of ultimate destiny.)</q>',[11,19]);
+		new Game.Achievement('The ultimate clickdown',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e21)))+'<q>(of ultimate destiny.)</q>',[11,19]);
 		
 		
 		order=1100;
@@ -12499,7 +12499,7 @@ Game.Launch=function()
 		order=1300;Game.TieredAchievement('Mine?','','Mine',9);
 		order=1400;Game.TieredAchievement('In full gear','','Factory',9);
 		order=1425;Game.TieredAchievement('Treacle tart economics','','Bank',9);
-		order=1450;Game.TieredAchievement('Holy cookies, grandma!','','Temple',9);
+		order=1450;Game.TieredAchievement('Holy kookies, grandma!','','Temple',9);
 		order=1475;Game.TieredAchievement('The Prestige','<q>(Unrelated to the Cookie Clicker feature of the same name.)</q>','Wizard tower',9);
 		order=1500;Game.TieredAchievement('That\'s just peanuts to space','','Shipment',9);
 		order=1600;Game.TieredAchievement('Worth its weight in lead','','Alchemy lab',9);
@@ -12524,14 +12524,14 @@ Game.Launch=function()
 		order=2100;Game.TieredAchievement('Jackpot','','Chancemaker',10);
 		
 		order=36000;
-		new Game.Achievement('So much to do so much to see',loc("Manage a cookie legacy for <b>at least a year</b>.")+'<q>Thank you so much for playing Cookie Clicker!</q>',[23,11]);Game.last.pool='shadow';
+		new Game.Achievement('So much to do so much to see',loc("Manage a kookie legacy for <b>at least a year</b>.")+'<q>Thank you so much for playing Cookie Clicker!</q>',[23,11]);Game.last.pool='shadow';
 		
 		
 		
 		Game.CpsAchievement('Running with scissors');
 		Game.CpsAchievement('Rarefied air');
 		Game.CpsAchievement('Push it to the limit');
-		Game.CpsAchievement('Green cookies sleep furiously');
+		Game.CpsAchievement('Green kookies sleep furiously');
 		
 		Game.BankAchievement('Panic! at Nabisco');
 		Game.BankAchievement('Bursting at the seams');
@@ -12539,8 +12539,8 @@ Game.Launch=function()
 		Game.BankAchievement('Hungry for more');
 		
 		order=1000;
-		new Game.Achievement('All the other kids with the pumped up clicks',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e23))),[11,28]);
-		new Game.Achievement('One...more...click...',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e25))),[11,30]);
+		new Game.Achievement('All the other kids with the pumped up clicks',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e23))),[11,28]);
+		new Game.Achievement('One...more...click...',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e25))),[11,30]);
 		
 		order=61515;
 		new Game.Achievement('Botany enthusiast',loc("Harvest <b>%1</b> mature garden plants.",100),[26,20]);
@@ -12551,11 +12551,11 @@ Game.Launch=function()
 		new Game.Achievement('Seedless to nay',loc("Convert a complete seed log into sugar lumps by sacrificing your garden to the sugar hornets.<div class=\"line\"></div>Owning this achievement makes seeds <b>%1% cheaper</b>, plants mature <b>%2% sooner</b>, and plant upgrades drop <b>%3% more</b>.",[5,5,5]),[29,20]);
 		
 		order=30050;
-		new Game.Achievement('You get nothing',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e36)))+'<q>Good day sir!</q>',[29,6]);
-		new Game.Achievement('Humble rebeginnings',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e39)))+'<q>Started from the bottom, now we\'re here.</q>',[29,6]);
-		new Game.Achievement('The end of the world',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e42)))+'<q>(as we know it)</q>',[21,25]);
-		new Game.Achievement('Oh, you\'re back',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e45)))+'<q>Missed us?</q>',[21,25]);
-		new Game.Achievement('Lazarus',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e48)))+'<q>All rise.</q>',[21,25]);
+		new Game.Achievement('You get nothing',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e36)))+'<q>Good day sir!</q>',[29,6]);
+		new Game.Achievement('Humble rebeginnings',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e39)))+'<q>Started from the bottom, now we\'re here.</q>',[29,6]);
+		new Game.Achievement('The end of the world',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e42)))+'<q>(as we know it)</q>',[21,25]);
+		new Game.Achievement('Oh, you\'re back',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e45)))+'<q>Missed us?</q>',[21,25]);
+		new Game.Achievement('Lazarus',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e48)))+'<q>All rise.</q>',[21,25]);
 		
 		Game.CpsAchievement('Leisurely pace');
 		Game.CpsAchievement('Hypersonic');
@@ -12574,7 +12574,7 @@ Game.Launch=function()
 		new Game.Achievement('Maillard reaction',loc("Harvest a <b>caramelized sugar lump</b>."),[29,27]);
 		
 		order=30250;
-		new Game.Achievement('When the cookies ascend just right',loc("Ascend with exactly <b>%1</b>.",loc("%1 cookie",LBeautify(1e12))),[25,7]);Game.last.pool='shadow';//this achievement is shadow because it is only achievable through blind luck or reading external guides; this may change in the future
+		new Game.Achievement('When the kookies ascend just right',loc("Ascend with exactly <b>%1</b>.",loc("%1 kookie",LBeautify(1e12))),[25,7]);Game.last.pool='shadow';//this achievement is shadow because it is only achievable through blind luck or reading external guides; this may change in the future
 		
 		
 		order=1050;
@@ -12656,8 +12656,8 @@ Game.Launch=function()
 		Game.BankAchievement('Horn of plenty');
 		
 		order=30050;
-		new Game.Achievement('Smurf account',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e51)))+'<q>It\'s like you just appeared out of the blue!</q>',[21,32]);
-		new Game.Achievement('If at first you don\'t succeed',loc("Ascend with <b>%1</b> baked.",loc("%1 cookie",LBeautify(1e54)))+'<q>If at first you don\'t succeed, try, try, try again.<br>But isn\'t that the definition of insanity?</q>',[21,32]);
+		new Game.Achievement('Smurf account',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e51)))+'<q>It\'s like you just appeared out of the blue!</q>',[21,32]);
+		new Game.Achievement('If at first you don\'t succeed',loc("Ascend with <b>%1</b> baked.",loc("%1 kookie",LBeautify(1e54)))+'<q>If at first you don\'t succeed, try, try, try again.<br>But isn\'t that the definition of insanity?</q>',[21,32]);
 		
 		order=33000;
 		new Game.Achievement('O Fortuna',loc("Own every <b>fortune upgrade</b>.<div class=\"line\"></div>Owning this achievement makes fortunes appear <b>twice as often</b>; unlocked fortune upgrades also have a <b>%1% chance</b> to carry over after ascending.",40),[29,8]);
@@ -12685,7 +12685,7 @@ Game.Launch=function()
 		Game.BankAchievement('Absolutely stuffed');
 		Game.BankAchievement('It\'s only wafer-thin','Just the one!');
 		
-		order=1000;new Game.Achievement('Clickety split',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e27))),[11,31]);
+		order=1000;new Game.Achievement('Clickety split',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e27))),[11,31]);
 		order=1050;new Game.Achievement('Gotta hand it to you',loc("Have <b>%1</b>.",loc("%1 cursor",LBeautify(700))),[0,17]);
 		order=1100;Game.TieredAchievement('Okay boomer','','Grandma',13);
 		order=1200;Game.TieredAchievement('Overripe','','Farm',12);
@@ -12705,7 +12705,7 @@ Game.Launch=function()
 		order=2300;Game.TieredAchievement('Curly braces','<q>Or as the French call them, mustache boxes.<br>Go well with quotes.</q>','Javascript console',12);
 		
 		order=10000;
-		new Game.Achievement('Seven horseshoes',loc("Click <b>%1</b>.",loc("%1 golden cookie",LBeautify(27777)))+'<q>Enough for one of those funky horses that graze near your factories.</q>',[21,33]);Game.last.pool='shadow';
+		new Game.Achievement('Seven horseshoes',loc("Click <b>%1</b>.",loc("%1 golden kookie",LBeautify(27777)))+'<q>Enough for one of those funky horses that graze near your factories.</q>',[21,33]);Game.last.pool='shadow';
 		
 		order=11005;
 		new Game.Achievement('Olden days',loc("Find the <b>forgotten madeleine</b>.")+'<q>DashNet Farms remembers.</q>',[12,3]);
@@ -12724,7 +12724,7 @@ Game.Launch=function()
 		order=1800;Game.TieredAchievement('Back already?','','Time machine',13);
 		order=1900;Game.TieredAchievement('Nuclear throne','','Antimatter condenser',13);
 		order=2000;Game.TieredAchievement('Making light of the situation','','Prism',13);
-		order=2100;Game.TieredAchievement('Flip a cookie. Chips, I win. Crust, you lose.','','Chancemaker',13);
+		order=2100;Game.TieredAchievement('Flip a kookie. Chips, I win. Crust, you lose.','','Chancemaker',13);
 		order=2200;Game.TieredAchievement('In and of itself','','Fractal engine',13);
 		order=2300;Game.TieredAchievement('Duck typing','<q>Hello, this is a duck typing. Got any grapes?</q>','Javascript console',13);
 		
@@ -12817,7 +12817,7 @@ Game.Launch=function()
 		order=2400;Game.TieredAchievement('Lost your cosmic marbles','','Idleverse',14);
 		order=2500;Game.TieredAchievement('By will alone I set my mind in motion','','Cortex baker',14);
 		
-		order=1000;new Game.Achievement('Ain\'t that a click in the head',loc("Make <b>%1</b> from clicking.",loc("%1 cookie",LBeautify(1e29))),[11,34]);
+		order=1000;new Game.Achievement('Ain\'t that a click in the head',loc("Make <b>%1</b> from clicking.",loc("%1 kookie",LBeautify(1e29))),[11,34]);
 		
 		order=7002;
 		new Game.Achievement('Sexcentennial and a half',loc("Have at least <b>%1 of everything</b>.",650)+'<q>Hope you\'re enjoying the grind so far! It gets worse.</q>',[21,34]);
@@ -13079,7 +13079,7 @@ Game.Launch=function()
 				aura:1
 			};
 		});
-		new Game.buffType('cookie storm',function(time,pow)
+		new Game.buffType('kookie storm',function(time,pow)
 		{
 			return {
 				name:'Cookie storm',
@@ -13123,7 +13123,7 @@ Game.Launch=function()
 		{
 			return {
 				name:'Sugar blessing',
-				desc:loc("You find %1% more golden cookies for the next %2.",[10,Game.sayTime(time*Game.fps,-1)]),
+				desc:loc("You find %1% more golden kookies for the next %2.",[10,Game.sayTime(time*Game.fps,-1)]),
 				icon:[29,16],
 				time:time*Game.fps,
 				//add:true
@@ -13453,8 +13453,8 @@ Game.Launch=function()
 			var onWrinkler=0;
 			if (Game.LeftBackground)
 			{
-				xBase=Game.cookieOriginX;
-				yBase=Game.cookieOriginY;
+				xBase=Game.kookieOriginX;
+				yBase=Game.kookieOriginY;
 			}
 			var max=Game.getWrinklersMax();
 			var n=0;
@@ -13496,7 +13496,7 @@ Game.Launch=function()
 				}
 				if (me.phase==2)
 				{
-					me.sucked+=(((Game.cookiesPs/Game.fps)*Game.cpsSucked));//suck the cookies
+					me.sucked+=(((Game.kookiesPs/Game.fps)*Game.cpsSucked));//suck the kookies
 				}
 				if (me.phase>0)
 				{
@@ -13571,7 +13571,7 @@ Game.Launch=function()
 					var toSuck=1.1;
 					if (Game.Has('Sacrilegious corruption')) toSuck*=1.05;
 					if (me.type==1) toSuck*=3;//shiny wrinklers are an elusive, profitable breed
-					me.sucked*=toSuck;//cookie dough does weird things inside wrinkler digestive tracts
+					me.sucked*=toSuck;//kookie dough does weird things inside wrinkler digestive tracts
 					if (Game.Has('Wrinklerspawn')) me.sucked*=1.05;
 					if (Game.hasGod)
 					{
@@ -13582,14 +13582,14 @@ Game.Launch=function()
 					}
 					if (me.sucked>0.5)
 					{
-						Game.Notify(me.type==1?loc("Exploded a shiny wrinkler"):loc("Exploded a wrinkler"),loc("Found <b>%1</b>!",loc("%1 cookie",LBeautify(me.sucked))),[19,8],6);
-						Game.Popup('<div style="font-size:80%;">'+loc("+%1!",loc("%1 cookie",LBeautify(me.sucked)))+'</div>',Game.mouseX,Game.mouseY);
+						Game.Notify(me.type==1?loc("Exploded a shiny wrinkler"):loc("Exploded a wrinkler"),loc("Found <b>%1</b>!",loc("%1 kookie",LBeautify(me.sucked))),[19,8],6);
+						Game.Popup('<div style="font-size:80%;">'+loc("+%1!",loc("%1 kookie",LBeautify(me.sucked)))+'</div>',Game.mouseX,Game.mouseY);
 						
 						if (Game.season=='halloween')
 						{
-							//if (Math.random()<(Game.HasAchiev('Spooky cookies')?0.2:0.05))//halloween cookie drops
+							//if (Math.random()<(Game.HasAchiev('Spooky kookies')?0.2:0.05))//halloween kookie drops
 							var failRate=0.95;
-							if (Game.HasAchiev('Spooky cookies')) failRate=0.8;
+							if (Game.HasAchiev('Spooky kookies')) failRate=0.8;
 							if (Game.Has('Starterror')) failRate*=0.9;
 							failRate*=1/Game.dropRateMult();
 							if (Game.hasGod)
@@ -13600,13 +13600,13 @@ Game.Launch=function()
 								else if (godLvl==3) failRate*=0.97;
 							}
 							if (me.type==1) failRate*=0.9;
-							if (Math.random()>failRate)//halloween cookie drops
+							if (Math.random()>failRate)//halloween kookie drops
 							{
-								var cookie=choose(['Skull cookies','Ghost cookies','Bat cookies','Slime cookies','Pumpkin cookies','Eyeball cookies','Spider cookies']);
-								if (!Game.HasUnlocked(cookie) && !Game.Has(cookie))
+								var kookie=choose(['Skull kookies','Ghost kookies','Bat kookies','Slime kookies','Pumpkin kookies','Eyeball kookies','Spider kookies']);
+								if (!Game.HasUnlocked(kookie) && !Game.Has(kookie))
 								{
-									Game.Unlock(cookie);
-									Game.Notify(Game.Upgrades[cookie].dname,loc("You also found <b>%1</b>!",Game.Upgrades[cookie].dname),Game.Upgrades[cookie].icon);
+									Game.Unlock(kookie);
+									Game.Notify(Game.Upgrades[kookie].dname,loc("You also found <b>%1</b>!",Game.Upgrades[kookie].dname),Game.Upgrades[kookie].icon);
 								}
 							}
 						}
@@ -13674,7 +13674,7 @@ Game.Launch=function()
 						ctx.translate(0,-30);
 					}
 					ctx.rotate(-(me.r)*Math.PI/180);
-					//var s=Math.min(1,me.sucked/(Game.cookiesPs*60))*0.75+0.25;//scale wrinklers as they eat
+					//var s=Math.min(1,me.sucked/(Game.kookiesPs*60))*0.75+0.25;//scale wrinklers as they eat
 					//ctx.scale(Math.pow(s,1.5)*1.25,s);
 					//ctx.fillRect(-50,-10,100,200);
 					var pic=Game.WINKLERS?'winkler.png':'wrinkler.png';
@@ -13703,8 +13703,8 @@ Game.Launch=function()
 			}
 			if (selected && Game.Has('Eye of the wrinkler'))
 			{
-				var x=Game.cookieOriginX;
-				var y=Game.cookieOriginY;
+				var x=Game.kookieOriginX;
+				var y=Game.kookieOriginY;
 				ctx.font='14px Merriweather';
 				ctx.textAlign='center';
 				var text=loc("Swallowed:");
@@ -13842,7 +13842,7 @@ Game.Launch=function()
 		Game.UpgradeSanta=function()
 		{
 			var moni=Math.pow(Game.santaLevel+1,Game.santaLevel+1);
-			if (Game.cookies>moni && Game.santaLevel<14)
+			if (Game.kookies>moni && Game.santaLevel<14)
 			{
 				PlaySound('snd/shimmerClick.mp3');
 				
@@ -13875,53 +13875,53 @@ Game.Launch=function()
 		
 		Game.dragonLevels=[
 			{name:'Dragon egg',action:loc("Chip it"),pic:0,
-				cost:function(){return Game.cookies>=1000000;},
+				cost:function(){return Game.kookies>=1000000;},
 				buy:function(){Game.Spend(1000000);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000));}},
+				costStr:function(){return loc("%1 kookie",LBeautify(1000000));}},
 			{name:'Dragon egg',action:loc("Chip it"),pic:1,
-				cost:function(){return Game.cookies>=1000000*2;},
+				cost:function(){return Game.kookies>=1000000*2;},
 				buy:function(){Game.Spend(1000000*2);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*2));}},
+				costStr:function(){return loc("%1 kookie",LBeautify(1000000*2));}},
 			{name:'Dragon egg',action:loc("Chip it"),pic:2,
-				cost:function(){return Game.cookies>=1000000*4;},
+				cost:function(){return Game.kookies>=1000000*4;},
 				buy:function(){Game.Spend(1000000*4);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*4));}},
+				costStr:function(){return loc("%1 kookie",LBeautify(1000000*4));}},
 			{name:'Shivering dragon egg',action:loc("Hatch it"),pic:3,
-				cost:function(){return Game.cookies>=1000000*8;},
+				cost:function(){return Game.kookies>=1000000*8;},
 				buy:function(){Game.Spend(1000000*8);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*8));}},
-			{name:'Krumblor, cookie hatchling',action:'Train Breath of Milk<br><small>Aura : kittens are 5% more effective</small>',pic:4,
-				cost:function(){return Game.cookies>=1000000*16;},
+				costStr:function(){return loc("%1 kookie",LBeautify(1000000*8));}},
+			{name:'Krumblor, kookie hatchling',action:'Train Breath of Milk<br><small>Aura : kittens are 5% more effective</small>',pic:4,
+				cost:function(){return Game.kookies>=1000000*16;},
 				buy:function(){Game.Spend(1000000*16);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*16));}},
-			{name:'Krumblor, cookie hatchling',action:'Train Dragon Cursor<br><small>Aura : clicking is 5% more effective</small>',pic:4,},
-			{name:'Krumblor, cookie hatchling',action:'Train Elder Battalion<br><small>Aura : grandmas gain +1% CpS for every non-grandma building</small>',pic:4,},
-			{name:'Krumblor, cookie hatchling',action:'Train Reaper of Fields<br><small>Aura : golden cookies may trigger a Dragon Harvest</small>',pic:4,},
-			{name:'Krumblor, cookie dragon',action:'Train Earth Shatterer<br><small>Aura : buildings sell back for 50% instead of 25%</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Master of the Armory<br><small>Aura : all upgrades are 2% cheaper</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Fierce Hoarder<br><small>Aura : all buildings are 2% cheaper</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Dragon God<br><small>Aura : prestige CpS bonus +5%</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Arcane Aura<br><small>Aura : golden cookies appear 5% more often</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Dragonflight<br><small>Aura : golden cookies may trigger a Dragonflight</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Ancestral Metamorphosis<br><small>Aura : golden cookies give 10% more cookies</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Unholy Dominion<br><small>Aura : wrath cookies give 10% more cookies</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Epoch Manipulator<br><small>Aura : golden cookie effects last 5% longer</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Mind Over Matter<br><small>Aura : +25% random drops</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Radiant Appetite<br><small>Aura : all cookie production multiplied by 2</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Dragon\'s Fortune<br><small>Aura : +123% CpS per golden cookie on-screen</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Dragon\'s Curve<br><small>Aura : sugar lumps grow 5% faster, 50% weirder</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Reality Bending<br><small>Aura : 10% of every other aura, combined</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Dragon Orbs<br><small>Aura : selling your best building may grant a wish</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:'Train Supreme Intellect<br><small>Aura : confers various powers to your minigames</small>',pic:5,},
-			{name:'Krumblor, cookie dragon',action:loc("Bake dragon cookie")+'<br><small>'+loc("Delicious!")+'</small>',pic:6,
+				costStr:function(){return loc("%1 kookie",LBeautify(1000000*16));}},
+			{name:'Krumblor, kookie hatchling',action:'Train Dragon Cursor<br><small>Aura : clicking is 5% more effective</small>',pic:4,},
+			{name:'Krumblor, kookie hatchling',action:'Train Elder Battalion<br><small>Aura : grandmas gain +1% CpS for every non-grandma building</small>',pic:4,},
+			{name:'Krumblor, kookie hatchling',action:'Train Reaper of Fields<br><small>Aura : golden kookies may trigger a Dragon Harvest</small>',pic:4,},
+			{name:'Krumblor, kookie dragon',action:'Train Earth Shatterer<br><small>Aura : buildings sell back for 50% instead of 25%</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Master of the Armory<br><small>Aura : all upgrades are 2% cheaper</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Fierce Hoarder<br><small>Aura : all buildings are 2% cheaper</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Dragon God<br><small>Aura : prestige CpS bonus +5%</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Arcane Aura<br><small>Aura : golden kookies appear 5% more often</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Dragonflight<br><small>Aura : golden kookies may trigger a Dragonflight</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Ancestral Metamorphosis<br><small>Aura : golden kookies give 10% more kookies</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Unholy Dominion<br><small>Aura : wrath kookies give 10% more kookies</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Epoch Manipulator<br><small>Aura : golden kookie effects last 5% longer</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Mind Over Matter<br><small>Aura : +25% random drops</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Radiant Appetite<br><small>Aura : all kookie production multiplied by 2</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Dragon\'s Fortune<br><small>Aura : +123% CpS per golden kookie on-screen</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Dragon\'s Curve<br><small>Aura : sugar lumps grow 5% faster, 50% weirder</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Reality Bending<br><small>Aura : 10% of every other aura, combined</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Dragon Orbs<br><small>Aura : selling your best building may grant a wish</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:'Train Supreme Intellect<br><small>Aura : confers various powers to your minigames</small>',pic:5,},
+			{name:'Krumblor, kookie dragon',action:loc("Bake dragon kookie")+'<br><small>'+loc("Delicious!")+'</small>',pic:6,
 				cost:function(){var fail=0;for (var i in Game.Objects){if (Game.Objects[i].amount<50) fail=1;}return (fail==0);},
-				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(50);}Game.Unlock('Dragon cookie');},
+				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(50);}Game.Unlock('Dragon kookie');},
 				costStr:function(){return loc("%1 of every building",50);}},
-			{name:'Krumblor, cookie dragon',action:loc("Train secondary aura")+'<br><small>'+loc("Lets you use two dragon auras simultaneously")+'</small>',pic:7,
+			{name:'Krumblor, kookie dragon',action:loc("Train secondary aura")+'<br><small>'+loc("Lets you use two dragon auras simultaneously")+'</small>',pic:7,
 				cost:function(){var fail=0;for (var i in Game.Objects){if (Game.Objects[i].amount<200) fail=1;}return (fail==0);},
 				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(200);}},
 				costStr:function(){return loc("%1 of every building",200);}},
-			{name:'Krumblor, cookie dragon',action:loc("Your dragon is fully trained."),pic:8}
+			{name:'Krumblor, kookie dragon',action:loc("Your dragon is fully trained."),pic:8}
 		];
 		
 		Game.dragonAuras={
@@ -13929,22 +13929,22 @@ Game.Launch=function()
 			1:{name:'Breath of Milk',pic:[18,25],desc:loc("Kittens are <b>%1%</b> more effective.",5)},
 			2:{name:'Dragon Cursor',pic:[0,25],desc:loc("Clicking is <b>%1%</b> more powerful.",5)},
 			3:{name:'Elder Battalion',pic:[1,25],desc:loc("Grandmas gain <b>+%1% CpS</b> for each non-grandma building.",1)},
-			4:{name:'Reaper of Fields',pic:[2,25],desc:loc("Golden cookies may trigger a <b>Dragon Harvest</b>.")},
+			4:{name:'Reaper of Fields',pic:[2,25],desc:loc("Golden kookies may trigger a <b>Dragon Harvest</b>.")},
 			5:{name:'Earth Shatterer',pic:[3,25],desc:loc("Buildings sell back for <b>%1%</b> instead of %2%.",[50,25])},
 			6:{name:'Master of the Armory',pic:[4,25],desc:loc("All upgrades are <b>%1% cheaper</b>.",2)},
 			7:{name:'Fierce Hoarder',pic:[15,25],desc:loc("All buildings are <b>%1% cheaper</b>.",2)},
 			8:{name:'Dragon God',pic:[16,25],desc:loc("<b>+%1%</b> prestige level effect on CpS.",5)},
-			9:{name:'Arcane Aura',pic:[17,25],desc:loc("Golden cookies appear <b>%1%</b> more often.",5)},
-			10:{name:'Dragonflight',pic:[5,25],desc:loc("Golden cookies may trigger a <b>Dragonflight</b>.")},
-			11:{name:'Ancestral Metamorphosis',pic:[6,25],desc:loc("Golden cookies give <b>%1%</b> more cookies.",10)},
-			12:{name:'Unholy Dominion',pic:[7,25],desc:loc("Wrath cookies give <b>%1%</b> more cookies.",10)},
-			13:{name:'Epoch Manipulator',pic:[8,25],desc:loc("Golden cookies stay <b>%1%</b> longer.",5)},
+			9:{name:'Arcane Aura',pic:[17,25],desc:loc("Golden kookies appear <b>%1%</b> more often.",5)},
+			10:{name:'Dragonflight',pic:[5,25],desc:loc("Golden kookies may trigger a <b>Dragonflight</b>.")},
+			11:{name:'Ancestral Metamorphosis',pic:[6,25],desc:loc("Golden kookies give <b>%1%</b> more kookies.",10)},
+			12:{name:'Unholy Dominion',pic:[7,25],desc:loc("Wrath kookies give <b>%1%</b> more kookies.",10)},
+			13:{name:'Epoch Manipulator',pic:[8,25],desc:loc("Golden kookies stay <b>%1%</b> longer.",5)},
 			14:{name:'Mind Over Matter',pic:[13,25],desc:loc("Random drops are <b>%1% more common</b>.",25)},
-			15:{name:'Radiant Appetite',pic:[14,25],desc:loc("All cookie production <b>multiplied by %1</b>.",2)},
-			16:{name:'Dragon\'s Fortune',pic:[19,25],desc:loc("<b>+%1% CpS</b> per golden cookie on-screen, multiplicative.",123)},
+			15:{name:'Radiant Appetite',pic:[14,25],desc:loc("All kookie production <b>multiplied by %1</b>.",2)},
+			16:{name:'Dragon\'s Fortune',pic:[19,25],desc:loc("<b>+%1% CpS</b> per golden kookie on-screen, multiplicative.",123)},
 			17:{name:'Dragon\'s Curve',pic:[20,25],desc:loc("<b>+%1%</b> sugar lump growth.",5)+" "+loc("Sugar lumps are <b>twice as likely</b> to be unusual.")},
 			18:{name:'Reality Bending',pic:[32,25],desc:loc("<b>One tenth</b> of every other dragon aura, <b>combined</b>.")},
-			19:{name:'Dragon Orbs',pic:[33,25],desc:loc("With no buffs and no golden cookies on screen, selling your most powerful building has <b>%1% chance to summon one</b>.",10)},
+			19:{name:'Dragon Orbs',pic:[33,25],desc:loc("With no buffs and no golden kookies on screen, selling your most powerful building has <b>%1% chance to summon one</b>.",10)},
 			20:{name:'Supreme Intellect',pic:[34,25],desc:loc("Confers various powers to your minigames while active.<br>See the bottom of each minigame for more details.")},
 		};
 		
@@ -14095,7 +14095,7 @@ Game.Launch=function()
 						'<div class="optionBox" style="margin-bottom:0px;"><a class="option framed large title" '+Game.clickStr+'="Game.UpgradeSanta();">'+
 							'<div style="display:table-cell;vertical-align:middle;">'+loc("Evolve")+'</div>'+
 							'<div style="display:table-cell;vertical-align:middle;padding:4px 12px;">|</div>'+
-							'<div style="display:table-cell;vertical-align:middle;font-size:65%;">'+loc("sacrifice %1",'<div'+(Game.cookies>moni?'':' style="color:#777;"')+'>'+loc("%1 cookie",LBeautify(Math.pow(Game.santaLevel+1,Game.santaLevel+1)))+'</div>')+'</div>'+
+							'<div style="display:table-cell;vertical-align:middle;font-size:65%;">'+loc("sacrifice %1",'<div'+(Game.kookies>moni?'':' style="color:#777;"')+'>'+loc("%1 kookie",LBeautify(Math.pow(Game.santaLevel+1,Game.santaLevel+1)))+'</div>')+'</div>'+
 						'</a></div>';
 					}
 				}
@@ -14260,8 +14260,8 @@ Game.Launch=function()
 		
 		Game.mousePointer=0;//when 1, draw the mouse as a pointer on the left screen
 		
-		Game.cookieOriginX=0;
-		Game.cookieOriginY=0;
+		Game.kookieOriginX=0;
+		Game.kookieOriginY=0;
 		Game.DrawBackground=function()
 		{
 			
@@ -14422,21 +14422,21 @@ Game.Launch=function()
 				var showDragon=0;
 				if (Game.hasBuff('Dragonflight') || Game.hasBuff('Dragon Harvest')) showDragon=1;
 				
-				Game.cookieOriginX=Math.floor(ctx.canvas.width/2);
-				Game.cookieOriginY=Math.floor(ctx.canvas.height*0.4);
+				Game.kookieOriginX=Math.floor(ctx.canvas.width/2);
+				Game.kookieOriginY=Math.floor(ctx.canvas.height*0.4);
 				
 				if (Game.AscendTimer==0)
 				{	
 					if (Game.prefs.particles)
 					{
-						//falling cookies
+						//falling kookies
 						var pic='';
 						var opacity=1;
 						if (Game.elderWrathD<=1.5 || Game.prefs.notScary)
 						{
-							if (Game.cookiesPs>=1000) pic='cookieShower3.png';
-							else if (Game.cookiesPs>=500) pic='cookieShower2.png';
-							else if (Game.cookiesPs>=50) pic='cookieShower1.png';
+							if (Game.kookiesPs>=1000) pic='kookieShower3.png';
+							else if (Game.kookiesPs>=500) pic='kookieShower2.png';
+							else if (Game.kookiesPs>=50) pic='kookieShower1.png';
 							else pic='';
 						}
 						if (pic!='')
@@ -14471,11 +14471,11 @@ Game.Launch=function()
 						ctx.globalAlpha=1;
 						Timer.track('particles');
 						
-						//big cookie shine
+						//big kookie shine
 						var s=512;
 						
-						var x=Game.cookieOriginX;
-						var y=Game.cookieOriginY;
+						var x=Game.kookieOriginX;
+						var y=Game.kookieOriginY;
 						
 						var r=Math.floor((Game.T*0.5)%360);
 						ctx.save();
@@ -14507,16 +14507,16 @@ Game.Launch=function()
 						{
 							//big dragon
 							var s=300*2*(1+Math.sin(Game.T*0.013)*0.1);
-							var x=Game.cookieOriginX-s/2;
-							var y=Game.cookieOriginY-s/(1.4+0.2*Math.sin(Game.T*0.01));
+							var x=Game.kookieOriginX-s/2;
+							var y=Game.kookieOriginY-s/(1.4+0.2*Math.sin(Game.T*0.01));
 							ctx.drawImage(Pic('dragonBG.png'),x,y,s,s);
 						}
 						
-						//big cookie
+						//big kookie
 						if (false)//don't do that
 						{
 							ctx.globalAlpha=1;
-							var amount=Math.floor(Game.cookies).toString();
+							var amount=Math.floor(Game.kookies).toString();
 							var digits=amount.length;
 							var space=0;
 							for (var i=0;i<digits;i++)
@@ -14527,8 +14527,8 @@ Game.Launch=function()
 								if (i==0 && num>1) space+=s*0.1;
 								for (var ii=0;ii<num;ii++)
 								{
-									var x=Game.cookieOriginX;
-									var y=Game.cookieOriginY;
+									var x=Game.kookieOriginX;
+									var y=Game.kookieOriginY;
 									var spin=Game.T*(0.005+i*0.001)+i+(ii/num)*Math.PI*2;
 									x+=Math.sin(spin)*space;
 									y+=Math.cos(spin)*space;
@@ -14541,10 +14541,10 @@ Game.Launch=function()
 						{
 							ctx.globalAlpha=1;
 							var s=256*Game.BigCookieSize;
-							var x=Game.cookieOriginX;
-							var y=Game.cookieOriginY;
+							var x=Game.kookieOriginX;
+							var y=Game.kookieOriginY;
 							ctx.save();
-							if (Game.prefs.fancy) ctx.drawImage(Pic('cookieShadow.png'),x-s/2,y-s/2+20,s,s);
+							if (Game.prefs.fancy) ctx.drawImage(Pic('kookieShadow.png'),x-s/2,y-s/2+20,s,s);
 							ctx.translate(x,y);
 							if (Game.season=='easter')
 							{
@@ -14569,15 +14569,15 @@ Game.Launch=function()
 							}
 							
 							ctx.restore();
-							Timer.track('big cookie');
+							Timer.track('big kookie');
 						}
 					}
 					else//no particles
 					{
-						//big cookie shine
+						//big kookie shine
 						var s=512;
-						var x=Game.cookieOriginX-s/2;
-						var y=Game.cookieOriginY-s/2;
+						var x=Game.kookieOriginX-s/2;
+						var y=Game.kookieOriginY-s/2;
 						ctx.globalAlpha=0.5;
 						ctx.drawImage(Pic('shine.png'),x,y,s,s);
 						
@@ -14585,17 +14585,17 @@ Game.Launch=function()
 						{
 							//big dragon
 							var s=300*2*(1+Math.sin(Game.T*0.013)*0.1);
-							var x=Game.cookieOriginX-s/2;
-							var y=Game.cookieOriginY-s/(1.4+0.2*Math.sin(Game.T*0.01));
+							var x=Game.kookieOriginX-s/2;
+							var y=Game.kookieOriginY-s/(1.4+0.2*Math.sin(Game.T*0.01));
 							ctx.drawImage(Pic('dragonBG.png'),x,y,s,s);
 						}
 					
-						//big cookie
+						//big kookie
 						ctx.globalAlpha=1;
 						var s=256*Game.BigCookieSize;
-						var x=Game.cookieOriginX-s/2;
-						var y=Game.cookieOriginY-s/2;
-						if (Game.prefs.fancy) ctx.drawImage(Pic('cookieShadow.png'),x,y+20,s,s);
+						var x=Game.kookieOriginX-s/2;
+						var y=Game.kookieOriginY-s/2;
+						if (Game.prefs.fancy) ctx.drawImage(Pic('kookieShadow.png'),x,y+20,s,s);
 						ctx.drawImage(Pic('perfectCookie.png'),x,y,s,s);
 					}
 					
@@ -14603,7 +14603,7 @@ Game.Launch=function()
 					if (Game.prefs.cursors)
 					{
 						ctx.save();
-						ctx.translate(Game.cookieOriginX,Game.cookieOriginY);
+						ctx.translate(Game.kookieOriginX,Game.kookieOriginY);
 						var pic=Pic('cursor.png');
 						var fancy=Game.prefs.fancy;
 						
@@ -14634,8 +14634,8 @@ Game.Launch=function()
 							/*if (i==spe)
 							{
 								y+=16;
-								x=Game.cookieOriginX+Math.sin(-((r-5)/360)*Math.PI*2)*y;
-								y=Game.cookieOriginY+Math.cos(-((r-5)/360)*Math.PI*2)*y;
+								x=Game.kookieOriginX+Math.sin(-((r-5)/360)*Math.PI*2)*y;
+								y=Game.kookieOriginY+Math.cos(-((r-5)/360)*Math.PI*2)*y;
 								if (Game.CanClick && ctx && Math.abs(Game.mouseX-x)<16 && Math.abs(Game.mouseY-y)<16) Game.mousePointer=1;
 							}*/
 						}
@@ -14646,7 +14646,7 @@ Game.Launch=function()
 				else
 				{
 					var tBase=Math.max(0,(Game.AscendTimer-Game.AscendBreakpoint)/(Game.AscendDuration-Game.AscendBreakpoint));
-					//big crumbling cookie
+					//big crumbling kookie
 					//var t=(3*Math.pow(tBase,2)-2*Math.pow(tBase,3));//S curve
 					var t=Math.pow(tBase,0.5);
 					
@@ -14656,8 +14656,8 @@ Game.Launch=function()
 
 					ctx.globalAlpha=1;
 					
-					var x=Game.cookieOriginX;
-					var y=Game.cookieOriginY;
+					var x=Game.kookieOriginX;
+					var y=Game.kookieOriginY;
 					
 					x+=(Math.random()*2-1)*10*shake;
 					y+=(Math.random()*2-1)*10*shake;
@@ -14795,13 +14795,13 @@ Game.Launch=function()
 								this.s=(Game.toysType==1?64:48)*(0.1+v*1.9);
 								if (Game.toysType==2) this.s=(this.id%10==1)?96:48;
 								this.st=this.s;this.s=0;
-									var cookies=[[10,0]];
+									var kookies=[[10,0]];
 									for (var i in Game.Upgrades)
 									{
-										var cookie=Game.Upgrades[i];
-										if (cookie.bought>0 && cookie.pool=='cookie') cookies.push(cookie.icon);
+										var kookie=Game.Upgrades[i];
+										if (kookie.bought>0 && kookie.pool=='kookie') kookies.push(kookie.icon);
 									}
-								this.icon=choose(cookies);
+								this.icon=choose(kookies);
 								this.dragged=false;
 								this.l=document.createElement('div');
 								this.l.innerHTML=this.id;
@@ -15032,7 +15032,7 @@ Game.Launch=function()
 			Game.HardReset(2);
 			Game.bakeryName=name;
 			Game.bakeryNameRefresh();
-			Game.Achievements['Cheated cookies taste awful'].won=1;
+			Game.Achievements['Cheated kookies taste awful'].won=1;
 		}
 		
 		Game.debugTimersOn=0;
@@ -15048,17 +15048,17 @@ Game.Launch=function()
 			
 			str+='<a class="option neato" '+Game.clickStr+'="Game.Ascend(1);">Ascend</a>';
 			str+='<div class="line"></div>';
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies*=10;Game.cookiesEarned*=10;">x10</a>';
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies/=10;Game.cookiesEarned/=10;">/10</a><br>';
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies*=1000;Game.cookiesEarned*=1000;">x1k</a>';
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies/=1000;Game.cookiesEarned/=1000;">/1k</a><br>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookies*=10;Game.kookiesEarned*=10;">x10</a>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookies/=10;Game.kookiesEarned/=10;">/10</a><br>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookies*=1000;Game.kookiesEarned*=1000;">x1k</a>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookies/=1000;Game.kookiesEarned/=1000;">/1k</a><br>';
 			str+='<a class="option neato" '+Game.clickStr+'="for (var i in Game.Objects){Game.Objects[i].buy(100);}">Buy 100 of all</a>';//for (var n=0;n<100;n++){for (var i in Game.Objects){Game.Objects[i].buy(1);}}
 			str+='<a class="option neato" '+Game.clickStr+'="for (var i in Game.Objects){Game.Objects[i].sell(100);}">Sell 100 of all</a><br>';
 			str+='<a class="option neato" '+Game.clickStr+'="Game.gainLumps(10);">+10 lumps</a>';
 			str+='<a class="option neato" '+Game.clickStr+'="for (var i in Game.Objects){Game.Objects[i].level=0;Game.Objects[i].onMinigame=false;Game.Objects[i].refresh();}Game.recalculateGains=1;">Reset levels</a>';
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookiesReset+=Game.HowManyCookiesReset((Game.heavenlyChips||1)*1000);Game.EarnHeavenlyChips(0,true);Game.recalculateGains=1;">HC x1k</a>';
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookiesReset=(Game.heavenlyChips<100?0:Game.HowManyCookiesReset(Math.floor(Game.heavenlyChips*0.001)));Game.cookiesReset=Math.max(Game.cookiesReset,0);Game.EarnHeavenlyChips(0,true);if (Game.cookiesReset<=0){Game.heavenlyChips=0;}Game.recalculateGains=1;">HC /1k</a><br>';//wee bit inaccurate
-			str+='<a class="option neato" '+Game.clickStr+'="Game.cookiesEarned=0;Game.recalculateGains=1;">Reset cookies earned</a><br>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookiesReset+=Game.HowManyCookiesReset((Game.heavenlyChips||1)*1000);Game.EarnHeavenlyChips(0,true);Game.recalculateGains=1;">HC x1k</a>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookiesReset=(Game.heavenlyChips<100?0:Game.HowManyCookiesReset(Math.floor(Game.heavenlyChips*0.001)));Game.kookiesReset=Math.max(Game.kookiesReset,0);Game.EarnHeavenlyChips(0,true);if (Game.kookiesReset<=0){Game.heavenlyChips=0;}Game.recalculateGains=1;">HC /1k</a><br>';//wee bit inaccurate
+			str+='<a class="option neato" '+Game.clickStr+'="Game.kookiesEarned=0;Game.recalculateGains=1;">Reset kookies earned</a><br>';
 			str+='<div class="line"></div>';
 			str+='<a class="option warning" '+Game.clickStr+'="Game.RuinTheFun(1);">Ruin The Fun</a>';
 			str+='<a class="option warning" '+Game.clickStr+'="Game.SesameReset();">Wipe</a>';
@@ -15107,7 +15107,7 @@ Game.Launch=function()
 			
 			l('debug').style.display='block';
 			Game.sesame=1;
-			Game.Achievements['Cheated cookies taste awful'].won=1;
+			Game.Achievements['Cheated kookies taste awful'].won=1;
 		}
 		
 		Game.EditAscend=function()
@@ -15138,7 +15138,7 @@ Game.Launch=function()
 			Game.CalculateGains();
 			Game.debuggedUpgradeCpS=[];
 			Game.debuggedUpgradeCpClick=[];
-			var CpS=Game.cookiesPs;
+			var CpS=Game.kookiesPs;
 			var CpClick=Game.computedMouseCps;
 			for (var i in Game.Upgrades)
 			{
@@ -15147,8 +15147,8 @@ Game.Launch=function()
 				{
 					me.bought=0;
 					Game.CalculateGains();
-					//Game.debuggedUpgradeCpS[me.name]=CpS-Game.cookiesPs;
-					Game.debuggedUpgradeCpS[me.name]=(CpS/(Game.cookiesPs||1)-1);
+					//Game.debuggedUpgradeCpS[me.name]=CpS-Game.kookiesPs;
+					Game.debuggedUpgradeCpS[me.name]=(CpS/(Game.kookiesPs||1)-1);
 					Game.debuggedUpgradeCpClick[me.name]=(CpClick/(Game.computedMouseCps||1)-1);
 					me.bought=1;
 				}
@@ -15330,9 +15330,9 @@ Game.Launch=function()
 				Game.storeBulkButton(-1);
 			}
 			
-			//handle cookies
+			//handle kookies
 			if (Game.recalculateGains) Game.CalculateGains();
-			Game.Earn(Game.cookiesPs/Game.fps);//add cookies per second
+			Game.Earn(Game.kookiesPs/Game.fps);//add kookies per second
 			
 			//grow lumps
 			Game.doLumps();
@@ -15349,22 +15349,22 @@ Game.Launch=function()
 			//wrinklers
 			if (Game.cpsSucked>0)
 			{
-				Game.Dissolve((Game.cookiesPs/Game.fps)*Game.cpsSucked);
-				Game.cookiesSucked+=((Game.cookiesPs/Game.fps)*Game.cpsSucked);
+				Game.Dissolve((Game.kookiesPs/Game.fps)*Game.cpsSucked);
+				Game.kookiesSucked+=((Game.kookiesPs/Game.fps)*Game.cpsSucked);
 				//should be using one of the following, but I'm not sure what I'm using this stat for anymore
-				//Game.cookiesSucked=Game.wrinklers.reduce(function(s,w){return s+w.sucked;},0);
-				//for (var i in Game.wrinklers) {Game.cookiesSucked+=Game.wrinklers[i].sucked;}
+				//Game.kookiesSucked=Game.wrinklers.reduce(function(s,w){return s+w.sucked;},0);
+				//for (var i in Game.wrinklers) {Game.kookiesSucked+=Game.wrinklers[i].sucked;}
 			}
 			
-			//var cps=Game.cookiesPs+Game.cookies*0.01;//exponential cookies
-			//Game.Earn(cps/Game.fps);//add cookies per second
+			//var cps=Game.kookiesPs+Game.kookies*0.01;//exponential kookies
+			//Game.Earn(cps/Game.fps);//add kookies per second
 			
 			for (var i in Game.Objects)
 			{
 				var me=Game.Objects[i];
 				me.totalCookies+=(me.storedTotalCps*Game.globalCpsMult)/Game.fps;
 			}
-			if (Game.prefs.particles && Game.cookies && Game.T%Math.ceil(Game.fps/Math.min(10,Game.cookiesPs))==0) Game.particleAdd();//cookie shower
+			if (Game.prefs.particles && Game.kookies && Game.T%Math.ceil(Game.fps/Math.min(10,Game.kookiesPs))==0) Game.particleAdd();//kookie shower
 			
 			if (Game.T%(Game.fps*10)==0) Game.recalculateGains=1;//recalculate CpS every 10 seconds (for dynamic boosts such as Century egg)
 			
@@ -15374,28 +15374,28 @@ Game.Launch=function()
 			if (Game.T%(Game.fps)==0 && Math.random()<1/1000000) Game.Win('Just plain lucky');//1 chance in 1,000,000 every second achievement
 			if (Game.T%(Game.fps*5)==0 && Game.ObjectsById.length>0)//check some achievements and upgrades
 			{
-				if (isNaN(Game.cookies)) {Game.cookies=0;Game.cookiesEarned=0;Game.recalculateGains=1;}
+				if (isNaN(Game.kookies)) {Game.kookies=0;Game.kookiesEarned=0;Game.recalculateGains=1;}
 				
 				var timePlayed=new Date();
 				timePlayed.setTime(Date.now()-Game.startDate);
 				
 				if (!Game.fullDate || (Date.now()-Game.fullDate)>=365*24*60*60*1000) Game.Win('So much to do so much to see');
 				
-				if (Game.cookiesEarned>=1000000 && (Game.ascensionMode==1 || Game.resets==0))//challenge run or hasn't ascended yet
+				if (Game.kookiesEarned>=1000000 && (Game.ascensionMode==1 || Game.resets==0))//challenge run or hasn't ascended yet
 				{
 					if (timePlayed<=1000*60*35) Game.Win('Speed baking I');
 					if (timePlayed<=1000*60*25) Game.Win('Speed baking II');
 					if (timePlayed<=1000*60*15) Game.Win('Speed baking III');
 					
-					if (Game.cookieClicks<=15) Game.Win('Neverclick');
-					if (Game.cookieClicks<=0) Game.Win('True Neverclick');
-					if (Game.cookiesEarned>=1000000000 && Game.UpgradesOwned==0) Game.Win('Hardcore');
+					if (Game.kookieClicks<=15) Game.Win('Neverclick');
+					if (Game.kookieClicks<=0) Game.Win('True Neverclick');
+					if (Game.kookiesEarned>=1000000000 && Game.UpgradesOwned==0) Game.Win('Hardcore');
 				}
 				
 				for (var i in Game.UnlockAt)
 				{
 					var unlock=Game.UnlockAt[i];
-					if (Game.cookiesEarned>=unlock.cookies)
+					if (Game.kookiesEarned>=unlock.kookies)
 					{
 						var pass=1;
 						if (unlock.require && !Game.Has(unlock.require) && !Game.HasAchiev(unlock.require)) pass=0;
@@ -15409,10 +15409,10 @@ Game.Launch=function()
 				if (Game.Has('Sugar craving')) Game.Unlock('Sugar frenzy');
 				if (Game.Has('Classic dairy selection')) Game.Unlock('Milk selector');
 				if (Game.Has('Basic wallpaper assortment')) Game.Unlock('Background selector');
-				if (Game.Has('Golden cookie alert sound')) Game.Unlock('Golden cookie sound selector');
+				if (Game.Has('Golden kookie alert sound')) Game.Unlock('Golden kookie sound selector');
 				if (Game.Has('Sound test')) Game.Unlock('Jukebox');
 				
-				if (Game.Has('Prism heart biscuits')) Game.Win('Lovely cookies');
+				if (Game.Has('Prism heart biscuits')) Game.Win('Lovely kookies');
 				if (Game.season=='easter')
 				{
 					var eggs=0;
@@ -15426,7 +15426,7 @@ Game.Launch=function()
 					if (eggs>=Game.easterEggs.length) Game.Win('Hide & seek champion');
 				}
 				
-				if (Game.Has('Fortune cookies'))
+				if (Game.Has('Fortune kookies'))
 				{
 					var list=Game.Tiers['fortune'].upgrades;
 					var fortunes=0;
@@ -15440,8 +15440,8 @@ Game.Launch=function()
 				if (Game.Has('Legacy') && Game.ascensionMode!=1)
 				{
 					Game.Unlock('Heavenly chip secret');
-					if (Game.Has('Heavenly chip secret')) Game.Unlock('Heavenly cookie stand');
-					if (Game.Has('Heavenly cookie stand')) Game.Unlock('Heavenly bakery');
+					if (Game.Has('Heavenly chip secret')) Game.Unlock('Heavenly kookie stand');
+					if (Game.Has('Heavenly kookie stand')) Game.Unlock('Heavenly bakery');
 					if (Game.Has('Heavenly bakery')) Game.Unlock('Heavenly confectionery');
 					if (Game.Has('Heavenly confectionery')) Game.Unlock('Heavenly key');
 					
@@ -15450,7 +15450,7 @@ Game.Launch=function()
 			
 				for (var i in Game.BankAchievements)
 				{
-					if (Game.cookiesEarned>=Game.BankAchievements[i].threshold) Game.Win(Game.BankAchievements[i].name);
+					if (Game.kookiesEarned>=Game.BankAchievements[i].threshold) Game.Win(Game.BankAchievements[i].name);
 				}
 				
 				var buildingsOwned=0;
@@ -15495,16 +15495,16 @@ Game.Launch=function()
 				if (Game.handmadeCookies>=1000000000000000000000000000) {Game.Win('Clickety split');Game.Unlock('Miraculite mouse');}
 				if (Game.handmadeCookies>=100000000000000000000000000000) {Game.Win('Ain\'t that a click in the head');Game.Unlock('Aetherice mouse');}
 				
-				if (Game.cookiesEarned<Game.cookies) Game.Win('Cheated cookies taste awful');
+				if (Game.kookiesEarned<Game.kookies) Game.Win('Cheated kookies taste awful');
 				
-				if (Game.Has('Skull cookies') && Game.Has('Ghost cookies') && Game.Has('Bat cookies') && Game.Has('Slime cookies') && Game.Has('Pumpkin cookies') && Game.Has('Eyeball cookies') && Game.Has('Spider cookies')) Game.Win('Spooky cookies');
+				if (Game.Has('Skull kookies') && Game.Has('Ghost kookies') && Game.Has('Bat kookies') && Game.Has('Slime kookies') && Game.Has('Pumpkin kookies') && Game.Has('Eyeball kookies') && Game.Has('Spider kookies')) Game.Win('Spooky kookies');
 				if (Game.wrinklersPopped>=1) Game.Win('Itchscratcher');
 				if (Game.wrinklersPopped>=50) Game.Win('Wrinklesquisher');
 				if (Game.wrinklersPopped>=200) Game.Win('Moistburster');
 				
-				if (Game.cookiesEarned>=1000000 && Game.Has('How to bake your dragon')) Game.Unlock('A crumbly egg');
+				if (Game.kookiesEarned>=1000000 && Game.Has('How to bake your dragon')) Game.Unlock('A crumbly egg');
 				
-				if (Game.cookiesEarned>=25 && Game.season=='christmas') Game.Unlock('A festive hat');
+				if (Game.kookiesEarned>=25 && Game.season=='christmas') Game.Unlock('A festive hat');
 				if (Game.Has('Christmas tree biscuits') && Game.Has('Snowflake biscuits') && Game.Has('Snowman biscuits') && Game.Has('Holly biscuits') && Game.Has('Candy cane biscuits') && Game.Has('Bell biscuits') && Game.Has('Present biscuits')) Game.Win('Let it snow');
 				
 				if (Game.reindeerClicked>=1) Game.Win('Oh deer');
@@ -15539,9 +15539,9 @@ Game.Launch=function()
 					if (kittens>=10) Game.Win('Jellicles');
 				}
 				
-				if (Game.cookiesEarned>=1e14 && !Game.HasAchiev('You win a cookie')) {Game.Win('You win a cookie');Game.Earn(1);}
+				if (Game.kookiesEarned>=1e14 && !Game.HasAchiev('You win a kookie')) {Game.Win('You win a kookie');Game.Earn(1);}
 				
-				if (Game.shimmerTypes['golden'].n>=4) Game.Win('Four-leaf cookie');
+				if (Game.shimmerTypes['golden'].n>=4) Game.Win('Four-leaf kookie');
 				
 				var grandmas=0;
 				for (var i in Game.GrandmaSynergies)
@@ -15571,7 +15571,7 @@ Game.Launch=function()
 				Game.runModHook('check');
 			}
 			
-			Game.cookiesd+=(Game.cookies-Game.cookiesd)*0.3;
+			Game.kookiesd+=(Game.kookies-Game.kookiesd)*0.3;
 			
 			if (Game.storeToRefresh) Game.RefreshStore();
 			if (Game.upgradesToRebuild) Game.RebuildUpgrades();
@@ -15586,17 +15586,17 @@ Game.Launch=function()
 		{
 			var title='Cookie Clicker';
 			if (Game.season=='fools') title='Cookie Baker';
-			document.title=(Game.OnAscend?(EN?'Ascending! ':(loc("Ascending")+' | ')):'')+loc("%1 cookie",LBeautify(Game.cookies))+' - '+title;
+			document.title=(Game.OnAscend?(EN?'Ascending! ':(loc("Ascending")+' | ')):'')+loc("%1 kookie",LBeautify(Game.kookies))+' - '+title;
 		}
 		if (Game.T%15==0)
 		{
 			//written through the magic of "hope for the best" maths
-			var chipsOwned=Game.HowMuchPrestige(Game.cookiesReset);
-			var ascendNowToOwn=Math.floor(Game.HowMuchPrestige(Game.cookiesReset+Game.cookiesEarned));
+			var chipsOwned=Game.HowMuchPrestige(Game.kookiesReset);
+			var ascendNowToOwn=Math.floor(Game.HowMuchPrestige(Game.kookiesReset+Game.kookiesEarned));
 			var ascendNowToGet=ascendNowToOwn-Math.floor(chipsOwned);
 			var nextChipAt=Game.HowManyCookiesReset(Math.floor(chipsOwned+ascendNowToGet+1))-Game.HowManyCookiesReset(Math.floor(chipsOwned+ascendNowToGet));
-			var cookiesToNext=Game.HowManyCookiesReset(ascendNowToOwn+1)-(Game.cookiesEarned+Game.cookiesReset);
-			var percent=1-(cookiesToNext/nextChipAt);
+			var kookiesToNext=Game.HowManyCookiesReset(ascendNowToOwn+1)-(Game.kookiesEarned+Game.kookiesReset);
+			var percent=1-(kookiesToNext/nextChipAt);
 			
 			//fill the tooltip under the Legacy tab
 			var date=new Date();
@@ -15616,11 +15616,11 @@ Game.Launch=function()
 			if (ascendNowToGet<1) str+=loc("Ascending now would grant you no prestige.");
 			else if (ascendNowToGet<2) str+=loc("Ascending now would grant you<br><b>1 prestige level</b> (+1% CpS)<br>and <b>1 heavenly chip</b> to spend.");
 			else str+=loc("Ascending now would grant you<br><b>%1 prestige levels</b> (+%2% CpS)<br>and <b>%3 heavenly chips</b> to spend.",[Beautify(ascendNowToGet),Beautify(ascendNowToGet),Beautify(ascendNowToGet)]);
-			if (cookiesToNext>=0)
+			if (kookiesToNext>=0)
 			{
-				//note: cookiesToNext can be negative at higher HC amounts due to precision loss. we simply hide it in such cases, as this usually only occurs when the gap is small and rapidly overcome anyway
+				//note: kookiesToNext can be negative at higher HC amounts due to precision loss. we simply hide it in such cases, as this usually only occurs when the gap is small and rapidly overcome anyway
 				str+='<div class="line"></div>';
-				str+=loc("You need <b>%1 more cookies</b> for the next level.",Beautify(cookiesToNext))+'<br>';
+				str+=loc("You need <b>%1 more kookies</b> for the next level.",Beautify(kookiesToNext))+'<br>';
 			}
 			l('ascendTooltip').innerHTML=str;
 			
@@ -15709,8 +15709,8 @@ Game.Launch=function()
 		if (!Game.OnAscend)
 		{
 			
-			var str=Beautify(Math.round(Game.cookiesd));
-			if (Game.cookiesd>=1000000)//dirty padding
+			var str=Beautify(Math.round(Game.kookiesd));
+			if (Game.kookiesd>=1000000)//dirty padding
 			{
 				var spacePos=str.indexOf(' ');
 				var dotPos=str.indexOf('.');
@@ -15727,13 +15727,13 @@ Game.Launch=function()
 				str=[str.slice(0,spacePos),add,str.slice(spacePos)].join('');
 			}
 			
-			str=loc("%1 cookie",{n:Math.round(Game.cookiesd),b:str});
+			str=loc("%1 kookie",{n:Math.round(Game.kookiesd),b:str});
 			if (str.length>14) str=str.replace(' ','<br>');
 			
 			if (Game.prefs.monospace) str='<span class="monospace">'+str+'</span>';
-			str=str+'<div id="cookiesPerSecond"'+(Game.cpsSucked>0?' class="wrinkled"':'')+'>'+loc("per second:")+' '+Beautify(Game.cookiesPs*(1-Game.cpsSucked),1)+'</div>';
-			l('cookies').innerHTML=str;
-			Timer.track('cookie amount');
+			str=str+'<div id="kookiesPerSecond"'+(Game.cpsSucked>0?' class="wrinkled"':'')+'>'+loc("per second:")+' '+Beautify(Game.kookiesPs*(1-Game.cpsSucked),1)+'</div>';
+			l('kookies').innerHTML=str;
+			Timer.track('kookie amount');
 			
 			for (var i in Game.Objects)
 			{
@@ -15744,7 +15744,7 @@ Game.Launch=function()
 			
 			if (Game.drawT%5==0)
 			{
-				//if (Game.prefs.monospace) {l('cookies').className='title monospace';} else {l('cookies').className='title';}
+				//if (Game.prefs.monospace) {l('kookies').className='title monospace';} else {l('kookies').className='title';}
 				var lastLocked=0;
 				for (var i in Game.Objects)
 				{
@@ -15753,8 +15753,8 @@ Game.Launch=function()
 					//make products full-opacity if we can buy them
 					var classes='product';
 					var price=me.bulkPrice;
-					if (Game.cookiesEarned>=me.basePrice || me.bought>0) {classes+=' unlocked';lastLocked=0;me.locked=0;} else {classes+=' locked';lastLocked++;me.locked=1;}
-					if ((Game.buyMode==1 && Game.cookies>=price) || (Game.buyMode==-1 && me.amount>0)) classes+=' enabled'; else classes+=' disabled';
+					if (Game.kookiesEarned>=me.basePrice || me.bought>0) {classes+=' unlocked';lastLocked=0;me.locked=0;} else {classes+=' locked';lastLocked++;me.locked=1;}
+					if ((Game.buyMode==1 && Game.kookies>=price) || (Game.buyMode==-1 && me.amount>0)) classes+=' enabled'; else classes+=' disabled';
 					if (lastLocked>2) classes+=' toggledOff';
 					me.l.className=classes;
 					//if (me.id>0) {l('productName'+me.id).innerHTML=Beautify(me.storedTotalCps/Game.ObjectsById[me.id-1].storedTotalCps,2);}
@@ -15768,7 +15768,7 @@ Game.Launch=function()
 					if (!me.bought)
 					{
 						var price=me.getPrice();
-						var canBuy=me.canBuy();//(Game.cookies>=price);
+						var canBuy=me.canBuy();//(Game.kookies>=price);
 						var enabled=(l('upgrade'+i).className.indexOf('enabled')>-1);
 						if ((canBuy && !enabled) || (!canBuy && enabled)) Game.upgradesToRebuild=1;
 						if (price<lastPrice) Game.storeToRefresh=1;//is this upgrade less expensive than the previous one? trigger a refresh to sort it again
@@ -15835,7 +15835,7 @@ Game.Launch=function()
 		Game.accumulatedDelay+=((time-Game.time)-1000/Game.fps);
 		if (Game.prefs.timeout && time-Game.lastActivity>=1000*60*5)
 		{
-			if (Game.accumulatedDelay>1000*60*30) Game.delayTimeouts+=3;//more than 30 minutes delay? computer probably asleep and not making cookies anyway
+			if (Game.accumulatedDelay>1000*60*30) Game.delayTimeouts+=3;//more than 30 minutes delay? computer probably asleep and not making kookies anyway
 			else if (Game.accumulatedDelay>1000*5) Game.delayTimeouts++;//add to timeout counter when we skip 10 seconds worth of frames (and the player has been inactive for at least 5 minutes)
 			if (Game.delayTimeouts>=3) Game.Timeout();//trigger timeout when the timeout counter is 3+
 		}
@@ -15925,9 +15925,9 @@ window.onload=function()
 							console.log('[=== '+choose([
 								'Oh, hello!',
 								'hey, how\'s it hangin',
-								'About to cheat in some cookies or just checking for bugs?',
-								'Remember : cheated cookies taste awful!',
-								'Hey, Orteil here. Cheated cookies taste awful... or do they?',
+								'About to cheat in some kookies or just checking for bugs?',
+								'Remember : cheated kookies taste awful!',
+								'Hey, Orteil here. Cheated kookies taste awful... or do they?',
 							])+' ===]');
 							Game.Load(function(){Game.Init();if (firstLaunch) Game.showLangSelection(true);});
 							//try {Game.Load(Game.Init);}
